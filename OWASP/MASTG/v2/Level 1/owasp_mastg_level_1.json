@@ -1,0 +1,664 @@
+{
+    "testcases": [
+        {
+            "testcase": "All app components are identified and known to be needed.",
+            "code": "1.1",
+            "tags":
+            [
+                "MSTG-ID: MSTG-ARCH-1",
+                "Level 1: true",
+                "Level 2: true"
+            ],
+            "sort_order": 1
+        },
+        {
+            "testcase": "Security controls are never enforced only on the client side, but on the respective remote endpoints.",
+            "code": "1.2",
+            "tags":
+            [
+                "MSTG-ID: MSTG-ARCH-2",
+                "Level 1: true",
+                "Level 2: true"
+            ],
+            "sort_order": 2
+        },
+        {
+            "testcase": "A high-level architecture for the mobile app and all connected remote services has been defined and security has been addressed in that architecture.",
+            "code": "1.3",
+            "tags":
+            [
+                "MSTG-ID: MSTG-ARCH-3",
+                "Level 1: true",
+                "Level 2: true"
+            ],
+            "sort_order": 3
+        },
+        {
+            "testcase": "Data considered sensitive in the context of the mobile app is clearly identified.",
+            "code": "1.4",
+            "tags":
+            [
+                "MSTG-ID: MSTG-ARCH-4",
+                "Level 1: true",
+                "Level 2: true"
+            ],
+            "sort_order": 4
+        },
+        {
+            "testcase": "The app should comply with privacy laws and regulations.",
+            "code": "1.12",
+            "tags":
+            [
+                "MSTG-ID: MSTG-ARCH-12",
+                "Level 1: true",
+                "Level 2: true"
+            ],
+            "sort_order": 5
+        },
+        {
+            "testcase": "System credential storage facilities need to be used to store sensitive data, such as PII, user credentials or cryptographic keys.",
+            "code": "2.1",
+            "tags":
+            [
+                "MSTG-ID: MSTG-STORAGE-1",
+                "Level 1: true",
+                "Level 2: true"
+            ],
+            "sort_order": 6
+        },
+        {
+            "testcase": "No sensitive data should be stored outside of the app container or system credential storage facilities.",
+            "code": "2.2",
+            "tags":
+            [
+                "MSTG-ID: MSTG-STORAGE-2",
+                "Level 1: true",
+                "Level 2: true"
+            ],
+            "sort_order": 7
+        },
+        {
+            "testcase": "No sensitive data is written to application logs.",
+            "code": "2.3",
+            "tags":
+            [
+                "MSTG-ID: MSTG-STORAGE-3",
+                "Level 1: true",
+                "Level 2: true"
+            ],
+            "sort_order": 8
+        },
+        {
+            "testcase": "No sensitive data is shared with third parties unless it is a necessary part of the architecture.",
+            "code": "2.4",
+            "tags":
+            [
+                "MSTG-ID: MSTG-STORAGE-4",
+                "Level 1: true",
+                "Level 2: true"
+            ],
+            "sort_order": 9
+        },
+        {
+            "testcase": "The keyboard cache is disabled on text inputs that process sensitive data.",
+            "code": "2.5",
+            "tags":
+            [
+                "MSTG-ID: MSTG-STORAGE-5",
+                "Level 1: true",
+                "Level 2: true"
+            ],
+            "sort_order": 10
+        },
+        {
+            "testcase": "No sensitive data is exposed via IPC mechanisms.",
+            "code": "2.6",
+            "tags":
+            [
+                "MSTG-ID: MSTG-STORAGE-6",
+                "Level 1: true",
+                "Level 2: true"
+            ],
+            "sort_order": 11
+        },
+        {
+            "testcase": "No sensitive data, such as passwords or pins, is exposed through the user interface.",
+            "code": "2.7",
+            "tags":
+            [
+                "MSTG-ID: MSTG-STORAGE-7",
+                "Level 1: true",
+                "Level 2: true"
+            ],
+            "sort_order": 12
+        },
+        {
+            "testcase": "The app educates the user about the types of personally identifiable information processed, as well as security best practices the user should follow in using the app.",
+            "code": "2.12",
+            "tags":
+            [
+                "MSTG-ID: MSTG-STORAGE-12",
+                "Level 1: true",
+                "Level 2: true"
+            ],
+            "sort_order": 13
+        },
+        {
+            "testcase": "The app does not rely on symmetric cryptography with hardcoded keys as a sole method of encryption.",
+            "code": "3.1",
+            "tags":
+            [
+                "MSTG-ID: MSTG-CRYPTO-1",
+                "Level 1: true",
+                "Level 2: true"
+            ],
+            "sort_order": 14
+        },
+        {
+            "testcase": "The app uses proven implementations of cryptographic primitives.",
+            "code": "3.2",
+            "tags":
+            [
+                "MSTG-ID: MSTG-CRYPTO-2",
+                "Level 1: true",
+                "Level 2: true"
+            ],
+            "sort_order": 15
+        },
+        {
+            "testcase": "The app uses cryptographic primitives that are appropriate for the particular use-case, configured with parameters that adhere to industry best practices.",
+            "code": "3.3",
+            "tags":
+            [
+                "MSTG-ID: MSTG-CRYPTO-3",
+                "Level 1: true",
+                "Level 2: true"
+            ],
+            "sort_order": 16
+        },
+        {
+            "testcase": "The app does not use cryptographic protocols or algorithms that are widely considered deprecated for security purposes.",
+            "code": "3.4",
+            "tags":
+            [
+                "MSTG-ID: MSTG-CRYPTO-4",
+                "Level 1: true",
+                "Level 2: true"
+            ],
+            "sort_order": 17
+        },
+        {
+            "testcase": "The app doesn't re-use the same cryptographic key for multiple purposes.",
+            "code": "3.5",
+            "tags":
+            [
+                "MSTG-ID: MSTG-CRYPTO-5",
+                "Level 1: true",
+                "Level 2: true"
+            ],
+            "sort_order": 18
+        },
+        {
+            "testcase": "All random values are generated using a sufficiently secure random number generator.",
+            "code": "3.6",
+            "tags":
+            [
+                "MSTG-ID: MSTG-CRYPTO-6",
+                "Level 1: true",
+                "Level 2: true"
+            ],
+            "sort_order": 19
+        },
+        {
+            "testcase": "If the app provides users access to a remote service, some form of authentication, such as username/password authentication, is performed at the remote endpoint.",
+            "code": "4.1",
+            "tags":
+            [
+                "MSTG-ID: MSTG-AUTH-1",
+                "Level 1: true",
+                "Level 2: true"
+            ],
+            "sort_order": 20
+        },
+        {
+            "testcase": "If stateful session management is used, the remote endpoint uses randomly generated session identifiers to authenticate client requests without sending the user's credentials.",
+            "code": "4.2",
+            "tags":
+            [
+                "MSTG-ID: MSTG-AUTH-2",
+                "Level 1: true",
+                "Level 2: true"
+            ],
+            "sort_order": 21
+        },
+        {
+            "testcase": "If stateless token-based authentication is used, the server provides a token that has been signed using a secure algorithm.",
+            "code": "4.3",
+            "tags":
+            [
+                "MSTG-ID: MSTG-AUTH-3",
+                "Level 1: true",
+                "Level 2: true"
+            ],
+            "sort_order": 22
+        },
+        {
+            "testcase": "The remote endpoint terminates the existing session when the user logs out.",
+            "code": "4.4",
+            "tags":
+            [
+                "MSTG-ID: MSTG-AUTH-4",
+                "Level 1: true",
+                "Level 2: true"
+            ],
+            "sort_order": 23
+        },
+        {
+            "testcase": "A password policy exists and is enforced at the remote endpoint.",
+            "code": "4.5",
+            "tags":
+            [
+                "MSTG-ID: MSTG-AUTH-5",
+                "Level 1: true",
+                "Level 2: true"
+            ],
+            "sort_order": 24
+        },
+        {
+            "testcase": "The remote endpoint implements a mechanism to protect against the submission of credentials an excessive number of times.",
+            "code": "4.6",
+            "tags":
+            [
+                "MSTG-ID: MSTG-AUTH-6",
+                "Level 1: true",
+                "Level 2: true"
+            ],
+            "sort_order": 25
+        },
+        {
+            "testcase": "Sessions are invalidated at the remote endpoint after a predefined period of inactivity and access tokens expire.",
+            "code": "4.7",
+            "tags":
+            [
+                "MSTG-ID: MSTG-AUTH-7",
+                "Level 1: true",
+                "Level 2: true"
+            ],
+            "sort_order": 26
+        },
+        {
+            "testcase": "Authorization models should be defined and enforced at the remote endpoint.",
+            "code": "4.12",
+            "tags":
+            [
+                "MSTG-ID: MSTG-AUTH-12",
+                "Level 1: true",
+                "Level 2: true"
+            ],
+            "sort_order": 27
+        },
+        {
+            "testcase": "Data is encrypted on the network using TLS. The secure channel is used consistently throughout the app.",
+            "code": "5.1",
+            "tags":
+            [
+                "MSTG-ID: MSTG-NETWORK-1",
+                "Level 1: true",
+                "Level 2: true"
+            ],
+            "sort_order": 28
+        },
+        {
+            "testcase": "The TLS settings are in line with current best practices, or as close as possible if the mobile operating system does not support the recommended standards.",
+            "code": "5.2",
+            "tags":
+            [
+                "MSTG-ID: MSTG-NETWORK-2",
+                "Level 1: true",
+                "Level 2: true"
+            ],
+            "sort_order": 29
+        },
+        {
+            "testcase": "The app verifies the X.509 certificate of the remote endpoint when the secure channel is established. Only certificates signed by a trusted CA are accepted.",
+            "code": "5.3",
+            "tags":
+            [
+                "MSTG-ID: MSTG-NETWORK-3",
+                "Level 1: true",
+                "Level 2: true"
+            ],
+            "sort_order": 30
+        },
+        {
+            "testcase": "The app only requests the minimum set of permissions necessary.",
+            "code": "6.1",
+            "tags":
+            [
+                "MSTG-ID: MSTG-PLATFORM-1",
+                "Level 1: true",
+                "Level 2: true"
+            ],
+            "sort_order": 31
+        },
+        {
+            "testcase": "All inputs from external sources and the user are validated and if necessary sanitized. This includes data received via the UI, IPC mechanisms such as intents, custom URLs, and network sources.",
+            "code": "6.2",
+            "tags":
+            [
+                "MSTG-ID: MSTG-PLATFORM-2",
+                "Level 1: true",
+                "Level 2: true"
+            ],
+            "sort_order": 32
+        },
+        {
+            "testcase": "The app does not export sensitive functionality via custom URL schemes, unless these mechanisms are properly protected.",
+            "code": "6.3",
+            "tags":
+            [
+                "MSTG-ID: MSTG-PLATFORM-3",
+                "Level 1: true",
+                "Level 2: true"
+            ],
+            "sort_order": 33
+        },
+        {
+            "testcase": "The app does not export sensitive functionality through IPC facilities, unless these mechanisms are properly protected.",
+            "code": "6.4",
+            "tags":
+            [
+                "MSTG-ID: MSTG-PLATFORM-4",
+                "Level 1: true",
+                "Level 2: true"
+            ],
+            "sort_order": 34
+        },
+        {
+            "testcase": "JavaScript is disabled in WebViews unless explicitly required.",
+            "code": "6.5",
+            "tags":
+            [
+                "MSTG-ID: MSTG-PLATFORM-5",
+                "Level 1: true",
+                "Level 2: true"
+            ],
+            "sort_order": 35
+        },
+        {
+            "testcase": "WebViews are configured to allow only the minimum set of protocol handlers required (ideally, only https is supported). Potentially dangerous handlers, such as file, tel and app-id, are disabled.",
+            "code": "6.6",
+            "tags":
+            [
+                "MSTG-ID: MSTG-PLATFORM-6",
+                "Level 1: true",
+                "Level 2: true"
+            ],
+            "sort_order": 36
+        },
+        {
+            "testcase": "If native methods of the app are exposed to a WebView, verify that the WebView only renders JavaScript contained within the app package.",
+            "code": "6.7",
+            "tags":
+            [
+                "MSTG-ID: MSTG-PLATFORM-7",
+                "Level 1: true",
+                "Level 2: true"
+            ],
+            "sort_order": 37
+        },
+        {
+            "testcase": "Object deserialization, if any, is implemented using safe serialization APIs.",
+            "code": "6.8",
+            "tags":
+            [
+                "MSTG-ID: MSTG-PLATFORM-8",
+                "Level 1: true",
+                "Level 2: true"
+            ],
+            "sort_order": 38
+        },
+        {
+            "testcase": "The app is signed and provisioned with a valid certificate, of which the private key is properly protected.",
+            "code": "7.1",
+            "tags":
+            [
+                "MSTG-ID: MSTG-CODE-1",
+                "Level 1: true",
+                "Level 2: true"
+            ],
+            "sort_order": 39
+        },
+        {
+            "testcase": "The app has been built in release mode, with settings appropriate for a release build (e.g. non-debuggable).",
+            "code": "7.2",
+            "tags":
+            [
+                "MSTG-ID: MSTG-CODE-2",
+                "Level 1: true",
+                "Level 2: true"
+            ],
+            "sort_order": 40
+        },
+        {
+            "testcase": "Debugging symbols have been removed from native binaries.",
+            "code": "7.3",
+            "tags":
+            [
+                "MSTG-ID: MSTG-CODE-3",
+                "Level 1: true",
+                "Level 2: true"
+            ],
+            "sort_order": 41
+        },
+        {
+            "testcase": "Debugging code and developer assistance code (e.g. test code, backdoors, hidden settings) have been removed. The app does not log verbose errors or debugging messages.",
+            "code": "7.4",
+            "tags":
+            [
+                "MSTG-ID: MSTG-CODE-4",
+                "Level 1: true",
+                "Level 2: true"
+            ],
+            "sort_order": 42
+        },
+        {
+            "testcase": "All third party components used by the mobile app, such as libraries and frameworks, are identified, and checked for known vulnerabilities.",
+            "code": "7.5",
+            "tags":
+            [
+                "MSTG-ID: MSTG-CODE-5",
+                "Level 1: true",
+                "Level 2: true"
+            ],
+            "sort_order": 43
+        },
+        {
+            "testcase": "The app catches and handles possible exceptions.",
+            "code": "7.6",
+            "tags":
+            [
+                "MSTG-ID: MSTG-CODE-6",
+                "Level 1: true",
+                "Level 2: true"
+            ],
+            "sort_order": 44
+        },
+        {
+            "testcase": "Error handling logic in security controls denies access by default.",
+            "code": "7.7",
+            "tags":
+            [
+                "MSTG-ID: MSTG-CODE-7",
+                "Level 1: true",
+                "Level 2: true"
+            ],
+            "sort_order": 45
+        },
+        {
+            "testcase": "In unmanaged code, memory is allocated, freed and used securely.",
+            "code": "7.8",
+            "tags":
+            [
+                "MSTG-ID: MSTG-CODE-8",
+                "Level 1: true",
+                "Level 2: true"
+            ],
+            "sort_order": 46
+        },
+        {
+            "testcase": "Free security features offered by the toolchain, such as byte-code minification, stack protection, PIE support and automatic reference counting, are activated.",
+            "code": "7.9",
+            "tags":
+            [
+                "MSTG-ID: MSTG-CODE-9",
+                "Level 1: true",
+                "Level 2: true"
+            ],
+            "sort_order": 47
+        },
+        {
+            "testcase": "The app detects, and responds to, the presence of a rooted or jailbroken device either by alerting the user or terminating the app.",
+            "code": "8.1",
+            "tags":
+            [
+                "MSTG-ID: MSTG-RESILIENCE-1",
+                "Level 1: true",
+                "Level 2: false"
+            ],
+            "sort_order": 48
+        },
+        {
+            "testcase": "The app prevents debugging and/or detects, and responds to, a debugger being attached. All available debugging protocols must be covered.",
+            "code": "8.2",
+            "tags":
+            [
+                "MSTG-ID: MSTG-RESILIENCE-2",
+                "Level 1: true",
+                "Level 2: false"
+            ],
+            "sort_order": 49
+        },
+        {
+            "testcase": "The app detects, and responds to, tampering with executable files and critical data within its own sandbox.",
+            "code": "8.3",
+            "tags":
+            [
+                "MSTG-ID: MSTG-RESILIENCE-3",
+                "Level 1: true",
+                "Level 2: false"
+            ],
+            "sort_order": 50
+        },
+        {
+            "testcase": "The app detects, and responds to, the presence of widely used reverse engineering tools and frameworks on the device.",
+            "code": "8.4",
+            "tags":
+            [
+                "MSTG-ID: MSTG-RESILIENCE-4",
+                "Level 1: true",
+                "Level 2: false"
+            ],
+            "sort_order": 51
+        },
+        {
+            "testcase": "The app detects, and responds to, being run in an emulator.",
+            "code": "8.5",
+            "tags":
+            [
+                "MSTG-ID: MSTG-RESILIENCE-5",
+                "Level 1: true",
+                "Level 2: false"
+            ],
+            "sort_order": 52
+        },
+        {
+            "testcase": "The app detects, and responds to, tampering the code and data in its own memory space.",
+            "code": "8.6",
+            "tags":
+            [
+                "MSTG-ID: MSTG-RESILIENCE-6",
+                "Level 1: true",
+                "Level 2: false"
+            ],
+            "sort_order": 53
+        },
+        {
+            "testcase": "The app implements multiple mechanisms in each defense category (8.1 to 8.6). Note that resiliency scales with the amount, diversity of the originality of the mechanisms used.",
+            "code": "8.7",
+            "tags":
+            [
+                "MSTG-ID: MSTG-RESILIENCE-7",
+                "Level 1: true",
+                "Level 2: false"
+            ],
+            "sort_order": 54
+        },
+        {
+            "testcase": "The detection mechanisms trigger responses of different types, including delayed and stealthy responses.",
+            "code": "8.8",
+            "tags":
+            [
+                "MSTG-ID: MSTG-RESILIENCE-8",
+                "Level 1: true",
+                "Level 2: false"
+            ],
+            "sort_order": 55
+        },
+        {
+            "testcase": "Obfuscation is applied to programmatic defenses, which in turn impede de-obfuscation via dynamic analysis.",
+            "code": "8.9",
+            "tags":
+            [
+                "MSTG-ID: MSTG-RESILIENCE-9",
+                "Level 1: true",
+                "Level 2: false"
+            ],
+            "sort_order": 56
+        },
+        {
+            "testcase": "The app implements a 'device binding' functionality using a device fingerprint derived from multiple properties unique to the device.",
+            "code": "8.10",
+            "tags":
+            [
+                "MSTG-ID: MSTG-RESILIENCE-10",
+                "Level 1: true",
+                "Level 2: false"
+            ],
+            "sort_order": 57
+        },
+        {
+            "testcase": "All executable files and libraries belonging to the app are either encrypted on the file level and/or important code and data segments inside the executables are encrypted or packed. Trivial static analysis does not reveal important code or data.",
+            "code": "8.11",
+            "tags":
+            [
+                "MSTG-ID: MSTG-RESILIENCE-11",
+                "Level 1: true",
+                "Level 2: false"
+            ],
+            "sort_order": 58
+        },
+        {
+            "testcase": "If the goal of obfuscation is to protect sensitive computations, an obfuscation scheme is used that is both appropriate for the particular task and robust against manual and automated de-obfuscation methods, considering currently published research. The effectiveness of the obfuscation scheme must be verified through manual testing. Note that hardware-based isolation features are preferred over obfuscation whenever possible.",
+            "code": "8.12",
+            "tags":
+            [
+                "MSTG-ID: MSTG-RESILIENCE-12",
+                "Level 1: true",
+                "Level 2: false"
+            ],
+            "sort_order": 59
+        },
+        {
+            "testcase": "As a defense in depth, next to having solid hardening of the communicating parties, application level payload encryption can be applied to further impede eavesdropping.",
+            "code": "8.13",
+            "tags":
+            [
+                "MSTG-ID: MSTG-RESILIENCE-13",
+                "Level 1: true",
+                "Level 2: false"
+            ],
+            "sort_order": 60
+        }
+    ]
+}
