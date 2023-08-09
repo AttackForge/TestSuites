@@ -1,4 +1,4 @@
-# Test Suites
+# Test Suites and Test Cases
 AttackForge helps you to track your security testing performed on any assessment or project.
 This is achieved using Test Cases which are assigned to a project, and can be further assigned to individual testers and/or scope assets.
 
