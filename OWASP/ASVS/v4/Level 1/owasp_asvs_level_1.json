@@ -1,0 +1,2198 @@
+{
+    "testcases": [
+        {
+            "testcase": "Verify that user set passwords are at least 12 characters in length (after multiple spaces are combined). ([C6](https://owasp.org/www-project-proactive-controls/#div-numbering))",
+            "code": "V2.1.1",
+            "tags":
+            [
+                "Chapter Id: V2",
+                "Chapter Name: Authentication",
+                "Section Id: V2.1",
+                "Section Name: Password Security",
+                "Requirement Id: V2.1.1",
+                "Level 1: true",
+                "Level 2: true",
+                "Level 3: true",
+                "CWE: 521",
+                "NIST: 5.1.1.2"
+            ],
+            "sort_order": 1
+        },
+        {
+            "testcase": "Verify that passwords of at least 64 characters are permitted, and that passwords of more than 128 characters are denied. ([C6](https://owasp.org/www-project-proactive-controls/#div-numbering))",
+            "code": "V2.1.2",
+            "tags":
+            [
+                "Chapter Id: V2",
+                "Chapter Name: Authentication",
+                "Section Id: V2.1",
+                "Section Name: Password Security",
+                "Requirement Id: V2.1.2",
+                "Level 1: true",
+                "Level 2: true",
+                "Level 3: true",
+                "CWE: 521",
+                "NIST: 5.1.1.2"
+            ],
+            "sort_order": 2
+        },
+        {
+            "testcase": "Verify that password truncation is not performed. However, consecutive multiple spaces may be replaced by a single space. ([C6](https://owasp.org/www-project-proactive-controls/#div-numbering))",
+            "code": "V2.1.3",
+            "tags":
+            [
+                "Chapter Id: V2",
+                "Chapter Name: Authentication",
+                "Section Id: V2.1",
+                "Section Name: Password Security",
+                "Requirement Id: V2.1.3",
+                "Level 1: true",
+                "Level 2: true",
+                "Level 3: true",
+                "CWE: 521",
+                "NIST: 5.1.1.2"
+            ],
+            "sort_order": 3
+        },
+        {
+            "testcase": "Verify that any printable Unicode character, including language neutral characters such as spaces and Emojis are permitted in passwords.",
+            "code": "V2.1.4",
+            "tags":
+            [
+                "Chapter Id: V2",
+                "Chapter Name: Authentication",
+                "Section Id: V2.1",
+                "Section Name: Password Security",
+                "Requirement Id: V2.1.4",
+                "Level 1: true",
+                "Level 2: true",
+                "Level 3: true",
+                "CWE: 521",
+                "NIST: 5.1.1.2"
+            ],
+            "sort_order": 4
+        },
+        {
+            "testcase": "Verify users can change their password.",
+            "code": "V2.1.5",
+            "tags":
+            [
+                "Chapter Id: V2",
+                "Chapter Name: Authentication",
+                "Section Id: V2.1",
+                "Section Name: Password Security",
+                "Requirement Id: V2.1.5",
+                "Level 1: true",
+                "Level 2: true",
+                "Level 3: true",
+                "CWE: 620",
+                "NIST: 5.1.1.2"
+            ],
+            "sort_order": 5
+        },
+        {
+            "testcase": "Verify that password change functionality requires the user's current and new password.",
+            "code": "V2.1.6",
+            "tags":
+            [
+                "Chapter Id: V2",
+                "Chapter Name: Authentication",
+                "Section Id: V2.1",
+                "Section Name: Password Security",
+                "Requirement Id: V2.1.6",
+                "Level 1: true",
+                "Level 2: true",
+                "Level 3: true",
+                "CWE: 620",
+                "NIST: 5.1.1.2"
+            ],
+            "sort_order": 6
+        },
+        {
+            "testcase": "Verify that passwords submitted during account registration, login, and password change are checked against a set of breached passwords either locally (such as the top 1,000 or 10,000 most common passwords which match the system's password policy) or using an external API. If using an API a zero knowledge proof or other mechanism should be used to ensure that the plain text password is not sent or used in verifying the breach status of the password. If the password is breached, the application must require the user to set a new non-breached password. ([C6](https://owasp.org/www-project-proactive-controls/#div-numbering))",
+            "code": "V2.1.7",
+            "tags":
+            [
+                "Chapter Id: V2",
+                "Chapter Name: Authentication",
+                "Section Id: V2.1",
+                "Section Name: Password Security",
+                "Requirement Id: V2.1.7",
+                "Level 1: true",
+                "Level 2: true",
+                "Level 3: true",
+                "CWE: 521",
+                "NIST: 5.1.1.2"
+            ],
+            "sort_order": 7
+        },
+        {
+            "testcase": "Verify that a password strength meter is provided to help users set a stronger password.",
+            "code": "V2.1.8",
+            "tags":
+            [
+                "Chapter Id: V2",
+                "Chapter Name: Authentication",
+                "Section Id: V2.1",
+                "Section Name: Password Security",
+                "Requirement Id: V2.1.8",
+                "Level 1: true",
+                "Level 2: true",
+                "Level 3: true",
+                "CWE: 521",
+                "NIST: 5.1.1.2"
+            ],
+            "sort_order": 8
+        },
+        {
+            "testcase": "Verify that there are no password composition rules limiting the type of characters permitted. There should be no requirement for upper or lower case or numbers or special characters. ([C6](https://owasp.org/www-project-proactive-controls/#div-numbering))",
+            "code": "V2.1.9",
+            "tags":
+            [
+                "Chapter Id: V2",
+                "Chapter Name: Authentication",
+                "Section Id: V2.1",
+                "Section Name: Password Security",
+                "Requirement Id: V2.1.9",
+                "Level 1: true",
+                "Level 2: true",
+                "Level 3: true",
+                "CWE: 521",
+                "NIST: 5.1.1.2"
+            ],
+            "sort_order": 9
+        },
+        {
+            "testcase": "Verify that there are no periodic credential rotation or password history requirements.",
+            "code": "V2.1.10",
+            "tags":
+            [
+                "Chapter Id: V2",
+                "Chapter Name: Authentication",
+                "Section Id: V2.1",
+                "Section Name: Password Security",
+                "Requirement Id: V2.1.10",
+                "Level 1: true",
+                "Level 2: true",
+                "Level 3: true",
+                "CWE: 263",
+                "NIST: 5.1.1.2"
+            ],
+            "sort_order": 10
+        },
+        {
+            "testcase": "Verify that \"paste\" functionality, browser password helpers, and external password managers are permitted.",
+            "code": "V2.1.11",
+            "tags":
+            [
+                "Chapter Id: V2",
+                "Chapter Name: Authentication",
+                "Section Id: V2.1",
+                "Section Name: Password Security",
+                "Requirement Id: V2.1.11",
+                "Level 1: true",
+                "Level 2: true",
+                "Level 3: true",
+                "CWE: 521",
+                "NIST: 5.1.1.2"
+            ],
+            "sort_order": 11
+        },
+        {
+            "testcase": "Verify that the user can choose to either temporarily view the entire masked password, or temporarily view the last typed character of the password on platforms that do not have this as built-in functionality.",
+            "code": "V2.1.12",
+            "tags":
+            [
+                "Chapter Id: V2",
+                "Chapter Name: Authentication",
+                "Section Id: V2.1",
+                "Section Name: Password Security",
+                "Requirement Id: V2.1.12",
+                "Level 1: true",
+                "Level 2: true",
+                "Level 3: true",
+                "CWE: 521",
+                "NIST: 5.1.1.2"
+            ],
+            "sort_order": 12
+        },
+        {
+            "testcase": "Verify that anti-automation controls are effective at mitigating breached credential testing, brute force, and account lockout attacks. Such controls include blocking the most common breached passwords, soft lockouts, rate limiting, CAPTCHA, ever increasing delays between attempts, IP address restrictions, or risk-based restrictions such as location, first login on a device, recent attempts to unlock the account, or similar. Verify that no more than 100 failed attempts per hour is possible on a single account.",
+            "code": "V2.2.1",
+            "tags":
+            [
+                "Chapter Id: V2",
+                "Chapter Name: Authentication",
+                "Section Id: V2.2",
+                "Section Name: General Authenticator Security",
+                "Requirement Id: V2.2.1",
+                "Level 1: true",
+                "Level 2: true",
+                "Level 3: true",
+                "CWE: 307",
+                "NIST: 5.2.2 / 5.1.1.2 / 5.1.4.2 / 5.1.5.2"
+            ],
+            "sort_order": 13
+        },
+        {
+            "testcase": "Verify that the use of weak authenticators (such as SMS and email) is limited to secondary verification and transaction approval and not as a replacement for more secure authentication methods. Verify that stronger methods are offered before weak methods, users are aware of the risks, or that proper measures are in place to limit the risks of account compromise.",
+            "code": "V2.2.2",
+            "tags":
+            [
+                "Chapter Id: V2",
+                "Chapter Name: Authentication",
+                "Section Id: V2.2",
+                "Section Name: General Authenticator Security",
+                "Requirement Id: V2.2.2",
+                "Level 1: true",
+                "Level 2: true",
+                "Level 3: true",
+                "CWE: 304",
+                "NIST: 5.2.10"
+            ],
+            "sort_order": 14
+        },
+        {
+            "testcase": "Verify that secure notifications are sent to users after updates to authentication details, such as credential resets, email or address changes, logging in from unknown or risky locations. The use of push notifications - rather than SMS or email - is preferred, but in the absence of push notifications, SMS or email is acceptable as long as no sensitive information is disclosed in the notification.",
+            "code": "V2.2.3",
+            "tags":
+            [
+                "Chapter Id: V2",
+                "Chapter Name: Authentication",
+                "Section Id: V2.2",
+                "Section Name: General Authenticator Security",
+                "Requirement Id: V2.2.3",
+                "Level 1: true",
+                "Level 2: true",
+                "Level 3: true",
+                "CWE: 620"
+            ],
+            "sort_order": 15
+        },
+        {
+            "testcase": "Verify system generated initial passwords or activation codes SHOULD be securely randomly generated, SHOULD be at least 6 characters long, and MAY contain letters and numbers, and expire after a short period of time. These initial secrets must not be permitted to become the long term password.",
+            "code": "V2.3.1",
+            "tags":
+            [
+                "Chapter Id: V2",
+                "Chapter Name: Authentication",
+                "Section Id: V2.3",
+                "Section Name: Authenticator Lifecycle",
+                "Requirement Id: V2.3.1",
+                "Level 1: true",
+                "Level 2: true",
+                "Level 3: true",
+                "CWE: 330",
+                "NIST: 5.1.1.2 / A.3"
+            ],
+            "sort_order": 16
+        },
+        {
+            "testcase": "Verify that a system generated initial activation or recovery secret is not sent in clear text to the user. ([C6](https://owasp.org/www-project-proactive-controls/#div-numbering))",
+            "code": "V2.5.1",
+            "tags":
+            [
+                "Chapter Id: V2",
+                "Chapter Name: Authentication",
+                "Section Id: V2.5",
+                "Section Name: Credential Recovery",
+                "Requirement Id: V2.5.1",
+                "Level 1: true",
+                "Level 2: true",
+                "Level 3: true",
+                "CWE: 640",
+                "NIST: 5.1.1.2"
+            ],
+            "sort_order": 17
+        },
+        {
+            "testcase": "Verify password hints or knowledge-based authentication (so-called \"secret questions\") are not present.",
+            "code": "V2.5.2",
+            "tags":
+            [
+                "Chapter Id: V2",
+                "Chapter Name: Authentication",
+                "Section Id: V2.5",
+                "Section Name: Credential Recovery",
+                "Requirement Id: V2.5.2",
+                "Level 1: true",
+                "Level 2: true",
+                "Level 3: true",
+                "CWE: 640",
+                "NIST: 5.1.1.2"
+            ],
+            "sort_order": 18
+        },
+        {
+            "testcase": "Verify password credential recovery does not reveal the current password in any way. ([C6](https://owasp.org/www-project-proactive-controls/#div-numbering))",
+            "code": "V2.5.3",
+            "tags":
+            [
+                "Chapter Id: V2",
+                "Chapter Name: Authentication",
+                "Section Id: V2.5",
+                "Section Name: Credential Recovery",
+                "Requirement Id: V2.5.3",
+                "Level 1: true",
+                "Level 2: true",
+                "Level 3: true",
+                "CWE: 640",
+                "NIST: 5.1.1.2"
+            ],
+            "sort_order": 19
+        },
+        {
+            "testcase": "Verify shared or default accounts are not present (e.g. \"root\", \"admin\", or \"sa\").",
+            "code": "V2.5.4",
+            "tags":
+            [
+                "Chapter Id: V2",
+                "Chapter Name: Authentication",
+                "Section Id: V2.5",
+                "Section Name: Credential Recovery",
+                "Requirement Id: V2.5.4",
+                "Level 1: true",
+                "Level 2: true",
+                "Level 3: true",
+                "CWE: 16",
+                "NIST: 5.1.1.2 / A.3"
+            ],
+            "sort_order": 20
+        },
+        {
+            "testcase": "Verify that if an authentication factor is changed or replaced, that the user is notified of this event.",
+            "code": "V2.5.5",
+            "tags":
+            [
+                "Chapter Id: V2",
+                "Chapter Name: Authentication",
+                "Section Id: V2.5",
+                "Section Name: Credential Recovery",
+                "Requirement Id: V2.5.5",
+                "Level 1: true",
+                "Level 2: true",
+                "Level 3: true",
+                "CWE: 304",
+                "NIST: 6.1.2.3"
+            ],
+            "sort_order": 21
+        },
+        {
+            "testcase": "Verify forgotten password, and other recovery paths use a secure recovery mechanism, such as time-based OTP (TOTP) or other soft token, mobile push, or another offline recovery mechanism. ([C6](https://owasp.org/www-project-proactive-controls/#div-numbering))",
+            "code": "V2.5.6",
+            "tags":
+            [
+                "Chapter Id: V2",
+                "Chapter Name: Authentication",
+                "Section Id: V2.5",
+                "Section Name: Credential Recovery",
+                "Requirement Id: V2.5.6",
+                "Level 1: true",
+                "Level 2: true",
+                "Level 3: true",
+                "CWE: 640",
+                "NIST: 5.1.1.2"
+            ],
+            "sort_order": 22
+        },
+        {
+            "testcase": "Verify that clear text out of band (NIST \"restricted\") authenticators, such as SMS or PSTN, are not offered by default, and stronger alternatives such as push notifications are offered first.",
+            "code": "V2.7.1",
+            "tags":
+            [
+                "Chapter Id: V2",
+                "Chapter Name: Authentication",
+                "Section Id: V2.7",
+                "Section Name: Out of Band Verifier",
+                "Requirement Id: V2.7.1",
+                "Level 1: true",
+                "Level 2: true",
+                "Level 3: true",
+                "CWE: 287",
+                "NIST: 5.1.3.2"
+            ],
+            "sort_order": 23
+        },
+        {
+            "testcase": "Verify that the out of band verifier expires out of band authentication requests, codes, or tokens after 10 minutes.",
+            "code": "V2.7.2",
+            "tags":
+            [
+                "Chapter Id: V2",
+                "Chapter Name: Authentication",
+                "Section Id: V2.7",
+                "Section Name: Out of Band Verifier",
+                "Requirement Id: V2.7.2",
+                "Level 1: true",
+                "Level 2: true",
+                "Level 3: true",
+                "CWE: 287",
+                "NIST: 5.1.3.2"
+            ],
+            "sort_order": 24
+        },
+        {
+            "testcase": "Verify that the out of band verifier authentication requests, codes, or tokens are only usable once, and only for the original authentication request.",
+            "code": "V2.7.3",
+            "tags":
+            [
+                "Chapter Id: V2",
+                "Chapter Name: Authentication",
+                "Section Id: V2.7",
+                "Section Name: Out of Band Verifier",
+                "Requirement Id: V2.7.3",
+                "Level 1: true",
+                "Level 2: true",
+                "Level 3: true",
+                "CWE: 287",
+                "NIST: 5.1.3.2"
+            ],
+            "sort_order": 25
+        },
+        {
+            "testcase": "Verify that the out of band authenticator and verifier communicates over a secure independent channel.",
+            "code": "V2.7.4",
+            "tags":
+            [
+                "Chapter Id: V2",
+                "Chapter Name: Authentication",
+                "Section Id: V2.7",
+                "Section Name: Out of Band Verifier",
+                "Requirement Id: V2.7.4",
+                "Level 1: true",
+                "Level 2: true",
+                "Level 3: true",
+                "CWE: 523",
+                "NIST: 5.1.3.2"
+            ],
+            "sort_order": 26
+        },
+        {
+            "testcase": "Verify that time-based OTPs have a defined lifetime before expiring.",
+            "code": "V2.8.1",
+            "tags":
+            [
+                "Chapter Id: V2",
+                "Chapter Name: Authentication",
+                "Section Id: V2.8",
+                "Section Name: One Time Verifier",
+                "Requirement Id: V2.8.1",
+                "Level 1: true",
+                "Level 2: true",
+                "Level 3: true",
+                "CWE: 613",
+                "NIST: 5.1.4.2 / 5.1.5.2"
+            ],
+            "sort_order": 27
+        },
+        {
+            "testcase": "Verify the application never reveals session tokens in URL parameters.",
+            "code": "V3.1.1",
+            "tags":
+            [
+                "Chapter Id: V3",
+                "Chapter Name: Session Management",
+                "Section Id: V3.1",
+                "Section Name: Fundamental Session Management Security",
+                "Requirement Id: V3.1.1",
+                "Level 1: true",
+                "Level 2: true",
+                "Level 3: true",
+                "CWE: 598"
+            ],
+            "sort_order": 28
+        },
+        {
+            "testcase": "Verify the application generates a new session token on user authentication. ([C6](https://owasp.org/www-project-proactive-controls/#div-numbering))",
+            "code": "V3.2.1",
+            "tags":
+            [
+                "Chapter Id: V3",
+                "Chapter Name: Session Management",
+                "Section Id: V3.2",
+                "Section Name: Session Binding",
+                "Requirement Id: V3.2.1",
+                "Level 1: true",
+                "Level 2: true",
+                "Level 3: true",
+                "CWE: 384",
+                "NIST: 7.1"
+            ],
+            "sort_order": 29
+        },
+        {
+            "testcase": "Verify that session tokens possess at least 64 bits of entropy. ([C6](https://owasp.org/www-project-proactive-controls/#div-numbering))",
+            "code": "V3.2.2",
+            "tags":
+            [
+                "Chapter Id: V3",
+                "Chapter Name: Session Management",
+                "Section Id: V3.2",
+                "Section Name: Session Binding",
+                "Requirement Id: V3.2.2",
+                "Level 1: true",
+                "Level 2: true",
+                "Level 3: true",
+                "CWE: 331",
+                "NIST: 7.1"
+            ],
+            "sort_order": 30
+        },
+        {
+            "testcase": "Verify the application only stores session tokens in the browser using secure methods such as appropriately secured cookies (see section 3.4) or HTML 5 session storage.",
+            "code": "V3.2.3",
+            "tags":
+            [
+                "Chapter Id: V3",
+                "Chapter Name: Session Management",
+                "Section Id: V3.2",
+                "Section Name: Session Binding",
+                "Requirement Id: V3.2.3",
+                "Level 1: true",
+                "Level 2: true",
+                "Level 3: true",
+                "CWE: 539",
+                "NIST: 7.1"
+            ],
+            "sort_order": 31
+        },
+        {
+            "testcase": "Verify that logout and expiration invalidate the session token, such that the back button or a downstream relying party does not resume an authenticated session, including across relying parties. ([C6](https://owasp.org/www-project-proactive-controls/#div-numbering))",
+            "code": "V3.3.1",
+            "tags":
+            [
+                "Chapter Id: V3",
+                "Chapter Name: Session Management",
+                "Section Id: V3.3",
+                "Section Name: Session Termination",
+                "Requirement Id: V3.3.1",
+                "Level 1: true",
+                "Level 2: true",
+                "Level 3: true",
+                "CWE: 613",
+                "NIST: 7.1"
+            ],
+            "sort_order": 32
+        },
+        {
+            "testcase": "Verify that cookie-based session tokens have the 'Secure' attribute set. ([C6](https://owasp.org/www-project-proactive-controls/#div-numbering))",
+            "code": "V3.4.1",
+            "tags":
+            [
+                "Chapter Id: V3",
+                "Chapter Name: Session Management",
+                "Section Id: V3.4",
+                "Section Name: Cookie-based Session Management",
+                "Requirement Id: V3.4.1",
+                "Level 1: true",
+                "Level 2: true",
+                "Level 3: true",
+                "CWE: 614",
+                "NIST: 7.1.1"
+            ],
+            "sort_order": 33
+        },
+        {
+            "testcase": "Verify that cookie-based session tokens have the 'HttpOnly' attribute set. ([C6](https://owasp.org/www-project-proactive-controls/#div-numbering))",
+            "code": "V3.4.2",
+            "tags":
+            [
+                "Chapter Id: V3",
+                "Chapter Name: Session Management",
+                "Section Id: V3.4",
+                "Section Name: Cookie-based Session Management",
+                "Requirement Id: V3.4.2",
+                "Level 1: true",
+                "Level 2: true",
+                "Level 3: true",
+                "CWE: 1004",
+                "NIST: 7.1.1"
+            ],
+            "sort_order": 34
+        },
+        {
+            "testcase": "Verify that cookie-based session tokens utilize the 'SameSite' attribute to limit exposure to cross-site request forgery attacks. ([C6](https://owasp.org/www-project-proactive-controls/#div-numbering))",
+            "code": "V3.4.3",
+            "tags":
+            [
+                "Chapter Id: V3",
+                "Chapter Name: Session Management",
+                "Section Id: V3.4",
+                "Section Name: Cookie-based Session Management",
+                "Requirement Id: V3.4.3",
+                "Level 1: true",
+                "Level 2: true",
+                "Level 3: true",
+                "CWE: 1275",
+                "NIST: 7.1.1"
+            ],
+            "sort_order": 35
+        },
+        {
+            "testcase": "Verify that cookie-based session tokens use the \"__Host-\" prefix so cookies are only sent to the host that initially set the cookie.",
+            "code": "V3.4.4",
+            "tags":
+            [
+                "Chapter Id: V3",
+                "Chapter Name: Session Management",
+                "Section Id: V3.4",
+                "Section Name: Cookie-based Session Management",
+                "Requirement Id: V3.4.4",
+                "Level 1: true",
+                "Level 2: true",
+                "Level 3: true",
+                "CWE: 16",
+                "NIST: 7.1.1"
+            ],
+            "sort_order": 36
+        },
+        {
+            "testcase": "Verify that if the application is published under a domain name with other applications that set or use session cookies that might disclose the session cookies, set the path attribute in cookie-based session tokens using the most precise path possible. ([C6](https://owasp.org/www-project-proactive-controls/#div-numbering))",
+            "code": "V3.4.5",
+            "tags":
+            [
+                "Chapter Id: V3",
+                "Chapter Name: Session Management",
+                "Section Id: V3.4",
+                "Section Name: Cookie-based Session Management",
+                "Requirement Id: V3.4.5",
+                "Level 1: true",
+                "Level 2: true",
+                "Level 3: true",
+                "CWE: 16",
+                "NIST: 7.1.1"
+            ],
+            "sort_order": 37
+        },
+        {
+            "testcase": "Verify the application ensures a full, valid login session or requires re-authentication or secondary verification before allowing any sensitive transactions or account modifications.",
+            "code": "V3.7.1",
+            "tags":
+            [
+                "Chapter Id: V3",
+                "Chapter Name: Session Management",
+                "Section Id: V3.7",
+                "Section Name: Defenses Against Session Management Exploits",
+                "Requirement Id: V3.7.1",
+                "Level 1: true",
+                "Level 2: true",
+                "Level 3: true",
+                "CWE: 306"
+            ],
+            "sort_order": 38
+        },
+        {
+            "testcase": "Verify that the application enforces access control rules on a trusted service layer, especially if client-side access control is present and could be bypassed.",
+            "code": "V4.1.1",
+            "tags":
+            [
+                "Chapter Id: V4",
+                "Chapter Name: Access Control",
+                "Section Id: V4.1",
+                "Section Name: General Access Control Design",
+                "Requirement Id: V4.1.1",
+                "Level 1: true",
+                "Level 2: true",
+                "Level 3: true",
+                "CWE: 602"
+            ],
+            "sort_order": 39
+        },
+        {
+            "testcase": "Verify that all user and data attributes and policy information used by access controls cannot be manipulated by end users unless specifically authorized.",
+            "code": "V4.1.2",
+            "tags":
+            [
+                "Chapter Id: V4",
+                "Chapter Name: Access Control",
+                "Section Id: V4.1",
+                "Section Name: General Access Control Design",
+                "Requirement Id: V4.1.2",
+                "Level 1: true",
+                "Level 2: true",
+                "Level 3: true",
+                "CWE: 639"
+            ],
+            "sort_order": 40
+        },
+        {
+            "testcase": "Verify that the principle of least privilege exists - users should only be able to access functions, data files, URLs, controllers, services, and other resources, for which they possess specific authorization. This implies protection against spoofing and elevation of privilege. ([C7](https://owasp.org/www-project-proactive-controls/#div-numbering))",
+            "code": "V4.1.3",
+            "tags":
+            [
+                "Chapter Id: V4",
+                "Chapter Name: Access Control",
+                "Section Id: V4.1",
+                "Section Name: General Access Control Design",
+                "Requirement Id: V4.1.3",
+                "Level 1: true",
+                "Level 2: true",
+                "Level 3: true",
+                "CWE: 285"
+            ],
+            "sort_order": 41
+        },
+        {
+            "testcase": "Verify that access controls fail securely including when an exception occurs. ([C10](https://owasp.org/www-project-proactive-controls/#div-numbering))",
+            "code": "V4.1.5",
+            "tags":
+            [
+                "Chapter Id: V4",
+                "Chapter Name: Access Control",
+                "Section Id: V4.1",
+                "Section Name: General Access Control Design",
+                "Requirement Id: V4.1.5",
+                "Level 1: true",
+                "Level 2: true",
+                "Level 3: true",
+                "CWE: 285"
+            ],
+            "sort_order": 42
+        },
+        {
+            "testcase": "Verify that sensitive data and APIs are protected against Insecure Direct Object Reference (IDOR) attacks targeting creation, reading, updating and deletion of records, such as creating or updating someone else's record, viewing everyone's records, or deleting all records.",
+            "code": "V4.2.1",
+            "tags":
+            [
+                "Chapter Id: V4",
+                "Chapter Name: Access Control",
+                "Section Id: V4.2",
+                "Section Name: Operation Level Access Control",
+                "Requirement Id: V4.2.1",
+                "Level 1: true",
+                "Level 2: true",
+                "Level 3: true",
+                "CWE: 639"
+            ],
+            "sort_order": 43
+        },
+        {
+            "testcase": "Verify that the application or framework enforces a strong anti-CSRF mechanism to protect authenticated functionality, and effective anti-automation or anti-CSRF protects unauthenticated functionality.",
+            "code": "V4.2.2",
+            "tags":
+            [
+                "Chapter Id: V4",
+                "Chapter Name: Access Control",
+                "Section Id: V4.2",
+                "Section Name: Operation Level Access Control",
+                "Requirement Id: V4.2.2",
+                "Level 1: true",
+                "Level 2: true",
+                "Level 3: true",
+                "CWE: 352"
+            ],
+            "sort_order": 44
+        },
+        {
+            "testcase": "Verify administrative interfaces use appropriate multi-factor authentication to prevent unauthorized use.",
+            "code": "V4.3.1",
+            "tags":
+            [
+                "Chapter Id: V4",
+                "Chapter Name: Access Control",
+                "Section Id: V4.3",
+                "Section Name: Other Access Control Considerations",
+                "Requirement Id: V4.3.1",
+                "Level 1: true",
+                "Level 2: true",
+                "Level 3: true",
+                "CWE: 419"
+            ],
+            "sort_order": 45
+        },
+        {
+            "testcase": "Verify that directory browsing is disabled unless deliberately desired. Additionally, applications should not allow discovery or disclosure of file or directory metadata, such as Thumbs.db, .DS_Store, .git or .svn folders.",
+            "code": "V4.3.2",
+            "tags":
+            [
+                "Chapter Id: V4",
+                "Chapter Name: Access Control",
+                "Section Id: V4.3",
+                "Section Name: Other Access Control Considerations",
+                "Requirement Id: V4.3.2",
+                "Level 1: true",
+                "Level 2: true",
+                "Level 3: true",
+                "CWE: 548"
+            ],
+            "sort_order": 46
+        },
+        {
+            "testcase": "Verify that the application has defenses against HTTP parameter pollution attacks, particularly if the application framework makes no distinction about the source of request parameters (GET, POST, cookies, headers, or environment variables).",
+            "code": "V5.1.1",
+            "tags":
+            [
+                "Chapter Id: V5",
+                "Chapter Name: Validation, Sanitization and Encoding",
+                "Section Id: V5.1",
+                "Section Name: Input Validation",
+                "Requirement Id: V5.1.1",
+                "Level 1: true",
+                "Level 2: true",
+                "Level 3: true",
+                "CWE: 235"
+            ],
+            "sort_order": 47
+        },
+        {
+            "testcase": "Verify that frameworks protect against mass parameter assignment attacks, or that the application has countermeasures to protect against unsafe parameter assignment, such as marking fields private or similar. ([C5](https://owasp.org/www-project-proactive-controls/#div-numbering))",
+            "code": "V5.1.2",
+            "tags":
+            [
+                "Chapter Id: V5",
+                "Chapter Name: Validation, Sanitization and Encoding",
+                "Section Id: V5.1",
+                "Section Name: Input Validation",
+                "Requirement Id: V5.1.2",
+                "Level 1: true",
+                "Level 2: true",
+                "Level 3: true",
+                "CWE: 915"
+            ],
+            "sort_order": 48
+        },
+        {
+            "testcase": "Verify that all input (HTML form fields, REST requests, URL parameters, HTTP headers, cookies, batch files, RSS feeds, etc) is validated using positive validation (allow lists). ([C5](https://owasp.org/www-project-proactive-controls/#div-numbering))",
+            "code": "V5.1.3",
+            "tags":
+            [
+                "Chapter Id: V5",
+                "Chapter Name: Validation, Sanitization and Encoding",
+                "Section Id: V5.1",
+                "Section Name: Input Validation",
+                "Requirement Id: V5.1.3",
+                "Level 1: true",
+                "Level 2: true",
+                "Level 3: true",
+                "CWE: 20"
+            ],
+            "sort_order": 49
+        },
+        {
+            "testcase": "Verify that structured data is strongly typed and validated against a defined schema including allowed characters, length and pattern (e.g. credit card numbers, e-mail addresses, telephone numbers, or validating that two related fields are reasonable, such as checking that suburb and zip/postcode match). ([C5](https://owasp.org/www-project-proactive-controls/#div-numbering))",
+            "code": "V5.1.4",
+            "tags":
+            [
+                "Chapter Id: V5",
+                "Chapter Name: Validation, Sanitization and Encoding",
+                "Section Id: V5.1",
+                "Section Name: Input Validation",
+                "Requirement Id: V5.1.4",
+                "Level 1: true",
+                "Level 2: true",
+                "Level 3: true",
+                "CWE: 20"
+            ],
+            "sort_order": 50
+        },
+        {
+            "testcase": "Verify that URL redirects and forwards only allow destinations which appear on an allow list, or show a warning when redirecting to potentially untrusted content.",
+            "code": "V5.1.5",
+            "tags":
+            [
+                "Chapter Id: V5",
+                "Chapter Name: Validation, Sanitization and Encoding",
+                "Section Id: V5.1",
+                "Section Name: Input Validation",
+                "Requirement Id: V5.1.5",
+                "Level 1: true",
+                "Level 2: true",
+                "Level 3: true",
+                "CWE: 601"
+            ],
+            "sort_order": 51
+        },
+        {
+            "testcase": "Verify that all untrusted HTML input from WYSIWYG editors or similar is properly sanitized with an HTML sanitizer library or framework feature. ([C5](https://owasp.org/www-project-proactive-controls/#div-numbering))",
+            "code": "V5.2.1",
+            "tags":
+            [
+                "Chapter Id: V5",
+                "Chapter Name: Validation, Sanitization and Encoding",
+                "Section Id: V5.2",
+                "Section Name: Sanitization and Sandboxing",
+                "Requirement Id: V5.2.1",
+                "Level 1: true",
+                "Level 2: true",
+                "Level 3: true",
+                "CWE: 116"
+            ],
+            "sort_order": 52
+        },
+        {
+            "testcase": "Verify that unstructured data is sanitized to enforce safety measures such as allowed characters and length.",
+            "code": "V5.2.2",
+            "tags":
+            [
+                "Chapter Id: V5",
+                "Chapter Name: Validation, Sanitization and Encoding",
+                "Section Id: V5.2",
+                "Section Name: Sanitization and Sandboxing",
+                "Requirement Id: V5.2.2",
+                "Level 1: true",
+                "Level 2: true",
+                "Level 3: true",
+                "CWE: 138"
+            ],
+            "sort_order": 53
+        },
+        {
+            "testcase": "Verify that the application sanitizes user input before passing to mail systems to protect against SMTP or IMAP injection.",
+            "code": "V5.2.3",
+            "tags":
+            [
+                "Chapter Id: V5",
+                "Chapter Name: Validation, Sanitization and Encoding",
+                "Section Id: V5.2",
+                "Section Name: Sanitization and Sandboxing",
+                "Requirement Id: V5.2.3",
+                "Level 1: true",
+                "Level 2: true",
+                "Level 3: true",
+                "CWE: 147"
+            ],
+            "sort_order": 54
+        },
+        {
+            "testcase": "Verify that the application avoids the use of eval() or other dynamic code execution features. Where there is no alternative, any user input being included must be sanitized or sandboxed before being executed.",
+            "code": "V5.2.4",
+            "tags":
+            [
+                "Chapter Id: V5",
+                "Chapter Name: Validation, Sanitization and Encoding",
+                "Section Id: V5.2",
+                "Section Name: Sanitization and Sandboxing",
+                "Requirement Id: V5.2.4",
+                "Level 1: true",
+                "Level 2: true",
+                "Level 3: true",
+                "CWE: 95"
+            ],
+            "sort_order": 55
+        },
+        {
+            "testcase": "Verify that the application protects against template injection attacks by ensuring that any user input being included is sanitized or sandboxed.",
+            "code": "V5.2.5",
+            "tags":
+            [
+                "Chapter Id: V5",
+                "Chapter Name: Validation, Sanitization and Encoding",
+                "Section Id: V5.2",
+                "Section Name: Sanitization and Sandboxing",
+                "Requirement Id: V5.2.5",
+                "Level 1: true",
+                "Level 2: true",
+                "Level 3: true",
+                "CWE: 94"
+            ],
+            "sort_order": 56
+        },
+        {
+            "testcase": "Verify that the application protects against SSRF attacks, by validating or sanitizing untrusted data or HTTP file metadata, such as filenames and URL input fields, and uses allow lists of protocols, domains, paths and ports.",
+            "code": "V5.2.6",
+            "tags":
+            [
+                "Chapter Id: V5",
+                "Chapter Name: Validation, Sanitization and Encoding",
+                "Section Id: V5.2",
+                "Section Name: Sanitization and Sandboxing",
+                "Requirement Id: V5.2.6",
+                "Level 1: true",
+                "Level 2: true",
+                "Level 3: true",
+                "CWE: 918"
+            ],
+            "sort_order": 57
+        },
+        {
+            "testcase": "Verify that the application sanitizes, disables, or sandboxes user-supplied Scalable Vector Graphics (SVG) scriptable content, especially as they relate to XSS resulting from inline scripts, and foreignObject.",
+            "code": "V5.2.7",
+            "tags":
+            [
+                "Chapter Id: V5",
+                "Chapter Name: Validation, Sanitization and Encoding",
+                "Section Id: V5.2",
+                "Section Name: Sanitization and Sandboxing",
+                "Requirement Id: V5.2.7",
+                "Level 1: true",
+                "Level 2: true",
+                "Level 3: true",
+                "CWE: 159"
+            ],
+            "sort_order": 58
+        },
+        {
+            "testcase": "Verify that the application sanitizes, disables, or sandboxes user-supplied scriptable or expression template language content, such as Markdown, CSS or XSL stylesheets, BBCode, or similar.",
+            "code": "V5.2.8",
+            "tags":
+            [
+                "Chapter Id: V5",
+                "Chapter Name: Validation, Sanitization and Encoding",
+                "Section Id: V5.2",
+                "Section Name: Sanitization and Sandboxing",
+                "Requirement Id: V5.2.8",
+                "Level 1: true",
+                "Level 2: true",
+                "Level 3: true",
+                "CWE: 94"
+            ],
+            "sort_order": 59
+        },
+        {
+            "testcase": "Verify that output encoding is relevant for the interpreter and context required. For example, use encoders specifically for HTML values, HTML attributes, JavaScript, URL parameters, HTTP headers, SMTP, and others as the context requires, especially from untrusted inputs (e.g. names with Unicode or apostrophes, such as ねこ or O'Hara). ([C4](https://owasp.org/www-project-proactive-controls/#div-numbering))",
+            "code": "V5.3.1",
+            "tags":
+            [
+                "Chapter Id: V5",
+                "Chapter Name: Validation, Sanitization and Encoding",
+                "Section Id: V5.3",
+                "Section Name: Output Encoding and Injection Prevention",
+                "Requirement Id: V5.3.1",
+                "Level 1: true",
+                "Level 2: true",
+                "Level 3: true",
+                "CWE: 116"
+            ],
+            "sort_order": 60
+        },
+        {
+            "testcase": "Verify that output encoding preserves the user's chosen character set and locale, such that any Unicode character point is valid and safely handled. ([C4](https://owasp.org/www-project-proactive-controls/#div-numbering))",
+            "code": "V5.3.2",
+            "tags":
+            [
+                "Chapter Id: V5",
+                "Chapter Name: Validation, Sanitization and Encoding",
+                "Section Id: V5.3",
+                "Section Name: Output Encoding and Injection Prevention",
+                "Requirement Id: V5.3.2",
+                "Level 1: true",
+                "Level 2: true",
+                "Level 3: true",
+                "CWE: 176"
+            ],
+            "sort_order": 61
+        },
+        {
+            "testcase": "Verify that context-aware, preferably automated - or at worst, manual - output escaping protects against reflected, stored, and DOM based XSS. ([C4](https://owasp.org/www-project-proactive-controls/#div-numbering))",
+            "code": "V5.3.3",
+            "tags":
+            [
+                "Chapter Id: V5",
+                "Chapter Name: Validation, Sanitization and Encoding",
+                "Section Id: V5.3",
+                "Section Name: Output Encoding and Injection Prevention",
+                "Requirement Id: V5.3.3",
+                "Level 1: true",
+                "Level 2: true",
+                "Level 3: true",
+                "CWE: 79"
+            ],
+            "sort_order": 62
+        },
+        {
+            "testcase": "Verify that data selection or database queries (e.g. SQL, HQL, ORM, NoSQL) use parameterized queries, ORMs, entity frameworks, or are otherwise protected from database injection attacks. ([C3](https://owasp.org/www-project-proactive-controls/#div-numbering))",
+            "code": "V5.3.4",
+            "tags":
+            [
+                "Chapter Id: V5",
+                "Chapter Name: Validation, Sanitization and Encoding",
+                "Section Id: V5.3",
+                "Section Name: Output Encoding and Injection Prevention",
+                "Requirement Id: V5.3.4",
+                "Level 1: true",
+                "Level 2: true",
+                "Level 3: true",
+                "CWE: 89"
+            ],
+            "sort_order": 63
+        },
+        {
+            "testcase": "Verify that where parameterized or safer mechanisms are not present, context-specific output encoding is used to protect against injection attacks, such as the use of SQL escaping to protect against SQL injection. ([C3, C4](https://owasp.org/www-project-proactive-controls/#div-numbering))",
+            "code": "V5.3.5",
+            "tags":
+            [
+                "Chapter Id: V5",
+                "Chapter Name: Validation, Sanitization and Encoding",
+                "Section Id: V5.3",
+                "Section Name: Output Encoding and Injection Prevention",
+                "Requirement Id: V5.3.5",
+                "Level 1: true",
+                "Level 2: true",
+                "Level 3: true",
+                "CWE: 89"
+            ],
+            "sort_order": 64
+        },
+        {
+            "testcase": "Verify that the application protects against JSON injection attacks, JSON eval attacks, and JavaScript expression evaluation. ([C4](https://owasp.org/www-project-proactive-controls/#div-numbering))",
+            "code": "V5.3.6",
+            "tags":
+            [
+                "Chapter Id: V5",
+                "Chapter Name: Validation, Sanitization and Encoding",
+                "Section Id: V5.3",
+                "Section Name: Output Encoding and Injection Prevention",
+                "Requirement Id: V5.3.6",
+                "Level 1: true",
+                "Level 2: true",
+                "Level 3: true",
+                "CWE: 830"
+            ],
+            "sort_order": 65
+        },
+        {
+            "testcase": "Verify that the application protects against LDAP injection vulnerabilities, or that specific security controls to prevent LDAP injection have been implemented. ([C4](https://owasp.org/www-project-proactive-controls/#div-numbering))",
+            "code": "V5.3.7",
+            "tags":
+            [
+                "Chapter Id: V5",
+                "Chapter Name: Validation, Sanitization and Encoding",
+                "Section Id: V5.3",
+                "Section Name: Output Encoding and Injection Prevention",
+                "Requirement Id: V5.3.7",
+                "Level 1: true",
+                "Level 2: true",
+                "Level 3: true",
+                "CWE: 90"
+            ],
+            "sort_order": 66
+        },
+        {
+            "testcase": "Verify that the application protects against OS command injection and that operating system calls use parameterized OS queries or use contextual command line output encoding. ([C4](https://owasp.org/www-project-proactive-controls/#div-numbering))",
+            "code": "V5.3.8",
+            "tags":
+            [
+                "Chapter Id: V5",
+                "Chapter Name: Validation, Sanitization and Encoding",
+                "Section Id: V5.3",
+                "Section Name: Output Encoding and Injection Prevention",
+                "Requirement Id: V5.3.8",
+                "Level 1: true",
+                "Level 2: true",
+                "Level 3: true",
+                "CWE: 78"
+            ],
+            "sort_order": 67
+        },
+        {
+            "testcase": "Verify that the application protects against Local File Inclusion (LFI) or Remote File Inclusion (RFI) attacks.",
+            "code": "V5.3.9",
+            "tags":
+            [
+                "Chapter Id: V5",
+                "Chapter Name: Validation, Sanitization and Encoding",
+                "Section Id: V5.3",
+                "Section Name: Output Encoding and Injection Prevention",
+                "Requirement Id: V5.3.9",
+                "Level 1: true",
+                "Level 2: true",
+                "Level 3: true",
+                "CWE: 829"
+            ],
+            "sort_order": 68
+        },
+        {
+            "testcase": "Verify that the application protects against XPath injection or XML injection attacks. ([C4](https://owasp.org/www-project-proactive-controls/#div-numbering))",
+            "code": "V5.3.10",
+            "tags":
+            [
+                "Chapter Id: V5",
+                "Chapter Name: Validation, Sanitization and Encoding",
+                "Section Id: V5.3",
+                "Section Name: Output Encoding and Injection Prevention",
+                "Requirement Id: V5.3.10",
+                "Level 1: true",
+                "Level 2: true",
+                "Level 3: true",
+                "CWE: 643"
+            ],
+            "sort_order": 69
+        },
+        {
+            "testcase": "Verify that serialized objects use integrity checks or are encrypted to prevent hostile object creation or data tampering. ([C5](https://owasp.org/www-project-proactive-controls/#div-numbering))",
+            "code": "V5.5.1",
+            "tags":
+            [
+                "Chapter Id: V5",
+                "Chapter Name: Validation, Sanitization and Encoding",
+                "Section Id: V5.5",
+                "Section Name: Deserialization Prevention",
+                "Requirement Id: V5.5.1",
+                "Level 1: true",
+                "Level 2: true",
+                "Level 3: true",
+                "CWE: 502"
+            ],
+            "sort_order": 70
+        },
+        {
+            "testcase": "Verify that the application correctly restricts XML parsers to only use the most restrictive configuration possible and to ensure that unsafe features such as resolving external entities are disabled to prevent XML eXternal Entity (XXE) attacks.",
+            "code": "V5.5.2",
+            "tags":
+            [
+                "Chapter Id: V5",
+                "Chapter Name: Validation, Sanitization and Encoding",
+                "Section Id: V5.5",
+                "Section Name: Deserialization Prevention",
+                "Requirement Id: V5.5.2",
+                "Level 1: true",
+                "Level 2: true",
+                "Level 3: true",
+                "CWE: 611"
+            ],
+            "sort_order": 71
+        },
+        {
+            "testcase": "Verify that deserialization of untrusted data is avoided or is protected in both custom code and third-party libraries (such as JSON, XML and YAML parsers).",
+            "code": "V5.5.3",
+            "tags":
+            [
+                "Chapter Id: V5",
+                "Chapter Name: Validation, Sanitization and Encoding",
+                "Section Id: V5.5",
+                "Section Name: Deserialization Prevention",
+                "Requirement Id: V5.5.3",
+                "Level 1: true",
+                "Level 2: true",
+                "Level 3: true",
+                "CWE: 502"
+            ],
+            "sort_order": 72
+        },
+        {
+            "testcase": "Verify that when parsing JSON in browsers or JavaScript-based backends, JSON.parse is used to parse the JSON document. Do not use eval() to parse JSON.",
+            "code": "V5.5.4",
+            "tags":
+            [
+                "Chapter Id: V5",
+                "Chapter Name: Validation, Sanitization and Encoding",
+                "Section Id: V5.5",
+                "Section Name: Deserialization Prevention",
+                "Requirement Id: V5.5.4",
+                "Level 1: true",
+                "Level 2: true",
+                "Level 3: true",
+                "CWE: 95"
+            ],
+            "sort_order": 73
+        },
+        {
+            "testcase": "Verify that all cryptographic modules fail securely, and errors are handled in a way that does not enable Padding Oracle attacks.",
+            "code": "V6.2.1",
+            "tags":
+            [
+                "Chapter Id: V6",
+                "Chapter Name: Stored Cryptography",
+                "Section Id: V6.2",
+                "Section Name: Algorithms",
+                "Requirement Id: V6.2.1",
+                "Level 1: true",
+                "Level 2: true",
+                "Level 3: true",
+                "CWE: 310"
+            ],
+            "sort_order": 74
+        },
+        {
+            "testcase": "Verify that the application does not log credentials or payment details. Session tokens should only be stored in logs in an irreversible, hashed form. ([C9, C10](https://owasp.org/www-project-proactive-controls/#div-numbering))",
+            "code": "V7.1.1",
+            "tags":
+            [
+                "Chapter Id: V7",
+                "Chapter Name: Error Handling and Logging",
+                "Section Id: V7.1",
+                "Section Name: Log Content",
+                "Requirement Id: V7.1.1",
+                "Level 1: true",
+                "Level 2: true",
+                "Level 3: true",
+                "CWE: 532"
+            ],
+            "sort_order": 75
+        },
+        {
+            "testcase": "Verify that the application does not log other sensitive data as defined under local privacy laws or relevant security policy. ([C9](https://owasp.org/www-project-proactive-controls/#div-numbering))",
+            "code": "V7.1.2",
+            "tags":
+            [
+                "Chapter Id: V7",
+                "Chapter Name: Error Handling and Logging",
+                "Section Id: V7.1",
+                "Section Name: Log Content",
+                "Requirement Id: V7.1.2",
+                "Level 1: true",
+                "Level 2: true",
+                "Level 3: true",
+                "CWE: 532"
+            ],
+            "sort_order": 76
+        },
+        {
+            "testcase": "Verify that a generic message is shown when an unexpected or security sensitive error occurs, potentially with a unique ID which support personnel can use to investigate. ([C10](https://owasp.org/www-project-proactive-controls/#div-numbering))",
+            "code": "V7.4.1",
+            "tags":
+            [
+                "Chapter Id: V7",
+                "Chapter Name: Error Handling and Logging",
+                "Section Id: V7.4",
+                "Section Name: Error Handling",
+                "Requirement Id: V7.4.1",
+                "Level 1: true",
+                "Level 2: true",
+                "Level 3: true",
+                "CWE: 210"
+            ],
+            "sort_order": 77
+        },
+        {
+            "testcase": "Verify the application sets sufficient anti-caching headers so that sensitive data is not cached in modern browsers.",
+            "code": "V8.2.1",
+            "tags":
+            [
+                "Chapter Id: V8",
+                "Chapter Name: Data Protection",
+                "Section Id: V8.2",
+                "Section Name: Client-side Data Protection",
+                "Requirement Id: V8.2.1",
+                "Level 1: true",
+                "Level 2: true",
+                "Level 3: true",
+                "CWE: 525"
+            ],
+            "sort_order": 78
+        },
+        {
+            "testcase": "Verify that data stored in browser storage (such as localStorage, sessionStorage, IndexedDB, or cookies) does not contain sensitive data.",
+            "code": "V8.2.2",
+            "tags":
+            [
+                "Chapter Id: V8",
+                "Chapter Name: Data Protection",
+                "Section Id: V8.2",
+                "Section Name: Client-side Data Protection",
+                "Requirement Id: V8.2.2",
+                "Level 1: true",
+                "Level 2: true",
+                "Level 3: true",
+                "CWE: 922"
+            ],
+            "sort_order": 79
+        },
+        {
+            "testcase": "Verify that authenticated data is cleared from client storage, such as the browser DOM, after the client or session is terminated.",
+            "code": "V8.2.3",
+            "tags":
+            [
+                "Chapter Id: V8",
+                "Chapter Name: Data Protection",
+                "Section Id: V8.2",
+                "Section Name: Client-side Data Protection",
+                "Requirement Id: V8.2.3",
+                "Level 1: true",
+                "Level 2: true",
+                "Level 3: true",
+                "CWE: 922"
+            ],
+            "sort_order": 80
+        },
+        {
+            "testcase": "Verify that sensitive data is sent to the server in the HTTP message body or headers, and that query string parameters from any HTTP verb do not contain sensitive data.",
+            "code": "V8.3.1",
+            "tags":
+            [
+                "Chapter Id: V8",
+                "Chapter Name: Data Protection",
+                "Section Id: V8.3",
+                "Section Name: Sensitive Private Data",
+                "Requirement Id: V8.3.1",
+                "Level 1: true",
+                "Level 2: true",
+                "Level 3: true",
+                "CWE: 319"
+            ],
+            "sort_order": 81
+        },
+        {
+            "testcase": "Verify that users have a method to remove or export their data on demand.",
+            "code": "V8.3.2",
+            "tags":
+            [
+                "Chapter Id: V8",
+                "Chapter Name: Data Protection",
+                "Section Id: V8.3",
+                "Section Name: Sensitive Private Data",
+                "Requirement Id: V8.3.2",
+                "Level 1: true",
+                "Level 2: true",
+                "Level 3: true",
+                "CWE: 212"
+            ],
+            "sort_order": 82
+        },
+        {
+            "testcase": "Verify that users are provided clear language regarding collection and use of supplied personal information and that users have provided opt-in consent for the use of that data before it is used in any way.",
+            "code": "V8.3.3",
+            "tags":
+            [
+                "Chapter Id: V8",
+                "Chapter Name: Data Protection",
+                "Section Id: V8.3",
+                "Section Name: Sensitive Private Data",
+                "Requirement Id: V8.3.3",
+                "Level 1: true",
+                "Level 2: true",
+                "Level 3: true",
+                "CWE: 285"
+            ],
+            "sort_order": 83
+        },
+        {
+            "testcase": "Verify that all sensitive data created and processed by the application has been identified, and ensure that a policy is in place on how to deal with sensitive data. ([C8](https://owasp.org/www-project-proactive-controls/#div-numbering))",
+            "code": "V8.3.4",
+            "tags":
+            [
+                "Chapter Id: V8",
+                "Chapter Name: Data Protection",
+                "Section Id: V8.3",
+                "Section Name: Sensitive Private Data",
+                "Requirement Id: V8.3.4",
+                "Level 1: true",
+                "Level 2: true",
+                "Level 3: true",
+                "CWE: 200"
+            ],
+            "sort_order": 84
+        },
+        {
+            "testcase": "Verify that TLS is used for all client connectivity, and does not fall back to insecure or unencrypted communications. ([C8](https://owasp.org/www-project-proactive-controls/#div-numbering))",
+            "code": "V9.1.1",
+            "tags":
+            [
+                "Chapter Id: V9",
+                "Chapter Name: Communication",
+                "Section Id: V9.1",
+                "Section Name: Client Communication Security",
+                "Requirement Id: V9.1.1",
+                "Level 1: true",
+                "Level 2: true",
+                "Level 3: true",
+                "CWE: 319"
+            ],
+            "sort_order": 85
+        },
+        {
+            "testcase": "Verify using up to date TLS testing tools that only strong cipher suites are enabled, with the strongest cipher suites set as preferred.",
+            "code": "V9.1.2",
+            "tags":
+            [
+                "Chapter Id: V9",
+                "Chapter Name: Communication",
+                "Section Id: V9.1",
+                "Section Name: Client Communication Security",
+                "Requirement Id: V9.1.2",
+                "Level 1: true",
+                "Level 2: true",
+                "Level 3: true",
+                "CWE: 326"
+            ],
+            "sort_order": 86
+        },
+        {
+            "testcase": "Verify that only the latest recommended versions of the TLS protocol are enabled, such as TLS 1.2 and TLS 1.3. The latest version of the TLS protocol should be the preferred option.",
+            "code": "V9.1.3",
+            "tags":
+            [
+                "Chapter Id: V9",
+                "Chapter Name: Communication",
+                "Section Id: V9.1",
+                "Section Name: Client Communication Security",
+                "Requirement Id: V9.1.3",
+                "Level 1: true",
+                "Level 2: true",
+                "Level 3: true",
+                "CWE: 326"
+            ],
+            "sort_order": 87
+        },
+        {
+            "testcase": "Verify that if the application has a client or server auto-update feature, updates should be obtained over secure channels and digitally signed. The update code must validate the digital signature of the update before installing or executing the update.",
+            "code": "V10.3.1",
+            "tags":
+            [
+                "Chapter Id: V10",
+                "Chapter Name: Malicious Code",
+                "Section Id: V10.3",
+                "Section Name: Application Integrity",
+                "Requirement Id: V10.3.1",
+                "Level 1: true",
+                "Level 2: true",
+                "Level 3: true",
+                "CWE: 16"
+            ],
+            "sort_order": 88
+        },
+        {
+            "testcase": "Verify that the application employs integrity protections, such as code signing or subresource integrity. The application must not load or execute code from untrusted sources, such as loading includes, modules, plugins, code, or libraries from untrusted sources or the Internet.",
+            "code": "V10.3.2",
+            "tags":
+            [
+                "Chapter Id: V10",
+                "Chapter Name: Malicious Code",
+                "Section Id: V10.3",
+                "Section Name: Application Integrity",
+                "Requirement Id: V10.3.2",
+                "Level 1: true",
+                "Level 2: true",
+                "Level 3: true",
+                "CWE: 353"
+            ],
+            "sort_order": 89
+        },
+        {
+            "testcase": "Verify that the application has protection from subdomain takeovers if the application relies upon DNS entries or DNS subdomains, such as expired domain names, out of date DNS pointers or CNAMEs, expired projects at public source code repos, or transient cloud APIs, serverless functions, or storage buckets (*autogen-bucket-id*.cloud.example.com) or similar. Protections can include ensuring that DNS names used by applications are regularly checked for expiry or change.",
+            "code": "V10.3.3",
+            "tags":
+            [
+                "Chapter Id: V10",
+                "Chapter Name: Malicious Code",
+                "Section Id: V10.3",
+                "Section Name: Application Integrity",
+                "Requirement Id: V10.3.3",
+                "Level 1: true",
+                "Level 2: true",
+                "Level 3: true",
+                "CWE: 350"
+            ],
+            "sort_order": 90
+        },
+        {
+            "testcase": "Verify that the application will only process business logic flows for the same user in sequential step order and without skipping steps.",
+            "code": "V11.1.1",
+            "tags":
+            [
+                "Chapter Id: V11",
+                "Chapter Name: Business Logic",
+                "Section Id: V11.1",
+                "Section Name: Business Logic Security",
+                "Requirement Id: V11.1.1",
+                "Level 1: true",
+                "Level 2: true",
+                "Level 3: true",
+                "CWE: 841"
+            ],
+            "sort_order": 91
+        },
+        {
+            "testcase": "Verify that the application will only process business logic flows with all steps being processed in realistic human time, i.e. transactions are not submitted too quickly.",
+            "code": "V11.1.2",
+            "tags":
+            [
+                "Chapter Id: V11",
+                "Chapter Name: Business Logic",
+                "Section Id: V11.1",
+                "Section Name: Business Logic Security",
+                "Requirement Id: V11.1.2",
+                "Level 1: true",
+                "Level 2: true",
+                "Level 3: true",
+                "CWE: 799"
+            ],
+            "sort_order": 92
+        },
+        {
+            "testcase": "Verify the application has appropriate limits for specific business actions or transactions which are correctly enforced on a per user basis.",
+            "code": "V11.1.3",
+            "tags":
+            [
+                "Chapter Id: V11",
+                "Chapter Name: Business Logic",
+                "Section Id: V11.1",
+                "Section Name: Business Logic Security",
+                "Requirement Id: V11.1.3",
+                "Level 1: true",
+                "Level 2: true",
+                "Level 3: true",
+                "CWE: 770"
+            ],
+            "sort_order": 93
+        },
+        {
+            "testcase": "Verify that the application has anti-automation controls to protect against excessive calls such as mass data exfiltration, business logic requests, file uploads or denial of service attacks.",
+            "code": "V11.1.4",
+            "tags":
+            [
+                "Chapter Id: V11",
+                "Chapter Name: Business Logic",
+                "Section Id: V11.1",
+                "Section Name: Business Logic Security",
+                "Requirement Id: V11.1.4",
+                "Level 1: true",
+                "Level 2: true",
+                "Level 3: true",
+                "CWE: 770"
+            ],
+            "sort_order": 94
+        },
+        {
+            "testcase": "Verify the application has business logic limits or validation to protect against likely business risks or threats, identified using threat modeling or similar methodologies.",
+            "code": "V11.1.5",
+            "tags":
+            [
+                "Chapter Id: V11",
+                "Chapter Name: Business Logic",
+                "Section Id: V11.1",
+                "Section Name: Business Logic Security",
+                "Requirement Id: V11.1.5",
+                "Level 1: true",
+                "Level 2: true",
+                "Level 3: true",
+                "CWE: 841"
+            ],
+            "sort_order": 95
+        },
+        {
+            "testcase": "Verify that the application will not accept large files that could fill up storage or cause a denial of service.",
+            "code": "V12.1.1",
+            "tags":
+            [
+                "Chapter Id: V12",
+                "Chapter Name: Files and Resources",
+                "Section Id: V12.1",
+                "Section Name: File Upload",
+                "Requirement Id: V12.1.1",
+                "Level 1: true",
+                "Level 2: true",
+                "Level 3: true",
+                "CWE: 400"
+            ],
+            "sort_order": 96
+        },
+        {
+            "testcase": "Verify that user-submitted filename metadata is not used directly by system or framework filesystems and that a URL API is used to protect against path traversal.",
+            "code": "V12.3.1",
+            "tags":
+            [
+                "Chapter Id: V12",
+                "Chapter Name: Files and Resources",
+                "Section Id: V12.3",
+                "Section Name: File Execution",
+                "Requirement Id: V12.3.1",
+                "Level 1: true",
+                "Level 2: true",
+                "Level 3: true",
+                "CWE: 22"
+            ],
+            "sort_order": 97
+        },
+        {
+            "testcase": "Verify that user-submitted filename metadata is validated or ignored to prevent the disclosure, creation, updating or removal of local files (LFI).",
+            "code": "V12.3.2",
+            "tags":
+            [
+                "Chapter Id: V12",
+                "Chapter Name: Files and Resources",
+                "Section Id: V12.3",
+                "Section Name: File Execution",
+                "Requirement Id: V12.3.2",
+                "Level 1: true",
+                "Level 2: true",
+                "Level 3: true",
+                "CWE: 73"
+            ],
+            "sort_order": 98
+        },
+        {
+            "testcase": "Verify that user-submitted filename metadata is validated or ignored to prevent the disclosure or execution of remote files via Remote File Inclusion (RFI) or Server-side Request Forgery (SSRF) attacks.",
+            "code": "V12.3.3",
+            "tags":
+            [
+                "Chapter Id: V12",
+                "Chapter Name: Files and Resources",
+                "Section Id: V12.3",
+                "Section Name: File Execution",
+                "Requirement Id: V12.3.3",
+                "Level 1: true",
+                "Level 2: true",
+                "Level 3: true",
+                "CWE: 98"
+            ],
+            "sort_order": 99
+        },
+        {
+            "testcase": "Verify that the application protects against Reflective File Download (RFD) by validating or ignoring user-submitted filenames in a JSON, JSONP, or URL parameter, the response Content-Type header should be set to text/plain, and the Content-Disposition header should have a fixed filename.",
+            "code": "V12.3.4",
+            "tags":
+            [
+                "Chapter Id: V12",
+                "Chapter Name: Files and Resources",
+                "Section Id: V12.3",
+                "Section Name: File Execution",
+                "Requirement Id: V12.3.4",
+                "Level 1: true",
+                "Level 2: true",
+                "Level 3: true",
+                "CWE: 641"
+            ],
+            "sort_order": 100
+        },
+        {
+            "testcase": "Verify that untrusted file metadata is not used directly with system API or libraries, to protect against OS command injection.",
+            "code": "V12.3.5",
+            "tags":
+            [
+                "Chapter Id: V12",
+                "Chapter Name: Files and Resources",
+                "Section Id: V12.3",
+                "Section Name: File Execution",
+                "Requirement Id: V12.3.5",
+                "Level 1: true",
+                "Level 2: true",
+                "Level 3: true",
+                "CWE: 78"
+            ],
+            "sort_order": 101
+        },
+        {
+            "testcase": "Verify that files obtained from untrusted sources are stored outside the web root, with limited permissions.",
+            "code": "V12.4.1",
+            "tags":
+            [
+                "Chapter Id: V12",
+                "Chapter Name: Files and Resources",
+                "Section Id: V12.4",
+                "Section Name: File Storage",
+                "Requirement Id: V12.4.1",
+                "Level 1: true",
+                "Level 2: true",
+                "Level 3: true",
+                "CWE: 552"
+            ],
+            "sort_order": 102
+        },
+        {
+            "testcase": "Verify that files obtained from untrusted sources are scanned by antivirus scanners to prevent upload and serving of known malicious content.",
+            "code": "V12.4.2",
+            "tags":
+            [
+                "Chapter Id: V12",
+                "Chapter Name: Files and Resources",
+                "Section Id: V12.4",
+                "Section Name: File Storage",
+                "Requirement Id: V12.4.2",
+                "Level 1: true",
+                "Level 2: true",
+                "Level 3: true",
+                "CWE: 509"
+            ],
+            "sort_order": 103
+        },
+        {
+            "testcase": "Verify that the web tier is configured to serve only files with specific file extensions to prevent unintentional information and source code leakage. For example, backup files (e.g. .bak), temporary working files (e.g. .swp), compressed files (.zip, .tar.gz, etc) and other extensions commonly used by editors should be blocked unless required.",
+            "code": "V12.5.1",
+            "tags":
+            [
+                "Chapter Id: V12",
+                "Chapter Name: Files and Resources",
+                "Section Id: V12.5",
+                "Section Name: File Download",
+                "Requirement Id: V12.5.1",
+                "Level 1: true",
+                "Level 2: true",
+                "Level 3: true",
+                "CWE: 552"
+            ],
+            "sort_order": 104
+        },
+        {
+            "testcase": "Verify that direct requests to uploaded files will never be executed as HTML/JavaScript content.",
+            "code": "V12.5.2",
+            "tags":
+            [
+                "Chapter Id: V12",
+                "Chapter Name: Files and Resources",
+                "Section Id: V12.5",
+                "Section Name: File Download",
+                "Requirement Id: V12.5.2",
+                "Level 1: true",
+                "Level 2: true",
+                "Level 3: true",
+                "CWE: 434"
+            ],
+            "sort_order": 105
+        },
+        {
+            "testcase": "Verify that the web or application server is configured with an allow list of resources or systems to which the server can send requests or load data/files from.",
+            "code": "V12.6.1",
+            "tags":
+            [
+                "Chapter Id: V12",
+                "Chapter Name: Files and Resources",
+                "Section Id: V12.6",
+                "Section Name: SSRF Protection",
+                "Requirement Id: V12.6.1",
+                "Level 1: true",
+                "Level 2: true",
+                "Level 3: true",
+                "CWE: 918"
+            ],
+            "sort_order": 106
+        },
+        {
+            "testcase": "Verify that all application components use the same encodings and parsers to avoid parsing attacks that exploit different URI or file parsing behavior that could be used in SSRF and RFI attacks.",
+            "code": "V13.1.1",
+            "tags":
+            [
+                "Chapter Id: V13",
+                "Chapter Name: API and Web Service",
+                "Section Id: V13.1",
+                "Section Name: Generic Web Service Security",
+                "Requirement Id: V13.1.1",
+                "Level 1: true",
+                "Level 2: true",
+                "Level 3: true",
+                "CWE: 116"
+            ],
+            "sort_order": 107
+        },
+        {
+            "testcase": "Verify API URLs do not expose sensitive information, such as the API key, session tokens etc.",
+            "code": "V13.1.3",
+            "tags":
+            [
+                "Chapter Id: V13",
+                "Chapter Name: API and Web Service",
+                "Section Id: V13.1",
+                "Section Name: Generic Web Service Security",
+                "Requirement Id: V13.1.3",
+                "Level 1: true",
+                "Level 2: true",
+                "Level 3: true",
+                "CWE: 598"
+            ],
+            "sort_order": 108
+        },
+        {
+            "testcase": "Verify that enabled RESTful HTTP methods are a valid choice for the user or action, such as preventing normal users using DELETE or PUT on protected API or resources.",
+            "code": "V13.2.1",
+            "tags":
+            [
+                "Chapter Id: V13",
+                "Chapter Name: API and Web Service",
+                "Section Id: V13.2",
+                "Section Name: RESTful Web Service",
+                "Requirement Id: V13.2.1",
+                "Level 1: true",
+                "Level 2: true",
+                "Level 3: true",
+                "CWE: 650"
+            ],
+            "sort_order": 109
+        },
+        {
+            "testcase": "Verify that JSON schema validation is in place and verified before accepting input.",
+            "code": "V13.2.2",
+            "tags":
+            [
+                "Chapter Id: V13",
+                "Chapter Name: API and Web Service",
+                "Section Id: V13.2",
+                "Section Name: RESTful Web Service",
+                "Requirement Id: V13.2.2",
+                "Level 1: true",
+                "Level 2: true",
+                "Level 3: true",
+                "CWE: 20"
+            ],
+            "sort_order": 110
+        },
+        {
+            "testcase": "Verify that RESTful web services that utilize cookies are protected from Cross-Site Request Forgery via the use of at least one or more of the following: double submit cookie pattern, CSRF nonces, or Origin request header checks.",
+            "code": "V13.2.3",
+            "tags":
+            [
+                "Chapter Id: V13",
+                "Chapter Name: API and Web Service",
+                "Section Id: V13.2",
+                "Section Name: RESTful Web Service",
+                "Requirement Id: V13.2.3",
+                "Level 1: true",
+                "Level 2: true",
+                "Level 3: true",
+                "CWE: 352"
+            ],
+            "sort_order": 111
+        },
+        {
+            "testcase": "Verify that XSD schema validation takes place to ensure a properly formed XML document, followed by validation of each input field before any processing of that data takes place.",
+            "code": "V13.3.1",
+            "tags":
+            [
+                "Chapter Id: V13",
+                "Chapter Name: API and Web Service",
+                "Section Id: V13.3",
+                "Section Name: SOAP Web Service",
+                "Requirement Id: V13.3.1",
+                "Level 1: true",
+                "Level 2: true",
+                "Level 3: true",
+                "CWE: 20"
+            ],
+            "sort_order": 112
+        },
+        {
+            "testcase": "Verify that all components are up to date, preferably using a dependency checker during build or compile time. ([C2](https://owasp.org/www-project-proactive-controls/#div-numbering))",
+            "code": "V14.2.1",
+            "tags":
+            [
+                "Chapter Id: V14",
+                "Chapter Name: Configuration",
+                "Section Id: V14.2",
+                "Section Name: Dependency",
+                "Requirement Id: V14.2.1",
+                "Level 1: true",
+                "Level 2: true",
+                "Level 3: true",
+                "CWE: 1026"
+            ],
+            "sort_order": 113
+        },
+        {
+            "testcase": "Verify that all unneeded features, documentation, sample applications and configurations are removed.",
+            "code": "V14.2.2",
+            "tags":
+            [
+                "Chapter Id: V14",
+                "Chapter Name: Configuration",
+                "Section Id: V14.2",
+                "Section Name: Dependency",
+                "Requirement Id: V14.2.2",
+                "Level 1: true",
+                "Level 2: true",
+                "Level 3: true",
+                "CWE: 1002"
+            ],
+            "sort_order": 114
+        },
+        {
+            "testcase": "Verify that if application assets, such as JavaScript libraries, CSS or web fonts, are hosted externally on a Content Delivery Network (CDN) or external provider, Subresource Integrity (SRI) is used to validate the integrity of the asset.",
+            "code": "V14.2.3",
+            "tags":
+            [
+                "Chapter Id: V14",
+                "Chapter Name: Configuration",
+                "Section Id: V14.2",
+                "Section Name: Dependency",
+                "Requirement Id: V14.2.3",
+                "Level 1: true",
+                "Level 2: true",
+                "Level 3: true",
+                "CWE: 829"
+            ],
+            "sort_order": 115
+        },
+        {
+            "testcase": "Verify that web or application server and application framework debug modes are disabled in production to eliminate debug features, developer consoles, and unintended security disclosures.",
+            "code": "V14.3.2",
+            "tags":
+            [
+                "Chapter Id: V14",
+                "Chapter Name: Configuration",
+                "Section Id: V14.3",
+                "Section Name: Unintended Security Disclosure",
+                "Requirement Id: V14.3.2",
+                "Level 1: true",
+                "Level 2: true",
+                "Level 3: true",
+                "CWE: 497"
+            ],
+            "sort_order": 116
+        },
+        {
+            "testcase": "Verify that the HTTP headers or any part of the HTTP response do not expose detailed version information of system components.",
+            "code": "V14.3.3",
+            "tags":
+            [
+                "Chapter Id: V14",
+                "Chapter Name: Configuration",
+                "Section Id: V14.3",
+                "Section Name: Unintended Security Disclosure",
+                "Requirement Id: V14.3.3",
+                "Level 1: true",
+                "Level 2: true",
+                "Level 3: true",
+                "CWE: 200"
+            ],
+            "sort_order": 117
+        },
+        {
+            "testcase": "Verify that every HTTP response contains a Content-Type header. Also specify a safe character set (e.g., UTF-8, ISO-8859-1) if the content types are text/*, /+xml and application/xml. Content must match with the provided Content-Type header.",
+            "code": "V14.4.1",
+            "tags":
+            [
+                "Chapter Id: V14",
+                "Chapter Name: Configuration",
+                "Section Id: V14.4",
+                "Section Name: HTTP Security Headers",
+                "Requirement Id: V14.4.1",
+                "Level 1: true",
+                "Level 2: true",
+                "Level 3: true",
+                "CWE: 173"
+            ],
+            "sort_order": 118
+        },
+        {
+            "testcase": "Verify that all API responses contain a Content-Disposition: attachment; filename=\"api.json\" header (or other appropriate filename for the content type).",
+            "code": "V14.4.2",
+            "tags":
+            [
+                "Chapter Id: V14",
+                "Chapter Name: Configuration",
+                "Section Id: V14.4",
+                "Section Name: HTTP Security Headers",
+                "Requirement Id: V14.4.2",
+                "Level 1: true",
+                "Level 2: true",
+                "Level 3: true",
+                "CWE: 116"
+            ],
+            "sort_order": 119
+        },
+        {
+            "testcase": "Verify that a Content Security Policy (CSP) response header is in place that helps mitigate impact for XSS attacks like HTML, DOM, JSON, and JavaScript injection vulnerabilities.",
+            "code": "V14.4.3",
+            "tags":
+            [
+                "Chapter Id: V14",
+                "Chapter Name: Configuration",
+                "Section Id: V14.4",
+                "Section Name: HTTP Security Headers",
+                "Requirement Id: V14.4.3",
+                "Level 1: true",
+                "Level 2: true",
+                "Level 3: true",
+                "CWE: 1021"
+            ],
+            "sort_order": 120
+        },
+        {
+            "testcase": "Verify that all responses contain a X-Content-Type-Options: nosniff header.",
+            "code": "V14.4.4",
+            "tags":
+            [
+                "Chapter Id: V14",
+                "Chapter Name: Configuration",
+                "Section Id: V14.4",
+                "Section Name: HTTP Security Headers",
+                "Requirement Id: V14.4.4",
+                "Level 1: true",
+                "Level 2: true",
+                "Level 3: true",
+                "CWE: 116"
+            ],
+            "sort_order": 121
+        },
+        {
+            "testcase": "Verify that a Strict-Transport-Security header is included on all responses and for all subdomains, such as Strict-Transport-Security: max-age=15724800; includeSubdomains.",
+            "code": "V14.4.5",
+            "tags":
+            [
+                "Chapter Id: V14",
+                "Chapter Name: Configuration",
+                "Section Id: V14.4",
+                "Section Name: HTTP Security Headers",
+                "Requirement Id: V14.4.5",
+                "Level 1: true",
+                "Level 2: true",
+                "Level 3: true",
+                "CWE: 523"
+            ],
+            "sort_order": 122
+        },
+        {
+            "testcase": "Verify that a suitable Referrer-Policy header is included to avoid exposing sensitive information in the URL through the Referer header to untrusted parties.",
+            "code": "V14.4.6",
+            "tags":
+            [
+                "Chapter Id: V14",
+                "Chapter Name: Configuration",
+                "Section Id: V14.4",
+                "Section Name: HTTP Security Headers",
+                "Requirement Id: V14.4.6",
+                "Level 1: true",
+                "Level 2: true",
+                "Level 3: true",
+                "CWE: 116"
+            ],
+            "sort_order": 123
+        },
+        {
+            "testcase": "Verify that the content of a web application cannot be embedded in a third-party site by default and that embedding of the exact resources is only allowed where necessary by using suitable Content-Security-Policy: frame-ancestors and X-Frame-Options response headers.",
+            "code": "V14.4.7",
+            "tags":
+            [
+                "Chapter Id: V14",
+                "Chapter Name: Configuration",
+                "Section Id: V14.4",
+                "Section Name: HTTP Security Headers",
+                "Requirement Id: V14.4.7",
+                "Level 1: true",
+                "Level 2: true",
+                "Level 3: true",
+                "CWE: 1021"
+            ],
+            "sort_order": 124
+        },
+        {
+            "testcase": "Verify that the application server only accepts the HTTP methods in use by the application/API, including pre-flight OPTIONS, and logs/alerts on any requests that are not valid for the application context.",
+            "code": "V14.5.1",
+            "tags":
+            [
+                "Chapter Id: V14",
+                "Chapter Name: Configuration",
+                "Section Id: V14.5",
+                "Section Name: HTTP Request Header Validation",
+                "Requirement Id: V14.5.1",
+                "Level 1: true",
+                "Level 2: true",
+                "Level 3: true",
+                "CWE: 749"
+            ],
+            "sort_order": 125
+        },
+        {
+            "testcase": "Verify that the supplied Origin header is not used for authentication or access control decisions, as the Origin header can easily be changed by an attacker.",
+            "code": "V14.5.2",
+            "tags":
+            [
+                "Chapter Id: V14",
+                "Chapter Name: Configuration",
+                "Section Id: V14.5",
+                "Section Name: HTTP Request Header Validation",
+                "Requirement Id: V14.5.2",
+                "Level 1: true",
+                "Level 2: true",
+                "Level 3: true",
+                "CWE: 346"
+            ],
+            "sort_order": 126
+        },
+        {
+            "testcase": "Verify that the Cross-Origin Resource Sharing (CORS) Access-Control-Allow-Origin header uses a strict allow list of trusted domains and subdomains to match against and does not support the \"null\" origin.",
+            "code": "V14.5.3",
+            "tags":
+            [
+                "Chapter Id: V14",
+                "Chapter Name: Configuration",
+                "Section Id: V14.5",
+                "Section Name: HTTP Request Header Validation",
+                "Requirement Id: V14.5.3",
+                "Level 1: true",
+                "Level 2: true",
+                "Level 3: true",
+                "CWE: 346"
+            ],
+            "sort_order": 127
+        }
+    ]
+}
