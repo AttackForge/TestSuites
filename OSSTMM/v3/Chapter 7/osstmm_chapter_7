@@ -1,0 +1,664 @@
+{
+	"testcases": [
+	    {
+	        "testcase": "Review and document appropriate organizational policy regarding security, integrity, and privacy responsibilities of personnel in the scope.",
+	        "code": "7.1.1",
+	        "tags":
+	        [
+	            "OSSTMM Chapter 7: Human Security Testing",
+	            "Category: Posture Review",
+	            "Type: Policy"
+	        ],
+	        "sort_order": 1
+	    },
+	    {
+	        "testcase": "Review and document appropriate regional and national legislation and industry regulations regarding the security and privacy requirements of the organization in the scope as well as that which includes the appropriate customers, partners, organizational branches, or resellers outside the scope.",
+	        "code": "7.1.2",
+	        "tags":
+	        [
+	            "OSSTMM Chapter 7: Human Security Testing",
+	            "Category: Posture Review",
+	            "Type: Legislation and Regulations"
+	        ],
+	        "sort_order": 2
+	    },
+	    {
+	        "testcase": "Review and document appropriate organizational culture in the scope towards security and privacy awareness, required and available personnel training, organizational hierarchy, and recognized trust interaction between employees.",
+	        "code": "7.1.3",
+	        "tags":
+	        [
+	            "OSSTMM Chapter 7: Human Security Testing",
+	            "Category: Posture Review",
+	            "Type: Culture"
+	        ],
+	        "sort_order": 3
+	    },
+	    {
+	        "testcase": "Review and document the appropriate influential relationships between personnel from the organizational hierarchy from within the scope.",
+	        "code": "7.1.4",
+	        "tags":
+	        [
+	            "OSSTMM Chapter 7: Human Security Testing",
+	            "Category: Posture Review",
+	            "Type: Relationships"
+	        ],
+	        "sort_order": 4
+	    },
+	    {
+	        "testcase": "Review and document the appropriate influence of regional and foreign cultures on social hierarchy in the environment in which the scope resides.",
+	        "code": "7.1.5",
+	        "tags":
+	        [
+	            "OSSTMM Chapter 7: Human Security Testing",
+	            "Category: Posture Review",
+	            "Type: Regional Culture"
+	        ],
+	        "sort_order": 5
+	    },
+	    {
+	        "testcase": "Review and document the appropriate influence of economics and pay scale on social status of personnel from both the vector of personnel within the scope and that of the outside community on which the scope resides.",
+	        "code": "7.1.6",
+	        "tags":
+	        [
+	            "OSSTMM Chapter 7: Human Security Testing",
+	            "Category: Posture Review",
+	            "Type: Economics"
+	        ],
+	        "sort_order": 6
+	    },
+	    {
+	        "testcase": "Test for communications that provide identification to the receiver such as caller ID, FAX back, IP address logging, locator badges, and e-mail gateway headers. Test whether the identification be blocked, removed, or obfuscated, and to what degree of anonymity.",
+	        "code": "7.2.1",
+	        "tags":
+	        [
+	            "OSSTMM Chapter 7: Human Security Testing",
+	            "Category: Logistics",
+	            "Type: Communications Equipment"
+	        ],
+	        "sort_order": 7
+	    },
+	    {
+	        "testcase": "Test which languages are used within the scope and which languages are communicated between the scope and the customers, partners, and resellers outside the scope.",
+	        "code": "7.2.2",
+	        "tags":
+	        [
+	            "OSSTMM Chapter 7: Human Security Testing",
+	            "Category: Logistics",
+	            "Type: Communications"
+	        ],
+	        "sort_order": 8
+	    },
+	    {
+	        "testcase": "Test for the timezone, holidays, and work schedules for various roles and jobs within the scope including partners, resellers, and influential customers interacting with the scope.",
+	        "code": "7.2.3",
+	        "tags":
+	        [
+	            "OSSTMM Chapter 7: Human Security Testing",
+	            "Category: Logistics",
+	            "Type: Time"
+	        ],
+	        "sort_order": 9
+	    },
+	    {
+	        "testcase": "Test whether help desk or support channels over telephone, instant messaging, chat, web-based forums, or e-mail, are monitored by a third party for quality control.",
+	        "code": "7.3.1",
+	        "tags":
+	        [
+	            "OSSTMM Chapter 7: Human Security Testing",
+	            "Category: Active Detection Verification",
+	            "Type: Channel Monitoring"
+	        ],
+	        "sort_order": 10
+	    },
+	    {
+	        "testcase": "Test whether help desk or support channels over telephone, instant messaging, chat, web-based forums, or e-mail, are filtered or quarantined by personnel or automated system to verify for authenticity, strip extraneous data, ignore repeated requests, or moderate interactions.",
+	        "code": "7.3.2",
+	        "tags":
+	        [
+	            "OSSTMM Chapter 7: Human Security Testing",
+	            "Category: Active Detection Verification",
+	            "Type: Channel Moderating"
+	        ],
+	        "sort_order": 11
+	    },
+	    {
+	        "testcase": "Test whether support personnel may answer requests without confirmation from a supervisor or similar personnel.",
+	        "code": "7.3.3",
+	        "tags":
+	        [
+	            "OSSTMM Chapter 7: Human Security Testing",
+	            "Category: Active Detection Verification",
+	            "Type: Supervision"
+	        ],
+	        "sort_order": 12
+	    },
+	    {
+	        "testcase": "Test what access to which personnel via the telecommunications channel must be made through an operator, whether manned by personnel or automated.",
+	        "code": "7.3.4",
+	        "tags":
+	        [
+	            "OSSTMM Chapter 7: Human Security Testing",
+	            "Category: Active Detection Verification",
+	            "Type: Operator Assistance"
+	        ],
+	        "sort_order": 13
+	    },
+	    {
+	        "testcase": "Test for channels which provide interactions with personnel from outside the scope and document all methods used and the results of those methods.",
+	        "code": "7.4.1",
+	        "tags":
+	        [
+	            "OSSTMM Chapter 7: Human Security Testing",
+	            "Category: Visibility Audit",
+	            "Type: Access Identification"
+	        ],
+	        "sort_order": 14
+	    },
+	    {
+	        "testcase": "Enumerate the number of personnel within the scope with both authorized and unauthorized access to processes within the scope, regardless of time or access channel, and the method for obtaining that data.",
+	        "code": "7.4.2",
+	        "tags":
+	        [
+	            "OSSTMM Chapter 7: Human Security Testing",
+	            "Category: Visibility Audit",
+	            "Type: Personnel Enumeration"
+	        ],
+	        "sort_order": 15
+	    },
+	    {
+	        "testcase": "Map and explore the use of channels into the scope to reach assets. Document all methods used and the results of those methods.",
+	        "code": "7.5.1",
+	        "tags":
+	        [
+	            "OSSTMM Chapter 7: Human Security Testing",
+	            "Category: Access Verification",
+	            "Type: Access Process"
+	        ],
+	        "sort_order": 16
+	    },
+	    {
+	        "testcase": "Use personnel in positions of authority with access-control or who hold gatekeeper positions to assets within the scope. Document methods used in discovery of key personnel.",
+	        "code": "7.5.2",
+	        "tags":
+	        [
+	            "OSSTMM Chapter 7: Human Security Testing",
+	            "Category: Access Verification",
+	            "Type: Authority"
+	        ],
+	        "sort_order": 17
+	    },
+	    {
+	        "testcase": "Enumerate and test for inadequacies from gateway personnel and what privileges are required to interact with them to assure that only identifiable, authorized, intended parties are provided access.",
+	        "code": "7.5.3",
+	        "tags":
+	        [
+	            "OSSTMM Chapter 7: Human Security Testing",
+	            "Category: Access Verification",
+	            "Type: Authentication"
+	        ],
+	        "sort_order": 18
+	    },
+	    {
+	        "testcase": "Test and document the depth of requirements for access to assets within the scope with the use of misrepresentation as a member of the “internal” support or delivery personnel from within the scope without any credentials.",
+	        "code": "7.6.1",
+	        "tags":
+	        [
+	            "OSSTMM Chapter 7: Human Security Testing",
+	            "Category: Trust Verification",
+	            "Type: Misrepresentation"
+	        ],
+	        "sort_order": 19
+	    },
+	    {
+	        "testcase": "Test and document the depth of requirements for access to assets within the scope with the use of fraudulent representation as a member of the management or other key personnel.",
+	        "code": "7.6.2",
+	        "tags":
+	        [
+	            "OSSTMM Chapter 7: Human Security Testing",
+	            "Category: Trust Verification",
+	            "Type: Fraud"
+	        ],
+	        "sort_order": 20
+	    },
+	    {
+	        "testcase": "Test and document the depth of requirements for access to assets within the scope with the use of misrepresentation as a member of support or delivery personnel from outside the scope.",
+	        "code": "7.6.3",
+	        "tags":
+	        [
+	            "OSSTMM Chapter 7: Human Security Testing",
+	            "Category: Trust Verification",
+	            "Type: Misdirection"
+	        ],
+	        "sort_order": 21
+	    },
+	    {
+	        "testcase": "Test and document the depth of requirements for access to personnel-controlled information or physical assets through all discovered channels to personnel within the scope with the use of a fraudulent gateway where personnel are asked to supply credentials. Document the methods and all credentials collected in this manner.",
+	        "code": "7.6.4",
+	        "tags":
+	        [
+	            "OSSTMM Chapter 7: Human Security Testing",
+	            "Category: Trust Verification",
+	            "Type: Phishing"
+	        ],
+	        "sort_order": 22
+	    },
+	    {
+	        "testcase": "Test and document the depth of requirements to take assets outside of the scope to a known and trusted source or throughout the scope itself to other personnel without any established, required credentials.",
+	        "code": "7.6.5",
+	        "tags":
+	        [
+	            "OSSTMM Chapter 7: Human Security Testing",
+	            "Category: Trust Verification",
+	            "Type: Resource Abuse"
+	        ],
+	        "sort_order": 23
+	    },
+	    {
+	        "testcase": "Test and document the depth of requirements to incite fear, revolt, violence, and chaos, through the disruption of personnel and the use of rumor or other psychological abuse.",
+	        "code": "7.6.6",
+	        "tags":
+	        [
+	            "OSSTMM Chapter 7: Human Security Testing",
+	            "Category: Trust Verification",
+	            "Type: In Terrorem"
+	        ],
+	        "sort_order": 24
+	    },
+	    {
+	        "testcase": "Enumerate and test for use or inadequacies from gateway personnel to properly identify and log access or interactions to assets for specific evidence to challenge repudiation. Document the depth of the interaction which is recorded.",
+	        "code": "7.7.1",
+	        "tags":
+	        [
+	            "OSSTMM Chapter 7: Human Security Testing",
+	            "Category: Controls Verification",
+	            "Type: Non-repudiation"
+	        ],
+	        "sort_order": 25
+	    },
+	    {
+	        "testcase": "Enumerate and test for use or inadequacies from all segments of communication with personnel within the scope over a channel or properties transported over a channel using secured lines, encryption, “quieted” or “closed” personal interactions to protect the confidentiality of the information assets known only to those with the proper security clearance classification of that asset.",
+	        "code": "7.7.2",
+	        "tags":
+	        [
+	            "OSSTMM Chapter 7: Human Security Testing",
+	            "Category: Controls Verification",
+	            "Type: Confidentiality"
+	        ],
+	        "sort_order": 26
+	    },
+	    {
+	        "testcase": "Enumerate and test for use of or inadequacies from all segments of communication with personnel within the scope over a channel or properties transported using specific, individual signatures, personal identification, “quieted” or “closed room” personal interactions to protect the privacy of the interaction and the process of providing assets only to those within the proper security clearance for that process, information, or physical assets.",
+	        "code": "7.7.3",
+	        "tags":
+	        [
+	            "OSSTMM Chapter 7: Human Security Testing",
+	            "Category: Controls Verification",
+	            "Type: Privacy"
+	        ],
+	        "sort_order": 27
+	    },
+	    {
+	        "testcase": "Enumerate and test for inadequacies in all segments of communication with personnel within the scope where assets are transported over a channel using a documented process, signatures, encryption, hash, or markings to protect and assure that the information or physical assets cannot be changed, switched, redirected, or reversed without it being known to parties involved.",
+	        "code": "7.7.4",
+	        "tags":
+	        [
+	            "OSSTMM Chapter 7: Human Security Testing",
+	            "Category: Controls Verification",
+	            "Type: Integrity"
+	        ],
+	        "sort_order": 28
+	    },
+	    {
+	        "testcase": "Examine and document the timeliness, appropriateness, access to, and extent of processes for the notification and security awareness of all personnel in regards to operational security, actual security, and loss controls.",
+	        "code": "7.8.1",
+	        "tags":
+	        [
+	            "OSSTMM Chapter 7: Human Security Testing",
+	            "Category: Process Verification",
+	            "Type: Maintenance"
+	        ],
+	        "sort_order": 29
+	    },
+	    {
+	        "testcase": "Determine the extent to which personnel security notifications and security news can be expanded or altered with misinformation.",
+	        "code": "7.8.2",
+	        "tags":
+	        [
+	            "OSSTMM Chapter 7: Human Security Testing",
+	            "Category: Process Verification",
+	            "Type: Misinformation"
+	        ],
+	        "sort_order": 30
+	    },
+	    {
+	        "testcase": "Map and verify any gaps between practice and requirements as determined in the Posture Review through all channels.",
+	        "code": "7.8.3",
+	        "tags":
+	        [
+	            "OSSTMM Chapter 7: Human Security Testing",
+	            "Category: Process Verification",
+	            "Type: Due Diligence"
+	        ],
+	        "sort_order": 31
+	    },
+	    {
+	        "testcase": "Document and enumerate the abuse or circumvention of employee policy, insurance, non-disclosure, non-compete, liability contracts, or use/user disclaimers with all access personnel within the scope over all channels.",
+	        "code": "7.8.4",
+	        "tags":
+	        [
+	            "OSSTMM Chapter 7: Human Security Testing",
+	            "Category: Process Verification",
+	            "Type: Indemnification"
+	        ],
+	        "sort_order": 32
+	    },
+	    {
+	        "testcase": "Map types and frequency of security awareness assistance, education courses, and training provided to personnel, partners, customers, and specifically to gatekeepers.",
+	        "code": "7.9.1",
+	        "tags":
+	        [
+	            "OSSTMM Chapter 7: Human Security Testing",
+	            "Category: Training Verification",
+	            "Type: Education Mapping"
+	        ],
+	        "sort_order": 33
+	    },
+	    {
+	        "testcase": "Discover and examine the process and depth of self-policing from personnel for the disruption or non-conformity of security policy.",
+	        "code": "7.9.2",
+	        "tags":
+	        [
+	            "OSSTMM Chapter 7: Human Security Testing",
+	            "Category: Training Verification",
+	            "Type: Policy Disruption"
+	        ],
+	        "sort_order": 34
+	    },
+	    {
+	        "testcase": "Map the limitations discovered in security awareness training for personnel through gap analysis with actual procedures, including but not limited to: the provision of assets via any channel, the ability to recognize improper and forged identification or required methods, the method of proper identification among personnel, the use of personal security measures for one’s self and assets, the handling of confidential and sensitive assets, and the conformity to organizational security policy.",
+	        "code": "7.9.3",
+	        "tags":
+	        [
+	            "OSSTMM Chapter 7: Human Security Testing",
+	            "Category: Training Verification",
+	            "Type: Awareness Mapping"
+	        ],
+	        "sort_order": 35
+	    },
+	    {
+	        "testcase": "Discover and examine the extent to which a non-official person provides misinformation regarding security policy in an authoritative manner to purposely circumvent or break security policy.",
+	        "code": "7.9.4",
+	        "tags":
+	        [
+	            "OSSTMM Chapter 7: Human Security Testing",
+	            "Category: Training Verification",
+	            "Type: Awareness Hijacking"
+	        ],
+	        "sort_order": 36
+	    },
+	    {
+	        "testcase": "Verify the extent to which individually licensed, private, faked, reproduced, non-free, or non-open property is shared between personnel either intentionally through shared processes and programs, libraries, and personal caches or unintentionally through mismanagement of licenses and resources, or negligence.",
+	        "code": "7.10.1",
+	        "tags":
+	        [
+	            "OSSTMM Chapter 7: Human Security Testing",
+	            "Category: Property Validation",
+	            "Type: Sharing"
+	        ],
+	        "sort_order": 37
+	    },
+	    {
+	        "testcase": "Verify the extent to which individually licensed, private, faked, reproduced, non-free, or non-open property is promoted, marketed, or sold between personnel or by the organization.",
+	        "code": "7.10.2",
+	        "tags":
+	        [
+	            "OSSTMM Chapter 7: Human Security Testing",
+	            "Category: Property Validation",
+	            "Type: Black Market"
+	        ],
+	        "sort_order": 38
+	    },
+	    {
+	        "testcase": "Verify public, out of scope businesses, auctions, or property sales which provide contact information through channels originating within the scope.",
+	        "code": "7.10.3",
+	        "tags":
+	        [
+	            "OSSTMM Chapter 7: Human Security Testing",
+	            "Category: Property Validation",
+	            "Type: Sales Channels"
+	        ],
+	        "sort_order": 39
+	    },
+	    {
+	        "testcase": "Map gatekeepers of private information assets within the scope, what information is stored, how and where the information is stored, and over which channels the information is communicated.",
+	        "code": "7.11.1",
+	        "tags":
+	        [
+	            "OSSTMM Chapter 7: Human Security Testing",
+	            "Category: Segregation Review",
+	            "Type: Privacy Containment Mapping"
+	        ],
+	        "sort_order": 40
+	    },
+	    {
+	        "testcase": "Enumerate and map information regarding individual gateway personne. such as names, race, sex, religion, vacation days, personal web pages, published resumes, personal affiliations, directory inquiries, bank branch(es), electoral register, and any particular personal information stated implicitly as private in regulations and policy.",
+	        "code": "7.11.2",
+	        "tags":
+	        [
+	            "OSSTMM Chapter 7: Human Security Testing",
+	            "Category: Segregation Review",
+	            "Type: Evident Information"
+	        ],
+	        "sort_order": 41
+	    },
+	    {
+	        "testcase": "Examine and document types of disclosures of private information assets on personnel from gatekeepers responsible for this segregation according to policy and regulations as determined in the Posture Review and the basic human right to privacy.",
+	        "code": "7.11.3",
+	        "tags":
+	        [
+	            "OSSTMM Chapter 7: Human Security Testing",
+	            "Category: Segregation Review",
+	            "Type: Disclosure"
+	        ],
+	        "sort_order": 42
+	    },
+	    {
+	        "testcase": "Examine and document types of gateways and channel alternatives with gateways accessible to people with physical limitations within that channel.",
+	        "code": "7.11.4",
+	        "tags":
+	        [
+	            "OSSTMM Chapter 7: Human Security Testing",
+	            "Category: Segregation Review",
+	            "Type: Limitations"
+	        ],
+	        "sort_order": 43
+	    },
+	    {
+	        "testcase": "Enumerate and map personnel information regarding the organization such as organization charts, key personnel titles, job descriptions, personal and work telephone numbers, mobile phone numbers, business cards, shared documents, resumes, organizational affiliations, private and public e-mail addresses, log-ins, log-in schemes, passwords, back-up methods, insurers, or any particular organizational information stated implicitly as confidential in regulations and policy.",
+	        "code": "7.12.1",
+	        "tags":
+	        [
+	            "OSSTMM Chapter 7: Human Security Testing",
+	            "Category: Exposure Verification",
+	            "Type: Exposure Mapping"
+	        ],
+	        "sort_order": 44
+	    },
+	    {
+	        "testcase": "Profile and verify the organization, employee skill requirement types, pay scales, channel and gateway information, technologies, and direction.",
+	        "code": "7.12.2",
+	        "tags":
+	        [
+	            "OSSTMM Chapter 7: Human Security Testing",
+	            "Category: Exposure Verification",
+	            "Type: Profiling"
+	        ],
+	        "sort_order": 45
+	    },
+	    {
+	        "testcase": "Map gatekeepers of business assets within the scope, what information is stored, how and where the information is stored, and over which channels the information is communicated between personnel.",
+	        "code": "7.13.1",
+	        "tags":
+	        [
+	            "OSSTMM Chapter 7: Human Security Testing",
+	            "Category: Competitive Intelligence Scouting",
+	            "Type: Business Grinding"
+	        ],
+	        "sort_order": 46
+	    },
+	    {
+	        "testcase": "Explore and document from individual gateway personnel business details such as alliances, partners, major customers, vendors, distributors, investors, business relations, production, development, product information, strategic planning, stocks and trading, and any particular business information or property stated implicitly as confidential in regulations and policy.",
+	        "code": "7.13.2",
+	        "tags":
+	        [
+	            "OSSTMM Chapter 7: Human Security Testing",
+	            "Category: Competitive Intelligence Scouting",
+	            "Type: Business Environment"
+	        ],
+	        "sort_order": 47
+	    },
+	    {
+	        "testcase": "Examine and document types of disclosures of business assets from gatekeepers on operations, processes, hierarchy, financial reporting, investment opportunities, mergers, acquisitions, channel investments, channel maintenance, internal social politics, personnel dissatisfaction and turn-over rate, primary vacation times, hirings, firings, and any particular organizational assets stated implicitly as confidential in regulations and policy.",
+	        "code": "7.13.3",
+	        "tags":
+	        [
+	            "OSSTMM Chapter 7: Human Security Testing",
+	            "Category: Competitive Intelligence Scouting",
+	            "Type: Organizational Environment"
+	        ],
+	        "sort_order": 48
+	    },
+	    {
+	        "testcase": "Identify and examine quarantine methods and process at the gateways in all channels for aggressive and hostile contacts such as sales people, head-hunters, grifters, journalists, competitors, job seekers, job candidates, and disruptive persons.",
+	        "code": "7.14.1",
+	        "tags":
+	        [
+	            "OSSTMM Chapter 7: Human Security Testing",
+	            "Category: Quarantine Verification",
+	            "Type: Containment Process Identification"
+	        ],
+	        "sort_order": 49
+	    },
+	    {
+	        "testcase": "Verify the state of containment, length of time, and all channels where interaction with gatekeepers has quarantine methods. Ensure that methods are within legal context and boundaries.",
+	        "code": "7.14.2",
+	        "tags":
+	        [
+	            "OSSTMM Chapter 7: Human Security Testing",
+	            "Category: Quarantine Verification",
+	            "Type: Containment Levels"
+	        ],
+	        "sort_order": 50
+	    },
+	    {
+	        "testcase": "Examine and document the process for obtaining identification through both legitimate and fraudulent means on all channels.",
+	        "code": "7.15.1",
+	        "tags":
+	        [
+	            "OSSTMM Chapter 7: Human Security Testing",
+	            "Category: Privileges Audit",
+	            "Type: Identification"
+	        ],
+	        "sort_order": 51
+	    },
+	    {
+	        "testcase": "Verify the use of fraudulent authorization on all channels to gain privileges similar to that of other personnel.",
+	        "code": "7.15.2",
+	        "tags":
+	        [
+	            "OSSTMM Chapter 7: Human Security Testing",
+	            "Category: Privileges Audit",
+	            "Type: Authorization"
+	        ],
+	        "sort_order": 52
+	    },
+	    {
+	        "testcase": "Verify and map access to assets through the use of privileges to gain higher or more extensive privileges beyond that which is authoritatively designated to the role.",
+	        "code": "7.15.3",
+	        "tags":
+	        [
+	            "OSSTMM Chapter 7: Human Security Testing",
+	            "Category: Privileges Audit",
+	            "Type: Escalation"
+	        ],
+	        "sort_order": 53
+	    },
+	    {
+	        "testcase": "Verify information requested and privileges granted from gatekeepers in cases where age (specifically those who are legally minors for the region), sex, race, custom/culture, and religion are factors which may be discriminated against in accordance to the Posture Review.",
+	        "code": "7.15.4",
+	        "tags":
+	        [
+	            "OSSTMM Chapter 7: Human Security Testing",
+	            "Category: Privileges Audit",
+	            "Type: Discrimination"
+	        ],
+	        "sort_order": 54
+	    },
+	    {
+	        "testcase": "Enumerate and test for inadequacies of assets communicated over channels where those controls are not required, can be circumvented or ignored such as insecure e-mail or over a public telephone line.",
+	        "code": "7.15.5",
+	        "tags":
+	        [
+	            "OSSTMM Chapter 7: Human Security Testing",
+	            "Category: Privileges Audit",
+	            "Type: Subjugation"
+	        ],
+	        "sort_order": 55
+	    },
+	    {
+	        "testcase": "Enumerate and test for inadequacies on all channels from personnel within the scope whereby removing or quieting gateway personnel will allow for direct access to assets.",
+	        "code": "7.16.1",
+	        "tags":
+	        [
+	            "OSSTMM Chapter 7: Human Security Testing",
+	            "Category: Service Continuity",
+	            "Type: Resilience"
+	        ],
+	        "sort_order": 56
+	    },
+	    {
+	        "testcase": "Enumerate and test for inadequacies from all personnel with regard to access delays and service response time through back-up personnel or automated means for access to alternate gateway personnel.",
+	        "code": "7.16.2",
+	        "tags":
+	        [
+	            "OSSTMM Chapter 7: Human Security Testing",
+	            "Category: Service Continuity",
+	            "Type: Continuity"
+	        ],
+	        "sort_order": 57
+	    },
+	    {
+	        "testcase": "Map and document the process of gatekeepers disconnecting channels due to evacuation or safety concerns as a gap analysis with regulation and security policy.",
+	        "code": "7.16.3",
+	        "tags":
+	        [
+	            "OSSTMM Chapter 7: Human Security Testing",
+	            "Category: Service Continuity",
+	            "Type: Safety"
+	        ],
+	        "sort_order": 58
+	    },
+	    {
+	        "testcase": "Verify and enumerate the use of a localized or scope-wide warning system, log, or message for each access gateway over each channel where a suspect situation is noted by personnel upon suspicion of circumvention attempts, social engineering, or fraudulent activity.",
+	        "code": "7.17.1",
+	        "tags":
+	        [
+	            "OSSTMM Chapter 7: Human Security Testing",
+	            "Category: End Survey",
+	            "Type: Alarm"
+	        ],
+	        "sort_order": 59
+	    },
+	    {
+	        "testcase": "Document and verify the privileged and efficient access to alarm, log, and notification storage locations and property.",
+	        "code": "7.17.2",
+	        "tags":
+	        [
+	            "OSSTMM Chapter 7: Human Security Testing",
+	            "Category: End Survey",
+	            "Type: Storage and Retrieval"
+	        ],
+	        "sort_order": 60
+	    }
+	]
+}
