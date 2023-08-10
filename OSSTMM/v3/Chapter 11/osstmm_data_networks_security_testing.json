@@ -1,0 +1,576 @@
+{	
+	"testcases": [
+	    {
+	        "testcase": "Review and document appropriate organizational policy regarding security, integrity, and privacy requirements of the scope. Review and document contracts and Service Level Agreements (SLAs) with service providers and other involved third parties.",
+	        "code": "11.1.1",
+	        "tags":
+	        [
+	            "OSSTMM Chapter 11: Data Networks Security Testing",
+	            "Category: Posture Review",
+	            "Type: Policy"
+	        ],
+	        "sort_order": 1
+	    },
+	    {
+	        "testcase": "Review and document appropriate regional and national legislation, and industry regulations regarding the security and privacy requirements of the organization in the scope as well as that which includes the appropriate customers, partners, organizational branches, or resellers outside the scope.",
+	        "code": "11.1.2",
+	        "tags":
+	        [
+	            "OSSTMM Chapter 11: Data Networks Security Testing",
+	            "Category: Posture Review",
+	            "Type: Legislation and Regulations"
+	        ],
+	        "sort_order": 2
+	    },
+	    {
+	        "testcase": "Review and document appropriate organizational culture in the scope towards security and privacy awareness, required and available personnel training, organizational hierarchy, help desk use, and requirements for reporting security issues.",
+	        "code": "11.1.3",
+	        "tags":
+	        [
+	            "OSSTMM Chapter 11: Data Networks Security Testing",
+	            "Category: Posture Review",
+	            "Type: Culture"
+	        ],
+	        "sort_order": 3
+	    },
+	    {
+	        "testcase": "Review and document the age of systems, software, and service applications required for operations.",
+	        "code": "11.1.4",
+	        "tags":
+	        [
+	            "OSSTMM Chapter 11: Data Networks Security Testing",
+	            "Category: Posture Review",
+	            "Type: Age"
+	        ],
+	        "sort_order": 4
+	    },
+	    {
+	        "testcase": "Review and document any systems, software, and service applications which require special care due to high use, instabilities, or a high rate of change.",
+	        "code": "11.1.5",
+	        "tags":
+	        [
+	            "OSSTMM Chapter 11: Data Networks Security Testing",
+	            "Category: Posture Review",
+	            "Type: Fragile Artifacts"
+	        ],
+	        "sort_order": 5
+	    },
+	    {
+	        "testcase": "(a) Verify the scope and the owner of the targets outlined for the audit.\n(b) Determine the property location and the owner of the property housing the targets.\n(c) Verify the owner of the targets from network registration information.\n(d) Verify the owner of the target domains from domain registration information.\n(e) Verify the ISP(s) providing network access or redundancy.\n(f) Search for other IP blocks and targets related to the same owner(s).\n(g) Search for similar domain names or mistyped domain names which can be confused with the target.\n(h) Verify which target domain names resolve to systems outside of the owner’s control such as caching devices.\n(i) Verify which target IP addresses trace back to locations different from the owner’s location.\n(j) Verify that reverse name look-ups of target system addresses correspond with the scope and the scope owner.\n(k) Find and verify the paths of network services which interact outside of target for the paths they follow into and out of the scope.\n(l) Prepare local name resolution to map domain names only to the specific systems to be tested and not any devices outside the target or target ownership.\n(m) Use reverse name look-ups as an additional information source towards determining the existence of all the machines in a network.",
+	        "code": "11.2.1",
+	        "tags":
+	        [
+	            "OSSTMM Chapter 11: Data Networks Security Testing",
+	            "Category: Logistics",
+	            "Type: Framework"
+	        ],
+	        "sort_order": 6
+	    },
+	    {
+	        "testcase": "(a) Measure the rate of speed and packet loss to the scope for a requested service in TCP, UDP, and ICMP both as a whole service request and as a request/response pair. Repeat each request in succession at least 100 times and record the average for both whole service requests and packet responses for each of the three protocols.\n(b) Determine sending and receiving packet rates for a total of 6 averages (per protocol) as requests per second per network segment in the scope.\n(c) Record packet loss percentages for the determined packet sending and receiving rates.",
+	        "code": "11.2.2",
+	        "tags":
+	        [
+	            "OSSTMM Chapter 11: Data Networks Security Testing",
+	            "Category: Logistics",
+	            "Type: Network Quality"
+	        ],
+	        "sort_order": 7
+	    },
+	    {
+	        "testcase": "(a) Verify timezone, holidays, and work schedules for the various systems within the scope including partners, resellers, and influential customers interacting with the scope.\n(b) Identify the Time To Live (TTL) distance to the gateway and the targets.\n(c) Assure the Analyst’s clock is in sync with the time of the targets.",
+	        "code": "11.2.3",
+	        "tags":
+	        [
+	            "OSSTMM Chapter 11: Data Networks Security Testing",
+	            "Category: Logistics",
+	            "Type: Time"
+	        ],
+	        "sort_order": 8
+	    },
+	    {
+	        "testcase": "(a) Test whether INCOMING network data or communications over web, instant messaging, chat, web-based forums, or e-mail, are monitored or filtered by an authoritative party for relay of improper materials, code injections, malicious content, and improper conduct and record responses and response time.\n(b) Test whether OUTGOING network data or communications over web, instant messaging, chat, web-based forums, or e-mail, are monitored or filtered by an authoritative party for relay of improper materials, code injections, malicious content, and improper conduct and record responses and response time.",
+	        "code": "11.3.1",
+	        "tags":
+	        [
+	            "OSSTMM Chapter 11: Data Networks Security Testing",
+	            "Category: Active Detection Verification",
+	            "Type: Filtering"
+	        ],
+	        "sort_order": 9
+	    },
+	    {
+	        "testcase": "(a) Verify active responses to probes from systems and services. This could be human or machine readable notifications, packet responses, silent alarm trips, or the like.\n(b) Map any applications, systems, or network segments within the scope which produce logs, alarms, or notifications. This could include Network or Host based Intrusion Detection or Prevention Systems, syslog, Security Information Management tools (SIMs), application logs, and the like.",
+	        "code": "11.3.2",
+	        "tags":
+	        [
+	            "OSSTMM Chapter 11: Data Networks Security Testing",
+	            "Category: Active Detection Verification",
+	            "Type: Active Detection"
+	        ],
+	        "sort_order": 10
+	    },
+	    {
+	        "testcase": "(a) Identify the perimeter of the target network segment(s) and the vector from which they will be tested.\n(b) Use network sniffing to identify emanating protocols from network service responses or requests where applicable. For example, Netbios, ARP, SAP, NFS, BGP, OSPF, MPLS, RIPv2, etc.\n(c) Query all name servers and the name servers of the ISP or hosting provider, if available, for corresponding A, AAAA, and PTR records as well as ability to perform zone transfers to determine the existence of all targets in the network and any related redundancies, load balancing, caching, proxying, and virtual hosting.\n(d) Verify broadcast requests and responses from all targets.\n(e) Verify and examine the use of traffic and routing protocols for all targets.\n(f) Verify ICMP responses for ICMP types 0-255 and ICMP codes 0-2 from all targets.\n(g) Verify default and likely SNMP community names in use are according to practical deployments of all SNMP versions.\n(h) Verify responses from targets to select ports with TTL expiration set to less than 1 and 2 hops from the targets. For example: TCP 8, 22, 23, 25, 80, 443, 445, 1433 - UDP 0, 53, 139, 161 - ICMP T00:C00, T13:C00, T15:C00, T17:C00\n(i) Trace the route of ICMP packets to all targets.\n(j) Trace the route of TCP packets to all targets for ports SSH, SMTP, HTTP, and HTTPS ports.\n(k) Trace the route of UDP packets to all targets for DNS and SNMP ports.\n(l) Identify TCP ISN sequence number predictability for all targets.\n(m) Verify IPID increments from responses for all targets.\n(n) Verify the use of Loose Source Routing to the target gateway and outer perimeter systems to route packets to all targets.",
+	        "code": "11.4.1",
+	        "tags":
+	        [
+	            "OSSTMM Chapter 11: Data Networks Security Testing",
+	            "Category: Visibility Audit",
+	            "Type: Network Surveying"
+	        ],
+	        "sort_order": 11
+	    },
+	    {
+	        "testcase": "(a) Search newsgroups, forums, IRC, IM, P2P, VoIP, and web-based communications for connecting information of the target to determine outgoing gateway systems and internal addressing.\n(b) Examine e-mail headers, bounced mails, read receipts, mail failures, and malware rejections to determine outgoing gateway systems and internal addressing.\n(c) Examine target web-based application source code and scripts to determine the existence of additional targets in the network.\n(d) Examine service and application emanations. Manipulate and replay captured traffic to invoke new requests or responses, gain depth, or expose additional information. For example, SQL, Citrix, HTTP, SAP, DNS, ARP, etc.\n(e) Search web logs and intrusion logs for system trails from the target network.\n(f) Verify all responses from UDP packet requests to ports 0-65535.\n(g) Verify responses to UDP packet requests FROM SOURCE ports 0, 53, 139, and 161 to 0, 53, 69, 131, and 161.\n(h) Verify responses to UDP packet requests with BAD CHECKSUMS to all discovered ports and for 0, 53, 69, 131, and 161.\n(i) Verify service request responses to common and contemporary UDP remote access malware ports.\n(j) Verify responses from TCP SYN packet requests to ports 0-65535.\n(k) Verify responses from TCP service requests to ports 0, 21, 22, 23, 25, 53, 80, and 443.\n(l) Verify responses from a TCP ACK with a SOURCE port of 80 to ports 3100-3150, 10001-10050, 33500-33550, and 50 random ports above 35000.\n(m) Verify responses from TCP SYN fragments to ports 0, 21, 22, 23, 25, 53, 80, and 443.\n(n) Verify responses from all combinations of TCP flags to ports 0, 21, 22, 23, 25, 53, 80, and 443.\n(o) Verify the use of all targets with HTTP or HTTPS based VPNs, proxies, and URL redirectors to redirect requests for targets within the scope.\n(p) Verify the use of all targets with sequential IPIDs to enumerate systems within the network.\n(q) Map and verify for consistency visible systems and responding ports by TTLs.",
+	        "code": "11.4.2",
+	        "tags":
+	        [
+	            "OSSTMM Chapter 11: Data Networks Security Testing",
+	            "Category: Visibility Audit",
+	            "Type: Enumeration"
+	        ],
+	        "sort_order": 12
+	    },
+	    {
+	        "testcase": "Identify targets’ TTL response, system uptime, services, applications, application faults, and correlate this with the responses from system and service fingerprinting tools.",
+	        "code": "11.4.3",
+	        "tags":
+	        [
+	            "OSSTMM Chapter 11: Data Networks Security Testing",
+	            "Category: Visibility Audit",
+	            "Type: Identification"
+	        ],
+	        "sort_order": 13
+	    },
+	    {
+	        "testcase": "(a) Request known, common services which utilize UDP for connections from all addresses.\n(b) Request known, common VPN services including those which utilize IPSEC and IKE for connections from all addresses.\n(c) Manipulate network service and routing to access past restrictions within the scope.\n(d) Request known, common Trojan services which utilize UDP for connections from all addresses.\n(e) Request known, common Trojan services which utilize ICMP for connections from all addresses.\n(f) Request known, common Trojan services which utilize TCP for connections from all addresses and unfiltered ports which have sent no response to a TCP SYN.",
+	        "code": "11.5.1",
+	        "tags":
+	        [
+	            "OSSTMM Chapter 11: Data Networks Security Testing",
+	            "Category: Access Verification",
+	            "Type: Network"
+	        ],
+	        "sort_order": 14
+	    },
+	    {
+	        "testcase": "(a) Request all service banners (flags) for discovered TCP ports.\n(b) Verify service banners (flags) through interactions with the service comprising of both valid and invalid requests.\n(c) Match each open port to a daemon (service), application (specific code or product which uses the service), and protocol (the means for interacting with that service or application).\n(d) Verify system uptime compared to the latest vulnerabilities and patch releases.\n(e) Verify the application to the system and the version.\n(f) Identify the components of the listening service.\n(g) Verify service uptime compared to the latest vulnerabilities and patch releases.\n(h) Verify service and application against TTL and OS fingerprint results for all addresses.\n(i) Verify HTTP and HTTPS for virtual hosting.\n(j) Verify VoIP services.\n(k) Manipulate application and service requests outside of standard boundaries to include special characters or special terminology of that service or application to gain access.",
+	        "code": "11.5.2",
+	        "tags":
+	        [
+	            "OSSTMM Chapter 11: Data Networks Security Testing",
+	            "Category: Access Verification",
+	            "Type: Services"
+	        ],
+	        "sort_order": 15
+	    },
+	    {
+	        "testcase": "(a) Enumerate accesses requiring authentication and document all privileges discovered which can be used to provide access.\n(b) Verify the method of obtaining the proper Authorization for the authentication.\n(c) Verify the method of being properly Identified for being provided the authentication.\n(d) Verify the logic method of authentication.\n(e) Verify the strength of the authentication through password cracking and re-applying discovered passwords to all access points requiring authentication.\n(f) Verify the process for receiving authentication.\n(g) Test for logic errors in the application of the authentication.",
+	        "code": "11.5.3",
+	        "tags":
+	        [
+	            "OSSTMM Chapter 11: Data Networks Security Testing",
+	            "Category: Access Verification",
+	            "Type: Authentication"
+	        ],
+	        "sort_order": 16
+	    },
+	    {
+	        "testcase": "(a) Test measures to access property within the scope by spoofing your network address as one of the trusted hosts.\n(b) Verify if available caching mechanisms can be poisoned.",
+	        "code": "11.6.1",
+	        "tags":
+	        [
+	            "OSSTMM Chapter 11: Data Networks Security Testing",
+	            "Category: Trust Verification",
+	            "Type: Spoofing"
+	        ],
+	        "sort_order": 17
+	    },
+	    {
+	        "testcase": "(a) Verify that URLs for submissions and queries on the target are concise, within the same domain, use only the POST method, and use consistent branding.\n(b) Verify that target content images/records/data do not exist on sites outside of the target to create a duplicate of the target.\n(c) Examine top level domain records for domains similar to those identified within the scope.\n(d) Verify that the target uses personalization in websites and mail when interacting with authenticated users.\n(e) Verify the control and response of the target to mail bounces where the FROM is spoofed in the header field to be that of the target domain.",
+	        "code": "11.6.2",
+	        "tags":
+	        [
+	            "OSSTMM Chapter 11: Data Networks Security Testing",
+	            "Category: Trust Verification",
+	            "Type: Phishing"
+	        ],
+	        "sort_order": 18
+	    },
+	    {
+	        "testcase": "(a) Test the depth of access to business or confidential information available on web servers without any established, required credentials.\n(b) Test if information is sent to the outside of the scope as padding to network packets such as that which has occurred previously as “Etherleak”.\n(c) Verify that continuity measures, specifically load balancing, are seamless outside the scope to prevent users from using, referring, linking, bookmarking, or abusing just one of the resources.",
+	        "code": "11.6.3",
+	        "tags":
+	        [
+	            "OSSTMM Chapter 11: Data Networks Security Testing",
+	            "Category: Trust Verification",
+	            "Type: Resource Abuse"
+	        ],
+	        "sort_order": 19
+	    },
+	    {
+	        "testcase": "(a) Enumerate and test for use or inadequacies of daemons and systems to properly identify and log access or interactions to property for specific evidence to challenge repudiation.\n(b) Document the depth of the recorded interaction and the process of identification.\n(c) Verify that all methods of interactions are properly recorded with proper identification.\n(d) Identify methods of identification which defeat repudiation.",
+	        "code": "11.7.1",
+	        "tags":
+	        [
+	            "OSSTMM Chapter 11: Data Networks Security Testing",
+	            "Category: Controls Verification",
+	            "Type: Non-repudiation"
+	        ],
+	        "sort_order": 20
+	    },
+	    {
+	        "testcase": "(a) Enumerate all interactions with services within the scope for communications or assets transported over the channel using secured lines, encryption, “quieted” or “closed” interactions to protect the confidentiality of the information property between the involved parties.\n(b) Verify the acceptable methods used for confidentiality.\n(c) Test the strength and design of the encryption or obfuscation method.\n(d) Verify the outer limits of communication which can be protected via the applied methods of confidentiality.",
+	        "code": "11.7.2",
+	        "tags":
+	        [
+	            "OSSTMM Chapter 11: Data Networks Security Testing",
+	            "Category: Controls Verification",
+	            "Type: Confidentiality"
+	        ],
+	        "sort_order": 21
+	    },
+	    {
+	        "testcase": "(a) Enumerate services within the scope for communications or assets transported using specific, individual signatures, personal identification, “quieted” or “closed room” personal interactions to protect the privacy of the interaction and the process of providing assets only to those within the proper security clearance for that process, communication, or asset.\n(b) Correlate information with non-responsive TCP and UDP ports to determine if availability is dependent upon a private type of contact or protocol.",
+	        "code": "11.7.3",
+	        "tags":
+	        [
+	            "OSSTMM Chapter 11: Data Networks Security Testing",
+	            "Category: Controls Verification",
+	            "Type: Privacy"
+	        ],
+	        "sort_order": 22
+	    },
+	    {
+	        "testcase": "Enumerate and test for inadequacies of integrity where using a documented process, signatures, encryption, hash, or markings to assure that the asset cannot be changed, redirected, or reversed without it being known to the parties involved.",
+	        "code": "11.7.4",
+	        "tags":
+	        [
+	            "OSSTMM Chapter 11: Data Networks Security Testing",
+	            "Category: Controls Verification",
+	            "Type: Integrity"
+	        ],
+	        "sort_order": 23
+	    },
+	    {
+	        "testcase": "(a) Examine and document the timeliness, appropriateness, access to, and extent of processes for notification and security response in regards to network and security monitoring.\n(b) Verify the appropriateness and functionality of incident response and forensics capabilities for all types of systems.\n(c) Verify the level of incident or compromise which the support channels can detect and the length of response time.",
+	        "code": "11.8.1",
+	        "tags":
+	        [
+	            "OSSTMM Chapter 11: Data Networks Security Testing",
+	            "Category: Process Verification",
+	            "Type: Maintenance"
+	        ],
+	        "sort_order": 24
+	    },
+	    {
+	        "testcase": "Determine the extent to which security notifications and alarms can be expanded or altered with misinformation.",
+	        "code": "11.8.2",
+	        "tags":
+	        [
+	            "OSSTMM Chapter 11: Data Networks Security Testing",
+	            "Category: Process Verification",
+	            "Type: Misinformation"
+	        ],
+	        "sort_order": 25
+	    },
+	    {
+	        "testcase": "Map and verify any gaps between practice and requirements as determined in the Posture Review through all channels.",
+	        "code": "11.8.3",
+	        "tags":
+	        [
+	            "OSSTMM Chapter 11: Data Networks Security Testing",
+	            "Category: Process Verification",
+	            "Type: Due Diligence"
+	        ],
+	        "sort_order": 26
+	    },
+	    {
+	        "testcase": "(a) Document and enumerate targets and services which are protected from abuse or circumvention of employee policy, are insured for theft or damages, or use liability and permission disclaimers.\n(b) Verify the legality and appropriateness of the language in the disclaimers.\n(c) Verify the affect of the disclaimers upon security or safety measures.\n(d) Examine the language of the insurance policy for limitations on types of damages or assets.",
+	        "code": "11.8.4",
+	        "tags":
+	        [
+	            "OSSTMM Chapter 11: Data Networks Security Testing",
+	            "Category: Process Verification",
+	            "Type: Indemnification"
+	        ],
+	        "sort_order": 27
+	    },
+	    {
+	        "testcase": "(a) Examine controls to verify the configurations and baselines of systems, equipment and applications meet the intent of the organization and reflect a business justification.\n(b) Examine Access Control Lists (ACLs) and business roles configured on networks, systems, services, and applications within the scope to ensure they meet the intent of the organization and reflect a business justification.",
+	        "code": "11.9.1",
+	        "tags":
+	        [
+	            "OSSTMM Chapter 11: Data Networks Security Testing",
+	            "Category: Configuration Verification",
+	            "Type: Configuration Controls"
+	        ],
+	        "sort_order": 28
+	    },
+	    {
+	        "testcase": "(a) Verify services available are not unnecessarily redundant and that they match the systems’ intended business role.\n(b) Verify default settings have been changed. Some devices or applications ship with a default or hidden administrative account. These accounts should be changed, or if possible, disabled or deleted and replaced with a new administrative account.\n(c) Verify that Administration is done locally or with controls to limit who or what can access the remote administration interfaces of the equipment.",
+	        "code": "11.9.2",
+	        "tags":
+	        [
+	            "OSSTMM Chapter 11: Data Networks Security Testing",
+	            "Category: Configuration Verification",
+	            "Type: Common Configuration Errors"
+	        ],
+	        "sort_order": 29
+	    },
+	    {
+	        "testcase": "(a) Check for unnecessary or unused services/features available.\n(b) Check for default credentials.\n(c) Identify if any known vulnerabilities are residing on the systems.",
+	        "code": "11.9.3",
+	        "tags":
+	        [
+	            "OSSTMM Chapter 11: Data Networks Security Testing",
+	            "Category: Configuration Verification",
+	            "Type: Limitations Mapping"
+	        ],
+	        "sort_order": 30
+	    },
+	    {
+	        "testcase": "Verify the extent to which individually licensed, private, faked, reproduced, non-free, or non-open property is shared either intentionally through sharing processes and programs, libraries, and personal caches or unintentionally through mismanagement of licenses and resources, or negligence.",
+	        "code": "11.10.1",
+	        "tags":
+	        [
+	            "OSSTMM Chapter 11: Data Networks Security Testing",
+	            "Category: Property Validation",
+	            "Type: Sharing"
+	        ],
+	        "sort_order": 31
+	    },
+	    {
+	        "testcase": "Verify the extent to which individually licensed, private, faked, reproduced, non-free, or non-open property is promoted, marketed, or sold between personnel or by the organization.",
+	        "code": "11.10.2",
+	        "tags":
+	        [
+	            "OSSTMM Chapter 11: Data Networks Security Testing",
+	            "Category: Property Validation",
+	            "Type: Black Market"
+	        ],
+	        "sort_order": 32
+	    },
+	    {
+	        "testcase": "Verify whether any public, out of scope businesses, auctions, or property sales provide contact information from targets within the scope.",
+	        "code": "11.10.3",
+	        "tags":
+	        [
+	            "OSSTMM Chapter 11: Data Networks Security Testing",
+	            "Category: Property Validation",
+	            "Type: Sales Channels"
+	        ],
+	        "sort_order": 33
+	    },
+	    {
+	        "testcase": "Map key locations of private information property within the scope, what information is stored, how and where the information is stored, and over which channels the information is communicated.",
+	        "code": "11.11.1",
+	        "tags":
+	        [
+	            "OSSTMM Chapter 11: Data Networks Security Testing",
+	            "Category: Segregation Review",
+	            "Type: Privacy Containment Mapping"
+	        ],
+	        "sort_order": 34
+	    },
+	    {
+	        "testcase": "(a) Examine and document types of disclosures of private information property for segregation according to policy and regulations as determined in the Posture Review.\n(b) Verify that private information and confidential intellectual property, such as documents, service contracts, OS/Software keys, etc. are not available to anyone without proper privileges.",
+	        "code": "11.11.2",
+	        "tags":
+	        [
+	            "OSSTMM Chapter 11: Data Networks Security Testing",
+	            "Category: Segregation Review",
+	            "Type: Disclosure"
+	        ],
+	        "sort_order": 35
+	    },
+	    {
+	        "testcase": "(a) Verify that design considerations or channel alternatives exist for people with physical limitations to interact with the target.\n(b) Identify any parts of the infrastructure designed to interact with children legally identified as minors and verify what and how identifying information is provided from that child.",
+	        "code": "11.11.3",
+	        "tags":
+	        [
+	            "OSSTMM Chapter 11: Data Networks Security Testing",
+	            "Category: Segregation Review",
+	            "Type: Limitations"
+	        ],
+	        "sort_order": 36
+	    },
+	    {
+	        "testcase": "Verify information requested and privileges granted from gatekeepers in cases where age (specifically minors), sex, race, custom/culture and religion are factors which may be discriminated against in accordance to the Posture Review.",
+	        "code": "11.11.4",
+	        "tags":
+	        [
+	            "OSSTMM Chapter 11: Data Networks Security Testing",
+	            "Category: Segregation Review",
+	            "Type: Discrimination"
+	        ],
+	        "sort_order": 37
+	    },
+	    {
+	        "testcase": "(a) Enumerate information regarding the organization such as organization charts, key personnel titles, job descriptions, personal and work telephone numbers, mobile phone numbers, business cards, shared documents, resumes, organizational affiliations, private and public e-mail addresses, log-ins, log-in schemes, passwords, back-up methods, insurers, or any particular organizational information stated implicitly as confidential in regulations and policy.\n(b) Enumerate system, service and application exposures detailing the design, type, version, or state on the targets or from resources outside the scope such as from postings or leaks.",
+	        "code": "11.12.1",
+	        "tags":
+	        [
+	            "OSSTMM Chapter 11: Data Networks Security Testing",
+	            "Category: Exposure Verification",
+	            "Type: Exposure Enumeration"
+	        ],
+	        "sort_order": 38
+	    },
+	    {
+	        "testcase": "Enumerate and evaluate access points (gateways) to business property within the scope: what business information is stored, how it is stored, and where the information is stored.",
+	        "code": "11.13.1",
+	        "tags":
+	        [
+	            "OSSTMM Chapter 11: Data Networks Security Testing",
+	            "Category: Competitive Intelligence Scouting",
+	            "Type: Business Grinding"
+	        ],
+	        "sort_order": 39
+	    },
+	    {
+	        "testcase": "(a) Profile employee skill requirement types, pay scales, channel and gateway information, technologies, and organizational direction from sources outside the scope.\n(b) Profile data network set-ups and configurations from job databases and newspapers hiring ads for data networking positions within the organization relating to hardware and software engineering or administration within the target’s default business language(s).",
+	        "code": "11.13.2",
+	        "tags":
+	        [
+	            "OSSTMM Chapter 11: Data Networks Security Testing",
+	            "Category: Competitive Intelligence Scouting",
+	            "Type: Profiling"
+	        ],
+	        "sort_order": 40
+	    },
+	    {
+	        "testcase": "(a) Explore and document from individual gateway personnel business details such as alliances, partners, major customers, vendors, distributors, investors, business relations, production, development, product information, planning, stocks and trading, and any particular business information or property stated implicitly as confidential in regulations and policy.\n(b) Review third party web notes, annotations, and social bookmark site content made for the web presence of the scope.",
+	        "code": "11.13.3",
+	        "tags":
+	        [
+	            "OSSTMM Chapter 11: Data Networks Security Testing",
+	            "Category: Competitive Intelligence Scouting",
+	            "Type: Business Environment"
+	        ],
+	        "sort_order": 41
+	    },
+	    {
+	        "testcase": "Examine and document types of disclosures of business property from gatekeepers on operations, processes, hierarchy, financial reporting, investment opportunities, mergers, acquisitions, channel investments, channel maintenance, internal social politics, personnel dissatisfaction and turn-over rate, primary vacation times, hirings, firings, and any particular organizational property stated implicitly as confidential in regulations and policy.",
+	        "code": "11.13.4",
+	        "tags":
+	        [
+	            "OSSTMM Chapter 11: Data Networks Security Testing",
+	            "Category: Competitive Intelligence Scouting",
+	            "Type: Organizational Environment"
+	        ],
+	        "sort_order": 42
+	    },
+	    {
+	        "testcase": "Identify and examine quarantine methods for aggressive and hostile contacts such as malware, rogue access points, unauthorized storage devices, etc.",
+	        "code": "11.14.1",
+	        "tags":
+	        [
+	            "OSSTMM Chapter 11: Data Networks Security Testing",
+	            "Category: Quarantine Verification",
+	            "Type: Containment Process Identification"
+	        ],
+	        "sort_order": 43
+	    },
+	    {
+	        "testcase": "(a) Measure the minimum resources that need to be available to this subsystem in order for it to perform its task.\n(b) Verify any resources available to this subsystem that it does not need to perform its tasks and what resources are shielded from use by this subsystem.\n(c) Verify the detection measures present for the detection of attempted access to the shielded resources.\n(d) Verify the features of the containment system.\n(e) Verify detection measures are present for detection of ’unusual’ access to the needed resources\n(f) Measure the response and process against encoded, packaged, condensed, renamed, or masqueraded inputs.\n(g) Verify the state of containment and length of time for quarantine methods both into and out of the scope. Ensure the completeness and thoroughness of the methods and that they are within legal context and boundaries.",
+	        "code": "11.14.2",
+	        "tags":
+	        [
+	            "OSSTMM Chapter 11: Data Networks Security Testing",
+	            "Category: Quarantine Verification",
+	            "Type: Containment Levels"
+	        ],
+	        "sort_order": 44
+	    },
+	    {
+	        "testcase": "Examine and document the authorization process for obtaining identification from users through both legitimate and fraudulent means on all channels.",
+	        "code": "11.15.1",
+	        "tags":
+	        [
+	            "OSSTMM Chapter 11: Data Networks Security Testing",
+	            "Category: Privileges Audit",
+	            "Type: Identification"
+	        ],
+	        "sort_order": 45
+	    },
+	    {
+	        "testcase": "(a) Examine and verify any means for gaining fraudulent authorization to gain privileges similar to that of other personnel.\n(b) Enumerate the use of default accounts on targets.\n(c) Test access to authenticated access points through the most appropriate and available cracking techniques. Password cracking via dictionary or brute-force may be limited by the time frame of the audit and therefore not a valid test of the protection from that authentication schema however any successful discoveries do attest to its weakness.",
+	        "code": "11.15.2",
+	        "tags":
+	        [
+	            "OSSTMM Chapter 11: Data Networks Security Testing",
+	            "Category: Privileges Audit",
+	            "Type: Authorization"
+	        ],
+	        "sort_order": 46
+	    },
+	    {
+	        "testcase": "(a) Collect information on persons with high privileges. Look for trusted roles or positions, access gateways for trusted persons, and any required physical access media such as tokens or smart cards.\n(b) Verify the boundaries of privileges on the target or across multiple targets and if the means exists to escalate those privileges.",
+	        "code": "11.15.3",
+	        "tags":
+	        [
+	            "OSSTMM Chapter 11: Data Networks Security Testing",
+	            "Category: Privileges Audit",
+	            "Type: Escalation"
+	        ],
+	        "sort_order": 47
+	    },
+	    {
+	        "testcase": "(a) Verify single points of failure (choke points) in the infrastructure where change or failure can cause a service outage.\n(b) Verify the impact to target access which a system or service failure will cause.\n(c) Verify the privileges available from the failure-induced access.\n(d) Verify the operational functionality of controls to prevent access or permissions above lowest possible privileges upon failure.",
+	        "code": "11.16.1",
+	        "tags":
+	        [
+	            "OSSTMM Chapter 11: Data Networks Security Testing",
+	            "Category: Survivability Validation",
+	            "Type: Resilience"
+	        ],
+	        "sort_order": 48
+	    },
+	    {
+	        "testcase": "(a) Enumerate and test for inadequacies from all targets with regard to access delays and service response times through back-up systems or the switch to alternate channels.\n(b) Verify intruder lock-out schemes cannot be used against valid users.",
+	        "code": "11.16.2",
+	        "tags":
+	        [
+	            "OSSTMM Chapter 11: Data Networks Security Testing",
+	            "Category: Survivability Validation",
+	            "Type: Continuity"
+	        ],
+	        "sort_order": 49
+	    },
+	    {
+	        "testcase": "Map and document the process of gatekeepers shutting down target systems due to evacuation or safety concerns as a gap analysis with regulation and security policy.",
+	        "code": "11.16.3",
+	        "tags":
+	        [
+	            "OSSTMM Chapter 11: Data Networks Security Testing",
+	            "Category: Survivability Validation",
+	            "Type: Safety"
+	        ],
+	        "sort_order": 50
+	    },
+	    {
+	        "testcase": "Verify and enumerate the use of a localized or scope-wide warning system, log, or message for each access gateway over each channel where a suspect situation is noted by personnel upon suspicion of circumvention attempts, social engineering, or fraudulent activity.",
+	        "code": "11.17.1",
+	        "tags":
+	        [
+	            "OSSTMM Chapter 11: Data Networks Security Testing",
+	            "Category: Alert and Log Review",
+	            "Type: Alarm"
+	        ],
+	        "sort_order": 51
+	    },
+	    {
+	        "testcase": "(a) Document and verify unprivileged access to alarm, log, and notification storage locations and property.\n(b) Verify the quality and the length of time of the document storage to assure the data will maintain integrity on that storage medium for the required duration.",
+	        "code": "11.17.2",
+	        "tags":
+	        [
+	            "OSSTMM Chapter 11: Data Networks Security Testing",
+	            "Category: Alert and Log Review",
+	            "Type: Storage and Retrieval"
+	        ],
+	        "sort_order": 52
+	    }
+	]
+}
