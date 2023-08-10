@@ -1,0 +1,653 @@
+{
+	"testcases": [
+	    {
+	        "testcase": "Review and document appropriate organizational policy regarding security, safety, integrity (i.e. supply chain), and privacy requirements for barriers in the scope.",
+	        "code": "8.1.1",
+	        "tags":
+	        [
+	            "OSSTMM Chapter 8: Physical Security Testing",
+	            "Category: Posture Review",
+	            "Type: Policy"
+	        ],
+	        "sort_order": 1
+	    },
+	    {
+	        "testcase": "Review and document appropriate regional and national legislation and industry regulations regarding the security and privacy requirements of the organization in the scope as well as that which includes the appropriate customers, partners, organizational branches, or resellers outside the scope.",
+	        "code": "8.1.2",
+	        "tags":
+	        [
+	            "OSSTMM Chapter 8: Physical Security Testing",
+	            "Category: Posture Review",
+	            "Type: Legislation and Regulations"
+	        ],
+	        "sort_order": 2
+	    },
+	    {
+	        "testcase": "Review and document appropriate organizational culture in the scope towards security and privacy awareness, required and available personnel training, organizational hierarchy, and recognized trust interaction between employees.",
+	        "code": "8.1.3",
+	        "tags":
+	        [
+	            "OSSTMM Chapter 8: Physical Security Testing",
+	            "Category: Posture Review",
+	            "Type: Culture"
+	        ],
+	        "sort_order": 3
+	    },
+	    {
+	        "testcase": "Review and document the appropriate influential relationships between personnel from the organizational hierarchy from within the scope.",
+	        "code": "8.1.4",
+	        "tags":
+	        [
+	            "OSSTMM Chapter 8: Physical Security Testing",
+	            "Category: Posture Review",
+	            "Type: Relationships"
+	        ],
+	        "sort_order": 4
+	    },
+	    {
+	        "testcase": "Review and document the appropriate influence of regional and foreign cultures on safety, social hierarchy, the supply chain, and services in the environment in which the scope resides.",
+	        "code": "8.1.5",
+	        "tags":
+	        [
+	            "OSSTMM Chapter 8: Physical Security Testing",
+	            "Category: Posture Review",
+	            "Type: Regional Culture"
+	        ],
+	        "sort_order": 5
+	    },
+	    {
+	        "testcase": "Review and document the appropriate influence of economics and pay scale on social status and criminal intent on personnel from both the vector of personnel within the scope and that of the outside community in which the scope resides.",
+	        "code": "8.1.6",
+	        "tags":
+	        [
+	            "OSSTMM Chapter 8: Physical Security Testing",
+	            "Category: Posture Review",
+	            "Type: Economics"
+	        ],
+	        "sort_order": 6
+	    },
+	    {
+	        "testcase": "Review for the target region the weather patterns, dangerous weather extremes (i.e. flooding, tornadoes, hurricanes), temperature extremes, humidity maximums, air quality, tectonic stability, typical fauna, forms of natural or man-made disaster and general insect infestation.",
+	        "code": "8.1.7",
+	        "tags":
+	        [
+	            "OSSTMM Chapter 8: Physical Security Testing",
+	            "Category: Posture Review",
+	            "Type: Environment"
+	        ],
+	        "sort_order": 7
+	    },
+	    {
+	        "testcase": "(a) Examine the scope to determine if any special equipment is required for the environment of the targets. Equipment can range from rope to climb walls to SCUBA gear to travel under water. Equipment types are not limited to just the environment but also the barriers one must circumvent.\n(b) Verify damaged safety equipment which may lead to Analyst injury.\n(c) Examine the targets for hazardous, contaminated, or poorly maintained terrain, air, water, buildings, or structures.\n(d) Examine noise, electromagnetic radiation, and magnetic field levels at the scope.",
+	        "code": "8.2.1",
+	        "tags":
+	        [
+	            "OSSTMM Chapter 8: Physical Security Testing",
+	            "Category: Logistics",
+	            "Type: Environment"
+	        ],
+	        "sort_order": 8
+	    },
+	    {
+	        "testcase": "(a) Test which languages are used within the scope and which languages are communicated between the scope and the customers, partners, and resellers outside the scope.\n(b) Examine the means of communication between personnel and whether it is enhanced through the use of tools such as flags, flares, radios, binoculars, night vision, etc.",
+	        "code": "8.2.2",
+	        "tags":
+	        [
+	            "OSSTMM Chapter 8: Physical Security Testing",
+	            "Category: Logistics",
+	            "Type: Communications"
+	        ],
+	        "sort_order": 9
+	    },
+	    {
+	        "testcase": "(a) Test for the timezone, holidays, and work schedules for various roles and jobs within the scope including partners, resellers, and influential customers interacting with the scope.\n(b) Determine if decreased mobility or visibility during time of day, week, month, or season (day or night, fog, rain, or snow) will have an impact upon operations at the target.",
+	        "code": "8.2.3",
+	        "tags":
+	        [
+	            "OSSTMM Chapter 8: Physical Security Testing",
+	            "Category: Logistics",
+	            "Type: Time"
+	        ],
+	        "sort_order": 10
+	    },
+	    {
+	        "testcase": "(a) Verify that the scope is monitored by a third party for intrusion via look-outs, guards, cameras, or sensors. The date and time of entry as well as departure of the target should be recorded.\n(b) Determine the range of the monitoring and whether the travel of a threat to the target can be intercepted in a timely manner.\n(c) Verify if travel to the target requires increased time on target and exposure. This includes, but is not limited to: quarantine rooms, long empty hallways, parking lots, large empty expanses, difficult or unnatural terrain, and guest or holding areas.\n(d) Verify that the lighting and visible contrast on approach to the target allows for interception of threats.",
+	        "code": "8.3.1",
+	        "tags":
+	        [
+	            "OSSTMM Chapter 8: Physical Security Testing",
+	            "Category: Active Detection Verification",
+	            "Type: Monitoring"
+	        ],
+	        "sort_order": 11
+	    },
+	    {
+	        "testcase": "(a) Verify if interactive controls for the target will react timely to extreme environmental conditions according to the Environment review task of the Posture Review.\n(b) Verify if the target will react timely to a disturbance in air, water, and soil quality.\n(c) Verify if the target will react timely to critical noise disturbances.\n(d) Verify if the target will react timely to magnetic field disturbances.\n(e) Verify if the target will react timely to fires.\n(f) Verify if the target will react timely to denial of target access via blockade or quarantine.\n(g) Verify if the target will react timely to threats of fear, revolt, or violence within the scope.\n(h) Determine the finality of threat interception.",
+	        "code": "8.3.2",
+	        "tags":
+	        [
+	            "OSSTMM Chapter 8: Physical Security Testing",
+	            "Category: Active Detection Verification",
+	            "Type: Reacting"
+	        ],
+	        "sort_order": 12
+	    },
+	    {
+	        "testcase": "(a) Map and detail the scope perimeter determined by visible and assisted viewing techniques, publicly accessible areas, public plans, and public sources.\n(b) Enumerate and detail targets and assets visible from outside the scope.\n(c) Enumerate and detail target traffic patterns, foot traffic, occupied areas, and sensors visible outside the scope.\n(d) Enumerate directories and internal telephone books identifying locations of sensitive information processing facilities that are not readily accessible by the public.\n(e) Map and enumerate the physical location and layout of the targets, the size and navigability of obstacles, barriers, and hazards which will increase time on target.",
+	        "code": "8.4.1",
+	        "tags":
+	        [
+	            "OSSTMM Chapter 8: Physical Security Testing",
+	            "Category: Visibility Audit",
+	            "Type: Reconnaissance"
+	        ],
+	        "sort_order": 13
+	    },
+	    {
+	        "testcase": "(a) Map and explore the navigable of terrain, barriers, and obstacles into the scope to reach the targets and assets. Document all methods used and the results of those methods.\n(b) Map and verify all access points that allow stealthy or unmonitored, direct (3 seconds or less time on target) interaction with the target.\n(c) Verify the size and navigable of public and private access points and all paths to target.",
+	        "code": "8.5.1",
+	        "tags":
+	        [
+	            "OSSTMM Chapter 8: Physical Security Testing",
+	            "Category: Access Verification",
+	            "Type: Enumeration"
+	        ],
+	        "sort_order": 14
+	    },
+	    {
+	        "testcase": "(a) Enumerate and test for inadequacies which privileges are required to access, the process of obtaining those privileges, and assure that only identifiable, authorized, intended parties are provided access.\n(b) Verify the process of authenticating which items may be taken into the scope by both authorized and unauthorized personnel.\n(c) Verify the process of authenticating which items may be taken out of the scope by both authorized and unauthorized personnel.\n(d) Verify the process of recording access and which items were entered and removed.",
+	        "code": "8.5.2",
+	        "tags":
+	        [
+	            "OSSTMM Chapter 8: Physical Security Testing",
+	            "Category: Access Verification",
+	            "Type: Authentication"
+	        ],
+	        "sort_order": 15
+	    },
+	    {
+	        "testcase": "(a) Map the distance from the scope perimeter to the visible targets and assets from outside the scope.\n(b) Map and identify all paths to access points which can be reached in a noisy, not stealthy, direct (3 seconds or less time on target) interaction with that access point. This may include attacks which are sans conatus (without regard for the attacker’s life).",
+	        "code": "8.5.3",
+	        "tags":
+	        [
+	            "OSSTMM Chapter 8: Physical Security Testing",
+	            "Category: Access Verification",
+	            "Type: Location"
+	        ],
+	        "sort_order": 16
+	    },
+	    {
+	        "testcase": "(a) Determine which barriers and obstacles in the scope provide remote access to change, disrupt, destroy, or obtain assets (visually, aurally, and magnetically).\n(b) Determine the effectiveness of barriers and obstacles to withstand conditions defined in the Posture Review.\n(c) Determine and rate the effectiveness of barriers and obstacles to withstand fire, explosions, and general concussive forces such as gunshots and vehicular ramming.\n(d) Determine and rate the effectiveness of barriers and obstacles to reduce incoming: critical noise levels, heat, cold, smoke, humidity, disruptive or caustic odors, intense magnetic fields, harmful light, and pollutants.\n(e) Determine and rate the effectiveness of barriers and obstacles to reduce outgoing: sounds, smells, vibrations, conditions for acclimatization, smoke, magnetic fields, waste, and pollutants.",
+	        "code": "8.5.4",
+	        "tags":
+	        [
+	            "OSSTMM Chapter 8: Physical Security Testing",
+	            "Category: Access Verification",
+	            "Type: Penetration"
+	        ],
+	        "sort_order": 17
+	    },
+	    {
+	        "testcase": "(a) Test and document the depth of requirements for access to assets with the use of misrepresentation as a member of the “internal” support or delivery personnel without proper credentials.\n(b) Test and document the depth of requirements for access to assets with the use of misrepresentation as a disabled person.",
+	        "code": "8.6.1",
+	        "tags":
+	        [
+	            "OSSTMM Chapter 8: Physical Security Testing",
+	            "Category: Trust Verification",
+	            "Type: Misrepresentation"
+	        ],
+	        "sort_order": 18
+	    },
+	    {
+	        "testcase": "Test and document the depth of requirements for access to assets with the use of fraudulent representation of authority as a member of the management or other key personnel.",
+	        "code": "8.6.2",
+	        "tags":
+	        [
+	            "OSSTMM Chapter 8: Physical Security Testing",
+	            "Category: Trust Verification",
+	            "Type: Fraud"
+	        ],
+	        "sort_order": 19
+	    },
+	    {
+	        "testcase": "Test and document the depth of requirements for access to assets with the use of misrepresentation as a member of support or delivery personnel outside the scope.",
+	        "code": "8.6.3",
+	        "tags":
+	        [
+	            "OSSTMM Chapter 8: Physical Security Testing",
+	            "Category: Trust Verification",
+	            "Type: Misdirection"
+	        ],
+	        "sort_order": 20
+	    },
+	    {
+	        "testcase": "Test and document the depth of requirements for access to assets through stealthy stowage with a transport of support or delivery to take the stowage outside the scope.",
+	        "code": "8.6.4",
+	        "tags":
+	        [
+	            "OSSTMM Chapter 8: Physical Security Testing",
+	            "Category: Trust Verification",
+	            "Type: Stowage"
+	        ],
+	        "sort_order": 21
+	    },
+	    {
+	        "testcase": "Test and document the depth of requirements to hide assets within the scope (whole or destroyed), take assets outside of the scope to a known and trusted source, and throughout the scope itself to other personnel without any established, required credentials.",
+	        "code": "8.6.5",
+	        "tags":
+	        [
+	            "OSSTMM Chapter 8: Physical Security Testing",
+	            "Category: Trust Verification",
+	            "Type: Embezzlement"
+	        ],
+	        "sort_order": 22
+	    },
+	    {
+	        "testcase": "Test and document the depth of requirements to incite fear, revolt, violence, and chaos, through the disruption of processes and the contamination of supplies.",
+	        "code": "8.6.6",
+	        "tags":
+	        [
+	            "OSSTMM Chapter 8: Physical Security Testing",
+	            "Category: Trust Verification",
+	            "Type: In Terrorem"
+	        ],
+	        "sort_order": 23
+	    },
+	    {
+	        "testcase": "Enumerate and test for use or inadequacies from monitors and sensors to properly identify and log access or interactions with assets for specific evidence to challenge repudiation. Document the depth of the interaction which is recorded.",
+	        "code": "8.7.1",
+	        "tags":
+	        [
+	            "OSSTMM Chapter 8: Physical Security Testing",
+	            "Category: Controls Verification",
+	            "Type: Non-repudiation"
+	        ],
+	        "sort_order": 24
+	    },
+	    {
+	        "testcase": "Enumerate and test for use or inadequacies from all signals, physical communication, and transported items between both internal and external-reaching processes and personnel using codes, undecipherable language, “quieted” or “closed” personal interactions to promote the confidentiality of the communication only to those with the proper security clearance classification for that communication.",
+	        "code": "8.7.2",
+	        "tags":
+	        [
+	            "OSSTMM Chapter 8: Physical Security Testing",
+	            "Category: Controls Verification",
+	            "Type: Confidentiality"
+	        ],
+	        "sort_order": 25
+	    },
+	    {
+	        "testcase": "Enumerate and test for use of or inadequacies from all interactions within the scope using unmarked or non-obvious packaging or labeling, “quieted” or “closed room” interactions, and within randomly chosen quarters to hide or protect the privacy of the interaction and only to those with the proper security clearance for that process or asset.",
+	        "code": "8.7.3",
+	        "tags":
+	        [
+	            "OSSTMM Chapter 8: Physical Security Testing",
+	            "Category: Controls Verification",
+	            "Type: Privacy"
+	        ],
+	        "sort_order": 26
+	    },
+	    {
+	        "testcase": "(a) Enumerate and test for inadequacies in all signals and communication between processes and personnel using a documented process, seals, signatures, hashing, or encrypted markings to protect and assure that the assets cannot be changed, redirected, or reversed without it being known to the parties involved.\n(b) Enumerate and test for inadequacies in all processes and interactions with assets in transport which use a documented process, signatures, seals, break-away tape, brands, tags, sensors, or encrypted markings to protect and assure that the assets cannot be changed, redirected, or reversed without it being known to the parties involved.\n(c) Verify all storage mediums for information are not in danger from unnatural decay such as heat or humidity damage, fading from direct sunlight, or magnetic degradation (bit rot).",
+	        "code": "8.7.4",
+	        "tags":
+	        [
+	            "OSSTMM Chapter 8: Physical Security Testing",
+	            "Category: Controls Verification",
+	            "Type: Integrity"
+	        ],
+	        "sort_order": 27
+	    },
+	    {
+	        "testcase": "(a) Examine and document the timeliness, appropriateness, access to, and extent of processes for equipment and barrier repair in regards to operational security, actual security, and loss controls.\n(b) Verify the repair and determine the extent to which notice and quality of repairs can be misrepresented and falsified.",
+	        "code": "8.8.1",
+	        "tags":
+	        [
+	            "OSSTMM Chapter 8: Physical Security Testing",
+	            "Category: Process Verification",
+	            "Type: Maintenance"
+	        ],
+	        "sort_order": 28
+	    },
+	    {
+	        "testcase": "(a) Document and enumerate the ability to abuse or circumvent employee policy, insurance, non-disclosure, non-compete, liability contracts, or use/user disclaimers for personnel within the scope.\n(b) Enumerate the use of signs warning of danger, surveillance or alarms in effect, health issues, and postings of no entrance.\n(c) Verify the extent and finality of legal action used to uphold indemnification.",
+	        "code": "8.8.2",
+	        "tags":
+	        [
+	            "OSSTMM Chapter 8: Physical Security Testing",
+	            "Category: Process Verification",
+	            "Type: Indemnification"
+	        ],
+	        "sort_order": 29
+	    },
+	    {
+	        "testcase": "Map types and frequency of physical security and safety assistance, education courses, and training provided to personnel, partners, customers, and specifically to gatekeepers.",
+	        "code": "8.9.1",
+	        "tags":
+	        [
+	            "OSSTMM Chapter 8: Physical Security Testing",
+	            "Category: Configuration Verification",
+	            "Type: Education Mapping"
+	        ],
+	        "sort_order": 30
+	    },
+	    {
+	        "testcase": "Discover and examine the process and depth of self-policing from personnel for the disruption or non-conformity of physical security and safety policy.",
+	        "code": "8.9.2",
+	        "tags":
+	        [
+	            "OSSTMM Chapter 8: Physical Security Testing",
+	            "Category: Configuration Verification",
+	            "Type: Policy Disruption"
+	        ],
+	        "sort_order": 31
+	    },
+	    {
+	        "testcase": "(a) Map the ready responses of security processes in reaction to increased threat condition levels (i.e. green, yellow, orange, and red alerts) as per requirements determined in the Posture Review.\n(b) Determine which triggers are required to increase threat levels and verify that they are met.\n(c) Map the ready responses of security processes in reaction to decreased threat condition levels as per requirements determined in the Posture Review.\n(d) Discover and examine the extent to which a non-official person provides misinformation regarding threat levels in an authoritative manner to purposely raise or lower ready status.",
+	        "code": "8.9.3",
+	        "tags":
+	        [
+	            "OSSTMM Chapter 8: Physical Security Testing",
+	            "Category: Configuration Verification",
+	            "Type: Threat Conditions"
+	        ],
+	        "sort_order": 32
+	    },
+	    {
+	        "testcase": "Verify the extent to which personal assets or those of the organization have been faked, reproduced, or shared illegally and intentionally according to the requirements of the Posture Review through sharing, lending, renting, or leasing services, personal libraries, and personal caches or unintentionally through ignorance or negligence.",
+	        "code": "8.10.1",
+	        "tags":
+	        [
+	            "OSSTMM Chapter 8: Physical Security Testing",
+	            "Category: Property Validation",
+	            "Type: Sharing"
+	        ],
+	        "sort_order": 33
+	    },
+	    {
+	        "testcase": "Verify the extent to which personal assets or those of the organization have been faked or reproduced and are being promoted, marketed, or sold between personnel or by the organization.",
+	        "code": "8.10.2",
+	        "tags":
+	        [
+	            "OSSTMM Chapter 8: Physical Security Testing",
+	            "Category: Property Validation",
+	            "Type: Black Market"
+	        ],
+	        "sort_order": 34
+	    },
+	    {
+	        "testcase": "Verify assets in auctions, flea markets, want-ads, yard sales, swap meets, or property sales which provide contact information through channels originating within the scope.",
+	        "code": "8.10.3",
+	        "tags":
+	        [
+	            "OSSTMM Chapter 8: Physical Security Testing",
+	            "Category: Property Validation",
+	            "Type: Sales Channels"
+	        ],
+	        "sort_order": 35
+	    },
+	    {
+	        "testcase": "(a) Verify storage locations and small caches of organizational assets are in the appropriate location within the scope.\n(b) Verify storage locations and small caches of organizational assets for use or for sale publicly or to other members of the organization are not being deliberately hidden, hoarded, controlled, or saved.",
+	        "code": "8.10.4",
+	        "tags":
+	        [
+	            "OSSTMM Chapter 8: Physical Security Testing",
+	            "Category: Property Validation",
+	            "Type: Storage"
+	        ],
+	        "sort_order": 36
+	    },
+	    {
+	        "testcase": "(a) Enumerate personal items which consume power, fuel, food, water, or other assets within the requirements defined in the Posture Review.\n(b) Enumerate personal items using channels which are the property of the organization (i.e. Internet servers, jukeboxes, fax machines, etc.).\n(c) Enumerate openly viewable personal items which symbolize beliefs not within the requirements defined in the Posture Review.",
+	        "code": "8.10.5",
+	        "tags":
+	        [
+	            "OSSTMM Chapter 8: Physical Security Testing",
+	            "Category: Property Validation",
+	            "Type: Resource Abuse"
+	        ],
+	        "sort_order": 37
+	    },
+	    {
+	        "testcase": "Map storage locations of private information property within the scope, what information is stored, how and where the information is stored, and how and where the property is discarded.",
+	        "code": "8.11.1",
+	        "tags":
+	        [
+	            "OSSTMM Chapter 8: Physical Security Testing",
+	            "Category: Segregation Review",
+	            "Type: Privacy Containment Mapping"
+	        ],
+	        "sort_order": 38
+	    },
+	    {
+	        "testcase": "Enumerate and map from the target documents and physical property with unsecured personal information as defined implicitly as private in regulations and policy of the Posture Review (i.e. full names, race, sex, religion, vacation days, personal web pages, published resumes, personal affiliations, directory inquiries, bank branch, electoral register, etc.).",
+	        "code": "8.11.2",
+	        "tags":
+	        [
+	            "OSSTMM Chapter 8: Physical Security Testing",
+	            "Category: Segregation Review",
+	            "Type: Evident Information"
+	        ],
+	        "sort_order": 39
+	    },
+	    {
+	        "testcase": "Verify access to stores of private information property of personnel as determined in the Posture Review.",
+	        "code": "8.11.3",
+	        "tags":
+	        [
+	            "OSSTMM Chapter 8: Physical Security Testing",
+	            "Category: Segregation Review",
+	            "Type: Disclosure"
+	        ],
+	        "sort_order": 40
+	    },
+	    {
+	        "testcase": "Examine and document mobility alternatives accessible to people with physical limitations within that channel.",
+	        "code": "8.11.4",
+	        "tags":
+	        [
+	            "OSSTMM Chapter 8: Physical Security Testing",
+	            "Category: Segregation Review",
+	            "Type: Limitations"
+	        ],
+	        "sort_order": 41
+	    },
+	    {
+	        "testcase": "Verify openly viewable personal property does not flaunt or offend as determined offensive or private in the Posture Review.",
+	        "code": "8.11.5",
+	        "tags":
+	        [
+	            "OSSTMM Chapter 8: Physical Security Testing",
+	            "Category: Segregation Review",
+	            "Type: Offensive Materials"
+	        ],
+	        "sort_order": 42
+	    },
+	    {
+	        "testcase": "Discover and enumerate unsecured documents and items with building information regarding the organization such as blueprints, logistics, schedules, keys, access tokens, badges, uniforms, or any particular organizational assets which provide deeper or broader access.",
+	        "code": "8.12.1",
+	        "tags":
+	        [
+	            "OSSTMM Chapter 8: Physical Security Testing",
+	            "Category: Exposure Verification",
+	            "Type: Exposure Mapping"
+	        ],
+	        "sort_order": 43
+	    },
+	    {
+	        "testcase": "(a) Profile and verify the structural definition of the targets including material type, height, thickness, and security or safety properties.\n(b) Discover and enumerate access control sensors, cameras, monitors, man-traps, cages, gates, fences, etc. for type, technology, maker, materials, and security or safety properties.",
+	        "code": "8.12.2",
+	        "tags":
+	        [
+	            "OSSTMM Chapter 8: Physical Security Testing",
+	            "Category: Exposure Verification",
+	            "Type: Profiling"
+	        ],
+	        "sort_order": 44
+	    },
+	    {
+	        "testcase": "Discover and map storage locations of business property within the scope, what information is stored, how and where the information is stored, and how and where the property is discarded.",
+	        "code": "8.13.1",
+	        "tags":
+	        [
+	            "OSSTMM Chapter 8: Physical Security Testing",
+	            "Category: Competitive Intelligence Scouting",
+	            "Type: Business Grinding"
+	        ],
+	        "sort_order": 45
+	    },
+	    {
+	        "testcase": "Discover and enumerate documents and items with business details such as personnel, pay rates, alliances, partners, major customers, vendors, distributors, investors, business relations, production, development, product information, planning, stocks and trading, and any particular business information or property determined implicitly as confidential or non-compete from the Posture Review.",
+	        "code": "8.13.2",
+	        "tags":
+	        [
+	            "OSSTMM Chapter 8: Physical Security Testing",
+	            "Category: Competitive Intelligence Scouting",
+	            "Type: Business Environment"
+	        ],
+	        "sort_order": 46
+	    },
+	    {
+	        "testcase": "Discover and enumerate documents and items with organizational details such as processes, hierarchy, financial reporting, investment opportunities, mergers, acquisitions, channel investments, channel maintenance, internal social politics, personnel dissatisfaction and turn-over rate, primary vacation times, hirings, firings, and any particular organizational property stated implicitly as confidential or non-compete from the Posture Review.",
+	        "code": "8.13.3",
+	        "tags":
+	        [
+	            "OSSTMM Chapter 8: Physical Security Testing",
+	            "Category: Competitive Intelligence Scouting",
+	            "Type: Organizational Environment"
+	        ],
+	        "sort_order": 47
+	    },
+	    {
+	        "testcase": "Discover and enumerate processes which expose operational details such as packaging, shipping, distribution, arrival and departure times of employees, management, customers, methods of interaction, advertising and marketing plans, product development, product capacity, and any particular operational property stated implicitly as confidential or non-compete from the Posture Review.",
+	        "code": "8.13.4",
+	        "tags":
+	        [
+	            "OSSTMM Chapter 8: Physical Security Testing",
+	            "Category: Competitive Intelligence Scouting",
+	            "Type: Operational Environment"
+	        ],
+	        "sort_order": 48
+	    },
+	    {
+	        "testcase": "(a) Identify and examine physical quarantine methods and processes within the scope for aggressive and hostile contacts such as chaotic or violent people, unscheduled sales people, head-hunters, grifters, journalists, competitors, job seekers, job candidates, and disruptive people.\n(b) Identify and examine physical quarantine methods and process within the scope for managing dangerous and harmful items or substances, illegal substances, and illegally removed company property.\n(c) Identify and examine physical quarantine methods and processes within the scope for merely suspicious behavior or items and substances of suspect utility.",
+	        "code": "8.14.1",
+	        "tags":
+	        [
+	            "OSSTMM Chapter 8: Physical Security Testing",
+	            "Category: Quarantine Verification",
+	            "Type: Containment Process Identification"
+	        ],
+	        "sort_order": 49
+	    },
+	    {
+	        "testcase": "(a) Verify the state of containment location, length of time, and process of the quarantine method. Ensure that methods are within legal context and boundaries as per the Posture Review.\n(b) Verify proper procedures are followed for a full lock-down as per the requirements in the Posture Review for environmental threats, biological, chemical, or other contamination threats and in cases of workplace violence.\n(c) Verify proper procedures for quarantine recovery and return to the proper secure state following a state of lock-down as per the requirements in the Posture Review.",
+	        "code": "8.14.2",
+	        "tags":
+	        [
+	            "OSSTMM Chapter 8: Physical Security Testing",
+	            "Category: Quarantine Verification",
+	            "Type: Containment Levels"
+	        ],
+	        "sort_order": 50
+	    },
+	    {
+	        "testcase": "Examine and document the process for obtaining identification through legitimate, illegal (i.e. graft, theft, threats, etc.) and fraudulent (forgery, misrepresentation, etc.) means.",
+	        "code": "8.15.1",
+	        "tags":
+	        [
+	            "OSSTMM Chapter 8: Physical Security Testing",
+	            "Category: Privileges Audit",
+	            "Type: Identification"
+	        ],
+	        "sort_order": 51
+	    },
+	    {
+	        "testcase": "Verify the use of fraudulent authorization to gain privileges similar to that of other personnel.",
+	        "code": "8.15.2",
+	        "tags":
+	        [
+	            "OSSTMM Chapter 8: Physical Security Testing",
+	            "Category: Privileges Audit",
+	            "Type: Authorization"
+	        ],
+	        "sort_order": 52
+	    },
+	    {
+	        "testcase": "Verify and enumerate accesses to assets through the use of privileges to gain higher privileges to that of gatekeepers.",
+	        "code": "8.15.3",
+	        "tags":
+	        [
+	            "OSSTMM Chapter 8: Physical Security Testing",
+	            "Category: Privileges Audit",
+	            "Type: Escalation"
+	        ],
+	        "sort_order": 53
+	    },
+	    {
+	        "testcase": "Verify gaining access privileges as requested in cases where age (specifically those regarded legally as minors for the region), relationship (i.e. son, daughter, father, mother, etc.) sex, race, custom/culture and religion are factors which may be granted special circumstances or discriminated against in accordance to the Posture Review.",
+	        "code": "8.15.4",
+	        "tags":
+	        [
+	            "OSSTMM Chapter 8: Physical Security Testing",
+	            "Category: Privileges Audit",
+	            "Type: Special Circumstances"
+	        ],
+	        "sort_order": 54
+	    },
+	    {
+	        "testcase": "Enumerate and test for inadequacies in access to assets not controlled by the source providing the access (i.e. PINs, ID photos, etc. selected by the actor, sign-ins with identification numbers written in by the actor, etc.).",
+	        "code": "8.15.5",
+	        "tags":
+	        [
+	            "OSSTMM Chapter 8: Physical Security Testing",
+	            "Category: Privileges Audit",
+	            "Type: Subjugation"
+	        ],
+	        "sort_order": 55
+	    },
+	    {
+	        "testcase": "(a) Enumerate and verify that the distraction, removal or quieting of gateway personnel will not allow for direct access to assets or operations.\n(b) Enumerate and verify that the disabling or destruction of operational security measures or controls will not allow for direct access to assets or operations.\n(c) Verify that the isolation of the scope from resources such as fuel, power, food, water, communications, etc. does not allow for direct access to assets or operations.\n(d) Verify that high alert threat conditions do not shut down or minimize operational security measures or controls allowing for direct access to assets or operations.",
+	        "code": "8.16.1",
+	        "tags":
+	        [
+	            "OSSTMM Chapter 8: Physical Security Testing",
+	            "Category: Survivability Validation",
+	            "Type: Resilience"
+	        ],
+	        "sort_order": 56
+	    },
+	    {
+	        "testcase": "(a) Enumerate and verify conditions where access delays are properly addressed through backup personnel or an automated means for timely access to services, processes, and operations.\n(b) Enumerate and verify that the distraction, removal or quieting of gateway personnel will not halt or deny timely access to services, processes, and operations.\n(c) Enumerate and verify that the disabling or destruction of operational security measures or controls will not deny timely access to services, processes, and operations.\n(d) Verify that the isolation of the scope from resources such as fuel, electrical power, food, water, communications, etc. will not halt or deny access to services, processes, and operations.\n(e) Verify that the inability to remove waste, pollutants, or other contaminants from the scope will not halt or deny access to services, processes, and operations.\n(f) Verify that high alert threat conditions do not halt or deny access to services, processes, and operations.",
+	        "code": "8.16.2",
+	        "tags":
+	        [
+	            "OSSTMM Chapter 8: Physical Security Testing",
+	            "Category: Survivability Validation",
+	            "Type: Continuity"
+	        ],
+	        "sort_order": 57
+	    },
+	    {
+	        "testcase": "Verify and enumerate the use of a localized or scope-wide warning system, log or message for each access gateway where a suspect situation is noted by personnel upon suspicion of circumvention attempts, fraudulent activity, trespass, or breach. Ensure that the sensors/systems are installed to national, regional or international standards and regularly tested to cover all accessible points.",
+	        "code": "8.17.1",
+	        "tags":
+	        [
+	            "OSSTMM Chapter 8: Physical Security Testing",
+	            "Category: Alert and Log Review",
+	            "Type: Alarm"
+	        ],
+	        "sort_order": 58
+	    },
+	    {
+	        "testcase": "Document and verify the permissions and efficient access to alarm, log, and notification storage locations and property. Access to areas where sensitive information is processed or stored should be controlled and restricted to authorized personnel only; an audit trail of all access should be securely maintained.",
+	        "code": "8.17.2",
+	        "tags":
+	        [
+	            "OSSTMM Chapter 8: Physical Security Testing",
+	            "Category: Alert and Log Review",
+	            "Type: Storage and Retrieval"
+	        ],
+	        "sort_order": 59
+	    }
+	]
+}
