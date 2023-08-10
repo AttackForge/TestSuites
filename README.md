@@ -10,7 +10,21 @@ For example, a Test Suite might be "Web Application Pentest" and a Test Case on 
 
 AttackForge already comes pre-loaded with many Test Suites from industry methodologies such as OWASP, OSSTMM, NIST and more.
 
-However you can load additional testing methodologies in the form of Test Cases which can be imported on your Test Suites using the [AttackForge Self-Service API](https://support.attackforge.com/attackforge-enterprise/modules/self-service-restful-api/addtestcasestotestsuite).
+This repository provides additional industry methodologies you can import into your AttackForge tenant.
+The following methodologies are supported:
+
+- OWASP Application Security Verification Standard (ASVS) Version 4 - Level 1
+- OWASP Application Security Verification Standard (ASVS) Version 4 - Level 2
+- OWASP Application Security Verification Standard (ASVS) Version 4 - Level 3
+- OWASP Mobile Application Security Testing Guide (MASTG) Version 2 - Level 1
+- OWASP Mobile Application Security Testing Guide (MASTG) Version 2 - Level 2
+- OSSTMM Version 3 - Human Security Testing
+- OSSTMM Version 3 - Physical Security Testing
+- OSSTMM Version 3 - Wireless Security Testing
+- OSSTMM Version 3 - Telecommuncations Security Testing
+- OSSTMM Version 3 - Data Networks Security Testing
+
+You can load additional testing methodologies in the form of Test Cases which can be imported on your Test Suites using the [AttackForge Self-Service API](https://support.attackforge.com/attackforge-enterprise/modules/self-service-restful-api/addtestcasestotestsuite).
 
 The following cURL example will import the OWASP ASVS v4 Level 1 Test Cases included in this repository to an existing Test Suite:
 
