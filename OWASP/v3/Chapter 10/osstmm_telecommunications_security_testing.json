@@ -1,0 +1,598 @@
+{	
+	"testcases": [
+	    {
+	        "testcase": "(a) Review and document appropriate organizational policy regarding security, integrity, and privacy requirements of the scope. Verify the limitations on telecommunications imposed by the security policy.\n(b) Review and document contracts and Service Level Agreements (SLAs) with service providers and other involved third parties.",
+	        "code": "10.1.1",
+	        "tags":
+	        [
+	            "OSSTMM Chapter 10: Telecommunications Security Testing",
+	            "Category: Posture Review",
+	            "Type: Policy"
+	        ],
+	        "sort_order": 1
+	    },
+	    {
+	        "testcase": "Review and document appropriate regional and national legislation regarding the security and privacy requirements of the organization in the scope as well as that which includes the appropriate customers, partners, organizational branches, or resellers outside the scope. Where applicable, pay special attention to privacy and data retention of Call Detail Records, laws and rulings governing interception or monitoring of telecommunications, and provision of critical services such as E-911.",
+	        "code": "10.1.2",
+	        "tags":
+	        [
+	            "OSSTMM Chapter 10: Telecommunications Security Testing",
+	            "Category: Posture Review",
+	            "Type: Legislation"
+	        ],
+	        "sort_order": 2
+	    },
+	    {
+	        "testcase": "Review and document appropriate organizational culture in the scope towards security and privacy awareness, required and available personnel training, organizational hierarchy, help desk use, and requirements for reporting security issues.",
+	        "code": "10.1.3",
+	        "tags":
+	        [
+	            "OSSTMM Chapter 10: Telecommunications Security Testing",
+	            "Category: Posture Review",
+	            "Type: Culture"
+	        ],
+	        "sort_order": 3
+	    },
+	    {
+	        "testcase": "Review and document the age of systems, software, and service applications required for operations.",
+	        "code": "10.1.4",
+	        "tags":
+	        [
+	            "OSSTMM Chapter 10: Telecommunications Security Testing",
+	            "Category: Posture Review",
+	            "Type: Age"
+	        ],
+	        "sort_order": 4
+	    },
+	    {
+	        "testcase": "Review and document any systems, software, and service applications which require special care due to high use, instabilities, or a high rate of change.",
+	        "code": "10.1.5",
+	        "tags":
+	        [
+	            "OSSTMM Chapter 10: Telecommunications Security Testing",
+	            "Category: Posture Review",
+	            "Type: Fragile Artifacts"
+	        ],
+	        "sort_order": 5
+	    },
+	    {
+	        "testcase": "(a) PBX testing\n(b) Voice mailbox testing\n(c) FAX and Modem surveying, polling, and testing\n(d) Remote Access Services (RAS) testing\n(e) Backup ISDN lines testing\n(f) Voice over IP testing\n(g) X.25 packet switched network testing",
+	        "code": "10.1.6",
+	        "tags":
+	        [
+	            "OSSTMM Chapter 10: Telecommunications Security Testing",
+	            "Category: Posture Review",
+	            "Type: Attack Vectors"
+	        ],
+	        "sort_order": 6
+	    },
+	    {
+	        "testcase": "(a) Verify the scope and the owner(s) of the targets outlined for the audit, along with the carrier(s) and other third parties managing the telecommunication lines and infrastructure for the targets.\n(b) Determine the property location and the owner of the property housing the targets.\n(c) Search for other targets from the same owner.\n(d) Find and verify the paths of telecommunication services which interact outside of target for the paths they follow into and out of the scope.\n(e) Determine the physical location of the targets.\n(f) Test which protocols are used within the scope (example: PSTN, ISDN, GSM, UMTS, SIP, H.323, RTP, XOT, DECNET, IPX, etc.).\n(g) Verify and document the special limitations imposed by the contract with client.",
+	        "code": "10.2.1",
+	        "tags":
+	        [
+	            "OSSTMM Chapter 10: Telecommunications Security Testing",
+	            "Category: Logistics",
+	            "Type: Framework"
+	        ],
+	        "sort_order": 7
+	    },
+	    {
+	        "testcase": "(a) Measure the maximum and minimum connection speeds supported by targets.\n(b) Determine and verify the appropriate connection speed, parity, RING time, and other specific configuration parameters to be used for scanning and testing.\n(c) Verify and document particular limitations imposed by the scope (example: X.25 network congestion, XOT strict routes, access filters based on CLID).",
+	        "code": "10.2.2",
+	        "tags":
+	        [
+	            "OSSTMM Chapter 10: Telecommunications Security Testing",
+	            "Category: Logistics",
+	            "Type: Network Quality"
+	        ],
+	        "sort_order": 8
+	    },
+	    {
+	        "testcase": "(a) Test the time frame of equipment operation (example: call redirect to answering machine out of normal business hours).\n(b) Determine and document the time settings (timezone, DST, etc.) for the targets.\n(c) Assure the Analyst’s time clock is in sync with the time of the targets. Certain equipment like fragile artifacts may have time settings that do not represent a valid time; if the Analyst’s time clock is put in sync with these it may have an impact on the result of the test.\n(d) Determine the additional financial costs involved in performing thorough tests from a remote location (example: scanning for modems/FAX, testing Remote Access Services not on toll-free numbers, placing X.25 calls without reverse charge).",
+	        "code": "10.2.3",
+	        "tags":
+	        [
+	            "OSSTMM Chapter 10: Telecommunications Security Testing",
+	            "Category: Logistics",
+	            "Type: Time and Additional Costs"
+	        ],
+	        "sort_order": 9
+	    },
+	    {
+	        "testcase": "(a) Test whether telecommunications are monitored by an authoritative party for relaying improper network data, code injections, malicious content and improper conduct, and record responses and response time.\n(b) Test whether controls are in place for monitoring fraudulent activities or services tampering, and record responses and response time such as in periodic billing reconciliation using Call Detail Records (CDR).",
+	        "code": "10.3.1",
+	        "tags":
+	        [
+	            "OSSTMM Chapter 10: Telecommunications Security Testing",
+	            "Category: Active Detection Verification",
+	            "Type: Monitoring"
+	        ],
+	        "sort_order": 10
+	    },
+	    {
+	        "testcase": "(a) Test whether network-level controls are in place for blocking unauthorized activities and record responses and response time such as access filters based on Call Line Identification (CLID), Network User Address (NUA), or Closed User Group (CUG).\n(b) Test whether application-level controls are in place for blocking unauthorized activities and record responses and response time.",
+	        "code": "10.3.2",
+	        "tags":
+	        [
+	            "OSSTMM Chapter 10: Telecommunications Security Testing",
+	            "Category: Active Detection Verification",
+	            "Type: Filtering"
+	        ],
+	        "sort_order": 11
+	    },
+	    {
+	        "testcase": "(a) Verify active responses to probes from systems and services.\n(b) Verify if protection from brute force attacks such as account locking are in place.\n(c) Map any applications, systems, or network segments within the scope which produce logs, alarms, or notifications.",
+	        "code": "10.3.3",
+	        "tags":
+	        [
+	            "OSSTMM Chapter 10: Telecommunications Security Testing",
+	            "Category: Active Detection Verification",
+	            "Type: Active Detection"
+	        ],
+	        "sort_order": 12
+	    },
+	    {
+	        "testcase": "(a) Compile a map of communication protocols in use within the scope.\n(b) Outline the topology of the telecommunication networks within the scope.",
+	        "code": "10.4.1",
+	        "tags":
+	        [
+	            "OSSTMM Chapter 10: Telecommunications Security Testing",
+	            "Category: Visibility Audit",
+	            "Type: Network Surveying"
+	        ],
+	        "sort_order": 13
+	    },
+	    {
+	        "testcase": "(a) PBX testing: enumerate telephony systems within the scope.\n(b) Voice mailbox testing: find voice mailboxes within the scope.\n(c) FAX testing: enumerate FAX systems within the scope.\n(d) Modem survey: find all systems with listening and interactive modems within the scope.\n(e) Remote Access Services testing: enumerate RAS systems within the scope.\n(f) Backup ISDN lines testing: enumerate network devices with backup ISDN lines within the scope.\n(g) Voice over IP testing: enumerate VoIP systems within the scope.\n(h) X.25 packet switched network testing: find live and reachable systems within the scope, recording their response codes.",
+	        "code": "10.4.2",
+	        "tags":
+	        [
+	            "OSSTMM Chapter 10: Telecommunications Security Testing",
+	            "Category: Visibility Audit",
+	            "Type: Enumeration"
+	        ],
+	        "sort_order": 14
+	    },
+	    {
+	        "testcase": "(a) Identify OS types and versions in use on systems within the scope.\n(b) Identify service types and versions in use on systems within the scope.\n(c) Identify modem and FAX types and operating programs.",
+	        "code": "10.4.3",
+	        "tags":
+	        [
+	            "OSSTMM Chapter 10: Telecommunications Security Testing",
+	            "Category: Visibility Audit",
+	            "Type: Identification"
+	        ],
+	        "sort_order": 15
+	    },
+	    {
+	        "testcase": "(a) PBX testing: find PBX systems that are allowing remote administration or world access to the maintenance terminal, either via telephone dial-in or IP network.\n(b) Voice mailbox testing: find voice mailboxes that are world accessible.\n(c) FAX testing: find FAX systems that are allowing remote administration or world access to the maintenance terminal.\n(d) Modem survey: test and document the authentication protocols in use (example: terminal, PAP, CHAP, others).\n(e) Remote Access Services testing: test and document the authentication protocols in use (example: terminal, PAP, CHAP, others).\n(f) Backup ISDN lines testing: test and document the authentication protocols in use (example: terminal, PAP, CHAP, others).\n(g) Voice over IP testing: verify the possibility of performing toll fraud, call eavesdropping or tracing, call hijacking, CLID spoofing, and Denial of Service, using attacks targeting converging networks, VoIP network elements, signaling and media transport protocols.\n(h) X.25 packet switched network testing: find systems that are allowing remote administration, access to other services via specific CUDs, or reverse charge, verify how many Virtual Channels (VCs) and Permanent Virtual Channels (PVCs) are in use and how they are managed (CUG, sub-addresses mapping, incoming X.25 calls screening, filtering based on NUA, etc.).",
+	        "code": "10.5.1",
+	        "tags":
+	        [
+	            "OSSTMM Chapter 10: Telecommunications Security Testing",
+	            "Category: Access Verification",
+	            "Type: Access Process"
+	        ],
+	        "sort_order": 16
+	    },
+	    {
+	        "testcase": "(a) Request known, common remote services.\n(b) Identify the components of services and their versions.\n(c) Verify service uptime to latest vulnerabilities and patch releases.\n(d) For each identified service, remotely test, and document configuration errors.\n(e) For each identified application, remotely test, and document programming errors.",
+	        "code": "10.5.2",
+	        "tags":
+	        [
+	            "OSSTMM Chapter 10: Telecommunications Security Testing",
+	            "Category: Access Verification",
+	            "Type: Services"
+	        ],
+	        "sort_order": 17
+	    },
+	    {
+	        "testcase": "(a) Enumerate telecommunication resources requiring authentication and verify all acceptable forms of privileges to interact or receive access.\n(b) Document the authentication schemes in use, verify the process for receiving authentication, and test for logic errors.\n(c) Verify the methods of authorization and the identification required.\n(d) Ensure administrative accounts do not have default or easily guessed credentials.\n(e) Ensure user accounts do not have default or easily guessed credentials.\n(f) Verify and test protections against brute force and dictionary type attacks.\n(g) Verify and test password complexity checks and voice mailbox PIN size, password aging, and frequency of change controls.\n(h) Try “known” credentials on all enumerated access points, to verify password re-usage controls.\n(i) Verify the format used for storage of authentication credentials and document clear-text or obfuscated passwords and weak encryption algorithms.\n(j) Verify the format used for transmission of authentication credentials through the network and document clear-text or obfuscated passwords and weak encryption algorithms.\n(k) Verify that authentication information whether attempted, successful, or failed. is appropriately logged.",
+	        "code": "10.5.3",
+	        "tags":
+	        [
+	            "OSSTMM Chapter 10: Telecommunications Security Testing",
+	            "Category: Access Verification",
+	            "Type: Authentication"
+	        ],
+	        "sort_order": 18
+	    },
+	    {
+	        "testcase": "(a) Test and document the access methods in use that do not require submission of authentication credentials.\n(b) Test and document the depth of requirements for interaction with and access to property within the scope by means of spoofing a trusted source (example: CLID and X.25 NUA spoofing).",
+	        "code": "10.6.1",
+	        "tags":
+	        [
+	            "OSSTMM Chapter 10: Telecommunications Security Testing",
+	            "Category: Trust Verification",
+	            "Type: Spoofing"
+	        ],
+	        "sort_order": 19
+	    },
+	    {
+	        "testcase": "(a) Test and document the depth of requirements to take property outside of the scope to a known and trusted source or throughout the scope itself without any established, required credentials.\n(b) Test and document the property available from outside of the scope due to information leaks.",
+	        "code": "10.6.2",
+	        "tags":
+	        [
+	            "OSSTMM Chapter 10: Telecommunications Security Testing",
+	            "Category: Trust Verification",
+	            "Type: Resource Abuse"
+	        ],
+	        "sort_order": 20
+	    },
+	    {
+	        "testcase": "(a) Enumerate and test for use or inadequacies from applications and systems to properly identify and log access or interactions to property for specific evidence to challenge repudiation.\n(b) Document the depth of the recorded interaction and the process of identification.\n(c) Verify that all methods of interaction are properly recorded with proper identification.\n(d) Identify methods of identification which defeat repudiation.",
+	        "code": "10.7.1",
+	        "tags":
+	        [
+	            "OSSTMM Chapter 10: Telecommunications Security Testing",
+	            "Category: Controls Verification",
+	            "Type: Non-repudiation"
+	        ],
+	        "sort_order": 21
+	    },
+	    {
+	        "testcase": "(a) Enumerate all interactions with services within the scope for communications or assets transported over the channel using secured lines, encryption, “quieted” or “closed” interactions to protect the confidentiality of the information property between the involved parties.\n(b) Verify the acceptable methods used for confidentiality.\n(c) Test the strength and design of the encryption or obfuscation methods.\n(d) Verify the outer limits of communication which can be protected via the applied method of confidentiality.",
+	        "code": "10.7.2",
+	        "tags":
+	        [
+	            "OSSTMM Chapter 10: Telecommunications Security Testing",
+	            "Category: Controls Verification",
+	            "Type: Confidentiality"
+	        ],
+	        "sort_order": 22
+	    },
+	    {
+	        "testcase": "Enumerate all interactions with services within the scope for communications or assets transported over the channel using secured lines, encryption, “quieted” or “closed” interactions to protect the privacy of the interaction and the process of providing assets only to those within the proper security clearance for that process, communication, or asset.",
+	        "code": "10.7.3",
+	        "tags":
+	        [
+	            "OSSTMM Chapter 10: Telecommunications Security Testing",
+	            "Category: Controls Verification",
+	            "Type: Privacy"
+	        ],
+	        "sort_order": 23
+	    },
+	    {
+	        "testcase": "Enumerate and test for inadequacies of integrity where using a documented process, signatures, encryption, hash, or markings to assure that the asset cannot be changed, switched, redirected, or reversed without it being known to parties involved.",
+	        "code": "10.7.4",
+	        "tags":
+	        [
+	            "OSSTMM Chapter 10: Telecommunications Security Testing",
+	            "Category: Controls Verification",
+	            "Type: Integrity"
+	        ],
+	        "sort_order": 24
+	    },
+	    {
+	        "testcase": "Examine and document the baseline services to ensure the processes are in line with the security policy.",
+	        "code": "10.8.1",
+	        "tags":
+	        [
+	            "OSSTMM Chapter 10: Telecommunications Security Testing",
+	            "Category: Process Verification",
+	            "Type: Baseline"
+	        ],
+	        "sort_order": 25
+	    },
+	    {
+	        "testcase": "Examine and document the timeliness, appropriateness, access to, and extent of processes for the notification and security awareness of personnel in regards to operational security, actual security, and loss controls.",
+	        "code": "10.8.2",
+	        "tags":
+	        [
+	            "OSSTMM Chapter 10: Telecommunications Security Testing",
+	            "Category: Process Verification",
+	            "Type: Maintenance"
+	        ],
+	        "sort_order": 26
+	    },
+	    {
+	        "testcase": "Determine the extent to which personnel security notifications and security news can be expanded or altered with misinformation.",
+	        "code": "10.8.3",
+	        "tags":
+	        [
+	            "OSSTMM Chapter 10: Telecommunications Security Testing",
+	            "Category: Process Verification",
+	            "Type: Misinformation"
+	        ],
+	        "sort_order": 27
+	    },
+	    {
+	        "testcase": "Map and verify any gaps between practice and requirements as determined in the Posture Review through all channels.",
+	        "code": "10.8.4",
+	        "tags":
+	        [
+	            "OSSTMM Chapter 10: Telecommunications Security Testing",
+	            "Category: Process Verification",
+	            "Type: Due Diligence"
+	        ],
+	        "sort_order": 28
+	    },
+	    {
+	        "testcase": "(a) Document and enumerate targets and services which are protected from abuse or circumvention of employee policy, are insured for theft or damages, or use liability and permission disclaimers.\n(b) Verify the legality and appropriateness of the language in the disclaimers.\n(c) Verify the effect of the disclaimers upon security or safety measures.\n(d) Examine the language of the insurance policy for limitations on types of damages or assets.\n(e) Compare cultural access policy with indemnification policy for evidence of weaknesses.",
+	        "code": "10.8.5",
+	        "tags":
+	        [
+	            "OSSTMM Chapter 10: Telecommunications Security Testing",
+	            "Category: Process Verification",
+	            "Type: Indemnification"
+	        ],
+	        "sort_order": 29
+	    },
+	    {
+	        "testcase": "(a) Examine controls, including baseline configuration, to validate proper configurations of equipment, systems, and applications within the scope.\n(b) Examine controls to ensure configurations of equipment, systems, and applications match the intent of the organization and reflect a business justification.\n(c) Examine Access Control Lists (ACLs) configured on networks, systems, services, and applications within the scope, to ensure they match the intent of the organization and reflect a business justification.",
+	        "code": "10.9.1",
+	        "tags":
+	        [
+	            "OSSTMM Chapter 10: Telecommunications Security Testing",
+	            "Category: Configuration Verification",
+	            "Type: Configuration Controls"
+	        ],
+	        "sort_order": 30
+	    },
+	    {
+	        "testcase": "(a) PBX testing: check for unnecessary, insecure or unused services/features and default credentials, verify the patch level of PBX systems to identify known vulnerabilities.\n(b) Voice mailbox testing: check for unnecessary, insecure or unused services/features and default credentials, verify the patch level of voice mailbox systems to identify known vulnerabilities.\n(c) FAX testing: check for unnecessary, insecure or unused services/features and default credentials, verify the patch level of FAX systems to identify known vulnerabilities.\n(d) Modem survey: check for unnecessary or unused answering modems within the scope.\n(e) Remote Access Services testing: check for unnecessary, insecure or unused services/features and default credentials, verify the patch level of RAS servers to identify known vulnerabilities.\n(f) Backup ISDN lines testing: check for unnecessary, insecure or unused services and default credentials, verify the patch level of network equipment to identify known vulnerabilities.\n(g) Voice over IP testing: check for unnecessary, insecure or unused services/protocols and default credentials on all systems within the VoIP infrastructure, and verify their patch level to identify known vulnerabilities.\n(h) On X.25 packet switched network testing check for unnecessary, insecure or unused services and default credentials on all X.25 systems, and verify their patch level to identify known vulnerabilities.",
+	        "code": "10.9.2",
+	        "tags":
+	        [
+	            "OSSTMM Chapter 10: Telecommunications Security Testing",
+	            "Category: Configuration Verification",
+	            "Type: Common Configuration Errors"
+	        ],
+	        "sort_order": 31
+	    },
+	    {
+	        "testcase": "Examine the available source code of applications where available to validate controls balance operations.",
+	        "code": "10.9.3",
+	        "tags":
+	        [
+	            "OSSTMM Chapter 10: Telecommunications Security Testing",
+	            "Category: Configuration Verification",
+	            "Type: Source Code Audit"
+	        ],
+	        "sort_order": 32
+	    },
+	    {
+	        "testcase": "Verify the extent to which individually licensed, private, faked, reproduced, non-free, or non-open property is shared between personnel either intentionally through sharing processes and programs, libraries, and personal caches or unintentionally through mismanagement of licenses and resources, or negligence.",
+	        "code": "10.10.1",
+	        "tags":
+	        [
+	            "OSSTMM Chapter 10: Telecommunications Security Testing",
+	            "Category: Property Validation",
+	            "Type: Sharing"
+	        ],
+	        "sort_order": 33
+	    },
+	    {
+	        "testcase": "Verify the extent to which individually licensed, private, faked, reproduced, non-free, or non-open property is promoted, marketed, or sold between personnel or by the organization.",
+	        "code": "10.10.2",
+	        "tags":
+	        [
+	            "OSSTMM Chapter 10: Telecommunications Security Testing",
+	            "Category: Property Validation",
+	            "Type: Black Market"
+	        ],
+	        "sort_order": 34
+	    },
+	    {
+	        "testcase": "Verify public, out of scope businesses, auctions, or property sales which provide contact information through channels originating within the scope.",
+	        "code": "10.10.3",
+	        "tags":
+	        [
+	            "OSSTMM Chapter 10: Telecommunications Security Testing",
+	            "Category: Property Validation",
+	            "Type: Sales Channels"
+	        ],
+	        "sort_order": 35
+	    },
+	    {
+	        "testcase": "Perform a complete inventory of all modems within the scope. Verify that the organization has adopted an adequate security policy that addresses the use and provision of modems.",
+	        "code": "10.10.4",
+	        "tags":
+	        [
+	            "OSSTMM Chapter 10: Telecommunications Security Testing",
+	            "Category: Property Validation",
+	            "Type: Rogue Modems"
+	        ],
+	        "sort_order": 36
+	    },
+	    {
+	        "testcase": "Map gatekeepers of private information within the scope, what information is stored, how and where the information is stored, and over which channels the information is communicated.",
+	        "code": "10.11.1",
+	        "tags":
+	        [
+	            "OSSTMM Chapter 10: Telecommunications Security Testing",
+	            "Category: Segregation Review",
+	            "Type: Privacy Containment Mapping"
+	        ],
+	        "sort_order": 37
+	    },
+	    {
+	        "testcase": "Examine and document types of disclosures of private information in communication services from gatekeepers responsible for this segregation according to policy and regulations as determined in the Posture Review and the basic human right to.",
+	        "code": "10.11.2",
+	        "tags":
+	        [
+	            "OSSTMM Chapter 10: Telecommunications Security Testing",
+	            "Category: Segregation Review",
+	            "Type: Disclosure"
+	        ],
+	        "sort_order": 38
+	    },
+	    {
+	        "testcase": "Examine and document types of gateways and channel alternatives with gateways accessible to people with physical limitations within that channel such as in the TTY service.",
+	        "code": "10.11.3",
+	        "tags":
+	        [
+	            "OSSTMM Chapter 10: Telecommunications Security Testing",
+	            "Category: Segregation Review",
+	            "Type: Limitations"
+	        ],
+	        "sort_order": 39
+	    },
+	    {
+	        "testcase": "(a) Identify personal and business information such as personal and work phone numbers, mobile phone numbers, toll-free phone numbers, FAX numbers, owners of the telecommunication lines, carriers, and organizational affiliations, using all available means such as company websites, phone books, on-line directory information, and telecommunication subscriber’s databases.\n(b) Identify other telecommunication lines such as X.25, using both company websites and search engines.\n(c) Identify personal and business information such as organization charts, key personnel titles, job descriptions, private and public e-mail addresses, log-ins (example: X.25 PSI mail information leak), log-in schemes, passwords, back-up methods, insurers, or any particular organizational information stated implicitly as confidential in regulations and policy.",
+	        "code": "10.12.1",
+	        "tags":
+	        [
+	            "OSSTMM Chapter 10: Telecommunications Security Testing",
+	            "Category: Exposure Verification",
+	            "Type: Exposure Mapping"
+	        ],
+	        "sort_order": 40
+	    },
+	    {
+	        "testcase": "Profile and verify the organization, its public telecommunication networks, employees, technologies, and business direction.",
+	        "code": "10.12.2",
+	        "tags":
+	        [
+	            "OSSTMM Chapter 10: Telecommunications Security Testing",
+	            "Category: Exposure Verification",
+	            "Type: Profiling"
+	        ],
+	        "sort_order": 41
+	    },
+	    {
+	        "testcase": "(a) Map gatekeepers of business property within the scope, what information is stored, how and where the information is stored, and over which channels the information is communicated.\n(b) Measure the cost of telecommunication infrastructure based on equipment (example: phones, PBX, modems, FAX, etc.).\n(c) Measure the cost of the support infrastructure, based on carrier and maintenance costs, including technical personnel.\n(d) Verify what kind of business is managed through the telecommunication infrastructure (example: call center, customer care, help desk, etc.).\n(e) Verify the amount of traffic in a defined time range.",
+	        "code": "10.13.1",
+	        "tags":
+	        [
+	            "OSSTMM Chapter 10: Telecommunications Security Testing",
+	            "Category: Competitive Intelligence Scouting",
+	            "Type: Business Grinding"
+	        ],
+	        "sort_order": 42
+	    },
+	    {
+	        "testcase": "(a) Explore and document business details such as alliances, partners, major customers, vendors, distributors, investors, business relations, production, development, product information, planning, stocks and trading, and any particular business information or property stated implicitly as confidential in regulations and policy.\n(b) Identify telecommunication lines which are part of the business of partners.",
+	        "code": "10.13.2",
+	        "tags":
+	        [
+	            "OSSTMM Chapter 10: Telecommunications Security Testing",
+	            "Category: Competitive Intelligence Scouting",
+	            "Type: Business Environment"
+	        ],
+	        "sort_order": 43
+	    },
+	    {
+	        "testcase": "Examine and document types of disclosures of business property from gatekeepers on operations, processes, hierarchy, financial reporting, investment opportunities, mergers, acquisitions, channel investments, channel maintenance, internal social politics, personnel dissatisfaction and turn-over rate, primary vacation times, hirings, firings, and any particular organizational property stated implicitly as confidential in regulations and policy.",
+	        "code": "10.13.3",
+	        "tags":
+	        [
+	            "OSSTMM Chapter 10: Telecommunications Security Testing",
+	            "Category: Competitive Intelligence Scouting",
+	            "Type: Organizational Environment"
+	        ],
+	        "sort_order": 44
+	    },
+	    {
+	        "testcase": "Identify and examine quarantine methods and processes at the target in all channels for annoying, aggressive, or hostile contacts such as telemarketers, head hunters, and stalkers.",
+	        "code": "10.14.1",
+	        "tags":
+	        [
+	            "OSSTMM Chapter 10: Telecommunications Security Testing",
+	            "Category: Quarantine Verification",
+	            "Type: Containment Process Identification"
+	        ],
+	        "sort_order": 45
+	    },
+	    {
+	        "testcase": "Verify the state of containment, length of time, and all channels where interactions have quarantine methods. Ensure that methods are within legal context and boundaries.",
+	        "code": "10.14.2",
+	        "tags":
+	        [
+	            "OSSTMM Chapter 10: Telecommunications Security Testing",
+	            "Category: Quarantine Verification",
+	            "Type: Containment Levels"
+	        ],
+	        "sort_order": 46
+	    },
+	    {
+	        "testcase": "Examine and document the process for obtaining identification through both legitimate and fraudulent means on all channels.",
+	        "code": "10.15.1",
+	        "tags":
+	        [
+	            "OSSTMM Chapter 10: Telecommunications Security Testing",
+	            "Category: Privileges Audit",
+	            "Type: Identification"
+	        ],
+	        "sort_order": 47
+	    },
+	    {
+	        "testcase": "(a) Verify the use of fraudulent authorization on all channels to gain privileges similar to that of other personnel.\n(b) Test and document possible paths for bypassing Access Control Lists (ACLs) configured for networks, systems, services, and applications within the scope.",
+	        "code": "10.15.2",
+	        "tags":
+	        [
+	            "OSSTMM Chapter 10: Telecommunications Security Testing",
+	            "Category: Privileges Audit",
+	            "Type: Authorization"
+	        ],
+	        "sort_order": 48
+	    },
+	    {
+	        "testcase": "Verify and map access to information through the use of privileges to gain higher privileges.",
+	        "code": "10.15.3",
+	        "tags":
+	        [
+	            "OSSTMM Chapter 10: Telecommunications Security Testing",
+	            "Category: Privileges Audit",
+	            "Type: Escalation"
+	        ],
+	        "sort_order": 49
+	    },
+	    {
+	        "testcase": "Enumerate and test for inadequacies from all channels to use or enable loss controls not enabled by default.",
+	        "code": "10.15.4",
+	        "tags":
+	        [
+	            "OSSTMM Chapter 10: Telecommunications Security Testing",
+	            "Category: Privileges Audit",
+	            "Type: Subjugation"
+	        ],
+	        "sort_order": 50
+	    },
+	    {
+	        "testcase": "(a) Enumerate and test for inadequacies from target with regard to access delays and service response time through back-up personnel or automated means for alternate access.\n(b) Enumerate and test for inadequacies from target with regard to Quality of Service issues and performance requirements of telecommunication technologies.",
+	        "code": "10.16.1",
+	        "tags":
+	        [
+	            "OSSTMM Chapter 10: Telecommunications Security Testing",
+	            "Category: Survivability Validation",
+	            "Type: Continuity"
+	        ],
+	        "sort_order": 51
+	    },
+	    {
+	        "testcase": "Map and document the process of gatekeepers disconnecting channels due to breach or safety concerns as a gap analysis with regulation and security policy.",
+	        "code": "10.16.2",
+	        "tags":
+	        [
+	            "OSSTMM Chapter 10: Telecommunications Security Testing",
+	            "Category: Survivability Validation",
+	            "Type: Resilience"
+	        ],
+	        "sort_order": 52
+	    },
+	    {
+	        "testcase": "(a) Verify and enumerate the use of a localized or scope-wide warning system, log, or message for each access gateway over each channel where a suspect situation is elevated upon suspicion of intrusion attempts or fraudulent activity and determine clipping levels.\n(b) Review outgoing and incoming call detail logs for signs of abuse or fraud.\n(c) Test and document log management systems.",
+	        "code": "10.17.1",
+	        "tags":
+	        [
+	            "OSSTMM Chapter 10: Telecommunications Security Testing",
+	            "Category: Alert and Log Review",
+	            "Type: Alarm"
+	        ],
+	        "sort_order": 53
+	    },
+	    {
+	        "testcase": "(a) Document and verify the unprivileged access to alarm, log, and notification storage locations and property.\n(b) Test and document logging backup policy and logging to multiple locations, to ensure that audit trails cannot be tampered with.\n(c) Test and document log management systems.",
+	        "code": "10.17.2",
+	        "tags":
+	        [
+	            "OSSTMM Chapter 10: Telecommunications Security Testing",
+	            "Category: Alert and Log Review",
+	            "Type: Storage and Retrieval"
+	        ],
+	        "sort_order": 54
+	    }
+	]
+}
