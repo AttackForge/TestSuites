@@ -1,0 +1,587 @@
+{	
+	"testcases": [
+	    {
+	        "testcase": "Review and document appropriate organizational policy regarding security, integrity, and privacy responsibilities of the scope. Review and document contracts and Service Level Agreements (SLAs) with service providers and other involved third parties.",
+	        "code": "9.1.1",
+	        "tags":
+	        [
+	            "OSSTMM Chapter 9: Wireless Security Testing",
+	            "Category: Posture Review",
+	            "Type: Policy"
+	        ],
+	        "sort_order": 1
+	    },
+	    {
+	        "testcase": "Review and document appropriate regional and national legislation and industry regulations regarding the security and privacy requirements of the organization in the scope as well as that which includes the appropriate customers, partners, organizational branches, or resellers outside the scope.",
+	        "code": "9.1.2",
+	        "tags":
+	        [
+	            "OSSTMM Chapter 9: Wireless Security Testing",
+	            "Category: Posture Review",
+	            "Type: Legislation"
+	        ],
+	        "sort_order": 2
+	    },
+	    {
+	        "testcase": "Review and document appropriate organizational culture in the scope towards security and privacy awareness, required and available personnel training, organizational hierarchy, help desk use, and requirements for reporting security issues.",
+	        "code": "9.1.3",
+	        "tags":
+	        [
+	            "OSSTMM Chapter 9: Wireless Security Testing",
+	            "Category: Posture Review",
+	            "Type: Culture"
+	        ],
+	        "sort_order": 3
+	    },
+	    {
+	        "testcase": "Review and document the age of systems, software, and service applications required for operations.",
+	        "code": "9.1.4",
+	        "tags":
+	        [
+	            "OSSTMM Chapter 9: Wireless Security Testing",
+	            "Category: Posture Review",
+	            "Type: Age"
+	        ],
+	        "sort_order": 4
+	    },
+	    {
+	        "testcase": "Review and document any systems, software, and service applications which require special care due to high use, instabilities, or a high rate of change.",
+	        "code": "9.1.5",
+	        "tags":
+	        [
+	            "OSSTMM Chapter 9: Wireless Security Testing",
+	            "Category: Posture Review",
+	            "Type: Fragile Artifacts"
+	        ],
+	        "sort_order": 5
+	    },
+	    {
+	        "testcase": "Test for equipment which may transmit Electromagnetic Radiation, such as CRTs, LCDs, printers, modems, and cell phones, and which may be used to recreate the data that is displayed on the screen, printed, or transmitted, etc. Exploiting this vulnerability is known as Van Eck phreaking.",
+	        "code": "9.2.1",
+	        "tags":
+	        [
+	            "OSSTMM Chapter 9: Wireless Security Testing",
+	            "Category: Logistics",
+	            "Type: Communications Equipment"
+	        ],
+	        "sort_order": 6
+	    },
+	    {
+	        "testcase": "Test which protocols are used within the scope and methods of transmission.",
+	        "code": "9.2.2",
+	        "tags":
+	        [
+	            "OSSTMM Chapter 9: Wireless Security Testing",
+	            "Category: Logistics",
+	            "Type: Communications"
+	        ],
+	        "sort_order": 7
+	    },
+	    {
+	        "testcase": "Test for the time frame of equipment operation. For example, is a wireless access point (AP) available 24/7 or just during normal business hours?",
+	        "code": "9.2.3",
+	        "tags":
+	        [
+	            "OSSTMM Chapter 9: Wireless Security Testing",
+	            "Category: Logistics",
+	            "Type: Time"
+	        ],
+	        "sort_order": 8
+	    },
+	    {
+	        "testcase": "Test whether controls are in place for monitoring intrusion or signal tampering.",
+	        "code": "9.3.1",
+	        "tags":
+	        [
+	            "OSSTMM Chapter 9: Wireless Security Testing",
+	            "Category: Active Detection Verification",
+	            "Type: Channel Monitoring"
+	        ],
+	        "sort_order": 9
+	    },
+	    {
+	        "testcase": "Test whether controls are in place to block signals (jamming) or alert for unauthorized activities.",
+	        "code": "9.3.2",
+	        "tags":
+	        [
+	            "OSSTMM Chapter 9: Wireless Security Testing",
+	            "Category: Active Detection Verification",
+	            "Type: Channel Moderating"
+	        ],
+	        "sort_order": 10
+	    },
+	    {
+	        "testcase": "Locate Access Control, Perimeter Security, and Ability to Intercept or Interfere with wireless channels.",
+	        "code": "9.4.1",
+	        "tags":
+	        [
+	            "OSSTMM Chapter 9: Wireless Security Testing",
+	            "Category: Visibility Audit",
+	            "Type: Interception"
+	        ],
+	        "sort_order": 11
+	    },
+	    {
+	        "testcase": "(a) Determine which frequencies and signals can leak into or out of the target area using a directional, high gain antenna and passive detection means such as frequency analysis.\n(b) Create a heat map of the scope showing all sources of the radiation and their radii and strength.\n(c) Test for sources that interact without authorization.\n(d) Collect information broadcast by these sources.\n(e) Map all found data to the emission limit values currently required in the region for all detected radiation.",
+	        "code": "9.4.2",
+	        "tags":
+	        [
+	            "OSSTMM Chapter 9: Wireless Security Testing",
+	            "Category: Visibility Audit",
+	            "Type: Passive Signal Detection"
+	        ],
+	        "sort_order": 12
+	    },
+	    {
+	        "testcase": "Examine which frequencies or electromagnetic signal broadcasts trigger responses such as that from RFID or other interactive wireless sources. (Radio Frequency Identifier tags are composed of an integrated circuit, which is sometimes half the size of a grain of sand, and an antenna – usually a coil of wires. Information is stored on the integrated circuit and transmitted via the antenna when probed by the right signal. The exact frequencies used in RFID systems may therefore vary by country or region.)",
+	        "code": "9.4.3",
+	        "tags":
+	        [
+	            "OSSTMM Chapter 9: Wireless Security Testing",
+	            "Category: Visibility Audit",
+	            "Type: Active Signal Detection"
+	        ],
+	        "sort_order": 13
+	    },
+	    {
+	        "testcase": "Determine if access points are turned off during portions of the day when they will not be in use.",
+	        "code": "9.5.1",
+	        "tags":
+	        [
+	            "OSSTMM Chapter 9: Wireless Security Testing",
+	            "Category: Access Verification",
+	            "Type: Evaluate Administrative Access to Wireless Devices"
+	        ],
+	        "sort_order": 14
+	    },
+	    {
+	        "testcase": "Test and document using directional and high-gain antennas that wireless devices are set to the lowest possible power setting to maintain sufficient operation that will keep transmissions within the secure boundaries of the organization",
+	        "code": "9.5.2",
+	        "tags":
+	        [
+	            "OSSTMM Chapter 9: Wireless Security Testing",
+	            "Category: Access Verification",
+	            "Type: Evaluate Device Configuration"
+	        ],
+	        "sort_order": 15
+	    },
+	    {
+	        "testcase": "Verify that the access point’s default Service Set Identifier (SSID) has been changed.",
+	        "code": "9.5.3",
+	        "tags":
+	        [
+	            "OSSTMM Chapter 9: Wireless Security Testing",
+	            "Category: Access Verification",
+	            "Type: Evaluate Configuration, Authentication, and Encryption of Wireless Networks"
+	        ],
+	        "sort_order": 16
+	    },
+	    {
+	        "testcase": "Enumerate and test for inadequacies in authentication and authorization methods.",
+	        "code": "9.5.4",
+	        "tags":
+	        [
+	            "OSSTMM Chapter 9: Wireless Security Testing",
+	            "Category: Access Verification",
+	            "Type: Authentication"
+	        ],
+	        "sort_order": 17
+	    },
+	    {
+	        "testcase": "Evaluate access controls, perimeter security, and ability to intercept or interfere with communication, determining the level of physical access controls to access points and devices controlling them (keyed locks, card badge readers, cameras, etc.).",
+	        "code": "9.5.5",
+	        "tags":
+	        [
+	            "OSSTMM Chapter 9: Wireless Security Testing",
+	            "Category: Access Verification",
+	            "Type: Access Control"
+	        ],
+	        "sort_order": 18
+	    },
+	    {
+	        "testcase": "Test and document the authentication-method of the clients.",
+	        "code": "9.6.1",
+	        "tags":
+	        [
+	            "OSSTMM Chapter 9: Wireless Security Testing",
+	            "Category: Trust Verification",
+	            "Type: Misrepresentation"
+	        ],
+	        "sort_order": 19
+	    },
+	    {
+	        "testcase": "Test and document the depth of requirements for access to wireless devices within the scope with the use of fraudulent credentials.",
+	        "code": "9.6.2",
+	        "tags":
+	        [
+	            "OSSTMM Chapter 9: Wireless Security Testing",
+	            "Category: Trust Verification",
+	            "Type: Fraud"
+	        ],
+	        "sort_order": 20
+	    },
+	    {
+	        "testcase": "Test and document the depth of requirements to send the property outside of the scope to a known and trusted source or throughout the scope itself to other personnel without any established, required credentials.",
+	        "code": "9.6.3",
+	        "tags":
+	        [
+	            "OSSTMM Chapter 9: Wireless Security Testing",
+	            "Category: Trust Verification",
+	            "Type: Resource Abuse"
+	        ],
+	        "sort_order": 21
+	    },
+	    {
+	        "testcase": "Test and document the connections that are made to a false or compromised receiver.",
+	        "code": "9.6.4",
+	        "tags":
+	        [
+	            "OSSTMM Chapter 9: Wireless Security Testing",
+	            "Category: Trust Verification",
+	            "Type: Blind Trust"
+	        ],
+	        "sort_order": 22
+	    },
+	    {
+	        "testcase": "Enumerate and test for use or inadequacies from daemons and systems to properly identify and log access or interactions to property for specific evidence to challenge repudiation, and document the depth of the recorded interaction and the process of identification.",
+	        "code": "9.7.1",
+	        "tags":
+	        [
+	            "OSSTMM Chapter 9: Wireless Security Testing",
+	            "Category: Controls Verification",
+	            "Type: Non-repudiation"
+	        ],
+	        "sort_order": 23
+	    },
+	    {
+	        "testcase": "Enumerate and test for use of equipment to dampen Electromagnetic transmission signals outside of the company and the controls in place for securing or encrypting wireless transmissions.",
+	        "code": "9.7.2",
+	        "tags":
+	        [
+	            "OSSTMM Chapter 9: Wireless Security Testing",
+	            "Category: Controls Verification",
+	            "Type: Confidentiality"
+	        ],
+	        "sort_order": 24
+	    },
+	    {
+	        "testcase": "Determine the level of physical access controls to access points and devices controlling them (keyed locks, card badge readers, cameras, etc.).",
+	        "code": "9.7.3",
+	        "tags":
+	        [
+	            "OSSTMM Chapter 9: Wireless Security Testing",
+	            "Category: Controls Verification",
+	            "Type: Privacy"
+	        ],
+	        "sort_order": 25
+	    },
+	    {
+	        "testcase": "Determine that data can only be accessed and modified by those that are authorized and ensure that adequate encryption is in use for guaranteeing signing and confidentiality of communications.",
+	        "code": "9.7.4",
+	        "tags":
+	        [
+	            "OSSTMM Chapter 9: Wireless Security Testing",
+	            "Category: Controls Verification",
+	            "Type: Integrity"
+	        ],
+	        "sort_order": 26
+	    },
+	    {
+	        "testcase": "Examine and document the baseline configuration to ensure the security stance is in-line with the security policy.",
+	        "code": "9.8.1",
+	        "tags":
+	        [
+	            "OSSTMM Chapter 9: Wireless Security Testing",
+	            "Category: Process Verification",
+	            "Type: Baseline"
+	        ],
+	        "sort_order": 27
+	    },
+	    {
+	        "testcase": "Examine and determine that proper shielding is in place. For example, determine that printers are in specially shielded cabinets to block EMT, panels or metallic paint are used to block wireless signals, etc.",
+	        "code": "9.8.2",
+	        "tags":
+	        [
+	            "OSSTMM Chapter 9: Wireless Security Testing",
+	            "Category: Process Verification",
+	            "Type: Proper Shielding"
+	        ],
+	        "sort_order": 28
+	    },
+	    {
+	        "testcase": "Map and verify any gaps between practice and requirements as determined in the Posture Review through all channels.",
+	        "code": "9.8.3",
+	        "tags":
+	        [
+	            "OSSTMM Chapter 9: Wireless Security Testing",
+	            "Category: Process Verification",
+	            "Type: Due Diligence"
+	        ],
+	        "sort_order": 29
+	    },
+	    {
+	        "testcase": "Document and enumerate that targets and services which are protected from abuse or circumvention of employee policy, are insured for theft or damages, or use liability and permission disclaimers. Verify the legality and appropriateness of the language in the disclaimers.",
+	        "code": "9.8.4",
+	        "tags":
+	        [
+	            "OSSTMM Chapter 9: Wireless Security Testing",
+	            "Category: Process Verification",
+	            "Type: Indemnification"
+	        ],
+	        "sort_order": 30
+	    },
+	    {
+	        "testcase": "Perform brute force attacks against access points to discern the strength of passwords. Verify that passwords contain both upper and lower case letters, numbers, and special characters. Access points which use case insensitive passwords, make it easier for attackers to conduct a brute force guessing attack due to the smaller space of possible passwords.",
+	        "code": "9.9.1",
+	        "tags":
+	        [
+	            "OSSTMM Chapter 9: Wireless Security Testing",
+	            "Category: Configuration Verification",
+	            "Type: Common Configuration Errors"
+	        ],
+	        "sort_order": 31
+	    },
+	    {
+	        "testcase": "Examine controls, including baseline configuration, to validate configurations are according to the security policy.",
+	        "code": "9.9.2",
+	        "tags":
+	        [
+	            "OSSTMM Chapter 9: Wireless Security Testing",
+	            "Category: Configuration Verification",
+	            "Type: Configuration Controls"
+	        ],
+	        "sort_order": 32
+	    },
+	    {
+	        "testcase": "Verify that all wiring feeds into and out of shielded rooms are made of fiber, where possible.",
+	        "code": "9.9.3",
+	        "tags":
+	        [
+	            "OSSTMM Chapter 9: Wireless Security Testing",
+	            "Category: Configuration Verification",
+	            "Type: Evaluate and Test Wiring and Emissions"
+	        ],
+	        "sort_order": 33
+	    },
+	    {
+	        "testcase": "Verify the extent to which individually licensed, private, faked, reproduced, non-free, or non-open property is shared between personnel either intentionally through sharing processes and programs, libraries, and personal caches or unintentionally through mismanagement of licenses and resources, or negligence.",
+	        "code": "9.10.1",
+	        "tags":
+	        [
+	            "OSSTMM Chapter 9: Wireless Security Testing",
+	            "Category: Property Validation",
+	            "Type: Sharing"
+	        ],
+	        "sort_order": 34
+	    },
+	    {
+	        "testcase": "Perform a complete inventory of all wireless devices. Verify that the organization has an adequate security policy that addresses the use of wireless technology.",
+	        "code": "9.10.2",
+	        "tags":
+	        [
+	            "OSSTMM Chapter 9: Wireless Security Testing",
+	            "Category: Property Validation",
+	            "Type: Rogue Wireless Transceivers"
+	        ],
+	        "sort_order": 35
+	    },
+	    {
+	        "testcase": "Map gatekeepers of private information within the scope, what information is stored, how and where the information is stored, and over which channels the information is communicated.",
+	        "code": "9.11.1",
+	        "tags":
+	        [
+	            "OSSTMM Chapter 9: Wireless Security Testing",
+	            "Category: Segregation Review",
+	            "Type: Privacy Containment Mapping"
+	        ],
+	        "sort_order": 36
+	    },
+	    {
+	        "testcase": "Examine and document types of disclosures of private information in wireless spectrum.",
+	        "code": "9.11.2",
+	        "tags":
+	        [
+	            "OSSTMM Chapter 9: Wireless Security Testing",
+	            "Category: Segregation Review",
+	            "Type: Disclosure"
+	        ],
+	        "sort_order": 37
+	    },
+	    {
+	        "testcase": "Examine and document types of gateways and channel alternatives accessible to people with physical limitations within that channel.",
+	        "code": "9.11.3",
+	        "tags":
+	        [
+	            "OSSTMM Chapter 9: Wireless Security Testing",
+	            "Category: Segregation Review",
+	            "Type: Limitations"
+	        ],
+	        "sort_order": 38
+	    },
+	    {
+	        "testcase": "Enumerate and map personnel information regarding the organization such as organization charts, key personnel titles, job descriptions, personal and work telephone numbers, mobile phone numbers, business cards, shared documents, resumes, organizational affiliations, private and public e-mail addresses, log-ins, log-in schemes, passwords, back-up methods, insurers, or any particular organizational information stated implicitly as confidential in regulations and policy.",
+	        "code": "9.12.1",
+	        "tags":
+	        [
+	            "OSSTMM Chapter 9: Wireless Security Testing",
+	            "Category: Exposure Verification",
+	            "Type: Exposure Mapping"
+	        ],
+	        "sort_order": 39
+	    },
+	    {
+	        "testcase": "Examine and verify with the use of a directional and high-gain antenna if wireless signals with information regarding the device are extending out past the target’s walls or property.",
+	        "code": "9.12.2",
+	        "tags":
+	        [
+	            "OSSTMM Chapter 9: Wireless Security Testing",
+	            "Category: Exposure Verification",
+	            "Type: Profiling"
+	        ],
+	        "sort_order": 40
+	    },
+	    {
+	        "testcase": "Map targets within the scope from active and passive analysis of emanations: what information is stored, how and where the information is stored, and how the information is communicated.",
+	        "code": "9.13.1",
+	        "tags":
+	        [
+	            "OSSTMM Chapter 9: Wireless Security Testing",
+	            "Category: Competitive Intelligence Scouting",
+	            "Type: Business Grinding"
+	        ],
+	        "sort_order": 41
+	    },
+	    {
+	        "testcase": "Explore and document business details such as alliances, partners, major customers, vendors, distributors, investors, business relations, production, development, product information, planning, stocks and trading, and any particular business information or property stated implicitly as confidential in regulations and policy.",
+	        "code": "9.13.2",
+	        "tags":
+	        [
+	            "OSSTMM Chapter 9: Wireless Security Testing",
+	            "Category: Competitive Intelligence Scouting",
+	            "Type: Business Environment"
+	        ],
+	        "sort_order": 42
+	    },
+	    {
+	        "testcase": "Examine and document types of disclosures of business property from gatekeepers on operations, processes, hierarchy, financial reporting, investment opportunities, mergers, acquisitions, channel investments, channel maintenance, internal social politics, personnel dissatisfaction and turn-over rate, primary vacation times, hirings, firings, and any particular organizational property stated implicitly as confidential in regulations and policy.",
+	        "code": "9.13.3",
+	        "tags":
+	        [
+	            "OSSTMM Chapter 9: Wireless Security Testing",
+	            "Category: Competitive Intelligence Scouting",
+	            "Type: Organizational Environment"
+	        ],
+	        "sort_order": 43
+	    },
+	    {
+	        "testcase": "Identify and examine quarantine methods and processes at the target in all channels for aggressive and hostile contacts.",
+	        "code": "9.14.1",
+	        "tags":
+	        [
+	            "OSSTMM Chapter 9: Wireless Security Testing",
+	            "Category: Quarantine Verification",
+	            "Type: Containment Process Identification"
+	        ],
+	        "sort_order": 44
+	    },
+	    {
+	        "testcase": "Verify the state of containment, length of time, and all channels where interactions have quarantine methods. Ensure that methods are within legal context and boundaries.",
+	        "code": "9.14.2",
+	        "tags":
+	        [
+	            "OSSTMM Chapter 9: Wireless Security Testing",
+	            "Category: Quarantine Verification",
+	            "Type: Containment Levels"
+	        ],
+	        "sort_order": 45
+	    },
+	    {
+	        "testcase": "Examine and document the process for obtaining identification through both legitimate and fraudulent means on all channels.",
+	        "code": "9.15.1",
+	        "tags":
+	        [
+	            "OSSTMM Chapter 9: Wireless Security Testing",
+	            "Category: Privileges Audit",
+	            "Type: Identification"
+	        ],
+	        "sort_order": 46
+	    },
+	    {
+	        "testcase": "Verify the use of fraudulent authorization on all channels to gain privileges similar to that of other personnel.",
+	        "code": "9.15.2",
+	        "tags":
+	        [
+	            "OSSTMM Chapter 9: Wireless Security Testing",
+	            "Category: Privileges Audit",
+	            "Type: Authorization"
+	        ],
+	        "sort_order": 47
+	    },
+	    {
+	        "testcase": "Verify and map access to information through the use of privileges to gain higher privileges.",
+	        "code": "9.15.3",
+	        "tags":
+	        [
+	            "OSSTMM Chapter 9: Wireless Security Testing",
+	            "Category: Privileges Audit",
+	            "Type: Escalation"
+	        ],
+	        "sort_order": 48
+	    },
+	    {
+	        "testcase": "Enumerate and test for inadequacies from all channels to use or enable loss controls not enabled by default.",
+	        "code": "9.15.4",
+	        "tags":
+	        [
+	            "OSSTMM Chapter 9: Wireless Security Testing",
+	            "Category: Privileges Audit",
+	            "Type: Subjugation"
+	        ],
+	        "sort_order": 49
+	    },
+	    {
+	        "testcase": "Enumerate and test for inadequacies from target with regard to access delays and service response time through back-up personnel or automated means for alternate access.",
+	        "code": "9.16.1",
+	        "tags":
+	        [
+	            "OSSTMM Chapter 9: Wireless Security Testing",
+	            "Category: Survivability Validation",
+	            "Type: Continuity"
+	        ],
+	        "sort_order": 50
+	    },
+	    {
+	        "testcase": "Map and document the process of gatekeepers disconnecting channels due to breach or safety concerns as a gap analysis with regulation and security policy.",
+	        "code": "9.16.2",
+	        "tags":
+	        [
+	            "OSSTMM Chapter 9: Wireless Security Testing",
+	            "Category: Survivability Validation",
+	            "Type: Resilience"
+	        ],
+	        "sort_order": 51
+	    },
+	    {
+	        "testcase": "Verify and enumerate the use of a localized or scope-wide warning system, log, or message for each access gateway over each channel where a suspect situation is noted by personnel upon suspicion of circumvention attempts, social engineering, or fraudulent activity.",
+	        "code": "9.17.1",
+	        "tags":
+	        [
+	            "OSSTMM Chapter 9: Wireless Security Testing",
+	            "Category: Alert and Log Review",
+	            "Type: Alarm"
+	        ],
+	        "sort_order": 52
+	    },
+	    {
+	        "testcase": "Document and verify unprivileged access to alarm, log, and notification storage locations and property.",
+	        "code": "9.17.2",
+	        "tags":
+	        [
+	            "OSSTMM Chapter 9: Wireless Security Testing",
+	            "Category: Alert and Log Review",
+	            "Type: Storage and Retrieval"
+	        ],
+	        "sort_order": 53
+	    }
+	]
+}
