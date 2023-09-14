@@ -24,10 +24,20 @@ The following methodologies are supported:
 - OSSTMM Version 3 - Telecommuncations Security Testing
 - OSSTMM Version 3 - Data Networks Security Testing
 
-You can load additional testing methodologies in the form of Test Cases which can be imported on your Test Suites using the [AttackForge Self-Service API](https://support.attackforge.com/attackforge-enterprise/modules/self-service-restful-api/addtestcasestotestsuite).
+You can load additional testing methodologies in the form of Test Cases which can be imported on your Test Suites using the import options on Test Cases:
 
-The following cURL example will import the OWASP ASVS v4 Level 1 Test Cases included in this repository to an existing Test Suite:
+<img width="2053" alt="1" src="https://github.com/AttackForge/TestSuites/assets/131424301/f4ce8ce8-4a8f-4757-9d51-700fcdef7036">
 
-```
-curl --request POST --url https://<YOUR-ATTACKFORGE-TENANT>/api/ss/testsuite/<TESTSUITE-ID>/testcases --header 'content-type: application/json' --header 'x-ssapi-key: <YOUR-API-KEY>' --data @owasp_asvs_level_1.json
-```
+<img width="2055" alt="2" src="https://github.com/AttackForge/TestSuites/assets/131424301/94ce1a1d-f190-4553-8e8d-56c1bab5dd18">
+
+<img width="2055" alt="3" src="https://github.com/AttackForge/TestSuites/assets/131424301/b35409a2-3669-42b8-8bbf-f7b6851527f3">
+
+<img width="2054" alt="4" src="https://github.com/AttackForge/TestSuites/assets/131424301/b707f6aa-767b-452e-bf43-3d3afaf1c86c">
+
+<img width="2054" alt="5" src="https://github.com/AttackForge/TestSuites/assets/131424301/7de64779-9442-471c-b085-f0ffe8a4a5ab">
+
+<img width="2052" alt="6" src="https://github.com/AttackForge/TestSuites/assets/131424301/319ef41e-27f0-483f-8ee1-562a0ab5c719">
+
+<img width="2053" alt="7" src="https://github.com/AttackForge/TestSuites/assets/131424301/e4e1d42d-b83c-434f-a133-946ab59cf83a">
+
+
