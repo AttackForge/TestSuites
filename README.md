@@ -13,6 +13,7 @@ AttackForge already comes pre-loaded with many Test Suites from industry methodo
 This repository provides additional industry methodologies you can import into your AttackForge tenant.
 The following methodologies are supported:
 
+- OWASP Web Security Testing Guide Version 4.2
 - OWASP Application Security Verification Standard (ASVS) Version 4 - Level 1
 - OWASP Application Security Verification Standard (ASVS) Version 4 - Level 2
 - OWASP Application Security Verification Standard (ASVS) Version 4 - Level 3
