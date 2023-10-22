@@ -1,0 +1,962 @@
+[
+    {
+        "sort_order": 1,
+        "testcase": "Conduct Search Engine Discovery Reconnaissance for Information Leakage",
+        "details": "Identify what sensitive design and configuration information of the application, system, or organization is exposed directly (on the organization’s website) or indirectly (via third-party services).",
+        "code": "WSTG-INFO-01",
+        "tags":
+        [
+            "WSTG-INFO-01"
+        ]
+    },
+    {
+        "sort_order": 2,
+        "testcase": "Fingerprint Web Server",
+        "details": "Determine the version and type of a running web server to enable further discovery of any known vulnerabilities.",
+        "code": "WSTG-INFO-02",
+        "tags":
+        [
+            "WSTG-INFO-02"
+        ]
+    },
+    {
+        "sort_order": 3,
+        "testcase": "Review Webserver Metafiles for Information Leakage",
+        "details": "<ul><li>Identify hidden or obfuscated paths and functionality through the analysis of metadata files.</li><li>Extract and map other information that could lead to better understanding of the systems at hand.</li></ul>",
+        "code": "WSTG-INFO-03",
+        "tags":
+        [
+            "WSTG-INFO-03"
+        ]
+    },
+    {
+        "sort_order": 4,
+        "testcase": "Enumerate Applications on Webserver",
+        "details": "Enumerate the applications within scope that exist on a web server.",
+        "code": "WSTG-INFO-04",
+        "tags":
+        [
+            "WSTG-INFO-04"
+        ]
+    },
+    {
+        "sort_order": 5,
+        "testcase": "Review Webpage Content for Information Leakage",
+        "details": "<ul><li>Review webpage comments and metadata to find any information leakage.</li><li>Gather JavaScript files and review the JS code to better understand the application and to find any information leakage.</li><li>Identify if source map files or other front-end debug files exist.</li></ul>",
+        "code": "WSTG-INFO-05",
+        "tags":
+        [
+            "WSTG-INFO-05"
+        ]
+    },
+    {
+        "sort_order": 6,
+        "testcase": "Identify Application Entry Points",
+        "details": "Identify possible entry and injection points through request and response analysis.",
+        "code": "WSTG-INFO-06",
+        "tags":
+        [
+            "WSTG-INFO-06"
+        ]
+    },
+    {
+        "sort_order": 7,
+        "testcase": "Map Execution Paths Through Application",
+        "details": "Map the target application and understand the principal workflows.",
+        "code": "WSTG-INFO-07",
+        "tags":
+        [
+            "WSTG-INFO-07"
+        ]
+    },
+    {
+        "sort_order": 8,
+        "testcase": "Fingerprint Web Application Framework",
+        "details": "Fingerprint the components being used by the web applications.",
+        "code": "WSTG-INFO-08",
+        "tags":
+        [
+            "WSTG-INFO-08"
+        ]
+    },
+    {
+        "sort_order": 9,
+        "testcase": "Fingerprint Web Application",
+        "details": "",
+        "code": "WSTG-INFO-09",
+        "tags":
+        [
+            "WSTG-INFO-09"
+        ]
+    },
+    {
+        "sort_order": 10,
+        "testcase": "Map Application Architecture",
+        "details": "Generate a map of the application at hand based on the research conducted.",
+        "code": "WSTG-INFO-10",
+        "tags":
+        [
+            "WSTG-INFO-10"
+        ]
+    },
+    {
+        "sort_order": 11,
+        "testcase": "Test Network Infrastructure Configuration",
+        "details": "<ul><li>Review the applications’ configurations set across the network and validate that they are not vulnerable.</li><li>Validate that used frameworks and systems are secure and not susceptible to known vulnerabilities due to unmaintained software or default settings and credentials.</li></ul>",
+        "code": "WSTG-CONF-01",
+        "tags":
+        [
+            "WSTG-CONF-01"
+        ]
+    },
+    {
+        "sort_order": 12,
+        "testcase": "Test Application Platform Configuration",
+        "details": "<ul><li>Ensure that defaults and known files have been removed.</li><li>Validate that no debugging code or extensions are left in the production environments.</li><li>Review the logging mechanisms set in place for the application.</li></ul>",
+        "code": "WSTG-CONF-02",
+        "tags":
+        [
+            "WSTG-CONF-02"
+        ]
+    },
+    {
+        "sort_order": 13,
+        "testcase": "Test File Extensions Handling for Sensitive Information",
+        "details": "<ul><li>Dirbust sensitive file extensions, or extensions that might contain raw data (e.g. scripts, raw data, credentials, etc.).</li><li>Validate that no system framework bypasses exist on the rules set.</li></ul>",
+        "code": "WSTG-CONF-03",
+        "tags":
+        [
+            "WSTG-CONF-03"
+        ]
+    },
+    {
+        "sort_order": 14,
+        "testcase": "Review Old Backup and Unreferenced Files for Sensitive Information",
+        "details": "Find and analyse unreferenced files that might contain sensitive information.",
+        "code": "WSTG-CONF-04",
+        "tags":
+        [
+            "WSTG-CONF-04"
+        ]
+    },
+    {
+        "sort_order": 15,
+        "testcase": "Enumerate Infrastructure and Application Admin Interfaces",
+        "details": "Identify hidden administrator interfaces and functionality.",
+        "code": "WSTG-CONF-05",
+        "tags":
+        [
+            "WSTG-CONF-05"
+        ]
+    },
+    {
+        "sort_order": 16,
+        "testcase": "Test HTTP Methods",
+        "details": "<ul><li>Enumerate supported HTTP methods.</li><li>Test for access control bypass.</li><li>Test XST vulnerabilities.</li><li>Test HTTP method overriding techniques.</li></ul>",
+        "code": "WSTG-CONF-06",
+        "tags":
+        [
+            "WSTG-CONF-06"
+        ]
+    },
+    {
+        "sort_order": 17,
+        "testcase": "Test HTTP Strict Transport Security",
+        "details": "Review the HSTS header and its validity.",
+        "code": "WSTG-CONF-07",
+        "tags":
+        [
+            "WSTG-CONF-07"
+        ]
+    },
+    {
+        "sort_order": 18,
+        "testcase": "Test RIA Cross Domain Policy",
+        "details": "Review and validate the policy files.",
+        "code": "WSTG-CONF-08",
+        "tags":
+        [
+            "WSTG-CONF-08"
+        ]
+    },
+    {
+        "sort_order": 19,
+        "testcase": "Test File Permission",
+        "details": "Review and identify any rogue file permissions.",
+        "code": "WSTG-CONF-09",
+        "tags":
+        [
+            "WSTG-CONF-09"
+        ]
+    },
+    {
+        "sort_order": 20,
+        "testcase": "Test for Subdomain Takeover",
+        "details": "<ul><li>Enumerate all possible domains (previous and current).</li><li>Identify forgotten or misconfigured domains.</li></ul>",
+        "code": "WSTG-CONF-10",
+        "tags":
+        [
+            "WSTG-CONF-10"
+        ]
+    },
+    {
+        "sort_order": 21,
+        "testcase": "Test Cloud Storage",
+        "details": "Assess that the access control configuration for the storage services is properly in place.",
+        "code": "WSTG-CONF-11",
+        "tags":
+        [
+            "WSTG-CONF-11"
+        ]
+    },
+    {
+        "sort_order": 22,
+        "testcase": "Test Role Definitions",
+        "details": "<ul><li>Identify and document roles used by the application.</li><li>Attempt to switch, change, or access another role.</li><li>Review the granularity of the roles and the needs behind the permissions given.</li></ul>",
+        "code": "WSTG-IDNT-01",
+        "tags":
+        [
+            "WSTG-IDNT-01"
+        ]
+    },
+    {
+        "sort_order": 23,
+        "testcase": "Test User Registration Process",
+        "details": "<ul><li>Verify that the identity requirements for user registration are aligned with business and security requirements.</li><li>Validate the registration process.</li></ul>",
+        "code": "WSTG-IDNT-02",
+        "tags":
+        [
+            "WSTG-IDNT-02"
+        ]
+    },
+    {
+        "sort_order": 24,
+        "testcase": "Test Account Provisioning Process",
+        "details": "Verify which accounts may provision other accounts and of what type.",
+        "code": "WSTG-IDNT-03",
+        "tags":
+        [
+            "WSTG-IDNT-03"
+        ]
+    },
+    {
+        "sort_order": 25,
+        "testcase": "Testing for Account Enumeration and Guessable User Account",
+        "details": "<ul><li>Review processes that pertain to user identification (e.g. registration, login, etc.).</li><li>Enumerate users where possible through response analysis.</li></ul>",
+        "code": "WSTG-IDNT-04",
+        "tags":
+        [
+            "WSTG-IDNT-04"
+        ]
+    },
+    {
+        "sort_order": 26,
+        "testcase": "Testing for Weak or Unenforced Username Policy",
+        "details": "<ul><li>Determine whether a consistent account name structure renders the application vulnerable to account enumeration.</li><li>Determine whether the application’s error messages permit account enumeration.</li></ul>",
+        "code": "WSTG-IDNT-05",
+        "tags":
+        [
+            "WSTG-IDNT-05"
+        ]
+    },
+    {
+        "sort_order": 27,
+        "testcase": "Testing for Credentials Transported over an Encrypted Channel",
+        "details": "Assess whether any use case of the web site or application causes the server or the client to exchange credentials without encryption.",
+        "code": "WSTG-ATHN-01",
+        "tags":
+        [
+            "WSTG-ATHN-01"
+        ]
+    },
+    {
+        "sort_order": 28,
+        "testcase": "Testing for Default Credentials",
+        "details": "<ul><li>Enumerate the applications for default credentials and validate if they still exist.</li><li>Review and assess new user accounts and if they are created with any defaults or identifiable patterns.</li></ul>",
+        "code": "WSTG-ATHN-02",
+        "tags":
+        [
+            "WSTG-ATHN-02"
+        ]
+    },
+    {
+        "sort_order": 29,
+        "testcase": "Testing for Weak Lock Out Mechanism",
+        "details": "<ul><li>Evaluate the account lockout mechanism’s ability to mitigate brute force password guessing.</li><li>Evaluate the unlock mechanism’s resistance to unauthorized account unlocking.</li></ul>",
+        "code": "WSTG-ATHN-03",
+        "tags":
+        [
+            "WSTG-ATHN-03"
+        ]
+    },
+    {
+        "sort_order": 30,
+        "testcase": "Testing for Bypassing Authentication Schema",
+        "details": "Ensure that authentication is applied across all services that require it.",
+        "code": "WSTG-ATHN-04",
+        "tags":
+        [
+            "WSTG-ATHN-04"
+        ]
+    },
+    {
+        "sort_order": 31,
+        "testcase": "Testing for Vulnerable Remember Password",
+        "details": "Validate that the generated session is managed securely and do not put the user’s credentials in danger.",
+        "code": "WSTG-ATHN-05",
+        "tags":
+        [
+            "WSTG-ATHN-05"
+        ]
+    },
+    {
+        "sort_order": 32,
+        "testcase": "Testing for Browser Cache Weaknesses",
+        "details": "<ul><li>Review if the application stores sensitive information on the client-side.</li><li>Review if access can occur without authorization.</li></ul>",
+        "code": "WSTG-ATHN-06",
+        "tags":
+        [
+            "WSTG-ATHN-06"
+        ]
+    },
+    {
+        "sort_order": 33,
+        "testcase": "Testing for Weak Password Policy",
+        "details": "Determine the resistance of the application against brute force password guessing using available password dictionaries by evaluating the length, complexity, reuse, and aging requirements of passwords.",
+        "code": "WSTG-ATHN-07",
+        "tags":
+        [
+            "WSTG-ATHN-07"
+        ]
+    },
+    {
+        "sort_order": 34,
+        "testcase": "Testing for Weak Security Question Answer",
+        "details": "<ul><li>Determine the complexity and how straight-forward the questions are.</li><li>Assess possible user answers and brute force capabilities.</li></ul>",
+        "code": "WSTG-ATHN-08",
+        "tags":
+        [
+            "WSTG-ATHN-08"
+        ]
+    },
+    {
+        "sort_order": 35,
+        "testcase": "Testing for Weak Password Change or Reset Functionalities",
+        "details": "<ul><li>Determine the resistance of the application to subversion of the account change process allowing someone to change the password of an account.</li><li>Determine the resistance of the passwords reset functionality against guessing or bypassing.</li></ul>",
+        "code": "WSTG-ATHN-09",
+        "tags":
+        [
+            "WSTG-ATHN-09"
+        ]
+    },
+    {
+        "sort_order": 36,
+        "testcase": "Testing for Weaker Authentication in Alternative Channel",
+        "details": "<ul><li>Identify alternative authentication channels.</li><li>Assess the security measures used and if any bypasses exists on the alternative channels.</li></ul>",
+        "code": "WSTG-ATHN-10",
+        "tags":
+        [
+            "WSTG-ATHN-10"
+        ]
+    },
+    {
+        "sort_order": 37,
+        "testcase": "Testing Directory Traversal File Include",
+        "details": "<ul><li>Identify injection points that pertain to path traversal.</li><li>Assess bypassing techniques and identify the extent of path traversal.</li></ul>",
+        "code": "WSTG-ATHZ-01",
+        "tags":
+        [
+            "WSTG-ATHZ-01"
+        ]
+    },
+    {
+        "sort_order": 38,
+        "testcase": "Testing for Bypassing Authorization Schema",
+        "details": "Assess if horizontal or vertical access is possible.",
+        "code": "WSTG-ATHZ-02",
+        "tags":
+        [
+            "WSTG-ATHZ-02"
+        ]
+    },
+    {
+        "sort_order": 39,
+        "testcase": "Testing for Privilege Escalation",
+        "details": "<ul><li>Identify injection points related to privilege manipulation.</li><li>Fuzz or otherwise attempt to bypass security measures.</li></ul>",
+        "code": "WSTG-ATHZ-03",
+        "tags":
+        [
+            "WSTG-ATHZ-03"
+        ]
+    },
+    {
+        "sort_order": 40,
+        "testcase": "Testing for Insecure Direct Object References",
+        "details": "<ul><li>Identify points where object references may occur.</li><li>Assess the access control measures and if they’re vulnerable to IDOR.</li></ul>",
+        "code": "WSTG-ATHZ-04",
+        "tags":
+        [
+            "WSTG-ATHZ-04"
+        ]
+    },
+    {
+        "sort_order": 41,
+        "testcase": "Testing for Session Management Schema",
+        "details": "<ul><li>Gather session tokens, for the same user and for different users where possible.</li><li>Analyze and ensure that enough randomness exists to stop session forging attacks.</li><li>Modify cookies that are not signed and contain information that can be manipulated.</li></ul>",
+        "code": "WSTG-SESS-01",
+        "tags":
+        [
+            "WSTG-SESS-01"
+        ]
+    },
+    {
+        "sort_order": 42,
+        "testcase": "Testing for Cookies Attributes",
+        "details": "Ensure that the proper security configuration is set for cookies.",
+        "code": "WSTG-SESS-02",
+        "tags":
+        [
+            "WSTG-SESS-02"
+        ]
+    },
+    {
+        "sort_order": 43,
+        "testcase": "Testing for Session Fixation",
+        "details": "<ul><li>Analyze the authentication mechanism and its flow.</li><li>Force cookies and assess the impact.</li></ul>",
+        "code": "WSTG-SESS-03",
+        "tags":
+        [
+            "WSTG-SESS-03"
+        ]
+    },
+    {
+        "sort_order": 44,
+        "testcase": "Testing for Exposed Session Variables",
+        "details": "<ul><li>Ensure that proper encryption is implemented.</li></li>Review the caching configuration.</li><li>Assess the channel and methods’ security.</li></ul>",
+        "code": "WSTG-SESS-04",
+        "tags":
+        [
+            "WSTG-SESS-04"
+        ]
+    },
+    {
+        "sort_order": 45,
+        "testcase": "Testing for Cross Site Request Forgery",
+        "details": "Determine whether it is possible to initiate requests on a user’s behalf that are not initiated by the user.",
+        "code": "WSTG-SESS-05",
+        "tags":
+        [
+            "WSTG-SESS-05"
+        ]
+    },
+    {
+        "sort_order": 46,
+        "testcase": "Testing for Logout Functionality",
+        "details": "<ul><li>Assess the logout UI.</li><li>Analyze the session timeout and if the session is properly killed after logout.</li></ul>",
+        "code": "WSTG-SESS-06",
+        "tags":
+        [
+            "WSTG-SESS-06"
+        ]
+    },
+    {
+        "sort_order": 47,
+        "testcase": "Testing Session Timeout",
+        "details": "Validate that a hard session timeout exists.",
+        "code": "WSTG-SESS-07",
+        "tags":
+        [
+            "WSTG-SESS-07"
+        ]
+    },
+    {
+        "sort_order": 48,
+        "testcase": "Testing for Session Puzzling",
+        "details": "<ul><li>Identify all session variables.</li><li>Break the logical flow of session generation.</li></ul>",
+        "code": "WSTG-SESS-08",
+        "tags":
+        [
+            "WSTG-SESS-08"
+        ]
+    },
+    {
+        "sort_order": 49,
+        "testcase": "Testing for Session Hijacking",
+        "details": "<ul><li>Identify vulnerable session cookies.</li><li>Hijack vulnerable cookies and assess the risk level.</li></ul>",
+        "code": "WSTG-SESS-09",
+        "tags":
+        [
+            "WSTG-SESS-09"
+        ]
+    },
+    {
+        "sort_order": 50,
+        "testcase": "Testing for Reflected Cross Site Scripting",
+        "details": "<ul><li>Identify variables that are reflected in responses.</li><li>Assess the input they accept and the encoding that gets applied on return (if any).</li></ul>",
+        "code": "WSTG-INPV-01",
+        "tags":
+        [
+            "WSTG-INPV-01"
+        ]
+    },
+    {
+        "sort_order": 51,
+        "testcase": "Testing for Stored Cross Site Scripting",
+        "details": "<ul><li>Identify stored input that is reflected on the client-side.</li><li>Assess the input they accept and the encoding that gets applied on return (if any).</li></ul>",
+        "code": "WSTG-INPV-02",
+        "tags":
+        [
+            "WSTG-INPV-02"
+        ]
+    },
+    {
+        "sort_order": 52,
+        "testcase": "Testing for HTTP Verb Tampering",
+        "details": "<ul><li>Identify the backend and the parsing method used.</li><li>Assess injection points and try bypassing input filters using HPP.</li></ul>",
+        "code": "WSTG-INPV-03",
+        "tags":
+        [
+            "WSTG-INPV-03"
+        ]
+    },
+    {
+        "sort_order": 53,
+        "testcase": "Testing for HTTP Parameter Pollution",
+        "details": "<ul><li>Identify the backend and the parsing method used.</li><li>Assess injection points and try bypassing input filters using HPP.</li></ul>",
+        "code": "WSTG-INPV-04",
+        "tags":
+        [
+            "WSTG-INPV-04"
+        ]
+    },
+    {
+        "sort_order": 54,
+        "testcase": "Testing for SQL Injection",
+        "details": "<ul><li>Identify SQL injection points.</li><li>Assess the severity of the injection and the level of access that can be achieved through it.</li></ul>",
+        "code": "WSTG-INPV-05",
+        "tags":
+        [
+            "WSTG-INPV-05"
+        ]
+    },
+    {
+        "sort_order": 55,
+        "testcase": "Testing for LDAP Injection",
+        "details": "<ul><li>Identify LDAP injection points.</li><li>Assess the severity of the injection.</li></ul>",
+        "code": "WSTG-INPV-06",
+        "tags":
+        [
+            "WSTG-INPV-06"
+        ]
+    },
+    {
+        "sort_order": 56,
+        "testcase": "Testing for XML Injection",
+        "details": "<ul><li>Identify XML injection points.</li><li>Assess the types of exploits that can be attained and their severities.</li></ul>",
+        "code": "WSTG-INPV-07",
+        "tags":
+        [
+            "WSTG-INPV-07"
+        ]
+    },
+    {
+        "sort_order": 57,
+        "testcase": "Testing for SSI Injection",
+        "details": "<ul><li>Identify SSI injection points.</li><li>Assess the severity of the injection.</li></ul>",
+        "code": "WSTG-INPV-08",
+        "tags":
+        [
+            "WSTG-INPV-08"
+        ]
+    },
+    {
+        "sort_order": 58,
+        "testcase": "Testing for XPath Injection",
+        "details": "Identify XPATH injection points.",
+        "code": "WSTG-INPV-09",
+        "tags":
+        [
+            "WSTG-INPV-09"
+        ]
+    },
+    {
+        "sort_order": 59,
+        "testcase": "Testing for IMAP SMTP Injection",
+        "details": "<ul><li>Identify IMAP/SMTP injection points.</li><li>Understand the data flow and deployment structure of the system.</li><li>Assess the injection impacts.</li></ul>",
+        "code": "WSTG-INPV-10",
+        "tags":
+        [
+            "WSTG-INPV-10"
+        ]
+    },
+    {
+        "sort_order": 60,
+        "testcase": "Testing for Code Injection",
+        "details": "<ul><li>Identify injection points where you can inject code into the application.</li><li>Assess the injection severity.</li></ul>",
+        "code": "WSTG-INPV-11",
+        "tags":
+        [
+            "WSTG-INPV-11"
+        ]
+    },
+    {
+        "sort_order": 61,
+        "testcase": "Testing for Command Injection",
+        "details": "Identify and assess the command injection points.",
+        "code": "WSTG-INPV-12",
+        "tags":
+        [
+            "WSTG-INPV-12"
+        ]
+    },
+    {
+        "sort_order": 62,
+        "testcase": "Testing for Format String Injection",
+        "details": "Assess whether injecting format string conversion specifiers into user-controlled fields causes undesired behaviour from the application.",
+        "code": "WSTG-INPV-13",
+        "tags":
+        [
+            "WSTG-INPV-13"
+        ]
+    },
+    {
+        "sort_order": 63,
+        "testcase": "Testing for Incubated Vulnerability",
+        "details": "<ul><li>Identify injections that are stored and require a recall step to the stored injection.</li><li>Understand how a recall step could occur.</li><li>Set listeners or activate the recall step if possible.</li></ul>",
+        "code": "WSTG-INPV-14",
+        "tags":
+        [
+            "WSTG-INPV-14"
+        ]
+    },
+    {
+        "sort_order": 64,
+        "testcase": "Testing for HTTP Splitting Smuggling",
+        "details": "<ul><li>Assess if the application is vulnerable to splitting, identifying what possible attacks are achievable.</li><li>Assess if the chain of communication is vulnerable to smuggling, identifying what possible attacks are achievable.</li></ul>",
+        "code": "WSTG-INPV-15",
+        "tags":
+        [
+            "WSTG-INPV-15"
+        ]
+    },
+    {
+        "sort_order": 65,
+        "testcase": "Testing for HTTP Incoming Requests",
+        "details": "<ul><li>Monitor all incoming and outgoing HTTP requests to the Web Server to inspect any suspicious requests.</li><li>Monitor HTTP traffic without changes of end user Browser proxy or client-side application.</li></ul>",
+        "code": "WSTG-INPV-16",
+        "tags":
+        [
+            "WSTG-INPV-16"
+        ]
+    },
+    {
+        "sort_order": 66,
+        "testcase": "Testing for Host Header Injection",
+        "details": "<ul><li>Assess if the Host header is being parsed dynamically in the application.</li><li>Bypass security controls that rely on the header.</li></ul>",
+        "code": "WSTG-INPV-17",
+        "tags":
+        [
+            "WSTG-INPV-17"
+        ]
+    },
+    {
+        "sort_order": 67,
+        "testcase": "Testing for Server-side Template Injection",
+        "details": "<ul><li>Detect template injection vulnerability points.</li><li>Identify the templating engine.</li><li>Build the exploit.</li></ul>",
+        "code": "WSTG-INPV-18",
+        "tags":
+        [
+            "WSTG-INPV-18"
+        ]
+    },
+    {
+        "sort_order": 68,
+        "testcase": "Testing for Server-Side Request Forgery",
+        "details": "<ul><li>Identify SSRF injection points.</li><li>Test if the injection points are exploitable.</li><li>Asses the severity of the vulnerability.</li></ul>",
+        "code": "WSTG-INPV-19",
+        "tags":
+        [
+            "WSTG-INPV-19"
+        ]
+    },
+    {
+        "sort_order": 69,
+        "testcase": "Testing for Improper Error Handling",
+        "details": "<ul><li>Identify existing error output.</li><li>Analyze the different output returned.</li></ul>",
+        "code": "WSTG-ERRH-01",
+        "tags":
+        [
+            "WSTG-ERRH-01"
+        ]
+    },
+    {
+        "sort_order": 70,
+        "testcase": "Testing for Stack Traces",
+        "details": "",
+        "code": "WSTG-ERRH-02",
+        "tags":
+        [
+            "WSTG-ERRH-02"
+        ]
+    },
+    {
+        "sort_order": 71,
+        "testcase": "Testing for Weak Transport Layer Security",
+        "details": "<ul><li>Validate the service configuration.</li><li>Review the digital certificate’s cryptographic strength and validity.</li><li>Ensure that the TLS security is not bypassable and is properly implemented across the application.</li></ul>",
+        "code": "WSTG-CRYP-01",
+        "tags":
+        [
+            "WSTG-CRYP-01"
+        ]
+    },
+    {
+        "sort_order": 72,
+        "testcase": "Testing for Padding Oracle",
+        "details": "<ul><li>Identify encrypted messages that rely on padding.</li><li>Attempt to break the padding of the encrypted messages and analyze the returned error messages for further analysis.</li></ul>",
+        "code": "WSTG-CRYP-02",
+        "tags":
+        [
+            "WSTG-CRYP-02"
+        ]
+    },
+    {
+        "sort_order": 73,
+        "testcase": "Testing for Sensitive Information Sent via Unencrypted Channels",
+        "details": "<ul><li>Identify sensitive information transmitted through the various channels.</li><li>Assess the privacy and security of the channels used.</li></ul>",
+        "code": "WSTG-CRYP-03",
+        "tags":
+        [
+            "WSTG-CRYP-03"
+        ]
+    },
+    {
+        "sort_order": 74,
+        "testcase": "Testing for Weak Encryption",
+        "details": "Provide a guideline for the identification weak encryption or hashing uses and implementations.",
+        "code": "WSTG-CRYP-04",
+        "tags":
+        [
+            "WSTG-CRYP-04"
+        ]
+    },
+    {
+        "sort_order": 75,
+        "testcase": "Test Business Logic Data Validation",
+        "details": "<ul><li>Identify data injection points.</li><li>Validate that all checks are occurring on the back end and can’t be bypassed.</li><li>Attempt to break the format of the expected data and analyze how the application is handling it.</li></ul>",
+        "code": "WSTG-BUSL-01",
+        "tags":
+        [
+            "WSTG-BUSL-01"
+        ]
+    },
+    {
+        "sort_order": 76,
+        "testcase": "Test Ability to Forge Requests",
+        "details": "<ul><li>Review the project documentation looking for guessable, predictable, or hidden functionality of fields.</li><li>Insert logically valid data in order to bypass normal business logic workflow.</li></ul>",
+        "code": "WSTG-BUSL-02",
+        "tags":
+        [
+            "WSTG-BUSL-02"
+        ]
+    },
+    {
+        "sort_order": 77,
+        "testcase": "Test Integrity Checks",
+        "details": "<ul><li>Review the project documentation for components of the system that move, store, or handle data.</li><li>Determine what type of data is logically acceptable by the component and what types the system should guard against.</li><li>Determine who should be allowed to modify or read that data in each component.</li><li>Attempt to insert, update, or delete data values used by each component that should not be allowed per the business logic workflow.</li></ul>",
+        "code": "WSTG-BUSL-03",
+        "tags":
+        [
+            "WSTG-BUSL-03"
+        ]
+    },
+    {
+        "sort_order": 78,
+        "testcase": "Test for Process Timing",
+        "details": "<ul><li>Review the project documentation for system functionality that may be impacted by time.</li><li>Develop and execute misuse cases.</li></ul>",
+        "code": "WSTG-BUSL-04",
+        "tags":
+        [
+            "WSTG-BUSL-04"
+        ]
+    },
+    {
+        "sort_order": 79,
+        "testcase": "Test Number of Times a Function Can Be Used Limits",
+        "details": "<ul><li>Identify functions that must set limits to the times they can be called.</li><li>Assess if there is a logical limit set on the functions and if it is properly validated.</li></ul>",
+        "code": "WSTG-BUSL-05",
+        "tags":
+        [
+            "WSTG-BUSL-05"
+        ]
+    },
+    {
+        "sort_order": 80,
+        "testcase": "Testing for the Circumvention of Work Flows",
+        "details": "<ul><li>Review the project documentation for methods to skip or go through steps in the application process in a different order from the intended business logic flow.</li><li>Develop a misuse case and try to circumvent every logic flow identified.</li></ul>",
+        "code": "WSTG-BUSL-06",
+        "tags":
+        [
+            "WSTG-BUSL-06"
+        ]
+    },
+    {
+        "sort_order": 81,
+        "testcase": "Test Defenses Against Application Misuse",
+        "details": "<ul><li>Generate notes from all tests conducted against the system.</li><li>Review which tests had a different functionality based on aggressive input.</li><li>Understand the defenses in place and verify if they are enough to protect the system against bypassing techniques.</li></ul>",
+        "code": "WSTG-BUSL-07",
+        "tags":
+        [
+            "WSTG-BUSL-07"
+        ]
+    },
+    {
+        "sort_order": 82,
+        "testcase": "Test Upload of Unexpected File Types",
+        "details": "<ul><li>Review the project documentation for file types that are rejected by the system.</li><li>Verify that the unwelcomed file types are rejected and handled safely.</li><li>Verify that file batch uploads are secure and do not allow any bypass against the set security measures.</li></ul>",
+        "code": "WSTG-BUSL-08",
+        "tags":
+        [
+            "WSTG-BUSL-08"
+        ]
+    },
+    {
+        "sort_order": 83,
+        "testcase": "Test Upload of Malicious Files",
+        "details": "<ul><li>Identify the file upload functionality.</li><li>Review the project documentation to identify what file types are considered acceptable, and what types would be considered dangerous or malicious. If documentation is not available then consider what would be appropriate based on the purpose of the application.</li><li>Determine how the uploaded files are processed.</li><li>Obtain or create a set of malicious files for testing.</li><li>Try to upload the malicious files to the application and determine whether it is accepted and processed.</li></ul>",
+        "code": "WSTG-BUSL-09",
+        "tags":
+        [
+            "WSTG-BUSL-09"
+        ]
+    },
+    {
+        "sort_order": 84,
+        "testcase": "Testing for DOM-Based Cross Site Scripting",
+        "details": "<ul><li>Identify DOM sinks.</li><li>Build payloads that pertain to every sink type.</li></ul>",
+        "code": "WSTG-CLNT-01",
+        "tags":
+        [
+            "WSTG-CLNT-01"
+        ]
+    },
+    {
+        "sort_order": 85,
+        "testcase": "Testing for JavaScript Execution",
+        "details": "Identify sinks and possible JavaScript injection points.",
+        "code": "WSTG-CLNT-02",
+        "tags":
+        [
+            "WSTG-CLNT-02"
+        ]
+    },
+    {
+        "sort_order": 86,
+        "testcase": "Testing for HTML Injection",
+        "details": "Identify HTML injection points and assess the severity of the injected content.",
+        "code": "WSTG-CLNT-03",
+        "tags":
+        [
+            "WSTG-CLNT-03"
+        ]
+    },
+    {
+        "sort_order": 87,
+        "testcase": "Testing for Client-side URL Redirect",
+        "details": "<ul><li>Identify injection points that handle URLs or paths.</li><li>Assess the locations that the system could redirect to.</li></ul>",
+        "code": "WSTG-CLNT-04",
+        "tags":
+        [
+            "WSTG-CLNT-04"
+        ]
+    },
+    {
+        "sort_order": 88,
+        "testcase": "Testing for CSS Injection",
+        "details": "<ul><li>Identify CSS injection points.</li><li>Assess the impact of the injection.</li></ul>",
+        "code": "WSTG-CLNT-05",
+        "tags":
+        [
+            "WSTG-CLNT-05"
+        ]
+    },
+    {
+        "sort_order": 89,
+        "testcase": "Testing for Client-side Resource Manipulation",
+        "details": "<ul><li>Identify sinks with weak input validation.</li><li>Assess the impact of the resource manipulation</li></ul>",
+        "code": "WSTG-CLNT-06",
+        "tags":
+        [
+            "WSTG-CLNT-06"
+        ]
+    },
+    {
+        "sort_order": 90,
+        "testcase": "Testing Cross Origin Resource Sharing",
+        "details": "<ul><li>Identify endpoints that implement CORS.</li><li>Ensure that the CORS configuration is secure or harmless.</li></ul>",
+        "code": "WSTG-CLNT-07",
+        "tags":
+        [
+            "WSTG-CLNT-07"
+        ]
+    },
+    {
+        "sort_order": 91,
+        "testcase": "Testing for Cross Site Flashing",
+        "details": "<ul><li>Decompile and analyze the application’s code.</li><li>Assess sinks inputs and unsafe method usages.</li></ul>",
+        "code": "WSTG-CLNT-08",
+        "tags":
+        [
+            "WSTG-CLNT-08"
+        ]
+    },
+    {
+        "sort_order": 92,
+        "testcase": "Testing for Clickjacking",
+        "details": "<ul><li>Understand security measures in place.</li><li>Assess how strict the security measures are and if they are bypassable.</li></ul>",
+        "code": "WSTG-CLNT-09",
+        "tags":
+        [
+            "WSTG-CLNT-09"
+        ]
+    },
+    {
+        "sort_order": 93,
+        "testcase": "Testing WebSockets",
+        "details": "<ul><li>Identify the usage of WebSockets.</li><li>Assess its implementation by using the same tests on normal HTTP channels.</li></ul>",
+        "code": "WSTG-CLNT-10",
+        "tags":
+        [
+            "WSTG-CLNT-10"
+        ]
+    },
+    {
+        "sort_order": 94,
+        "testcase": "Testing Web Messaging",
+        "details": "<ul><li>Assess the security of the message’s origin.</li><li>Validate that it’s using safe methods and validating its input.</li></ul>",
+        "code": "WSTG-CLNT-11",
+        "tags":
+        [
+            "WSTG-CLNT-11"
+        ]
+    },
+    {
+        "sort_order": 95,
+        "testcase": "Testing Browser Storage",
+        "details": "<ul><li>Determine whether the website is storing sensitive data in client-side storage.</li><li>The code handling of the storage objects should be examined for possibilities of injection attacks, such as utilizing unvalidated input or vulnerable libraries.</li></ul>",
+        "code": "WSTG-CLNT-12",
+        "tags":
+        [
+            "WSTG-CLNT-12"
+        ]
+    },
+    {
+        "sort_order": 96,
+        "testcase": "Testing for Cross Site Script Inclusion",
+        "details": "<ul><li>Locate sensitive data across the system.</li><li>Assess the leakage of sensitive data through various techniques.</li></ul>",
+        "code": "WSTG-CLNT-13",
+        "tags":
+        [
+            "WSTG-CLNT-13"
+        ]
+    }
+]
