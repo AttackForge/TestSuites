@@ -32,7 +32,7 @@ The following methodologies are supported:
 - [MITRE ATT&CK Mobile Version 14.1](https://github.com/AttackForge/TestSuites/blob/main/MITRE/ATT%26CK/MOBILE/14/mitre_attack_mobile_14_1.json)
 
 ## Network Infrastructure, Hardware and IOT
-- [OSSTMM Version 3 - Telecommuncations Security Testing](https://github.com/AttackForge/TestSuites/blob/main/OSSTMM/v3/Chapter%2010/osstmm_telecommunications_security_testing.json)
+- [OSSTMM Version 3 - Telecommunications Security Testing](https://github.com/AttackForge/TestSuites/blob/main/OSSTMM/v3/Chapter%2010/osstmm_telecommunications_security_testing.json)
 - [OSSTMM Version 3 - Data Networks Security Testing](https://github.com/AttackForge/TestSuites/blob/main/OSSTMM/v3/Chapter%2011/osstmm_data_networks_security_testing.json)
 - [OSSTMM Version 3 - Wireless Security Testing](https://github.com/AttackForge/TestSuites/blob/main/OSSTMM/v3/Chapter%209/osstmm_wireless_security_testing.json)
 - [MITRE ATT&CK ICS Version 14.1](https://github.com/AttackForge/TestSuites/blob/main/MITRE/ATT%26CK/ICS/14/mitre_attack_ics_14_1.json)
