@@ -52,7 +52,7 @@
                 ]
             },
             {
-                "mitre_domain": "Enterprise"
+                "mitre_domain": "ICS"
             },
             {
                 "mitre_tactic":
@@ -207,7 +207,7 @@
                 ]
             },
             {
-                "mitre_domain": "Enterprise"
+                "mitre_domain": "ICS"
             },
             {
                 "mitre_tactic":
@@ -326,7 +326,7 @@
                 ]
             },
             {
-                "mitre_domain": "Enterprise"
+                "mitre_domain": "ICS"
             },
             {
                 "mitre_tactic":
@@ -462,7 +462,7 @@
                 ]
             },
             {
-                "mitre_domain": "Enterprise"
+                "mitre_domain": "ICS"
             },
             {
                 "mitre_tactic":
@@ -588,7 +588,7 @@
                 ]
             },
             {
-                "mitre_domain": "Enterprise"
+                "mitre_domain": "ICS"
             },
             {
                 "mitre_tactic":
@@ -700,7 +700,7 @@
                 ]
             },
             {
-                "mitre_domain": "Enterprise"
+                "mitre_domain": "ICS"
             },
             {
                 "mitre_tactic":
@@ -810,7 +810,7 @@
                 ]
             },
             {
-                "mitre_domain": "Enterprise"
+                "mitre_domain": "ICS"
             },
             {
                 "mitre_tactic":
@@ -922,7 +922,7 @@
                 ]
             },
             {
-                "mitre_domain": "Enterprise"
+                "mitre_domain": "ICS"
             },
             {
                 "mitre_tactic":
@@ -1050,7 +1050,7 @@
                 ]
             },
             {
-                "mitre_domain": "Enterprise"
+                "mitre_domain": "ICS"
             },
             {
                 "mitre_tactic":
@@ -1155,7 +1155,7 @@
                 ]
             },
             {
-                "mitre_domain": "Enterprise"
+                "mitre_domain": "ICS"
             },
             {
                 "mitre_tactic":
@@ -1272,7 +1272,7 @@
                 ]
             },
             {
-                "mitre_domain": "Enterprise"
+                "mitre_domain": "ICS"
             },
             {
                 "mitre_tactic":
@@ -1393,7 +1393,7 @@
                 ]
             },
             {
-                "mitre_domain": "Enterprise"
+                "mitre_domain": "ICS"
             },
             {
                 "mitre_tactic":
@@ -1477,7 +1477,7 @@
                 ]
             },
             {
-                "mitre_domain": "Enterprise"
+                "mitre_domain": "ICS"
             },
             {
                 "mitre_tactic":
@@ -1598,7 +1598,7 @@
                 ]
             },
             {
-                "mitre_domain": "Enterprise"
+                "mitre_domain": "ICS"
             },
             {
                 "mitre_tactic":
@@ -1747,7 +1747,7 @@
                 ]
             },
             {
-                "mitre_domain": "Enterprise"
+                "mitre_domain": "ICS"
             },
             {
                 "mitre_tactic":
@@ -1871,7 +1871,7 @@
                 ]
             },
             {
-                "mitre_domain": "Enterprise"
+                "mitre_domain": "ICS"
             },
             {
                 "mitre_tactic":
@@ -1967,7 +1967,7 @@
                 ]
             },
             {
-                "mitre_domain": "Enterprise"
+                "mitre_domain": "ICS"
             },
             {
                 "mitre_tactic":
@@ -2074,7 +2074,7 @@
                 ]
             },
             {
-                "mitre_domain": "Enterprise"
+                "mitre_domain": "ICS"
             },
             {
                 "mitre_tactic":
@@ -2188,7 +2188,7 @@
                 ]
             },
             {
-                "mitre_domain": "Enterprise"
+                "mitre_domain": "ICS"
             },
             {
                 "mitre_tactic":
@@ -2288,7 +2288,7 @@
                 ]
             },
             {
-                "mitre_domain": "Enterprise"
+                "mitre_domain": "ICS"
             },
             {
                 "mitre_tactic":
@@ -2397,7 +2397,7 @@
                 ]
             },
             {
-                "mitre_domain": "Enterprise"
+                "mitre_domain": "ICS"
             },
             {
                 "mitre_tactic":
@@ -2539,7 +2539,7 @@
                 ]
             },
             {
-                "mitre_domain": "Enterprise"
+                "mitre_domain": "ICS"
             },
             {
                 "mitre_tactic":
@@ -2669,7 +2669,7 @@
                 ]
             },
             {
-                "mitre_domain": "Enterprise"
+                "mitre_domain": "ICS"
             },
             {
                 "mitre_tactic":
@@ -2764,7 +2764,7 @@
                 ]
             },
             {
-                "mitre_domain": "Enterprise"
+                "mitre_domain": "ICS"
             },
             {
                 "mitre_tactic":
@@ -2867,7 +2867,7 @@
                 ]
             },
             {
-                "mitre_domain": "Enterprise"
+                "mitre_domain": "ICS"
             },
             {
                 "mitre_tactic":
@@ -2962,7 +2962,7 @@
                 ]
             },
             {
-                "mitre_domain": "Enterprise"
+                "mitre_domain": "ICS"
             },
             {
                 "mitre_tactic":
@@ -3071,7 +3071,7 @@
                 ]
             },
             {
-                "mitre_domain": "Enterprise"
+                "mitre_domain": "ICS"
             },
             {
                 "mitre_tactic":
@@ -3207,7 +3207,7 @@
                 ]
             },
             {
-                "mitre_domain": "Enterprise"
+                "mitre_domain": "ICS"
             },
             {
                 "mitre_tactic":
@@ -3346,7 +3346,7 @@
                 ]
             },
             {
-                "mitre_domain": "Enterprise"
+                "mitre_domain": "ICS"
             },
             {
                 "mitre_tactic":
@@ -3452,7 +3452,7 @@
                 ]
             },
             {
-                "mitre_domain": "Enterprise"
+                "mitre_domain": "ICS"
             },
             {
                 "mitre_tactic":
@@ -3555,7 +3555,7 @@
                 ]
             },
             {
-                "mitre_domain": "Enterprise"
+                "mitre_domain": "ICS"
             },
             {
                 "mitre_tactic":
@@ -3661,7 +3661,7 @@
                 ]
             },
             {
-                "mitre_domain": "Enterprise"
+                "mitre_domain": "ICS"
             },
             {
                 "mitre_tactic":
@@ -3761,7 +3761,7 @@
                 ]
             },
             {
-                "mitre_domain": "Enterprise"
+                "mitre_domain": "ICS"
             },
             {
                 "mitre_tactic":
@@ -3860,7 +3860,7 @@
                 ]
             },
             {
-                "mitre_domain": "Enterprise"
+                "mitre_domain": "ICS"
             },
             {
                 "mitre_tactic":
@@ -4010,7 +4010,7 @@
                 ]
             },
             {
-                "mitre_domain": "Enterprise"
+                "mitre_domain": "ICS"
             },
             {
                 "mitre_tactic":
@@ -4104,7 +4104,7 @@
                 ]
             },
             {
-                "mitre_domain": "Enterprise"
+                "mitre_domain": "ICS"
             },
             {
                 "mitre_tactic":
@@ -4197,7 +4197,7 @@
                 ]
             },
             {
-                "mitre_domain": "Enterprise"
+                "mitre_domain": "ICS"
             },
             {
                 "mitre_tactic":
@@ -4287,7 +4287,7 @@
                 ]
             },
             {
-                "mitre_domain": "Enterprise"
+                "mitre_domain": "ICS"
             },
             {
                 "mitre_tactic":
@@ -4340,7 +4340,7 @@
                 ]
             },
             {
-                "mitre_domain": "Enterprise"
+                "mitre_domain": "ICS"
             },
             {
                 "mitre_tactic":
@@ -4426,7 +4426,7 @@
                 ]
             },
             {
-                "mitre_domain": "Enterprise"
+                "mitre_domain": "ICS"
             },
             {
                 "mitre_tactic":
@@ -4517,7 +4517,7 @@
                 ]
             },
             {
-                "mitre_domain": "Enterprise"
+                "mitre_domain": "ICS"
             },
             {
                 "mitre_tactic":
@@ -4614,7 +4614,7 @@
                 ]
             },
             {
-                "mitre_domain": "Enterprise"
+                "mitre_domain": "ICS"
             },
             {
                 "mitre_tactic":
@@ -4701,7 +4701,7 @@
                 ]
             },
             {
-                "mitre_domain": "Enterprise"
+                "mitre_domain": "ICS"
             },
             {
                 "mitre_tactic":
@@ -4854,7 +4854,7 @@
                 ]
             },
             {
-                "mitre_domain": "Enterprise"
+                "mitre_domain": "ICS"
             },
             {
                 "mitre_tactic":
@@ -4978,7 +4978,7 @@
                 ]
             },
             {
-                "mitre_domain": "Enterprise"
+                "mitre_domain": "ICS"
             },
             {
                 "mitre_tactic":
@@ -5089,7 +5089,7 @@
                 ]
             },
             {
-                "mitre_domain": "Enterprise"
+                "mitre_domain": "ICS"
             },
             {
                 "mitre_tactic":
@@ -5218,7 +5218,7 @@
                 ]
             },
             {
-                "mitre_domain": "Enterprise"
+                "mitre_domain": "ICS"
             },
             {
                 "mitre_tactic":
@@ -5339,7 +5339,7 @@
                 ]
             },
             {
-                "mitre_domain": "Enterprise"
+                "mitre_domain": "ICS"
             },
             {
                 "mitre_tactic":
@@ -5477,7 +5477,7 @@
                 ]
             },
             {
-                "mitre_domain": "Enterprise"
+                "mitre_domain": "ICS"
             },
             {
                 "mitre_tactic":
@@ -5576,7 +5576,7 @@
                 ]
             },
             {
-                "mitre_domain": "Enterprise"
+                "mitre_domain": "ICS"
             },
             {
                 "mitre_tactic":
@@ -5679,7 +5679,7 @@
                 ]
             },
             {
-                "mitre_domain": "Enterprise"
+                "mitre_domain": "ICS"
             },
             {
                 "mitre_tactic":
@@ -5792,7 +5792,7 @@
                 ]
             },
             {
-                "mitre_domain": "Enterprise"
+                "mitre_domain": "ICS"
             },
             {
                 "mitre_tactic":
@@ -5914,7 +5914,7 @@
                 ]
             },
             {
-                "mitre_domain": "Enterprise"
+                "mitre_domain": "ICS"
             },
             {
                 "mitre_tactic":
@@ -6070,7 +6070,7 @@
                 ]
             },
             {
-                "mitre_domain": "Enterprise"
+                "mitre_domain": "ICS"
             },
             {
                 "mitre_tactic":
@@ -6190,7 +6190,7 @@
                 ]
             },
             {
-                "mitre_domain": "Enterprise"
+                "mitre_domain": "ICS"
             },
             {
                 "mitre_tactic":
@@ -6371,7 +6371,7 @@
                 ]
             },
             {
-                "mitre_domain": "Enterprise"
+                "mitre_domain": "ICS"
             },
             {
                 "mitre_tactic":
@@ -6491,7 +6491,7 @@
                 ]
             },
             {
-                "mitre_domain": "Enterprise"
+                "mitre_domain": "ICS"
             },
             {
                 "mitre_tactic":
@@ -6689,7 +6689,7 @@
                 ]
             },
             {
-                "mitre_domain": "Enterprise"
+                "mitre_domain": "ICS"
             },
             {
                 "mitre_tactic":
@@ -6808,7 +6808,7 @@
                 ]
             },
             {
-                "mitre_domain": "Enterprise"
+                "mitre_domain": "ICS"
             },
             {
                 "mitre_tactic":
@@ -6931,7 +6931,7 @@
                 ]
             },
             {
-                "mitre_domain": "Enterprise"
+                "mitre_domain": "ICS"
             },
             {
                 "mitre_tactic":
@@ -7022,7 +7022,7 @@
                 ]
             },
             {
-                "mitre_domain": "Enterprise"
+                "mitre_domain": "ICS"
             },
             {
                 "mitre_tactic":
@@ -7171,7 +7171,7 @@
                 ]
             },
             {
-                "mitre_domain": "Enterprise"
+                "mitre_domain": "ICS"
             },
             {
                 "mitre_tactic":
@@ -7320,7 +7320,7 @@
                 ]
             },
             {
-                "mitre_domain": "Enterprise"
+                "mitre_domain": "ICS"
             },
             {
                 "mitre_tactic":
@@ -7469,7 +7469,7 @@
                 ]
             },
             {
-                "mitre_domain": "Enterprise"
+                "mitre_domain": "ICS"
             },
             {
                 "mitre_tactic":
@@ -7589,7 +7589,7 @@
                 ]
             },
             {
-                "mitre_domain": "Enterprise"
+                "mitre_domain": "ICS"
             },
             {
                 "mitre_tactic":
@@ -7707,7 +7707,7 @@
                 ]
             },
             {
-                "mitre_domain": "Enterprise"
+                "mitre_domain": "ICS"
             },
             {
                 "mitre_tactic":
@@ -7863,7 +7863,7 @@
                 ]
             },
             {
-                "mitre_domain": "Enterprise"
+                "mitre_domain": "ICS"
             },
             {
                 "mitre_tactic":
@@ -7981,7 +7981,7 @@
                 ]
             },
             {
-                "mitre_domain": "Enterprise"
+                "mitre_domain": "ICS"
             },
             {
                 "mitre_tactic":
@@ -8143,7 +8143,7 @@
                 ]
             },
             {
-                "mitre_domain": "Enterprise"
+                "mitre_domain": "ICS"
             },
             {
                 "mitre_tactic":
@@ -8289,7 +8289,7 @@
                 ]
             },
             {
-                "mitre_domain": "Enterprise"
+                "mitre_domain": "ICS"
             },
             {
                 "mitre_tactic":
@@ -8481,7 +8481,7 @@
                 ]
             },
             {
-                "mitre_domain": "Enterprise"
+                "mitre_domain": "ICS"
             },
             {
                 "mitre_tactic":
@@ -8600,7 +8600,7 @@
                 ]
             },
             {
-                "mitre_domain": "Enterprise"
+                "mitre_domain": "ICS"
             },
             {
                 "mitre_tactic":
