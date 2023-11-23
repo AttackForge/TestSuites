@@ -14,28 +14,28 @@ This repository provides additional industry methodologies you can import into y
 The following methodologies are supported:
 
 ## Red Teaming
-- MITRE ATT&CK Enterprise Version 14.1
-- MITRE ATT&CK Mobile Version 14.1
-- MITRE ATT&CK ICS Version 14.1
-- OSSTMM Version 3 - Human Security Testing
-- OSSTMM Version 3 - Physical Security Testing
+- [MITRE ATT&CK Enterprise Version 14.1](https://github.com/AttackForge/TestSuites/blob/main/MITRE/ATT%26CK/ENTERPRISE/14/mitre_attack_enterprise_14_1.json)
+- [MITRE ATT&CK Mobile Version 14.1](https://github.com/AttackForge/TestSuites/blob/main/MITRE/ATT%26CK/MOBILE/14/mitre_attack_mobile_14_1.json)
+- [MITRE ATT&CK ICS Version 14.1](https://github.com/AttackForge/TestSuites/blob/main/MITRE/ATT%26CK/ICS/14/mitre_attack_ics_14_1.json)
+- [OSSTMM Version 3 - Human Security Testing](https://github.com/AttackForge/TestSuites/blob/main/OSSTMM/v3/Chapter%207/osstmm_human_security_testing.json)
+- [OSSTMM Version 3 - Physical Security Testing](https://github.com/AttackForge/TestSuites/blob/main/OSSTMM/v3/Chapter%208/osstmm_physical_security_testing.json)
 
 ## Web Application & API
-- OWASP Web Security Testing Guide Version 4.2
-- OWASP Application Security Verification Standard (ASVS) Version 4 - Level 1
-- OWASP Application Security Verification Standard (ASVS) Version 4 - Level 2
-- OWASP Application Security Verification Standard (ASVS) Version 4 - Level 3
+- [OWASP Web Security Testing Guide Version 4.2](https://github.com/AttackForge/TestSuites/blob/main/OWASP/WSTG/v4.2/owasp_wstg.json)
+- [OWASP Application Security Verification Standard (ASVS) Version 4 - Level 1](https://github.com/AttackForge/TestSuites/blob/main/OWASP/ASVS/v4/Level%201/owasp_asvs_level_1.json)
+- [OWASP Application Security Verification Standard (ASVS) Version 4 - Level 2](https://github.com/AttackForge/TestSuites/blob/main/OWASP/ASVS/v4/Level%202/owasp_asvs_level_2.json)
+- [OWASP Application Security Verification Standard (ASVS) Version 4 - Level 3](https://github.com/AttackForge/TestSuites/blob/main/OWASP/ASVS/v4/Level%203/owasp_asvs_level_3.json)
 
 ## Mobile Application
-- OWASP Mobile Application Security Testing Guide (MASTG) Version 2 - Level 1
-- OWASP Mobile Application Security Testing Guide (MASTG) Version 2 - Level 2
-- MITRE ATT&CK Mobile Version 14.1
+- [OWASP Mobile Application Security Testing Guide (MASTG) Version 2 - Level 1](https://github.com/AttackForge/TestSuites/blob/main/OWASP/MASTG/v2/Level%201/owasp_mastg_level_1.json)
+- [OWASP Mobile Application Security Testing Guide (MASTG) Version 2 - Level 2](https://github.com/AttackForge/TestSuites/blob/main/OWASP/MASTG/v2/Level%202/owasp_mastg_level_2.json)
+- [MITRE ATT&CK Mobile Version 14.1](https://github.com/AttackForge/TestSuites/blob/main/MITRE/ATT%26CK/MOBILE/14/mitre_attack_mobile_14_1.json)
 
 ## Network Infrastructure, Hardware and IOT
-- OSSTMM Version 3 - Telecommuncations Security Testing
-- OSSTMM Version 3 - Data Networks Security Testing
-- OSSTMM Version 3 - Wireless Security Testing
-- MITRE ATT&CK ICS Version 14.1
+- [OSSTMM Version 3 - Telecommuncations Security Testing](https://github.com/AttackForge/TestSuites/blob/main/OSSTMM/v3/Chapter%2010/osstmm_telecommunications_security_testing.json)
+- [OSSTMM Version 3 - Data Networks Security Testing](https://github.com/AttackForge/TestSuites/blob/main/OSSTMM/v3/Chapter%2011/osstmm_data_networks_security_testing.json)
+- [OSSTMM Version 3 - Wireless Security Testing](https://github.com/AttackForge/TestSuites/blob/main/OSSTMM/v3/Chapter%209/osstmm_wireless_security_testing.json)
+- [MITRE ATT&CK ICS Version 14.1](https://github.com/AttackForge/TestSuites/blob/main/MITRE/ATT%26CK/ICS/14/mitre_attack_ics_14_1.json)
 
 You can load additional testing methodologies in the form of Test Cases which can be imported on your Test Suites using the import options on Test Cases:
 
