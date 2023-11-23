@@ -15,6 +15,8 @@ The following methodologies are supported:
 
 ## Red Teaming
 - MITRE ATT&CK Enterprise Version 14.1
+- MITRE ATT&CK Mobile Version 14.1
+- MITRE ATT&CK ICS Version 14.1
 - OSSTMM Version 3 - Human Security Testing
 - OSSTMM Version 3 - Physical Security Testing
 
@@ -27,11 +29,13 @@ The following methodologies are supported:
 ## Mobile Application
 - OWASP Mobile Application Security Testing Guide (MASTG) Version 2 - Level 1
 - OWASP Mobile Application Security Testing Guide (MASTG) Version 2 - Level 2
+- MITRE ATT&CK Mobile Version 14.1
 
-## Network Infrastructure
+## Network Infrastructure, Hardware and IOT
 - OSSTMM Version 3 - Telecommuncations Security Testing
 - OSSTMM Version 3 - Data Networks Security Testing
 - OSSTMM Version 3 - Wireless Security Testing
+- MITRE ATT&CK ICS Version 14.1
 
 You can load additional testing methodologies in the form of Test Cases which can be imported on your Test Suites using the import options on Test Cases:
 
