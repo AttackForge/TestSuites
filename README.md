@@ -37,6 +37,13 @@ The following methodologies are supported:
 - [OSSTMM Version 3 - Wireless Security Testing](https://github.com/AttackForge/TestSuites/blob/main/OSSTMM/v3/Chapter%209/osstmm_wireless_security_testing.json)
 - [MITRE ATT&CK ICS Version 14.1](https://github.com/AttackForge/TestSuites/blob/main/MITRE/ATT%26CK/ICS/14/mitre_attack_ics_14_1.json) - see [recommended mapping](https://support.attackforge.com/attackforge-enterprise/modules/test-suite-builder#import-mappings)
 
+## Cloud Configuration
+- [CIS Amazon Web Services Foundation v1.2.0](https://github.com/AttackForge/TestSuites/blob/main/AWS/CIS-Amazon-Web-Services-Foundation-v1.2.0.json)
+- [CIS Microsoft Azure Foundation v1.2.0](https://github.com/AttackForge/TestSuites/blob/main/AZURE/CIS-Microsoft-Azure-Foundation-v1.2.0.json)
+- [CIS Google Cloud Platform Foundation v1.1.0](https://github.com/AttackForge/TestSuites/blob/main/GCP/CIS-Google-Cloud-Platform-Foundation-v1.1.0.json)
+- [Oracle Cloud Infrastructure](https://github.com/AttackForge/TestSuites/blob/main/OCI/Oracle-Cloud-Infrastructure.json)
+- [Kubernetes Infrastructure](https://github.com/AttackForge/TestSuites/blob/main/KUBERNETES/Kubernetes-Infrastructure.json)
+
 You can load additional testing methodologies in the form of Test Cases which can be imported on your Test Suites using the import options on Test Cases:
 
 <img width="2053" alt="1" src="https://github.com/AttackForge/TestSuites/assets/131424301/f4ce8ce8-4a8f-4757-9d51-700fcdef7036">
