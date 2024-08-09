@@ -1,0 +1,1 @@
+nccgroup/ScoutSuite (https://github.com/nccgroup/ScoutSuite)
