@@ -1,0 +1,77 @@
+[
+    {
+        "testcase": "Password policy - Minimum Password Length Too Short",
+        "details": "<p><b>Path</b>: identity.password_policy.minimum_password_length</p><p><b>Argument Names</b>:<ul><li>Minimum password length</li></ul></p><p><b>Conditions</b>: or,this,lessThan,_ARG_0_</p>",
+        "tags":
+        [],
+        "sort_order": 1
+    },
+    {
+        "testcase": "Password policy - Password Policy Lacks Lowercase Requirement",
+        "details": "<p><b>Path</b>: identity.password_policy.is_lowercase_characters_required</p><p><b>Conditions</b>: or,this,false,</p>",
+        "tags":
+        [],
+        "sort_order": 2
+    },
+    {
+        "testcase": "Password policy - Password Policy Lacks Number Requirement",
+        "details": "<p><b>Path</b>: identity.password_policy.is_numeric_characters_required</p><p><b>Conditions</b>: or,this,false,</p>",
+        "tags":
+        [],
+        "sort_order": 3
+    },
+    {
+        "testcase": "Password policy - Password Policy Lacks Symbol Requirement",
+        "details": "<p><b>Path</b>: identity.password_policy.is_special_characters_required</p><p><b>Conditions</b>: or,this,false,</p>",
+        "tags":
+        [],
+        "sort_order": 4
+    },
+    {
+        "testcase": "Password policy - Password Policy Lacks Uppercase Requirement",
+        "details": "<p><b>Path</b>: identity.password_policy.is_uppercase_characters_required</p><p><b>Conditions</b>: or,this,false,</p>",
+        "tags":
+        [],
+        "sort_order": 5
+    },
+    {
+        "testcase": "Policies - Policy Affects User",
+        "code": "statements",
+        "details": "<p>Policies should apply to services and groups, not directly to users.</p><p><b>Display Path</b>: identity.policies.id</p><p><b>Path</b>: identity.policies.id</p><p><b>Conditions</b>: and,identity.policies.id.statements,containString,any-user</p>",
+        "tags":
+        [],
+        "sort_order": 6
+    },
+    {
+        "testcase": "Users - User with Multiple API Keys",
+        "code": "multiple_api_keys",
+        "details": "<p>It is recommended for users to only have one access key.</p><p><b>Path</b>: identity.users.id</p><p><b>Conditions</b>: and,identity.users.id.api_keys,lengthMoreThan,1</p>",
+        "tags":
+        [],
+        "sort_order": 7
+    },
+    {
+        "testcase": "Keys - KMS Keys Are Not Being Rotated",
+        "code": "time_created",
+        "details": "<p>Keys should be routinely rotated to prevent usage of compromised keys.</p><p><b>Display Path</b>: kms.keyvaults.id</p><p><b>Path</b>: kms.keyvaults.id.keys.id</p><p><b>Conditions</b>: and,kms.keyvaults.id.keys.id.lifecycle_state,equal,ENABLED,kms.keyvaults.id.keys.id.time_created,olderThan,_ARG_0_,days</p>",
+        "tags":
+        [],
+        "sort_order": 8
+    },
+    {
+        "testcase": "Buckets - Buckets Lacking KMS Encryption",
+        "code": "kms_key_id",
+        "details": "<p>Buckets should be configured with KMS keys to ensure fine-grained control over data at rest.</p><p><b>Path</b>: objectstorage.buckets.id</p><p><b>Conditions</b>: and,objectstorage.buckets.id.kms_key_id,null,</p>",
+        "tags":
+        [],
+        "sort_order": 9
+    },
+    {
+        "testcase": "Buckets - Public Buckets",
+        "code": "public_access_type",
+        "details": "<p>Buckets should be private unless intended.</p><p><b>Path</b>: objectstorage.buckets.id</p><p><b>Conditions</b>: and,objectstorage.buckets.id.public_access_type,notEqual,NoPublicAccess</p>",
+        "tags":
+        [],
+        "sort_order": 10
+    }
+]
