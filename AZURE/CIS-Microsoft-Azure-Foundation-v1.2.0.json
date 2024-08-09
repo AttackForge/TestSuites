@@ -1,0 +1,1055 @@
+[
+    {
+        "testcase": "Users - Guest Users in Use",
+        "code": "user_type",
+        "details": "<p>Avoid creating guest users, as they are typically added outside your employee on-boarding/off-boarding process and could potentially be overlooked indefinitely leading to a potential vulnerability.</p><p><b>Path</b>: aad.users.id</p><p><b>Conditions</b>: and,aad.users.id.user_type,equal,Guest</p>",
+        "tags":
+        [
+            "CIS Microsoft Azure Foundations v1.1.0 ref:1.3"
+        ],
+        "sort_order": 1
+    },
+    {
+        "testcase": "Policies - Users Can Create Security Group Enabled",
+        "code": "allowed_to_create_security_groups",
+        "details": "<p>When creating security groups is enabled, all users in the directory are allowed to create new security groups and add members to those groups. Security group creation should be restricted to administrators only.</p><p><b>Recommendation</b>: From Azure console:<ol><li>Go to <samp>Azure Active Directory</samp></li> <li>Go to <samp>Groups</samp></li> <li>Go to <samp>General</samp> in setting</li> <li>Ensure that <samp>Users can create security groups in Azure Portals</samp> is set to <samp>No</samp></li></ol></p><p><b>Path</b>: aad.policies.id</p><p><b>Conditions</b>: and,aad.policies.id.allowed_to_create_security_groups,true,</p>",
+        "tags":
+        [
+            "CIS Microsoft Azure Foundations v1.2.0 ref:1.17"
+        ],
+        "sort_order": 2
+    },
+    {
+        "testcase": "Web Apps - App Service Authentication Disabled",
+        "code": "authentication_enabled",
+        "details": "<p>Azure App Service Authentication is a feature that can prevent anonymous HTTP requests from reaching the API app, or authenticate those that have tokens before they reach the API app. If an anonymous request is received from a browser, App Service will redirect to a logon page. To handle the logon process, a choice from a set of identity providers can be made, or a custom authentication mechanism can be implemented.</p><p><b>Recommendation</b>: In the Azure console:\n<ol>\n    <li>Go to <samp>App Services</samp></li>\n    <li>Click on each App</li>\n    <li>Under <samp>Setting</samp> section, Click on <samp>Authentication / Authorization</samp></li>\n    <li>Set <samp>App Service Authentication</samp> to <samp>On</samp></li>\n    <li>Choose other parameters as per your requirement and Click on Save</li>\n</ol></p><p><b>Path</b>: appservice.subscriptions.id.web_apps.id</p><p><b>Conditions</b>: and,appservice.subscriptions.id.web_apps.id.authentication_enabled,false,</p>",
+        "tags":
+        [
+            "CIS Microsoft Azure Foundations v1.2.0 ref:9.1",
+            "CIS Microsoft Azure Foundations v1.1.0 ref:9.1",
+            "https://learn.microsoft.com/en-us/azure/app-service/app-service-authentication-overview",
+            "https://learn.microsoft.com/en-us/azure/role-based-access-control/built-in-roles#website-contributor",
+            "https://learn.microsoft.com/en-us/azure/security/benchmarks/security-controls-v2-privileged-access#pa-5-automate-entitlement-management",
+            "https://learn.microsoft.com/en-us/azure/security/benchmarks/security-controls-v2-governance-strategy#gs-6-define-identity-and-privileged-access-strategy"
+        ],
+        "sort_order": 3
+    },
+    {
+        "testcase": "Web Apps - Client Certificates Disabled",
+        "code": "client_cert_enabled",
+        "details": "<p>Client certificates allow for the app to request a certificate for incoming requests. Only clients that have a valid certificate will be able to reach the app. The TLS mutual authentication technique in enterprise environments ensures the authenticity of clients to the server. If incoming client certificates are enabled, then only an authenticated client who has valid certificates can access the app.</p><p><b>Recommendation</b>: In the Azure console:\n<ol>\n    <li>Go to <samp>App Services</samp></li>\n    <li>Click on each App</li>\n    <li>Under <samp>Setting</samp> section, Click on <samp>Configuration</samp></li>\n    <li>Ensure that the option <samp>Client certificate mode</samp> located under Incoming client certificates is set to <samp>Require</samp></li>\n</ol></p><p><b>Path</b>: appservice.subscriptions.id.web_apps.id</p><p><b>Conditions</b>: and,appservice.subscriptions.id.web_apps.id.client_cert_enabled,false,</p>",
+        "tags":
+        [
+            "CIS Microsoft Azure Foundations v1.2.0 ref:9.4",
+            "CIS Microsoft Azure Foundations v1.1.0 ref:9.4",
+            "https://learn.microsoft.com/bs-latn-ba/azure/app-service/app-service-web-configure-tls-mutual-auth"
+        ],
+        "sort_order": 4
+    },
+    {
+        "testcase": "Web Apps - FTP Deployment Enabled",
+        "code": "ftp_deployment_enabled",
+        "details": "<p>Azure FTP deployment endpoints are public. An attacker listening to traffic on a wifi network used by a remote employee or a corporate network could see login traffic in clear-text which would then grant them full control of the code base of the app or service. This finding is more severe if User Credentials for deployment are set at the subscription level rather than using the default Application Credentials which are unique per App.</p><p><b>Recommendation</b>: Using Console:\n<ol>\n    <li>Go to <samp>App Services</samp></li>\n    <li>Click on an App</li>\n    <li>Select Settings > Configuration</li>\n    <li>Under Platform Settings, FTP state should be <samp>Disabled</samp> or <samp>FTPS Only</samp></li>\n</ol></p><p><b>Path</b>: appservice.subscriptions.id.web_apps.id</p><p><b>Conditions</b>: and,appservice.subscriptions.id.web_apps.id.ftp_deployment_enabled,true,</p>",
+        "tags":
+        [
+            "CIS Microsoft Azure Foundations v1.20 ref:9.11",
+            "https://learn.microsoft.com/en-us/azure/app-service/deploy-ftp",
+            "https://learn.microsoft.com/en-us/azure/app-service/overview-security",
+            "https://learn.microsoft.com/en-us/azure/security/benchmarks/security-controls-v2-data-protection#dp-4-encrypt-sensitive-information-in-transit",
+            "https://learn.microsoft.com/en-us/azure/security/benchmarks/security-controls-v2-identity-management#im-1-standardize-azure-active-directory-as-the-central-identity-and-authentication-system"
+        ],
+        "sort_order": 5
+    },
+    {
+        "testcase": "Web Apps - HTTP 2.0 Disabled",
+        "code": "http_2_enabled",
+        "details": "<p>Periodically, newer versions are released for HTTP either due to security flaws or to include additional functionality. Using the latest HTTP version for web apps to take advantage of security fixes, if any, and/or new functionalities of the newer version.<br><br>Newer versions may contain security enhancements and additional functionality. Using the latest version is recommended in order to take advantage of enhancements and new capabilities. With each software installation, organizations need to determine if a given update meets their requirements and also verify the compatibility and support provided for any additional software against the update revision that is selected.<br><br>HTTP 2.0 has additional performance improvements on the head-of-line blocking problem of old HTTP version, header compression, and prioritization of requests. HTTP 2.0 no longer supports HTTP 1.1's chunked transfer encoding mechanism, as it provides its own, more efficient, mechanisms for data streaming.</p><p><b>Recommendation</b>: Using Console:<ol><li>Login to Azure Portal using https://portal.azure.com</li><li>Go to \"App Services\"</li><li>Click on each App</li><li>Under \"Setting\" section, Click on \"Application settings\"</li><li>Ensure that \"HTTP Version\" set to \"2.0\" version under \"General settings\"</li></ol></p><p><b>Path</b>: appservice.subscriptions.id.web_apps.id</p><p><b>Conditions</b>: and,appservice.subscriptions.id.web_apps.id.http_2_enabled,false,</p>",
+        "tags":
+        [
+            "CIS Microsoft Azure Foundations v1.2.0 ref:9.10",
+            "CIS Microsoft Azure Foundations v1.1.0 ref:9.10",
+            "https://learn.microsoft.com/en-us/azure/app-service/web-sites-configure#general-settings",
+            "https://learn.microsoft.com/en-us/azure/security/benchmarks/security-controls-v2-endpoint-security"
+        ],
+        "sort_order": 6
+    },
+    {
+        "testcase": "Web Apps - HTTP Traffic Allowed",
+        "code": "https_only",
+        "details": "<p>Azure Web Apps allows sites to run under both HTTP and HTTPS by default. Web apps can be accessed by anyone using non-secure HTTP links by default. Non-secure HTTP requests can be restricted and all HTTP requests redirected to the secure HTTPS port.</p><p><b>Recommendation</b>: In the Azure console:\n<ol><li>Go to <samp>App Services</samp></li>\n    <li>Click on each App</li>\n    <li>Under <samp>Setting</samp> section, Click on <samp>SSL settings</samp></li>\n    <li>Set <samp>HTTPS Only</samp> to <samp>On</samp> under <samp>Protocol Settings</samp> section</li>\n</ol></p><p><b>Path</b>: appservice.subscriptions.id.web_apps.id</p><p><b>Conditions</b>: and,appservice.subscriptions.id.web_apps.id.https_only,false,</p>",
+        "tags":
+        [
+            "CIS Microsoft Azure Foundations v1.2.0 ref:9.2",
+            "CIS Microsoft Azure Foundations v1.1.0 ref:9.2",
+            "https://learn.microsoft.com/en-us/azure/app-service/app-service-web-tutorial-custom-ssl#enforce-https"
+        ],
+        "sort_order": 7
+    },
+    {
+        "testcase": "Web Apps - Managed Service Identities Disabled",
+        "code": "identity.managed_principal_id",
+        "details": "<p>App Service provides a highly scalable, self-patching web hosting service in Azure. It also provides a managed identity for apps, which is a turn-key solution for securing access to Azure SQL Database and other Azure services.</p><p><b>Recommendation</b>: Using Console:<ol><li>Login to Azure Portal using https://portal.azure.com</li><li>Go to \"App Services\"</li><li>Click on each App</li><li>Under the \"Setting\" section, Click on \"Identity\"</li><li>Ensure that \"Status\" set to On\"</li></ol></p><p><b>Path</b>: appservice.subscriptions.id.web_apps.id</p><p><b>Conditions</b>: and,appservice.subscriptions.id.web_apps.id.identity,notNull,,appservice.subscriptions.id.web_apps.id.identity.principal_id,null,</p>",
+        "tags":
+        [
+            "CIS Microsoft Azure Foundations v1.2.0 ref:9.5",
+            "CIS Microsoft Azure Foundations v1.1.0 ref:9.5",
+            "https://learn.microsoft.com/en-gb/azure/app-service/app-service-web-tutorial-connect-msi",
+            "https://learn.microsoft.com/en-us/azure/security/benchmarks/security-controls-v2-identity-management#im-1-standardize-azure-active-directory-as-the-central-identity-and-authentication-system"
+        ],
+        "sort_order": 8
+    },
+    {
+        "testcase": "Web Apps - Web App Running an Outdated .Net Framework Version",
+        "code": "programming_language_version",
+        "details": "<p>Periodically, newer versions are released for .Net Framework software either due to security flaws or to include additional functionality. Using the latest version for web apps is recommended in order to take advantage of security fixes, if any, and/or additional functionalities of the newer version.</p><p><b>Recommendation</b>: Using Command Line:\n<ol>\n    <li>To see the list of supported runtimes</li>\n    <code><samp>az webapp list-runtimes | grep aspnet</samp></code>\n    <li>To set latest .NET Framework version for an existing app, run the following command:</li>\n  <code>az webapp config set --resource-group &ltRESOURCE_GROUP_NAME&gt --name &ltAPP_NAME&gt --net-framework-version &ltVERSION&gt</code>\n    <li>Use .NET Framework as, 'v4.0' for .NET 4.6 and 'v3.0' for .NET 3.5.</li>\n</ol></p><p><b>Path</b>: appservice.subscriptions.id.web_apps.id</p><p><b>Conditions</b>: and,appservice.subscriptions.id.web_apps.id.programming_language,equal,dotnet,appservice.subscriptions.id.web_apps.id.programming_language_version,containNoneOf,v6.0,6.0</p>",
+        "tags":
+        [
+            "CIS Microsoft Azure Foundations v1.2.0 ref:9.6",
+            "CIS Microsoft Azure Foundations v1.1.0 ref:9.6",
+            "https://learn.microsoft.com/en-us/azure/app-service/web-sites-configure#general-settings",
+            "https://learn.microsoft.com/en-us/azure/security/benchmarks/security-controls-v2-endpoint-security"
+        ],
+        "sort_order": 9
+    },
+    {
+        "testcase": "Web Apps - Web App Running an Outdated Java Version",
+        "code": "programming_language_version",
+        "details": "<p>Periodically, newer versions are released for Java software either due to security flaws or to include additional functionality. Using the latest Java version for web apps is recommended in order to to take advantage of security fixes, if any, and/or new functionalities of the latest version.</p><p><b>Recommendation</b>: Using Console:\n<ol>\n    <li>Go to <samp>App Services</samp></li>\n    <li>Click on each App</li>\n    <li>Under <samp>Setting</samp> section, Click on <samp>Application Settings</samp></li>\n    <li>Set  <samp>Java version</samp>  to latest version available under <samp>General Settings</samp></li>\n    <li>Set <samp>Java minor version</samp> to latest version available</li>\n    <li>Set <samp>Java web container</samp> to the latest version of web container available</li>\n    NOTE: No action is required if <samp>Java version</samp> is set to <samp>Off</samp> \n</ol></p><p><b>Path</b>: appservice.subscriptions.id.web_apps.id</p><p><b>Conditions</b>: and,appservice.subscriptions.id.web_apps.id.programming_language,equal,java,appservice.subscriptions.id.web_apps.id.programming_language_version,containNoneOf,8-jre8,11-java11,1.8,11,8u232</p>",
+        "tags":
+        [
+            "CIS Microsoft Azure Foundations v1.2.0 ref:9.9",
+            "CIS Microsoft Azure Foundations v1.1.0 ref:9.9",
+            "https://learn.microsoft.com/en-us/azure/app-service/web-sites-configure#general-settings",
+            "https://learn.microsoft.com/en-us/azure/security/benchmarks/security-controls-v2-endpoint-security"
+        ],
+        "sort_order": 10
+    },
+    {
+        "testcase": "Web Apps - Web App Running an Outdated PHP Version",
+        "code": "programming_language_version",
+        "details": "<p>Periodically newer versions are released for PHP software either due to security flaws or to include additional functionality. Using the latest PHP version for web apps is recommended in order to take advantage of security fixes, if any, and/or additional functionalities of the newer version.</p><p><b>Recommendation</b>: Using Console:\n<ol>\n    <li>Go to <samp>App Services</samp></li>\n    <li>Click on each App</li>\n    <li>Under <samp>Setting</samp> section, Click on <samp>Configuration</samp></li>\n    <li>Set  <samp>PHP version</samp>  to latest version available under <samp>General Settings</samp></li>\n   NOTE: No action is required if <samp>PHP version</samp> is set to <samp>Off</samp> \n</ol></p><p><b>Path</b>: appservice.subscriptions.id.web_apps.id</p><p><b>Conditions</b>: and,appservice.subscriptions.id.web_apps.id.programming_language,equal,php,appservice.subscriptions.id.web_apps.id.programming_language_version,containNoneOf,7.2,7.3,7.4</p>",
+        "tags":
+        [
+            "CIS Microsoft Azure Foundations v1.2.0 ref:9.7",
+            "CIS Microsoft Azure Foundations v1.1.0 ref:9.7",
+            "https://learn.microsoft.com/en-us/azure/app-service/web-sites-configure#general-settings",
+            "https://learn.microsoft.com/en-us/azure/security/benchmarks/security-controls-v2-endpoint-security"
+        ],
+        "sort_order": 11
+    },
+    {
+        "testcase": "Web Apps - Web App Running an Outdated Python Version",
+        "code": "programming_language_version",
+        "details": "<p>Periodically, newer versions are released for Python software either due to security flaws or to include additional functionality. Using the latest Python version for web apps is recommended in order to take advantage of security fixes, if any, and/or additional functionalities of the newer version.</p><p><b>Recommendation</b>: Using Console:\n<ol>\n    <li>Go to <samp>App Services</samp></li>\n    <li>Click on each App</li>\n    <li>Under <samp>Setting</samp> section, Click on <samp>Application Settings</samp></li>\n    <li>Set  <samp>Python version</samp>  to latest version available under <samp>General Settings</samp></li>\n  NOTE: No action is required if <samp>Python version</samp> is set to <samp>Off</samp>\n</ol></p><p><b>Path</b>: appservice.subscriptions.id.web_apps.id</p><p><b>Conditions</b>: and,appservice.subscriptions.id.web_apps.id.programming_language,equal,python,appservice.subscriptions.id.web_apps.id.programming_language_version,containNoneOf,3.6,3.7,3.8,3.9</p>",
+        "tags":
+        [
+            "CIS Microsoft Azure Foundations v1.2.0 ref:9.8",
+            "CIS Microsoft Azure Foundations v1.1.0 ref:9.8",
+            "https://learn.microsoft.com/en-us/azure/app-service/web-sites-configure#general-settings"
+        ],
+        "sort_order": 12
+    },
+    {
+        "testcase": "Web Apps - Insecure TLS Version Supported",
+        "code": "minimum_tls_supported",
+        "details": "<p>The TLS (Transport Layer Security) protocol secures transmission of data over the internet using standard encryption technology. Encryption should be set with the latest version of TLS. App Service allows TLS 1.2 by default, which is the recommended TLS level by industry standards, such as PCI DSS.</p><p><b>Recommendation</b>: In the Azure console:\n<ol>\n    <li>Go to <samp>App Services</samp></li>\n    <li>Click on each App</li>\n    <li>Under <samp>Setting</samp> section, Click on <samp>SSL settings</samp></li>\n    <li>Set  <samp>Minimum TLS Version</samp> to <samp>1.2</samp> under <samp>Protocol Settings</samp> section</li>\n</ol></p><p><b>Path</b>: appservice.subscriptions.id.web_apps.id</p><p><b>Conditions</b>: and,appservice.subscriptions.id.web_apps.id.minimum_tls_version_supported,notEqual,1.2</p>",
+        "tags":
+        [
+            "CIS Microsoft Azure Foundations v1.2.0 ref:9.3",
+            "CIS Microsoft Azure Foundations v1.1.0 ref:9.3",
+            "https://learn.microsoft.com/en-us/azure/app-service/app-service-web-tutorial-custom-ssl#enforce-tls-versions"
+        ],
+        "sort_order": 13
+    },
+    {
+        "testcase": "Web Apps - (WIP) Web App Not Using Latest Programming Language Version",
+        "code": "programming_language_version",
+        "details": "<p><b>Path</b>: appservice.subscriptions.id.web_apps.id</p><p><b>Conditions</b>: and,or,appservice.subscriptions.id.web_apps.id.programming_language,equal,dotnet,appservice.subscriptions.id.web_apps.id.programming_language_version,notEqual,v4.0</p>",
+        "tags":
+        [
+            "CIS Microsoft Azure Foundations v1.1.0 ref:9.6",
+            "CIS Microsoft Azure Foundations v1.1.0 ref:9.7",
+            "CIS Microsoft Azure Foundations v1.1.0 ref:9.8",
+            "CIS Microsoft Azure Foundations v1.1.0 ref:9.9",
+            "https://learn.microsoft.com/en-us/azure/app-service/web-sites-configure#general-settings"
+        ],
+        "sort_order": 14
+    },
+    {
+        "testcase": "Key Vaults - Key Vault Not Recoverable",
+        "code": "recovery_protection_enabled",
+        "details": "<p>There could be scenarios where users accidently run delete/purge commands on key vault or attacker/malicious user does it deliberately to cause disruption. Deleting or purging a key vault leads to immediate data loss as keys encrypting data and secrets/certificates allowing access/services will become non-accessible.</p><p><b>Recommendation</b>: From Azure CLI: <br> <samp>az resource update --id /subscriptions/xxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/resourceGroups/<resourceGroupName>/providers/Microsoft.KeyVault /vaults/<keyVaultName> --set properties.enablePurgeProtection=true properties.enableSoftDelete=true</samp></br></p><p><b>Path</b>: keyvault.subscriptions.id.vaults.id</p><p><b>Conditions</b>: and,keyvault.subscriptions.id.vaults.id.recovery_protection_enabled,false,</p>",
+        "tags":
+        [
+            "CIS Microsoft Azure Foundations v1.2.0 ref:8.5",
+            "https://learn.microsoft.com/en-us/azure/key-vault/key-vault-soft-delete-cli",
+            "https://blogs.technet.microsoft.com/kv/2017/05/10/azure-key-vault-recovery-options/",
+            "https://learn.microsoft.com/en-us/azure/security/benchmarks/security-controls-v2-governance-strategy#gs-8-define-backup-and-recovery-strategy"
+        ],
+        "sort_order": 15
+    },
+    {
+        "testcase": "Key Vaults - Key Vaults Allowing Public Network Access",
+        "code": "public_access_allowed",
+        "details": "<p>Restricting default network access helps to provide a new layer of security, since key vaults accept connections from clients on any network. To limit access to selected networks, the default action must be changed.</p><p><b>Recommendation</b>: In the Azure console: <ol> <li>Go to <samp>Key Vaults</samp></li> <li>For each key vault, click on the settings menu called <samp>Networking</samp>.</li><li>Go to the tab named <samp>Firewalls and virtual networks</samp>.</li> <li>Ensure that you have elected to disable public access, or allow public access from <samp>specific virtual networks and IP addresses</samp>.</li> <li>If necessary, add rules to allow traffic from specific networks.</li> <li>Click <samp>Save</samp> to apply your changes.</li> </ol></p><p><b>Path</b>: keyvault.subscriptions.id.vaults.id</p><p><b>Conditions</b>: and,keyvault.subscriptions.id.vaults.id.public_access_allowed,true,</p>",
+        "tags":
+        [
+            "https://learn.microsoft.com/en-us/azure/key-vault/general/network-security",
+            "https://learn.microsoft.com/en-gb/security/benchmark/azure/baselines/key-vault-security-baseline?context=%2Fazure%2Fkey-vault%2Fgeneral%2Fcontext%2Fcontext#ns-2-secure-cloud-services-with-network-controls"
+        ],
+        "sort_order": 16
+    },
+    {
+        "testcase": "Key Vaults - Key Vault Role Based Access Control Disabled",
+        "code": "rbac_authorization_enabled",
+        "details": "<p>Azure RBAC provides finer-grained access management of Azure resources than vault access policy. It allows an administrator to set separate permissions on individual keys, secrets and certificates on different scope levels, from a management group level all the way to individual resources. It also allows an administrator to take advantage of privileged identity management functionality such as assigning Just in Time access (JIT) to resources.</p><p><b>Recommendation</b>: In the Azure console:<ol><li>Go to <samp>Key Vaults</samp></li> <li>For each key vault, go to <samp>Access configuration</samp></li> <li>Set <samp>Permission model</samp> to <samp>Azure role-based access control (recommended)</samp></li></ol></p><p><b>Path</b>: keyvault.subscriptions.id.vaults.id</p><p><b>Conditions</b>: and,keyvault.subscriptions.id.vaults.id.rbac_authorization_enabled,false,</p>",
+        "tags":
+        [
+            "CIS Microsoft Azure Foundations v2.0.0 ref:8.6",
+            "https://learn.microsoft.com/en-us/azure/key-vault/general/rbac-access-policy",
+            "https://learn.microsoft.com/en-us/azure/key-vault/general/rbac-guide"
+        ],
+        "sort_order": 17
+    },
+    {
+        "testcase": "Diagnostic Settings - Diagnostic Setting Does Not Exist",
+        "code": "diagnostic_exist",
+        "details": "<p>A diagnostic setting controls how a diagnostic log is exported. By default, logs are retained only for 90 days. Diagnostic settings should be defined so that logs can be exported and stored for a longer duration in order to analyze security activities within an Azure subscription.</p><p><b>Recommendation</b>: In the Azure console: <ol> <li>Go to <samp>Diagnostic settings</samp></li> <li>Click on <samp>Add diagnostic setting</samp>.</li> <li></li> <li>Add rules to allow traffic from specific network.</li>Configure the setting including the export location (This may be Log Analytics/Storage account or Event Hub) <li>Click on <samp>Save</samp></li> </ol></p><p><b>Path</b>: loggingmonitoring.subscriptions.id.diagnostic_settings.id</p><p><b>Conditions</b>: and,loggingmonitoring.subscriptions.id.diagnostic_settings.id.diagnostic_exist,false,</p>",
+        "tags":
+        [
+            "CIS Microsoft Azure Foundations v1.2.0 ref:5.1.1",
+            "https://learn.microsoft.com/en-us/azure/azure-monitor/essentials/platform-logs-overview#export-the-activity-log-with-a-log-profile",
+            "https://learn.microsoft.com/en-us/cli/azure/monitor/log-profiles?view=azure-cli-latest#az_monitor_log_profiles_create",
+            "https://learn.microsoft.com/en-us/azure/security/benchmarks/security-controls-v2-logging-threat-detection#lt-5-centralize-security-log-management-and-analysis"
+        ],
+        "sort_order": 18
+    },
+    {
+        "testcase": "Alert Rules - Activity Log Alert Does Not Exist for Create Policy Assignment",
+        "code": "create_policy_assignment_exist",
+        "details": "<p>Monitoring for \"Create Policy Assignment\" events gives insight into changes done in \"azure policy -assignments\" and can reduce the time it takes to detect unsolicited changes.</p><p><b>Recommendation</b>: In the Azure console: <ol><li>Go to Monitor service on Azure Security Center</li><li>Select Alerts blade</li><li>Click On New alert Rule</li><li>Under Scope, click Select resource</li><li>Select the appropriate subscription under Filter by subscription</li><li>Select Policy Assignment under Filter by resource type</li><li>Select All for Filter by location</li><li>Click on the subscription from the entries populated under Resource</li><li>Verify Selection preview shows All Policy assignment (policyAssignments) and your selected subscription name</li><li>Under Condition click Select Condition</li><li>Select Create policy assignment signal</li><li>Click Done</li><li>Under Action group, select appropriate action group</li><li>Under Alert rule details, enter rule name and description</li><li>Select appropriate resource group</li><li>Check Enable alert rule upon creation checkbox</li><li>Click Create alert rule</li> </ol></p><p><b>Path</b>: loggingmonitoring.subscriptions.id.log_alerts.id</p><p><b>Conditions</b>: or,loggingmonitoring.subscriptions.id.log_alerts.id.create_policy_assignment_exist,false,,loggingmonitoring.subscriptions.id.log_alerts.id.create_policy_assignment_exist,null,</p>",
+        "tags":
+        [
+            "CIS Microsoft Azure Foundations v1.2.0 ref:5.2.1",
+            "https://azure.microsoft.com/en-us/updates/classic-alerting-monitoring-retirement/",
+            "https://learn.microsoft.com/en-in/azure/azure-monitor/alerts/alerts-activity-log",
+            "https://learn.microsoft.com/en-in/rest/api/monitor/activitylogalerts/createorupdate",
+            "https://learn.microsoft.com/en-in/rest/api/monitor/activitylogalerts/listbysubscriptionid",
+            "https://learn.microsoft.com/en-us/azure/security/benchmarks/security-controls-v2-logging-threat-detection#lt-4-enable-logging-for-azure-resources"
+        ],
+        "sort_order": 19
+    },
+    {
+        "testcase": "Alert Rules - Activity Log Alert Does Not Exist for _ARG_0_",
+        "code": "_ARG_2_",
+        "details": "<p>Monitoring for \"_ARG_0_\" events gives insight into network access changes and may reduce the time it takes to detect suspicious activity.</p><p><b>Recommendation</b>: In the Azure console: <ol><li>Go to Monitor service on Azure Security Center</li><li>Select Alerts blade</li><li>Click On New alert Rule</li><li>Under Scope, click Select resource</li><li>Select the appropriate subscription under Filter by subscription</li><li>Select Policy Assignment under Filter by resource type</li><li>Select All for Filter by location</li><li>Click on the subscription from the entries populated under Resource</li><li>Verify Selection preview shows All Policy assignment (policyAssignments) and your selected subscription name</li><li>Under Condition click Select Condition</li><li>Select Create policy assignment signal</li><li>Click Done</li><li>Under Action group, select appropriate action group</li><li>Under Alert rule details, enter rule name and description</li><li>Select appropriate resource group</li><li>Check Enable alert rule upon creation checkbox</li><li>Click Create alert rule</li> </ol></p><p><b>Path</b>: loggingmonitoring.subscriptions.id.log_alerts.id</p><p><b>Key</b>: _ARG_2_</p><p><b>Argument Names</b>:<ul><li>Event</li><li>Associated CIS rule</li><li>Dictionary Value</li></ul></p><p><b>Conditions</b>: or,loggingmonitoring.subscriptions.id.log_alerts.id._ARG_2_,false,,loggingmonitoring.subscriptions.id.log_alerts.id._ARG_2_,null,</p>",
+        "tags":
+        [
+            "CIS Microsoft Azure Foundations v1.2.0 ref:_ARG_1_",
+            "https://azure.microsoft.com/en-us/updates/classic-alerting-monitoring-retirement/",
+            "https://learn.microsoft.com/en-in/azure/azure-monitor/alerts/alerts-activity-log",
+            "https://learn.microsoft.com/en-in/rest/api/monitor/activitylogalerts/createorupdate",
+            "https://learn.microsoft.com/en-in/rest/api/monitor/activitylogalerts/listbysubscriptionid",
+            "https://learn.microsoft.com/en-us/azure/security/benchmarks/security-controls-v2-logging-threat-detection#lt-4-enable-logging-for-azure-resources"
+        ],
+        "sort_order": 20
+    },
+    {
+        "testcase": "Alert Rules - Activity Log Alert Does Not Exist for _ARG_0_",
+        "code": "_ARG_2_",
+        "details": "<p>Monitoring for \"_ARG_0_\" events gives insight into changes to the active security solutions and may reduce the time it takes to detect suspicious activity.</p><p><b>Recommendation</b>: In the Azure console: <ol><li>Go to Monitor service on Azure Security Center</li><li>Select Alerts blade</li><li>Click On New alert Rule</li><li>Under Scope, click Select resource</li><li>Select the appropriate subscription under Filter by subscription</li><li>Select Policy Assignment under Filter by resource type</li><li>Select All for Filter by location</li><li>Click on the subscription from the entries populated under Resource</li><li>Verify Selection preview shows All Policy assignment (policyAssignments) and your selected subscription name</li><li>Under Condition click Select Condition</li><li>Select Create policy assignment signal</li><li>Click Done</li><li>Under Action group, select appropriate action group</li><li>Under Alert rule details, enter rule name and description</li><li>Select appropriate resource group</li><li>Check Enable alert rule upon creation checkbox</li><li>Click Create alert rule</li> </ol></p><p><b>Path</b>: loggingmonitoring.subscriptions.id.log_alerts.id</p><p><b>Key</b>: _ARG_2_</p><p><b>Argument Names</b>:<ul><li>Event</li><li>Associated CIS rule</li><li>Dictionary Value</li></ul></p><p><b>Conditions</b>: or,loggingmonitoring.subscriptions.id.log_alerts.id._ARG_2_,false,,loggingmonitoring.subscriptions.id.log_alerts.id._ARG_2_,null,</p>",
+        "tags":
+        [
+            "CIS Microsoft Azure Foundations v1.2.0 ref:_ARG_1_",
+            "https://azure.microsoft.com/en-us/updates/classic-alerting-monitoring-retirement/",
+            "https://learn.microsoft.com/en-in/azure/azure-monitor/alerts/alerts-activity-log",
+            "https://learn.microsoft.com/en-in/rest/api/monitor/activitylogalerts/createorupdate",
+            "https://learn.microsoft.com/en-in/rest/api/monitor/activitylogalerts/listbysubscriptionid",
+            "https://learn.microsoft.com/en-us/azure/security/benchmarks/security-controls-v2-logging-threat-detection#lt-4-enable-logging-for-azure-resources"
+        ],
+        "sort_order": 21
+    },
+    {
+        "testcase": "Key Vaults - Logging for Azure Key Vault Is Disabled",
+        "code": "diagnostic_key_vault_audit_event_enabled",
+        "details": "<p>Monitoring how and when key vaults are accessed, and by whom enables an audit trail of interactions with confidential information, keys and certificates managed by Azure Keyvault. Enabling logging for Key Vault saves information in an Azure storage account that the user provides. This creates a new container named insights-logs-auditevent automatically for the specified storage account, andthis same storage account can be used for collecting logs for multiple key vaults.</p><p><b>Recommendation</b>: Follow Microsoft Azure documentation and setup Azure Key Vault Logging.</p><p><b>Path</b>: loggingmonitoring.subscriptions.id.resources_logging.id</p><p><b>Conditions</b>: and,loggingmonitoring.subscriptions.id.resources_logging.id.diagnostic_key_vault.audit_event_enabled,false,</p>",
+        "tags":
+        [
+            "CIS Microsoft Azure Foundations v1.2.0 ref:5.1.5",
+            "https://learn.microsoft.com/en-us/azure/key-vault/general/logging?tabs=Vault",
+            "https://learn.microsoft.com/en-us/azure/security/benchmarks/security-controls-v2-logging-threat-detection#lt-4-enable-logging-for-azure-resources"
+        ],
+        "sort_order": 22
+    },
+    {
+        "testcase": "Profile - Audit Profile Does Not Capture All Activities",
+        "code": "captures_all_activities",
+        "details": "<p>A log profile controls how the activity log is exported. Configuring the log profile to collect logs for the categories \"write\", \"delete\" and \"action\" ensures that all the control/management plane activities performed on the subscription are exported.</p><p><b>Recommendation</b>: On Azure portal there is no provision to check or set categories.</p><p><b>Path</b>: loggingmonitoring.subscriptions.id.log_profiles.id</p><p><b>Conditions</b>: and,loggingmonitoring.subscriptions.id.log_profiles.id.captures_all_activities,false,</p>",
+        "tags":
+        [
+            "CIS Microsoft Azure Foundations v1.2.0 ref:5.1.2",
+            "https://learn.microsoft.com/en-us/cli/azure/monitor/log-profiles?view=azure-cli-latest#az-monitor-log-profiles-update",
+            "https://learn.microsoft.com/en-us/azure/security/benchmarks/security-controls-v2-logging-threat-detection#lt-4-enable-logging-for-azure-resources"
+        ],
+        "sort_order": 23
+    },
+    {
+        "testcase": "MySQL Servers - Enforce SSL Connection Is Disabled for MySQL Database Server",
+        "code": "ssl_enforcement",
+        "details": "<p><samp>SSL connectivity</samp> helps to provide a new layer of security, by connecting database server to client applications using Secure Sockets Layer (SSL). Enforcing SSL connections between database server and client applications helps protect against \"man in the middle\" attacks by encrypting the data stream between the server and application.</p><p><b>Recommendation</b>: From Azure Console: <ol><li>Login to Azure Portal using https://portal.azure.com</li><li>Go to <samp>Azure Database</samp> for <samp>MySQL server</samp></li><li>For each database, click on <samp>Connection security</samp></li><li>In <samp>SSL</samp> settings.</li><li>Click <samp>Enabled</samp> to Enforce SSL connection</li></ol></p><p><b>Path</b>: mysqldatabase.subscriptions.id.servers.id</p><p><b>Conditions</b>: and,mysqldatabase.subscriptions.id.servers.id.ssl_enforcement,equal,Disabled</p>",
+        "tags":
+        [
+            "CIS Microsoft Azure Foundations v1.2.0 ref:4.3.2",
+            "https://learn.microsoft.com/en-us/azure/postgresql/concepts-ssl-connection-security",
+            "https://learn.microsoft.com/en-us/azure/mysql/howto-configure-ssl",
+            "https://learn.microsoft.com/en-us/azure/security/benchmarks/security-controls-v2-data-protection#dp-4-encrypt-sensitive-information-in-transit"
+        ],
+        "sort_order": 24
+    },
+    {
+        "testcase": "NSGs - Security Group Rules Allowing All Inbound Access",
+        "details": "<p>It was detected that all ports in the security group are open, and accessible from the Internet, which creates a wider attack surface for resources assigned to it. Open ports should be reduced to the minimum needed to correctly operate and, when possible, source address restrictions should be implemented.</p><p><b>Display Path</b>: network.subscriptions.id.security_groups.id</p><p><b>Path</b>: network.subscriptions.id.security_groups.id.security_rules.id</p><p><b>Conditions</b>: and,network.subscriptions.id.security_groups.id.security_rules.id.destination_port_ranges,containAtLeastOneOf,*,0-65535,1-65535,_INCLUDE_(conditions/exposed-to-the-internet.json),,,_INCLUDE_(conditions/allow-tcp.json),,</p>",
+        "tags":
+        [],
+        "sort_order": 25
+    },
+    {
+        "testcase": "NSGs - Security Group Rules Allowing Inbound MsSQL Access",
+        "details": "<p>MsSQL (1433) inbound access should not be allowed to a network security group.</p><p><b>Display Path</b>: network.subscriptions.id.security_groups.id</p><p><b>Path</b>: network.subscriptions.id.security_groups.id.security_rules.id</p><p><b>Key</b>: network-security-groups-rule-inbound-MsSQL</p><p><b>Conditions</b>: and,network.subscriptions.id.security_groups.id.security_rules.id.destination_ports,portsInPortList,1433,_INCLUDE_(conditions/exposed-to-the-internet.json),,,_INCLUDE_(conditions/allow-tcp.json),,</p>",
+        "tags":
+        [
+            "CIS Microsoft Azure Foundations v1.0.0 ref:6.3"
+        ],
+        "sort_order": 26
+    },
+    {
+        "testcase": "NSGs - Security Group Rules Allowing Inbound UDP Access",
+        "details": "<p>UDP inbound access should not be allowed to a network security group.</p><p><b>Recommendation</b>: Disable direct UDP access to your Azure Virtual Machines from the Internet. After direct UDP access from the Internet is disabled, you have other options you can use to access UDP based services running on these virtual machines:<ol><li>Point-to-site VPN</li><li>Site-to-site VPN</li><li>ExpressRoute</li></ol></p><p><b>Display Path</b>: network.subscriptions.id.security_groups.id</p><p><b>Path</b>: network.subscriptions.id.security_groups.id.security_rules.id</p><p><b>Key</b>: network-security-groups-rule-inbound-UDP</p><p><b>Conditions</b>: and,_INCLUDE_(conditions/exposed-to-the-internet.json),,,_INCLUDE_(conditions/allow-udp.json),,</p>",
+        "tags":
+        [
+            "CIS Microsoft Azure Foundations v1.2.0 ref:6.6",
+            "https://learn.microsoft.com/en-us/azure/vpn-gateway/vpn-gateway-howto-point-to-site-resource-manager-portal",
+            "https://learn.microsoft.com/en-us/azure/vpn-gateway/tutorial-site-to-site-portal",
+            "https://learn.microsoft.com/en-us/azure/expressroute/",
+            "https://learn.microsoft.com/en-us/azure/security/fundamentals/network-best-practices",
+            "https://learn.microsoft.com/en-us/azure/security/benchmarks/security-controls-v2-network-security#ns-1-implement-security-for-internal-traffic"
+        ],
+        "sort_order": 27
+    },
+    {
+        "testcase": "NSGs - Security Group Rules Allowing Inbound _ARG_0_ Access",
+        "details": "<p>_ARG_0_ (port _ARG_1_) inbound access should not be allowed to a network security group.</p><p><b>Recommendation</b>: Disable direct _ARG_0_ access to your Azure Virtual Machines from the Internet. After direct UDP access from the Internet is disabled, you have other options you can use to access UDP based services running on these virtual machines:<br><ol><li>Point-to-site VPN</li><li>Site-to-site VPN</li><li>ExpressRoute</li></ol></p><p><b>Display Path</b>: network.subscriptions.id.security_groups.id</p><p><b>Path</b>: network.subscriptions.id.security_groups.id.security_rules.id</p><p><b>Key</b>: network-security-groups-rule-inbound-_ARG_0_</p><p><b>Argument Names</b>:<ul><li>Protocol (ex: SSH, RDP, etc.)</li><li>Protocol's port</li><li>Associated CIS rule</li></ul></p><p><b>Conditions</b>: and,network.subscriptions.id.security_groups.id.security_rules.id.destination_ports,portsInPortList,_ARG_1_,_INCLUDE_(conditions/exposed-to-the-internet.json),,,_INCLUDE_(conditions/allow-tcp.json),,</p>",
+        "tags":
+        [
+            "CIS Microsoft Azure Foundations v1.0.0 ref:_ARG_2_",
+            "CIS Microsoft Azure Foundations v1.2.0 ref:_ARG_2_",
+            "https://learn.microsoft.com/en-us/azure/vpn-gateway/vpn-gateway-howto-point-to-site-resource-manager-portal",
+            "https://learn.microsoft.com/en-us/azure/vpn-gateway/tutorial-site-to-site-portal",
+            "https://learn.microsoft.com/en-us/azure/expressroute/",
+            "https://learn.microsoft.com/en-us/azure/security/fundamentals/network-best-practices#disable-rdpssh-access-to-azure-virtual-machines",
+            "https://learn.microsoft.com/en-us/azure/security/benchmarks/security-controls-v2-network-security"
+        ],
+        "sort_order": 28
+    },
+    {
+        "testcase": "Network Configurations - Network Watchers Not Enabled",
+        "code": "network_watchers_disabled",
+        "details": "<p>Network watchers should be enabled.</p><p><b>Display Path</b>: network.subscriptions.id.watchers</p><p><b>Path</b>: network.subscriptions.id.watchers</p><p><b>Conditions</b>: and,network.subscriptions.id.watchers,empty,</p>",
+        "tags":
+        [
+            "CIS Microsoft Azure Foundations v1.0.0 ref:6.5",
+            "CIS Microsoft Azure Foundations v1.2.0 ref:6.5",
+            "https://learn.microsoft.com/en-us/azure/network-watcher/network-watcher-monitoring-overview",
+            "https://docs.azure.cn/zh-cn/cli/network/watcher?view=azure-cli-latest",
+            "https://learn.microsoft.com/en-us/azure/network-watcher/network-watcher-create",
+            "https://learn.microsoft.com/en-us/azure/security/benchmarks/security-controls-v2-asset-management#am-2-ensure-security-team-has-access-to-asset-inventory-and-metadata"
+        ],
+        "sort_order": 29
+    },
+    {
+        "testcase": "Network - Network Watchers Not Provisioned",
+        "code": "network_watchers_not_provisioned",
+        "details": "<p>Network watchers should be provisioned to work.</p><p><b>Display Path</b>: network.subscriptions.id.watchers.id</p><p><b>Path</b>: network.subscriptions.id.watchers.id</p><p><b>Conditions</b>: and,network.subscriptions.id.watchers.id.provisioning_state,notEqual,Succeeded</p>",
+        "tags":
+        [
+            "CIS Microsoft Azure Foundations v1.0.0 ref:6.5"
+        ],
+        "sort_order": 30
+    },
+    {
+        "testcase": "PostgreSQL Firewall Rules - PostgreSQL Database Allow Ingress 0.0.0.0/0 (Any IP)",
+        "code": "start_ip",
+        "details": "<p>If access from Azure services is enabled, the server's firewall will accept connections from all Azure resources, including resources not in your subscription. This is usually not a desired configuration. Instead, setup firewall rules to allow access from specific network ranges or VNET rules to allow access from specific virtual networks.</p><p><b>Recommendation</b>: From Azure Console: <ol><li>Login to Azure Portal using https://portal.azure.com</li><li>Go to <samp>Azure Database</samp> for <samp>PostgreSQL server</samp></li><li>For each database, click on <samp>Connection security</samp></li><li>In <samp>Firewall rukes</samp></li><li>Ensure <samp> Allow access to Azure services</samp> is set to 'OFF'</li><li>Click <samp>Save</samp> to apply the changed rule.</li></ol></p><p><b>Display Path</b>: postgresqldatabase.subscriptions.id.servers.id</p><p><b>Path</b>: postgresqldatabase.subscriptions.id.servers.id.postgresql_firewall_rules.id</p><p><b>Conditions</b>: and,postgresqldatabase.subscriptions.id.servers.id.postgresql_firewall_rules.id.start_ip,equal,0.0.0.0</p>",
+        "tags":
+        [
+            "CIS Microsoft Azure Foundations v1.2.0 ref:4.3.9",
+            "https://learn.microsoft.com/en-us/azure/postgresql/concepts-firewall-rules",
+            "https://learn.microsoft.com/en-us/azure/postgresql/howto-manage-firewall-using-cli",
+            "https://learn.microsoft.com/en-us/azure/security/benchmarks/security-controls-v2-network-security#ns-1-implement-security-for-internal-traffic",
+            "https://learn.microsoft.com/en-us/azure/security/benchmarks/security-controls-v2-network-security#ns-4-protect-applications-and-services-from-external-network-attacks"
+        ],
+        "sort_order": 31
+    },
+    {
+        "testcase": "PostgreSQL Servers - Server Parameter Connection Throttling Not Set to 'ON'",
+        "code": "server_connection_throttling_value",
+        "details": "<p>Enabling <samp>connection_throttling</samp> helps the PostgreSQL Database to <samp>Set the verbosity of logged messages</samp> which in turn generates query and error logs with respect to concurrent connections, that could lead to a successful Denial of Service (DoS) attack by exhausting connection resources. A system can also fail or be degraded by an overload of legitimate users. Query and error logs can be used to identify, troubleshoot, and repair configuration errors and sub-optimal performance.</p><p><b>Recommendation</b>: From Azure Console: <ol><li>Login to Azure Portal using https://portal.azure.com</li><li>Go to <samp>Azure Database</samp> for <samp>PostgreSQL server</samp></li><li>For each database, click on <samp>Server parameters</samp></li><li>Search for <samp>connection_throttling.</samp></li><li>Click <samp>ON</samp> and save.</li></ol></p><p><b>Path</b>: postgresqldatabase.subscriptions.id.servers.id</p><p><b>Conditions</b>: and,postgresqldatabase.subscriptions.id.servers.id.connection_throttling.value,equal,off</p>",
+        "tags":
+        [
+            "CIS Microsoft Azure Foundations v1.2.0 ref:4.3.7",
+            "https://learn.microsoft.com/en-us/rest/api/postgresql/configurations/listbyserver",
+            "https://learn.microsoft.com/en-us/azure/postgresql/howto-configure-server-parameters-using-portal",
+            "https://learn.microsoft.com/en-us/azure/security/benchmarks/security-controls-v2-logging-threat-detection#lt-4-enable-logging-for-azure-resources"
+        ],
+        "sort_order": 32
+    },
+    {
+        "testcase": "PostgreSQL Servers - Server Parameter Log Checkpoints Not Set to 'ON'",
+        "code": "server_log_checkpoints_value",
+        "details": "<p>Enabling <samp>log_checkpoints</samp> helps the PostgreSQL Database to Log each checkpoint in turn generates query and error logs. However, access to transaction logs is not supported. Query and error logs can be used to identify, troubleshoot, and repair configuration errors and sub-optimal performance.</p><p><b>Recommendation</b>: From Azure Console: <ol><li>Login to Azure Portal using https://portal.azure.com</li><li>Go to <samp>Azure Database</samp> for <samp>PostgreSQL server</samp></li><li>For each database, click on <samp>Server parameters</samp></li><li>Search for <samp>log_checkpoints.</samp></li><li>Click <samp>ON</samp> and save.</li></ol></p><p><b>Path</b>: postgresqldatabase.subscriptions.id.servers.id</p><p><b>Conditions</b>: and,postgresqldatabase.subscriptions.id.servers.id.log_checkpoints.value,equal,off</p>",
+        "tags":
+        [
+            "CIS Microsoft Azure Foundations v1.2.0 ref:4.3.3",
+            "https://learn.microsoft.com/en-us/rest/api/postgresql/configurations/listbyserver",
+            "https://learn.microsoft.com/en-us/azure/postgresql/howto-configure-server-parameters-using-portal",
+            "https://learn.microsoft.com/en-us/azure/security/benchmarks/security-controls-v2-logging-threat-detection#lt-4-enable-logging-for-azure-resources"
+        ],
+        "sort_order": 33
+    },
+    {
+        "testcase": "PostgreSQL Servers - Server Parameter Log Connections Not Set to 'ON'",
+        "code": "server_log_connections_value",
+        "details": "<p>Enabling <samp>log_connections</samp> helps PostgreSQL Database to log attempted connection to the server, as well as successful completion of client authentication. Log data can be used to identify, troubleshoot, and repair configuration errors and suboptimal performance.</p><p><b>Recommendation</b>: From Azure Console: <ol><li>Login to Azure Portal using https://portal.azure.com</li><li>Go to <samp>Azure Database</samp> for <samp>PostgreSQL server</samp></li><li>For each database, click on <samp>Server parameters</samp></li><li>Search for <samp>log_connection.</samp></li><li>Click <samp>ON</samp> and save.</li></ol></p><p><b>Path</b>: postgresqldatabase.subscriptions.id.servers.id</p><p><b>Conditions</b>: and,postgresqldatabase.subscriptions.id.servers.id.log_connections.value,equal,off</p>",
+        "tags":
+        [
+            "CIS Microsoft Azure Foundations v1.2.0 ref:4.3.4",
+            "https://learn.microsoft.com/en-us/rest/api/postgresql/configurations/listbyserver",
+            "https://learn.microsoft.com/en-us/azure/postgresql/howto-configure-server-parameters-using-portal",
+            "https://learn.microsoft.com/en-us/azure/security/benchmarks/security-controls-v2-logging-threat-detection#lt-4-enable-logging-for-azure-resources"
+        ],
+        "sort_order": 34
+    },
+    {
+        "testcase": "PostgreSQL Servers - Server Parameter Log Disconnections Not Set to 'ON'",
+        "code": "server_log_disconnections_value",
+        "details": "<p>Enabling <samp>log_disconnections</samp>helps PostgreSQL Database to <samp>Logs end of a session</samp>, including duration, which in turn generates query and error logs. Query and error logs can be used to identify, troubleshoot, and repair configuration errors and sub-optimal performance.</p><p><b>Recommendation</b>: From Azure Console: <ol><li>Login to Azure Portal using https://portal.azure.com</li><li>Go to <samp>Azure Database</samp> for <samp>PostgreSQL server</samp></li><li>For each database, click on <samp>Server parameters</samp></li><li>Search for <samp>log_disconnection.</samp></li><li>Click <samp>ON</samp> and save.</li></ol></p><p><b>Path</b>: postgresqldatabase.subscriptions.id.servers.id</p><p><b>Conditions</b>: and,postgresqldatabase.subscriptions.id.servers.id.log_disconnections.value,equal,off</p>",
+        "tags":
+        [
+            "CIS Microsoft Azure Foundations v1.2.0 ref:4.3.5",
+            "https://learn.microsoft.com/en-us/rest/api/postgresql/configurations/listbyserver",
+            "https://learn.microsoft.com/en-us/azure/postgresql/howto-configure-server-parameters-using-portal",
+            "https://learn.microsoft.com/en-us/azure/security/benchmarks/security-controls-v2-logging-threat-detection#lt-4-enable-logging-for-azure-resources"
+        ],
+        "sort_order": 35
+    },
+    {
+        "testcase": "PostgreSQL Servers - Server Parameter Log Duration Not Set to 'ON'",
+        "code": "server_log_duration_value",
+        "details": "<p>Enabling <samp>log_duration</samp> helps the PostgreSQL Database to <samp>Logs the duration of each completed SQL statement</samp> which in turn generates query and error logs. Query and error logs can be used to identify, troubleshoot, and repair configuration errors and sub-optimal performance.</p><p><b>Recommendation</b>: From Azure Console: <ol><li>Login to Azure Portal using https://portal.azure.com</li><li>Go to <samp>Azure Database</samp> for <samp>PostgreSQL server</samp></li><li>For each database, click on <samp>Server parameters</samp></li><li>Search for <samp>log_duration.</samp></li><li>Click <samp>ON</samp> and save.</li></ol></p><p><b>Path</b>: postgresqldatabase.subscriptions.id.servers.id</p><p><b>Conditions</b>: and,postgresqldatabase.subscriptions.id.servers.id.log_duration.value,equal,off</p>",
+        "tags":
+        [
+            "CIS Microsoft Azure Foundations v1.2.0 ref:4.3.6",
+            "https://learn.microsoft.com/en-us/rest/api/postgresql/configurations/listbyserver",
+            "https://learn.microsoft.com/en-us/azure/postgresql/howto-configure-server-parameters-using-portal",
+            "https://learn.microsoft.com/en-us/azure/security/benchmarks/security-controls-v2-logging-threat-detection#lt-4-enable-logging-for-azure-resources"
+        ],
+        "sort_order": 36
+    },
+    {
+        "testcase": "PostgreSQL Servers - Server Parameter Log Retention Days Less Than 4",
+        "code": "server_log_retention_days_value",
+        "details": "<p>Enabling <samp>log_retention_days</samp> helps PostgreSQL Database to <samp>Sets number of days a log file is retained</samp> which in turn generates query and error logs. Query and error logs can be used to identify, troubleshoot, and repair configuration errors and sub-optimal performance.</p><p><b>Recommendation</b>: From Azure Console: <ol><li>Login to Azure Portal using https://portal.azure.com</li><li>Go to <samp>Azure Database</samp> for <samp>PostgreSQL server</samp></li><li>For each database, click on <samp>Server parameters</samp></li><li>Search for <samp>retention_days.</samp></li><li>Enter value in range 4-7 (inclusive) and save.</li></ol></p><p><b>Path</b>: postgresqldatabase.subscriptions.id.servers.id</p><p><b>Conditions</b>: and,postgresqldatabase.subscriptions.id.servers.id.log_retention_days.value,lessThan,4</p>",
+        "tags":
+        [
+            "CIS Microsoft Azure Foundations v1.2.0 ref:4.3.8",
+            "https://learn.microsoft.com/en-us/rest/api/postgresql/configurations/listbyserver",
+            "https://learn.microsoft.com/en-us/azure/postgresql/howto-configure-server-parameters-using-portal",
+            "https://learn.microsoft.com/en-us/azure/security/benchmarks/security-controls-v2-logging-threat-detection#lt-4-enable-logging-for-azure-resources"
+        ],
+        "sort_order": 37
+    },
+    {
+        "testcase": "PostgreSQL Servers - Enforce SSL Connection Is Disabled for PostgreSQL Database Server",
+        "code": "ssl_enforcement",
+        "details": "<p><samp>SSL connectivity</samp> helps to provide a new layer of security, by connecting database server to client applications using Secure Sockets Layer (SSL). Enforcing SSL connections between database server and client applications helps protect against \"man in the middle\" attacks by encrypting the data stream between the server and application.</p><p><b>Recommendation</b>: From Azure Console: <ol><li>Login to Azure Portal using https://portal.azure.com</li><li>Go to <samp>Azure Database</samp> for <samp>PostgreSQL server</samp></li><li>For each database, click on <samp>Connection security</samp></li><li>In <samp>SSL</samp> settings.</li><li>Click <samp>Enabled</samp> to Enforce SSL connection</li></ol></p><p><b>Path</b>: postgresqldatabase.subscriptions.id.servers.id</p><p><b>Conditions</b>: and,postgresqldatabase.subscriptions.id.servers.id.ssl_enforcement,equal,Disabled</p>",
+        "tags":
+        [
+            "CIS Microsoft Azure Foundations v1.2.0 ref:4.3.1",
+            "https://learn.microsoft.com/en-us/azure/postgresql/concepts-ssl-connection-security",
+            "https://learn.microsoft.com/en-us/azure/security/benchmarks/security-controls-v2-data-protection#dp-4-encrypt-sensitive-information-in-transit"
+        ],
+        "sort_order": 38
+    },
+    {
+        "testcase": "Roles - No Administering Resource Locks Role",
+        "code": "missing_custom_role_administering_resource_locks",
+        "details": "<p>Given the resource lock functionality is outside of standard Role Based Access Control(RBAC), it would be prudent to create a resource lock administrator role to prevent inadvertent unlocking of resources.</p><p><b>Recommendation</b>: From Azure Console: <ol><li>In the Azure portal, open a subscription or resource group where you want the custom role to be assignable.</li><li>Select <samp>Access control (IAM)</samp></li> <li> Click <samp> Add</samp></li><li>Select Add custom role</li><li>\n    Select Add custom role\n</li><li>\n    In the Custom Role Name field enter <samp>Resource Lock Administrator</samp>\n</li>\n<li>\n    In the <samp>Description</samp> field enter <samp>Can Administer Resource Locks</samp>\n</li>\n<li>\n    For <samp>Baseline permissions</samp> select <samp> Start from scratch</samp>\n</li>\n<li>\n    Click <samp>next</samp>\n</li>\n<li>\n    In the <samp>Permissions</samp> select <samp>Add permissions</samp>\n</li>\n<li>In the Search for a permission box, type in <samp>Microsoft.Authorization/locks</samp> to search for permissions.</li>\n<li> Select the check box next to the permission called <samp>Microsoft.Authorization/locks</samp></li>\n<li>Click <samp>add</samp></li>\n<li>Click <samp>Review+create</samp></li>\n<li>Click <samp>Create</samp></li>\n<li>Assign the newly created role to the appropriate user</li> </ol></p><p><b>Path</b>: rbac.subscriptions.id.custom_roles_report.id</p><p><b>Conditions</b>: and,rbac.subscriptions.id.custom_roles_report.id.missing_custom_role_administering_resource_locks,true,</p>",
+        "tags":
+        [
+            "CIS Microsoft Azure Foundations v1.2.0 ref:1.23",
+            "https://learn.microsoft.com/en-us/azure/role-based-access-control/custom-roles",
+            "https://learn.microsoft.com/en-us/azure/role-based-access-control/check-access"
+        ],
+        "sort_order": 39
+    },
+    {
+        "testcase": "Roles - Custom Subscription Owner Role Not Allowed",
+        "code": "custom_subscription_owner_role",
+        "details": "<p>Classic subscription admin roles offer basic access management and include Account Administrator, Service Administrator, and Co-Administrators. It is recommended the least necessary permissions be given initially. Permissions can be added as needed by the account holder. This ensures the account holder cannot perform actions which were not intended.</p><p><b>Recommendation</b>: From Azure Command Line Interface 2.0: <ol><li><samp>az role definition list</samp></li><li>Check for entries with <samp>assignableScope</samp> of <samp>/</samp> or a <samp> subscription</samp>, and an action of <samp>*</samp></li> <li> Verify the usage and impact of removing the role identified:</li><li><samp>az role definition delete --name \"rolename\"</samp></li></ol></p><p><b>Path</b>: rbac.subscriptions.id.roles.id</p><p><b>Conditions</b>: and,rbac.subscriptions.id.roles.id.custom_subscription_owner_role,true,</p>",
+        "tags":
+        [
+            "CIS Microsoft Azure Foundations v1.2.0 ref:1.21",
+            "https://learn.microsoft.com/en-us/azure/cost-management-billing/manage/add-change-subscription-administrator",
+            "https://learn.microsoft.com/en-us/azure/security/benchmarks/security-controls-v2-governance-strategy",
+            "https://learn.microsoft.com/en-us/azure/security/benchmarks/security-controls-v2-privileged-access"
+        ],
+        "sort_order": 40
+    },
+    {
+        "testcase": "Security Center - No Automatic Provisioning of Monitoring Agent",
+        "code": "auto_provision",
+        "details": "<p>When Automatic provisioning of monitoring agentis turned on, Azure Security Center provisions the Microsoft Monitoring Agent on all existing supported Azure virtual machines and any new ones that are created. The Microsoft Monitoring Agent scans for various security-related configurations and events such as system updates, OS vulnerabilities, endpoint protection, and provides alerts.</p><p><b>Recommendation</b>: From Azure console:<ol><li>Go to <samp>Security Center</samp></li><li>Click on <samp>Pricing & Settings</samp></li><li>Click on subscription</li><li>Click on <samp>Data Collection</samp></li><li>Set <samp>Automatic provisioning</samp> to <samp>On</samp></li><li>Click <samp>Save</samp></li></ol></p><p><b>Path</b>: securitycenter.subscriptions.id.auto_provisioning_settings.id</p><p><b>Conditions</b>: and,securitycenter.subscriptions.id.auto_provisioning_settings.id.auto_provision,false,</p>",
+        "tags":
+        [
+            "CIS Microsoft Azure Foundations v1.1.0 ref:2.2",
+            "CIS Microsoft Azure Foundations v1.2.0 ref:2.9",
+            "https://learn.microsoft.com/en-us/azure/security-center/security-center-data-security",
+            "https://learn.microsoft.com/en-us/azure/security-center/security-center-enable-data-collection",
+            "https://learn.microsoft.com/en-us/previous-versions/azure/reference/mt704062(v=azure.100)?redirectedfrom=MSDN",
+            "https://learn.microsoft.com/en-us/previous-versions/azure/reference/mt704063(v=azure.100)?redirectedfrom=MSDN",
+            "https://learn.microsoft.com/en-us/rest/api/securitycenter/autoprovisioningsettings/list",
+            "https://learn.microsoft.com/en-us/rest/api/securitycenter/autoprovisioningsettings/create",
+            "https://learn.microsoft.com/en-us/azure/security/benchmarks/security-controls-v2-posture-vulnerability-management#pv-6-perform-software-vulnerability-assessments"
+        ],
+        "sort_order": 41
+    },
+    {
+        "testcase": "Security contacts - No Security Contact Email Set",
+        "code": "email",
+        "details": "<p>Azure Security Center emails the Subscription Owner to notify them about security alerts. Adding your Security Contact's email address to the 'Additional email addresses' field ensures that your organization's Security Team is included in these alerts. This ensures that the proper people are aware of any potential compromise in order to mitigate the risk in a timely fashion.</p><p><b>Recommendation</b>: From Azure console:<ol><li>Go to <samp>Security Center</samp></li><li>Click on <samp>Pricing & Settings</samp></li><li>Click on the appropriate Management Group, Subscription, or Workspace</li><li>Click on <samp>Email notifications</samp></li><li>Enter a valid security contact email address (or multiple addresses separated by commas) in the <samp>Additional email addresses</samp> field</li><li>Click <samp>Save</samp></li></ol></p><p><b>Path</b>: securitycenter.subscriptions.id.security_contacts.id</p><p><b>Conditions</b>: and,securitycenter.subscriptions.id.security_contacts.id.email,equal,</p>",
+        "tags":
+        [
+            "CIS Microsoft Azure Foundations v1.1.0 ref:2.16",
+            "CIS Microsoft Azure Foundations v1.2.0 ref:2.11",
+            "https://learn.microsoft.com/en-us/azure/security-center/security-center-provide-security-contact-details",
+            "https://learn.microsoft.com/en-us/rest/api/securitycenter/securitycontacts/list",
+            "https://learn.microsoft.com/en-us/azure/security/benchmarks/security-controls-v2-governance-strategy#gs-3-define-security-posture-management-strategy"
+        ],
+        "sort_order": 42
+    },
+    {
+        "testcase": "Security contacts - \"Sending Email to Security Contact on Alert\" Is \"Off\"",
+        "code": "alerts_to_admins",
+        "details": "<p>Enabling security alert emails to subscription owners ensures that they receive security alert emails from Microsoft. This ensures that they are aware of any potential security issues and can mitigate the risk in a timely fashion.</p><p><b>Recommendation</b>: From Azure console:<ol><li>Go to <samp>Security Center</samp></li><li>Click on <samp>Pricing & Settings</samp></li><li>Click on the appropriate Management Group, Subscription, or Workspace</li><li>Click on <samp>Email notifications</samp></li><li> In the drop down of the <samp>All users with the following roles</samp> field select <samp>Owner</samp></li><li>Click <samp>Save</samp></li></ol></p><p><b>Path</b>: securitycenter.subscriptions.id.security_contacts.id</p><p><b>Conditions</b>: and,securitycenter.subscriptions.id.security_contacts.id.alerts_to_admins,false,</p>",
+        "tags":
+        [
+            "CIS Microsoft Azure Foundations v1.1.0 ref:2.19",
+            "CIS Microsoft Azure Foundations v1.2.0 ref:2.13",
+            "https://learn.microsoft.com/en-us/azure/security-center/security-center-provide-security-contact-details",
+            "https://learn.microsoft.com/en-us/rest/api/securitycenter/securitycontacts/list",
+            "https://learn.microsoft.com/en-us/azure/security/benchmarks/security-controls-v2-governance-strategy#gs-3-define-security-posture-management-strategy"
+        ],
+        "sort_order": 43
+    },
+    {
+        "testcase": "Security contacts - \"Sending Email to Administrators on Alert\" Is \"Off\"",
+        "code": "alert_notifications",
+        "details": "<p>Enabling securityalert emails ensures that security alert emails are received from Microsoft. This ensures that the right people are aware of any potential security issues and are able to mitigate the risk.</p><p><b>Recommendation</b>: From Azure console:<ol><li>Go to <samp>Security Center</samp></li><li>Click on <samp>Pricing & Settings</samp></li><li>Click on the appropriate Management Group, Subscription, or Workspace</li><li>Click on <samp>Email notifications</samp></li><li>Under 'Notification types', check the check box next to <samp>Notify about alerts with the following severity (or higher)</samp>: and select <samp>High</samp> from the drop down menu</li><li>Click <samp>Save</samp></li></ol></p><p><b>Path</b>: securitycenter.subscriptions.id.security_contacts.id</p><p><b>Conditions</b>: and,securitycenter.subscriptions.id.security_contacts.id.alert_notifications,false,</p>",
+        "tags":
+        [
+            "CIS Microsoft Azure Foundations v1.0.0 ref:2.18",
+            "CIS Microsoft Azure Foundations v1.2.0 ref:2.12",
+            "https://learn.microsoft.com/en-us/azure/security-center/security-center-provide-security-contact-details",
+            "https://learn.microsoft.com/en-us/rest/api/securitycenter/securitycontacts/list",
+            "https://learn.microsoft.com/en-us/azure/security/benchmarks/security-controls-v2-governance-strategy#gs-3-define-security-posture-management-strategy"
+        ],
+        "sort_order": 44
+    },
+    {
+        "testcase": "Security Center - No Security Contact Set",
+        "code": "security_contact_not_set",
+        "details": "<p>Set at least one security contact.</p><p><b>Path</b>: securitycenter.subscriptions.id.security_contacts</p><p><b>Conditions</b>: and,securitycenter.subscriptions.id.security_contacts,empty,</p>",
+        "tags":
+        [
+            "CIS Microsoft Azure Foundations v1.0.0 ref:2.16",
+            "CIS Microsoft Azure Foundations v1.0.0 ref:2.17"
+        ],
+        "sort_order": 45
+    },
+    {
+        "testcase": "Security contacts - No Security Contact Phone Set",
+        "code": "phone",
+        "details": "<p>Set at least one security contact phone number.</p><p><b>Path</b>: securitycenter.subscriptions.id.security_contacts.id</p><p><b>Conditions</b>: and,securitycenter.subscriptions.id.security_contacts.id.phone,equal,</p>",
+        "tags":
+        [
+            "CIS Microsoft Azure Foundations v1.1.0 ref:2.17"
+        ],
+        "sort_order": 46
+    },
+    {
+        "testcase": "Security Settings - Microsoft Cloud App Security (MCAS) Is Disabled",
+        "code": "enabled",
+        "details": "<p>Security Center offers an additional layer of protection by using Azure Resource Manager events, which is considered to be the control plane for Azure. By analyzing the Azure Resource Manager records, Security Center detects unusual or potentially harmful operations in the Azure subscription environment. Several of the preceding analytics are powered by Microsoft Cloud App Security.</p><p><b>Recommendation</b>: From Azure console:<ol><li>Go to <samp>Azure Security Center</samp></li><li>Select <samp>Security policy</samp> blade</li><li>Click on <samp>Edit Settings</samp> to alter the the security policy for a subscription</li><li>Select the <samp>Threat Detection</samp> blade</li><li>Check/Enable option <samp>Allow Microsoft Cloud App Security to access my data</samp></li><li>Select <samp>Save</samp></li></ol></p><p><b>Path</b>: securitycenter.subscriptions.id.settings.id</p><p><b>Conditions</b>: and,securitycenter.subscriptions.id.settings.id.name,equal,MCAS,securitycenter.subscriptions.id.settings.id.enabled,false,</p>",
+        "tags":
+        [
+            "CIS Microsoft Azure Foundations v1.2.0 ref:2.8",
+            "https://learn.microsoft.com/en-in/azure/security-center/azure-defender#azure-management-layer-azure-resource-manager-preview",
+            "https://learn.microsoft.com/en-us/rest/api/securitycenter/settings/list",
+            "https://learn.microsoft.com/en-us/rest/api/securitycenter/settings/update"
+        ],
+        "sort_order": 47
+    },
+    {
+        "testcase": "Security Settings - Windows Defender ATP (WDATP) Is Disabled",
+        "code": "enabled",
+        "details": "<p>WDATP integration brings comprehensive Endpoint Detection and Response (EDR) capabilities within security center. This integration helps to spot abnormalities, detect and respond to advanced attacks on Windows server endpoints monitored by Azure Security Center. Windows Defender ATP in Security Center supports detection on Windows Server 2016, 2012 R2, and 2008 R2 SP1 operating systems in a Standard service subscription.</p><p><b>Recommendation</b>: From Azure console:<ol><li>Go to <samp>Azure Security Center</samp></li><li>Select <samp>Security policy</samp> blade</li><li>Click on <samp>Edit Settings</samp> to alter the the security policy for a subscription</li><li>Select the <samp>Threat Detection</samp> blade</li><li>Check/Enable option <samp>Allow Windows Defender ATP to access my data</samp></li><li>Select <samp>Save</samp></li></ol></p><p><b>Path</b>: securitycenter.subscriptions.id.settings.id</p><p><b>Conditions</b>: and,securitycenter.subscriptions.id.settings.id.name,equal,WDATP,securitycenter.subscriptions.id.settings.id.enabled,false,</p>",
+        "tags":
+        [
+            "CIS Microsoft Azure Foundations v1.2.0 ref:2.7",
+            "https://learn.microsoft.com/en-in/azure/security-center/security-center-wdatp",
+            "https://learn.microsoft.com/en-us/rest/api/securitycenter/settings/list",
+            "https://learn.microsoft.com/en-us/rest/api/securitycenter/settings/update"
+        ],
+        "sort_order": 48
+    },
+    {
+        "testcase": "Pricings - Standard Tier Not Enabled",
+        "code": "pricing_tier",
+        "details": "<p>Enabling Azure Defender allows for greater defense-in-depth, with threat detection provided by the Microsoft Security Response Center (MSRC).</p><p><b>Recommendation</b>: From Azure console:<ol><li>Go to <samp>Security Center</samp></li><li>Click on <samp>Pricing & Settings</samp></li><li>Click on the subscription name</li><li>Select <samp>Azure Defender plans</samp> blade</li><li>On the line in the table for the resource type Select <samp>On</samp> under <samp>Plan</samp></li><li>Click <samp>Save</samp></li></ol></p><p><b>Display Path</b>: securitycenter.subscriptions.id.pricings.id</p><p><b>Path</b>: securitycenter.subscriptions.id.pricings.id</p><p><b>Conditions</b>: and,securitycenter.subscriptions.id.pricings.id.pricing_tier,notEqual,Standard</p>",
+        "tags":
+        [
+            "CIS Microsoft Azure Foundations v1.1.0 ref:2.1",
+            "CIS Microsoft Azure Foundations v1.2.0 ref:2.1 to 2.6",
+            "https://learn.microsoft.com/en-us/rest/api/securitycenter/pricings/list",
+            "https://learn.microsoft.com/en-us/azure/security-center/security-center-alerts-overview"
+        ],
+        "sort_order": 49
+    },
+    {
+        "testcase": "Firewall Rules - SQL Database Allow Ingress 0.0.0.0/0 (Any IP)",
+        "code": "start_ip",
+        "details": "<p>SQL Server includes a firewall to block access to unauthorized connections. More granular IP addresses can be defined by referencing the range of addresses available from specific datacenters. In order to reduce the potential attack surface for a SQL server, firewall rules should be defined with more granular IP addresses by referencing the range of addresses available from specific datacenters.</p><p><b>Recommendation</b>: In the Azure console:<ol><li>Go to <samp>SQL servers</samp></li><li>For each SQL server</li><li>Click on <samp>Firewall/Virtual Networks</samp></li><li>Set <samp>Allow access to Azure services</samp> to 'OFF'</li><li>Set firewall rules to limit access to only authorized connections</li></ol></p><p><b>Display Path</b>: sqldatabase.subscriptions.id.servers.id</p><p><b>Path</b>: sqldatabase.subscriptions.id.servers.id.firewall_rules.id</p><p><b>Conditions</b>: and,sqldatabase.subscriptions.id.servers.id.firewall_rules.id.start_ip,equal,0.0.0.0</p>",
+        "tags":
+        [
+            "CIS Microsoft Azure Foundations v1.2.0 ref:6.3",
+            "https://learn.microsoft.com/en-us/sql/database-engine/configure-windows/configure-a-windows-firewall-for-database-engine-access?view=sql-server-2017",
+            "https://learn.microsoft.com/en-us/powershell/module/azurerm.sql/get-azurermsqlserverfirewallrule?view=azurermps-6.13.0&viewFallbackFrom=azurermps-5.2.0",
+            "https://learn.microsoft.com/en-us/azure/azure-sql/database/firewall-configure",
+            "https://learn.microsoft.com/en-us/sql/relational-databases/system-stored-procedures/sp-set-database-firewall-rule-azure-sql-database?view=azuresqldb-current"
+        ],
+        "sort_order": 50
+    },
+    {
+        "testcase": "SQL Databases - Short Auditing Retention Period for SQL Databases",
+        "code": "db_low_auditing_retention",
+        "details": "<p>Auditing retention period should be greater than _ARG_0_ days. Audit Logs can be used to check for anomalies and give insight into suspected breaches or misuse of information and access.</p><p><b>Recommendation</b>: From Azure Console:\n<ol>\n    <li>Go to <samp>SQL servers</samp></li>\n    <li>For each server instance</li>\n    <li>Click on <samp>Auditing</samp></li>\n    <li>Select <samp>Storage Details</samp> </li>\n    <li>Ensure <samp>Retention (days) </samp>setting <samp>greater than 90 days</samp></li>\n</ol></p><p><b>Display Path</b>: sqldatabase.subscriptions.id.servers.id</p><p><b>Path</b>: sqldatabase.subscriptions.id.servers.id.databases.id</p><p><b>Conditions</b>: and,sqldatabase.subscriptions.id.servers.id.databases.id.auditing.retention_days,notEqual,0,sqldatabase.subscriptions.id.servers.id.databases.id.auditing.retention_days,lessThan,_ARG_0_</p>",
+        "tags":
+        [
+            "CIS Microsoft Azure Foundations v1.2.0 ref:4.1.3",
+            "CIS Microsoft Azure Foundations v1.0.0 ref:4.2",
+            "https://learn.microsoft.com/en-us/azure/sql-database/sql-database-auditing",
+            "https://learn.microsoft.com/en-us/powershell/module/azurerm.sql/get-azurermsqlserverauditing?view=azurermps-5.2.0",
+            "https://learn.microsoft.com/en-us/powershell/module/azurerm.sql/set-azurermsqlserverauditing?view=azurermps-5.2.0",
+            "https://learn.microsoft.com/en-us/azure/security/benchmarks/security-controls-v2-logging-threat-detection#lt-6-configure-log-storage-retention"
+        ],
+        "sort_order": 51
+    },
+    {
+        "testcase": "SQL Databases - Auditing Disabled for SQL Databases",
+        "code": "db_auditing_disabled",
+        "details": "<p>Auditing tracks database events and writes them to an audit log in the Azure storage account. It also helps to maintain regulatory compliance, understand database activity, and gain insight into discrepancies and anomalies that could indicate business concerns or suspected security violations.</p><p><b>Recommendation</b>: From Azure Console:\n<ol>\n    <li>Go to <samp>SQL servers</samp></li>\n    <li>For each server instance</li>\n    <li>Click on <samp>Auditing</samp></li>\n    <li>Set <samp>Auditing</samp> to On</li>\n</ol></p><p><b>Display Path</b>: sqldatabase.subscriptions.id.servers.id</p><p><b>Path</b>: sqldatabase.subscriptions.id.servers.id.databases.id</p><p><b>Conditions</b>: and,sqldatabase.subscriptions.id.servers.id.databases.id.auditing.auditing_enabled,false,</p>",
+        "tags":
+        [
+            "CIS Microsoft Azure Foundations v1.2.0 ref:4.1.1",
+            "CIS Microsoft Azure Foundations v1.0.0 ref:4.2",
+            "https://learn.microsoft.com/en-us/azure/security-center/security-center-enable-auditing-on-sql-servers",
+            "https://learn.microsoft.com/en-us/powershell/module/azurerm.sql/get-azurermsqlserverauditing?view=azurermps-5.2.0",
+            "https://learn.microsoft.com/en-us/powershell/module/azurerm.sql/set-azurermsqlserverauditingpolicy?view=azurermps-5.2.0",
+            "https://learn.microsoft.com/en-us/azure/sql-database/sql-database-auditing",
+            "https://learn.microsoft.com/en-us/azure/security/benchmarks/security-controls-v2-logging-threat-detection#lt-4-enable-logging-for-azure-resources"
+        ],
+        "sort_order": 52
+    },
+    {
+        "testcase": "SQL Databases - Threat Detection Disabled for SQL Databases",
+        "code": "db_threat_detection_disabled",
+        "details": "<p>Enable threat detection for all of SQL databases.</p><p><b>Display Path</b>: sqldatabase.subscriptions.id.servers.id</p><p><b>Path</b>: sqldatabase.subscriptions.id.servers.id.databases.id</p><p><b>Conditions</b>: and,sqldatabase.subscriptions.id.servers.id.databases.id.threat_detection.threat_detection_enabled,false,</p>",
+        "tags":
+        [
+            "CIS Microsoft Azure Foundations v1.0.0 ref:4.2"
+        ],
+        "sort_order": 53
+    },
+    {
+        "testcase": "SQL Databases - Data Encryption Disabled for SQL Databases",
+        "code": "transparent_data_encryption_enabled",
+        "details": "<p>Azure SQL Database transparent data encryption helps protect against the threat of malicious activity by performing real-time encryption and decryption of the database, associated backups, and transaction log files at rest without requiring changes to the application.</p><p><b>Recommendation</b>: From Azure Console: <ol><li>Go to <samp>SQL databases</samp></li>\n<li>For each DB instance</li>\n<li>Click on <samp>Transparent data encryption</samp></li>\n<li>Set <samp>Data encryption</samp> to On</li></ol></p><p><b>Display Path</b>: sqldatabase.subscriptions.id.servers.id</p><p><b>Path</b>: sqldatabase.subscriptions.id.servers.id.databases.id</p><p><b>Conditions</b>: and,sqldatabase.subscriptions.id.servers.id.databases.id.transparent_data_encryption_enabled,false,</p>",
+        "tags":
+        [
+            "CIS Microsoft Azure Foundations v1.2.0 ref:4.1.2",
+            "CIS Microsoft Azure Foundations v1.0.0 ref:4.2",
+            "https://learn.microsoft.com/en-us/sql/relational-databases/security/encryption/transparent-data-encryption-with-azure-sql-database",
+            "https://learn.microsoft.com/en-us/azure/security/benchmarks/security-controls-v2-data-protection#dp-5-encrypt-sensitive-data-at-rest"
+        ],
+        "sort_order": 54
+    },
+    {
+        "testcase": "SQL Databases - Threat Detection Alerts Disabled for SQL Databases",
+        "code": "db_threat_detection_alerts_disabled",
+        "details": "<p>Enable alerts related to threat detections.</p><p><b>Display Path</b>: sqldatabase.subscriptions.id.servers.id</p><p><b>Path</b>: sqldatabase.subscriptions.id.servers.id.databases.id</p><p><b>Conditions</b>: and,sqldatabase.subscriptions.id.servers.id.databases.id.threat_detection.alerts_enabled,false,</p>",
+        "tags":
+        [
+            "CIS Microsoft Azure Foundations v1.0.0 ref:4.2"
+        ],
+        "sort_order": 55
+    },
+    {
+        "testcase": "SQL Databases - Short Threat Detection Period for SQL Databases",
+        "code": "db_low_threat_detection_retention",
+        "details": "<p>Threat detection retention period should be greater than _ARG_0_ days.</p><p><b>Display Path</b>: sqldatabase.subscriptions.id.servers.id</p><p><b>Path</b>: sqldatabase.subscriptions.id.servers.id.databases.id</p><p><b>Conditions</b>: and,sqldatabase.subscriptions.id.servers.id.databases.id.threat_detection.retention_days,notEqual,0,sqldatabase.subscriptions.id.servers.id.databases.id.threat_detection.retention_days,lessThan,_ARG_0_</p>",
+        "tags":
+        [
+            "CIS Microsoft Azure Foundations v1.0.0 ref:4.2"
+        ],
+        "sort_order": 56
+    },
+    {
+        "testcase": "SQL Databases - Send Threat Detection Alerts Disabled for SQL Databases",
+        "code": "db_send_threat_detection_alerts_disabled",
+        "details": "<p>Specify email addresses and ensure that alerts are sent to them.</p><p><b>Display Path</b>: sqldatabase.subscriptions.id.servers.id</p><p><b>Path</b>: sqldatabase.subscriptions.id.servers.id.databases.id</p><p><b>Conditions</b>: and,sqldatabase.subscriptions.id.servers.id.databases.id.threat_detection.send_alerts_enabled,false,</p>",
+        "tags":
+        [
+            "CIS Microsoft Azure Foundations v1.0.0 ref:4.2.4",
+            "CIS Microsoft Azure Foundations v1.0.0 ref:4.2.5"
+        ],
+        "sort_order": 57
+    },
+    {
+        "testcase": "SQL Databases - SQL Server TDE Protector Not Encrypted with Customer-Managed Key",
+        "code": "server_encryption_protectors_TDE_protector_is_encrypted",
+        "details": "<p>Customer-managed key support for Transparent Data Encryption (TDE) allows user control of TDE encryption keys and restricts who can access them and when. Azure Key Vault, Azure’s cloud-based external key management system is the first key management service where TDE has integrated support for Customer-managed keys. With Customer-managed key support, the database encryption key is protected by an asymmetric key stored inthe Key Vault. The asymmetric key is set at the server level and inherited by all databases under that server.</p><p><b>Recommendation</b>: From Azure console: <br> Go to <samp>SQL servers</samp><br>For the desired server instance<br><ol><li>Click on <samp>Transparent data encryption</samp></li><li>Set <samp> Use your own key</samp> to <samp>YES</samp></li><li>Browse through your <samp>key vaults</samp> to Select an existing key or create a new key in Key Vault</li><li>Check <samp>Make selected key the default TDE protector</samp></li></ol></p><p><b>Display Path</b>: sqldatabase.subscriptions.id.servers.id</p><p><b>Path</b>: sqldatabase.subscriptions.id.servers.id</p><p><b>Conditions</b>: and,sqldatabase.subscriptions.id.servers.id.encryption_protectors.TDE_protector_is_encrypted,false,</p>",
+        "tags":
+        [
+            "CIS Microsoft Azure Foundations v1.2.0 ref:4.5",
+            "https://learn.microsoft.com/en-us/azure/azure-sql/database/transparent-data-encryption-byok-overview?view=sql-server-ver15",
+            "https://azure.microsoft.com/en-in/blog/preview-sql-transparent-data-encryption-tde-with-bring-your-own-key-support/",
+            "https://winterdom.com/2017/09/07/azure-sql-tde-protector-keyvault",
+            "https://learn.microsoft.com/en-us/azure/azure-sql/database/transparent-data-encryption-byok-overview?view=sql-server-ver15"
+        ],
+        "sort_order": 58
+    },
+    {
+        "testcase": "SQL Servers - Short Auditing Retention Period for SQL Servers",
+        "code": "server_low_auditing_retention",
+        "details": "<p>Auditing retention period should be greater than _ARG_0_ days.</p><p><b>Display Path</b>: sqldatabase.subscriptions.id.servers.id</p><p><b>Path</b>: sqldatabase.subscriptions.id.servers.id</p><p><b>Conditions</b>: and,sqldatabase.subscriptions.id.servers.id.auditing.retention_days,notEqual,0,sqldatabase.subscriptions.id.servers.id.auditing.retention_days,lessThan,_ARG_0_</p>",
+        "tags":
+        [
+            "CIS Microsoft Azure Foundations v1.0.0 ref:4.1"
+        ],
+        "sort_order": 59
+    },
+    {
+        "testcase": "SQL Databases - Azure Active Directory Admin Not Configured for SQL Servers",
+        "code": "ad_admin",
+        "details": "<p>Azure Active Directory authentication is a mechanism to connect to Microsoft Azure SQL Database and SQL Data Warehouse by using identities in Azure Active Directory (Azure AD). With Azure AD authentication, identities of database users and other Microsoft services can be managed in one central location. Central ID management provides a single place to manage database users and simplifies permission management.</p><p><b>Recommendation</b>: From Azure console:<ol><li>Go to <samp>SQL servers</samp></li><li>For each SQL server, click on <samp>Active Directory admin</samp></li><li>Click on <samp>Set admin</samp></li><li>Select an admin</li><li>Click <samp>Save</samp></li></ol></p><p><b>Display Path</b>: sqldatabase.subscriptions.id.servers.id</p><p><b>Path</b>: sqldatabase.subscriptions.id.servers.id</p><p><b>Conditions</b>: and,sqldatabase.subscriptions.id.servers.id.ad_admin,empty,</p>",
+        "tags":
+        [
+            "CIS Microsoft Azure Foundations v1.0.0 ref:4.1",
+            "CIS Microsoft Azure Foundations v1.2.0 ref:4.4",
+            "https://learn.microsoft.com/en-us/azure/azure-sql/database/authentication-aad-configure?tabs=azure-powershell",
+            "https://learn.microsoft.com/en-us/azure/azure-sql/database/authentication-aad-overview",
+            "https://learn.microsoft.com/en-us/powershell/module/azurerm.sql/get-azurermsqlserveractivedirectoryadministrator?view=azurermps-6.13.0&viewFallbackFrom=azurermps-5.2.0",
+            "https://learn.microsoft.com/en-us/powershell/module/azurerm.sql/set-azurermsqlserveractivedirectoryadministrator?view=azurermps-6.13.0&viewFallbackFrom=azurermps-5.2.0",
+            "https://learn.microsoft.com/en-us/azure/security/benchmarks/security-controls-v2-identity-management#im-1-standardize-azure-active-directory-as-the-central-identity-and-authentication-system"
+        ],
+        "sort_order": 60
+    },
+    {
+        "testcase": "SQL Servers - Auditing Disabled for SQL Servers",
+        "code": "server_auditing_disabled",
+        "details": "<p>Enable auditing for all SQL servers.</p><p><b>Display Path</b>: sqldatabase.subscriptions.id.servers.id</p><p><b>Path</b>: sqldatabase.subscriptions.id.servers.id</p><p><b>Conditions</b>: and,sqldatabase.subscriptions.id.servers.id.auditing.auditing_enabled,false,</p>",
+        "tags":
+        [
+            "CIS Microsoft Azure Foundations v1.0.0 ref:4.1"
+        ],
+        "sort_order": 61
+    },
+    {
+        "testcase": "SQL Servers - Advanced Threat Protection (ATP) Disabled for SQL Servers",
+        "code": "server_threat_detection_disabled",
+        "details": "<p>SQL Server \"Advanced Data Security\" (ADS) provides a new layer of security, which enables customers to detect and respond to potential threats as they occur by providing security alerts on anomalous activities. Users will receive an alert upon suspicious database activities, potential vulnerabilities, and SQL injection attacks, as well as anomalous database access patterns.</p><p><b>Display Path</b>: sqldatabase.subscriptions.id.servers.id</p><p><b>Path</b>: sqldatabase.subscriptions.id.servers.id</p><p><b>Conditions</b>: and,sqldatabase.subscriptions.id.servers.id.threat_detection.threat_detection_enabled,false,</p>",
+        "tags":
+        [
+            "CIS Microsoft Azure Foundations v1.2.0 ref:4.2.1",
+            "CIS Microsoft Azure Foundations v1.0.0 ref:4.1",
+            "https://learn.microsoft.com/en-us/azure/sql-database/sql-advanced-threat-protection",
+            "https://learn.microsoft.com/en-us/azure/azure-sql/database/azure-defender-for-sql"
+        ],
+        "sort_order": 62
+    },
+    {
+        "testcase": "SQL Servers - Advanced Threat Protection Disabled Types for SQL Servers",
+        "code": "server_threat_detection_alerts_disabled",
+        "details": "<p>Enabling all threat protection types protects against SQL injection, database vulnerabilities, and any other anomalous activities.</p><p><b>Display Path</b>: sqldatabase.subscriptions.id.servers.id</p><p><b>Path</b>: sqldatabase.subscriptions.id.servers.id</p><p><b>Conditions</b>: and,sqldatabase.subscriptions.id.servers.id.threat_detection.alerts_enabled,false,</p>",
+        "tags":
+        [
+            "CIS Microsoft Azure Foundations v1.2.0 ref:4.2.2",
+            "CIS Microsoft Azure Foundations v1.0.0 ref:4.1",
+            "https://learn.microsoft.com/en-us/azure/sql-database/sql-advanced-threat-protection",
+            "https://learn.microsoft.com/en-us/azure/azure-sql/database/azure-defender-for-sql"
+        ],
+        "sort_order": 63
+    },
+    {
+        "testcase": "SQL Servers - Short Threat Detection Retention Period for SQL Servers",
+        "code": "server_low_threat_detection_retention",
+        "details": "<p>Threat detection retention period should be greater than _ARG_0_ days.</p><p><b>Display Path</b>: sqldatabase.subscriptions.id.servers.id</p><p><b>Path</b>: sqldatabase.subscriptions.id.servers.id</p><p><b>Conditions</b>: and,sqldatabase.subscriptions.id.servers.id.threat_detection.retention_days,notEqual,0,sqldatabase.subscriptions.id.servers.id.threat_detection.retention_days,lessThan,_ARG_0_</p>",
+        "tags":
+        [
+            "CIS Microsoft Azure Foundations v1.0.0 ref:4.1"
+        ],
+        "sort_order": 64
+    },
+    {
+        "testcase": "SQL Servers - Send Advanced Threat Protection Alerts Disabled for SQL Servers",
+        "code": "server_send_threat_detection_alerts_disabled",
+        "details": "<p>Providing the email address and enable Administrator and subscription owner to receive alerts ensures that any detection of anomalous activities is reported as soon as possible, making it more likely to mitigate any potential risk sooner.</p><p><b>Display Path</b>: sqldatabase.subscriptions.id.servers.id</p><p><b>Path</b>: sqldatabase.subscriptions.id.servers.id</p><p><b>Conditions</b>: and,sqldatabase.subscriptions.id.servers.id.threat_detection.send_alerts_enabled,false,</p>",
+        "tags":
+        [
+            "CIS Microsoft Azure Foundations v1.2.0 ref:4.2.3",
+            "CIS Microsoft Azure Foundations v1.2.0 ref:4.2.4",
+            "CIS Microsoft Azure Foundations v1.0.0 ref:4.1.4",
+            "CIS Microsoft Azure Foundations v1.0.0 ref:4.1.5",
+            "https://learn.microsoft.com/en-us/azure/sql-database/sql-advanced-threat-protection",
+            "https://learn.microsoft.com/en-us/azure/azure-sql/database/azure-defender-for-sql"
+        ],
+        "sort_order": 65
+    },
+    {
+        "testcase": "SQL Servers - Vulnerability Assessment (VA) Is Disabled on SQL Servers",
+        "code": "server_vulnerability_storage_account_name",
+        "details": "<p>Enabling Advanced Data Security on a SQL server does not enables Vulnerability Assessment capability for individual SQL databases unless storage account is set to store the scanning data and reports.</p><p><b>Recommendation</b>: In the Azure console: <ol> <li>Go to <samp>SQL servers</samp></li><li>For each server instance</li><li>Click on <samp>Advanced Data Security</samp></li><li>Set <samp> Advanced Data Security to On</samp> if not already</li><li>In Section <samp>Vulnerability Assessment Settings</samp>, Click <samp>Storage Accounts</samp></li><li>Choose Storage Account (Existing or Create New). Click <samp>Ok</samp></li><li>Click <samp>Save</samp></li></ol></p><p><b>Display Path</b>: sqldatabase.subscriptions.id.servers.id</p><p><b>Path</b>: sqldatabase.subscriptions.id.servers.id</p><p><b>Conditions</b>: and,sqldatabase.subscriptions.id.servers.id.server_vulnerability.storage_account_name,null,</p>",
+        "tags":
+        [
+            "CIS Microsoft Azure Foundations v1.2.0 ref:4.2.5",
+            "https://learn.microsoft.com/en-us/azure/azure-sql/database/sql-vulnerability-assessment",
+            "https://learn.microsoft.com/en-us/rest/api/sql/servervulnerabilityassessments/listbyserver",
+            "https://learn.microsoft.com/en-in/powershell/module/Az.Sql/Update-AzSqlServerVulnerabilityAssessmentSetting?view=azps-5.5.0&viewFallbackFrom=azps-2.6.0",
+            "https://learn.microsoft.com/en-in/powershell/module/Az.Sql/Get-AzSqlServerVulnerabilityAssessmentSetting?view=azps-5.5.0&viewFallbackFrom=azps-2.6.0",
+            "https://learn.microsoft.com/en-us/azure/security/benchmarks/security-controls-v2-posture-vulnerability-management#pv-6-perform-software-vulnerability-assessments"
+        ],
+        "sort_order": 66
+    },
+    {
+        "testcase": "SQL Servers - Send Email Notifications to Admins and Subscription Owners Is Not Set on SQL Servers",
+        "code": "server_vulnerability_email_subscription_admin",
+        "details": "<p>ADS -VA scan reports and alerts will be sent to admins and subscription owners by enabling setting 'Also send email notifications to admins and subscription owners'. This may help in reducing time required for identifying risks and taking corrective measures.</p><p><b>Recommendation</b>: In the Azure console: <ol> <li>Go to <samp>SQL servers</samp></li><li>For each server instance</li><li>Click on <samp>Advanced Data Security</samp></li><li>Set <samp> Advanced Data Security to On</samp> if not already</li><li>In Section <samp>Vulnerability Assessment Settings</samp>, set <samp>Storage Accounts</samp> if not already</li><li>Check/enable 'Also send email notifications to admins and subscription owners'</li><li>Click <samp>Save</samp></li></ol></p><p><b>Display Path</b>: sqldatabase.subscriptions.id.servers.id</p><p><b>Path</b>: sqldatabase.subscriptions.id.servers.id</p><p><b>Conditions</b>: and,sqldatabase.subscriptions.id.servers.id.server_vulnerability.email_subscription_admin,false,</p>",
+        "tags":
+        [
+            "CIS Microsoft Azure Foundations v1.2.0 ref:4.2.8",
+            "https://learn.microsoft.com/en-us/azure/azure-sql/database/sql-vulnerability-assessment",
+            "https://learn.microsoft.com/en-us/rest/api/sql/servervulnerabilityassessments/listbyserver",
+            "https://learn.microsoft.com/en-in/powershell/module/Az.Sql/Update-AzSqlServerVulnerabilityAssessmentSetting?view=azps-5.5.0&viewFallbackFrom=azps-2.6.0",
+            "https://learn.microsoft.com/en-in/powershell/module/Az.Sql/Get-AzSqlServerVulnerabilityAssessmentSetting?view=azps-5.5.0&viewFallbackFrom=azps-2.6.0",
+            "https://learn.microsoft.com/en-us/azure/security/benchmarks/security-controls-v2-posture-vulnerability-management#pv-6-perform-software-vulnerability-assessments"
+        ],
+        "sort_order": 67
+    },
+    {
+        "testcase": "SQL Servers - Periodic Recurring Scans Is Disabled on SQL Servers",
+        "code": "server_vulnerability_recurring_scans_enabled",
+        "details": "<p>ADS -VA setting 'Periodic recurring scans' schedules periodic (weekly) vulnerability scanning for the SQL server and corresponding Databases. Periodic and regular vulnerability scanning provides risk visibility based on updated known vulnerability signatures and best practices.</p><p><b>Recommendation</b>: In the Azure console: <ol> <li>Go to <samp>SQL servers</samp></li><li>For each server instance</li><li>Click on <samp>Advanced Data Security</samp></li><li>Set <samp> Advanced Data Security to On</samp> if not already</li><li>In Section <samp>Vulnerability Assessment Settings</samp>, set <samp>Storage Accounts</samp> if not already</li><li>Toggle 'Periodic recurring scans' ton ON</li><li>Click <samp>Save</samp></li></ol></p><p><b>Display Path</b>: sqldatabase.subscriptions.id.servers.id</p><p><b>Path</b>: sqldatabase.subscriptions.id.servers.id</p><p><b>Conditions</b>: and,sqldatabase.subscriptions.id.servers.id.server_vulnerability.recurring_scans_enabled,false,</p>",
+        "tags":
+        [
+            "CIS Microsoft Azure Foundations v1.2.0 ref:4.2.6",
+            "https://learn.microsoft.com/en-us/azure/azure-sql/database/sql-vulnerability-assessment",
+            "https://learn.microsoft.com/en-us/rest/api/sql/servervulnerabilityassessments/listbyserver",
+            "https://learn.microsoft.com/en-in/powershell/module/Az.Sql/Update-AzSqlServerVulnerabilityAssessmentSetting?view=azps-5.5.0&viewFallbackFrom=azps-2.6.0",
+            "https://learn.microsoft.com/en-in/powershell/module/Az.Sql/Get-AzSqlServerVulnerabilityAssessmentSetting?view=azps-5.5.0&viewFallbackFrom=azps-2.6.0",
+            "https://learn.microsoft.com/en-us/azure/security/benchmarks/security-controls-v2-posture-vulnerability-management#pv-6-perform-software-vulnerability-assessments"
+        ],
+        "sort_order": 68
+    },
+    {
+        "testcase": "SQL Servers - Send Scan Report to Is Not Configured on SQL Servers",
+        "code": "server_vulnerability_send_scan_reports_to_not_empty",
+        "details": "<p>ADS -VA scan reports and alerts will be sent to email ids configured at 'Send scan reports to'. This may help in reducing time required for identifying risks and taking corrective measures.</p><p><b>Recommendation</b>: In the Azure console: <ol> <li>Go to <samp>SQL servers</samp></li><li>For each server instance</li><li>Click on <samp>Advanced Data Security</samp></li><li>Set <samp> Advanced Data Security to On</samp> if not already</li><li>In Section <samp>Vulnerability Assessment Settings</samp>, set <samp>Storage Accounts</samp> if not already</li><li>Configure email ids for concerned data owners/stakeholders at 'Send scan reports to'</li><li>Click <samp>Save</samp></li></ol></p><p><b>Display Path</b>: sqldatabase.subscriptions.id.servers.id</p><p><b>Path</b>: sqldatabase.subscriptions.id.servers.id</p><p><b>Conditions</b>: and,sqldatabase.subscriptions.id.servers.id.server_vulnerability.send_scan_reports_to_not_empty,false,</p>",
+        "tags":
+        [
+            "CIS Microsoft Azure Foundations v1.2.0 ref:4.2.7",
+            "https://learn.microsoft.com/en-us/azure/azure-sql/database/sql-vulnerability-assessment",
+            "https://learn.microsoft.com/en-us/rest/api/sql/servervulnerabilityassessments/listbyserver",
+            "https://learn.microsoft.com/en-in/powershell/module/Az.Sql/Update-AzSqlServerVulnerabilityAssessmentSetting?view=azps-5.5.0&viewFallbackFrom=azps-2.6.0",
+            "https://learn.microsoft.com/en-in/powershell/module/Az.Sql/Get-AzSqlServerVulnerabilityAssessmentSetting?view=azps-5.5.0&viewFallbackFrom=azps-2.6.0",
+            "https://learn.microsoft.com/en-us/azure/security/benchmarks/security-controls-v2-posture-vulnerability-management#pv-6-perform-software-vulnerability-assessments"
+        ],
+        "sort_order": 69
+    },
+    {
+        "testcase": "Storage Accounts - Access Keys Not Rotated",
+        "code": "access_keys_rotated",
+        "details": "<p>When a storage account is created, Azure generates two 512-bit storage access keys, which are used for authentication when the storage account is accessed. Rotating these keys periodically ensures that any inadvertent access or exposure does not result in these keys being compromised.<br><br>The access keys storage accounts should be rotated at least every _ARG_0_ days.</p><p><b>Recommendation</b>: Follow Microsoft Azure documentation for regenerating storage account access keys.</p><p><b>Path</b>: storageaccounts.subscriptions.id.storage_accounts.id</p><p><b>Conditions</b>: and,storageaccounts.subscriptions.id.storage_accounts.id.shared_key_access_allowed,true,,or,storageaccounts.subscriptions.id.storage_accounts.id.access_keys_last_rotation_date,equal,None,storageaccounts.subscriptions.id.storage_accounts.id.access_keys_last_rotation_date,olderThan,_ARG_0_,days</p>",
+        "tags":
+        [
+            "CIS Microsoft Azure Foundations v1.1.0 ref:3.2",
+            "CIS Microsoft Azure Foundations v1.2.0 ref:3.2",
+            "https://learn.microsoft.com/en-us/azure/storage/common/storage-create-storage-account",
+            "https://learn.microsoft.com/en-us/azure/security/benchmarks/security-controls-v2-privileged-access"
+        ],
+        "sort_order": 70
+    },
+    {
+        "testcase": "Accounts - Secure Transfer (HTTPS) Not Enforced",
+        "code": "https_traffic_enabled",
+        "details": "<p>The secure transfer option enhances the security of a storage account by only allowing requests to the storage account by a secure connection.<br><br>For example, when calling REST APIs to access storage accounts, the connection must use HTTPS. Any requests using HTTP will be rejected when 'secure transfer required' is enabled. When using the Azure files service, connection without encryption will fail, including scenarios using SMB 2.1, SMB 3.0 without encryption, and some flavors of the Linux SMB client.<br><br>Because Azure storage does not support HTTPS for custom domain names, this option is not applied when using a custom domain name.</p><p><b>Recommendation</b>: In the Azure console:<ol><li>Go to <samp>Storage Accounts</samp></li> <li>For each storage account, go to <samp>Configuration</samp></li> <li>Set <samp>Secure transfer</samp> required to <samp>Enabled</samp></li></ol></p><p><b>Path</b>: storageaccounts.subscriptions.id.storage_accounts.id</p><p><b>Conditions</b>: and,storageaccounts.subscriptions.id.storage_accounts.id.https_traffic_enabled,false,</p>",
+        "tags":
+        [
+            "CIS Microsoft Azure Foundations v1.1.0 ref:3.1",
+            "CIS Microsoft Azure Foundations v1.2.0 ref:3.1",
+            "https://learn.microsoft.com/en-us/azure/storage/common/storage-security-guide",
+            "https://learn.microsoft.com/en-us/azure/storage/common/storage-require-secure-transfer",
+            "https://learn.microsoft.com/en-us/azure/storage/blobs/security-recommendations#encryption-in-transit",
+            "https://learn.microsoft.com/en-us/cli/azure/storage/account?view=azure-cli-latest#az_storage_account_list",
+            "https://learn.microsoft.com/en-us/cli/azure/storage/account?view=azure-cli-latest#az_storage_account_update",
+            "https://learn.microsoft.com/en-us/azure/security/benchmarks/security-controls-v2-data-protection#dp-4-encrypt-sensitive-information-in-transit"
+        ],
+        "sort_order": 71
+    },
+    {
+        "testcase": "Accounts - Storage Not Encrypted with Customer Managed Key",
+        "code": "encryption_key_customer_managed",
+        "details": "<p>By default, data in the storage account is encrypted using Microsoft Managed Keys at rest.<br><br>If sensitive information is stored, it should be encrypted using either Server-side Customer-Managed keys or Client-side Encryption. In the case of Client-side Encryption, it is difficult to decipher if the customer loses the key.<br><br></p><p><b>Recommendation</b>: In the Azure console:<ol><li>Go to <samp>Storage Accounts</samp></li> <li>For each storage account, go to <samp>Encryption</samp></li> <li>Set <samp>Customer Managed Keys</samp> </li><li>Select the <samp>Encryption key</samp> and enter the appropriate setting value</li></ol></p><p><b>Path</b>: storageaccounts.subscriptions.id.storage_accounts.id</p><p><b>Conditions</b>: and,storageaccounts.subscriptions.id.storage_accounts.id.encryption_key_customer_managed,equal,False</p>",
+        "tags":
+        [
+            "CIS Microsoft Azure Foundations v1.2.0 ref:3.9",
+            "https://learn.microsoft.com/en-us/azure/storage/common/storage-service-encryption",
+            "https://learn.microsoft.com/en-us/azure/security/fundamentals/data-encryption-best-practices#protect-data-at-rest"
+        ],
+        "sort_order": 72
+    },
+    {
+        "testcase": "Blob Containers - Blob Containers Allowing Public Access",
+        "code": "public_access_allowed",
+        "details": "<p>Anonymous, public read access to a container and its blobs can be enabled in Azure Blob storage. It grants read-only access to these resources without sharing the account key, and without requiring a shared access signature.<br><br>It is recommended not to provide anonymous access to blob containers until, and unless, it is strongly desired. A shared access signature token should be used for providing controlled and timed access to blob containers.</p><p><b>Recommendation</b>: First, follow Microsoft documentation and created shared access signature tokens for your blob containers.<br><br>Then, in the Azure console:<ol><li>Go to <samp>Storage Accounts</samp></li> <li>For each storage account, go to <samp>Containers</samp> under <samp>Blob Service</samp></li> <li>For each container, click <samp>Access policy</samp></li> <li>Set <samp>Public access level</samp> to <samp>Private (no anonymous access)</samp></li></ol></p><p><b>Display Path</b>: storageaccounts.subscriptions.id.storage_accounts.id</p><p><b>Path</b>: storageaccounts.subscriptions.id.storage_accounts.id.blob_containers.id</p><p><b>Conditions</b>: and,storageaccounts.subscriptions.id.storage_accounts.id.blob_containers.id.public_access_allowed,true,</p>",
+        "tags":
+        [
+            "CIS Microsoft Azure Foundations v1.1.0 ref:3.6",
+            "CIS Microsoft Azure Foundations v1.2.0 ref:3.5",
+            "https://learn.microsoft.com/en-us/azure/storage/blobs/storage-manage-access-to-resources",
+            "https://learn.microsoft.com/en-us/azure/security/benchmarks/security-controls-v2-privileged-access"
+        ],
+        "sort_order": 73
+    },
+    {
+        "testcase": "Storage Accounts - Storage Accounts Allowing Public Traffic",
+        "code": "public_traffic_allowed",
+        "details": "<p>Restricting default network access helps to provide a new layer of security, since storage accounts accept connections from clients on any network. To limit access to selected networks, the default action must be changed.</p><p><b>Recommendation</b>: In the Azure console: <ol> <li>Go to <samp>Storage Accounts</samp></li> <li>For each storage account, click on the settings menu called <samp>Firewalls and virtual networks</samp>.</li> <li>Ensure that you have elected to allow access from <samp>Selected networks</samp>.</li> <li>Add rules to allow traffic from specific network.</li> <li>Click <samp>Save</samp> to apply your changes.</li> </ol></p><p><b>Path</b>: storageaccounts.subscriptions.id.storage_accounts.id</p><p><b>Conditions</b>: and,storageaccounts.subscriptions.id.storage_accounts.id.public_traffic_allowed,true,</p>",
+        "tags":
+        [
+            "CIS Microsoft Azure Foundations v1.1.0 ref:3.7",
+            "CIS Microsoft Azure Foundations v1.2.0 ref:3.6",
+            "https://learn.microsoft.com/en-us/azure/storage/common/storage-network-security",
+            "https://learn.microsoft.com/en-us/azure/security/benchmarks/security-controls-v2-governance-strategy"
+        ],
+        "sort_order": 74
+    },
+    {
+        "testcase": "Accounts - Storage Account Soft Delete Disabled",
+        "code": "soft_delete_enabled",
+        "details": "<p>Enabling this configuration for azure storage ensures that even if blobs/data were deleted from the storage account, Blobs/data objects remain recoverable for a particular time which set in the \"Retention policies\" </p><p><b>Recommendation</b>: In the Azure console:<ol><li>Go to <samp>Storage Accounts</samp></li> <li>For each storage account, navigate to <samp>Data protection</samp></li> <li>Ensure that soft delete is <samp>Enabled</samp></li></ol></p><p><b>Display Path</b>: storageaccounts.subscriptions.id.storage_accounts.id</p><p><b>Path</b>: storageaccounts.subscriptions.id.storage_accounts.id.blob_services.id</p><p><b>Conditions</b>: and,storageaccounts.subscriptions.id.storage_accounts.id.blob_services.id.soft_delete_enabled,false,</p>",
+        "tags":
+        [
+            "CIS Microsoft Azure Foundations v1.2.0 ref:3.8",
+            "https://learn.microsoft.com/en-us/azure/storage/blobs/storage-blob-soft-delete"
+        ],
+        "sort_order": 75
+    },
+    {
+        "testcase": "Storage Accounts - Trusted Microsoft Services Enabled",
+        "code": "trusted_microsoft_services_enabled",
+        "details": "<p>Some Microsoft services that interact with storage accounts operate from networks that can't be granted access through network rules. To help this type of service work as intended allow the set of trusted Microsoft services to bypass the network rules. These services will then use strong authentication to access the storage account.<br><br>If the <samp>Allow trusted Microsoft services</samp> exception is enabled the following services are granted access to the storage account:<br> <ul> <li>Azure Backup</li> <li>Azure Site Recovery</li> <li>Azure DevTest Labs</li> <li>Azure Event Grid</li> <li>Azure Event Hubs</li> <li>Azure Networking</li> <li>Azure Monitor</li> <li>Azure SQL Data Warehouse (when registered in the subscription)</li> </ul></p><p><b>Recommendation</b>: In the Azure console: <ol> <li>Go to <samp>Storage Accounts</samp></li> <li>For each storage account, click on the settings menu called <samp>Firewalls and virtual networks</samp>.</li> <li>Ensure that you have elected to allow access from <samp>Selected networks</samp>.</li> <li>Enable check box for <samp>Allow trusted Microsoft services to access this storage account</samp>.</li> <li>Click <samp>Save</samp> to apply your changes.</li> </ol></p><p><b>Path</b>: storageaccounts.subscriptions.id.storage_accounts.id</p><p><b>Conditions</b>: and,storageaccounts.subscriptions.id.storage_accounts.id.trusted_microsoft_services_enabled,false,</p>",
+        "tags":
+        [
+            "CIS Microsoft Azure Foundations v1.1.0 ref:3.8",
+            "CIS Microsoft Azure Foundations v1.2.0 ref:3.7",
+            "https://learn.microsoft.com/en-us/azure/storage/common/storage-network-security",
+            "https://learn.microsoft.com/en-us/azure/security/benchmarks/security-controls-v2-network-security#ns-1-implement-security-for-internal-traffic"
+        ],
+        "sort_order": 76
+    },
+    {
+        "testcase": "Disks - Disks Lacking Encryption",
+        "code": "encryption_type",
+        "details": "<p>Encrypting disks ensures that their entire content is fully unrecoverable without a key and thus protects the volume from unwarranted reads.</p><p><b>Recommendation</b>: Ensure that disks are encrypted, where possible.</p><p><b>Path</b>: virtualmachines.subscriptions.id.disks.id</p><p><b>Conditions</b>: and,virtualmachines.subscriptions.id.disks.id.encryption_type,null,,virtualmachines.subscriptions.id.disks.id.encryption_ade,false,</p>",
+        "tags":
+        [
+            "CIS Microsoft Azure Foundations v1.0.0 ref:7.2",
+            "CIS Microsoft Azure Foundations v1.0.0 ref:7.3",
+            "CIS Microsoft Azure Foundations v1.1.0 ref:7.1",
+            "CIS Microsoft Azure Foundations v1.1.0 ref:7.2",
+            "CIS Microsoft Azure Foundations v1.1.0 ref:7.3",
+            "https://learn.microsoft.com/en-us/azure/security/azure-security-disk-encryption-overview",
+            "https://learn.microsoft.com/en-us/azure/security-center/security-center-apply-disk-encryption"
+        ],
+        "sort_order": 77
+    },
+    {
+        "testcase": "Instances - Virtual Machine Extensions Installed",
+        "code": "extensions",
+        "details": "<p>Azure virtual machine extensions are small applications that provide post-deployment configuration and automation tasks on Azure virtual machines. These extensions run with administrative privileges and could potentially access anything on a virtual machine. The Azure Portal and community provide several such extensions.</p><p><b>Recommendation</b>: From Azure console: <ol> <li>Go to <samp>Virtual machines</samp></li><li>For each virtual machine, go to <samp>Settings</samp></li><li>Click on <samp>Extensions</samp></li><li>If there are unapproved extensions, uninstall them.</li></ol></p><p><b>Path</b>: virtualmachines.subscriptions.id.instances.id</p><p><b>Conditions</b>: and,virtualmachines.subscriptions.id.instances.id.extension_names,containAtLeastOneDifferentFrom,AzureDiskEncryption,AzureDiskEncryptionForLinux</p>",
+        "tags":
+        [
+            "CIS Microsoft Azure Foundations v1.0.0 ref:7.4",
+            "CIS Microsoft Azure Foundations v1.1.0 ref:7.4",
+            "CIS Microsoft Azure Foundations v1.2.0 ref:7.4",
+            "https://learn.microsoft.com/en-us/azure/virtual-machines/windows/extensions-features",
+            "https://learn.microsoft.com/en-us/azure/security/benchmarks/security-controls-v2-endpoint-security"
+        ],
+        "sort_order": 78
+    },
+    {
+        "testcase": "Instances - Virtual Machines Not Utilizing Managed Disks",
+        "code": "OS Managed Disk ID",
+        "details": "<p>Managed disks are by default encrypted on the underlying hardware so no additional encryption is required for basic protection, it is available if additional encryption is required. Managed disks are by design more resilient that storage accounts.</p><p><b>Recommendation</b>: From Azure console:<ol><li> Using the search feature, go to <samp>Virtual Machines</samp></li><li>Select the virtual machine you would like to convert</li><li>Select <samp> Disks</samp> in the menu for the VM</li><li>At the top select <samp>Migrate to managed disks</samp></li><li>You may follow the prompts to convert the disk and finish by selecting 'Migrate' to start the process</li></ol></p><p><b>Path</b>: virtualmachines.subscriptions.id.instances.id</p><p><b>Conditions</b>: and,virtualmachines.subscriptions.id.instances.id.storage_profile.OS Managed Disk ID,equal,None</p>",
+        "tags":
+        [
+            "CIS Microsoft Azure Foundations v1.2.0 ref:7.1",
+            "https://learn.microsoft.com/en-us/azure/virtual-machines/windows/convert-unmanaged-to-managed-disks",
+            "https://learn.microsoft.com/en-us/azure/security/benchmarks/security-controls-v2-governance-strategy#gs-1-define-asset-management-and-data-protection-strategy"
+        ],
+        "sort_order": 79
+    },
+    {
+        "testcase": "Disks - OS and Data Disks Not Encrypted with CMK",
+        "code": "encryption_type",
+        "details": "<p>Encrypting the IaaS VM's OS disk (boot volume), Data disks (non-boot volume) ensures that the entire content is fully unrecoverable without a key and thus protects the volume from unwarranted reads. CMK is superior encryption although requires additional planning.</p><p><b>Recommendation</b>: From Azure console: <ol><li>Go to <samp>Virtual machines</samp></li><li>For each virtual machine, go to <samp>Settings</samp></li><li>Click on <samp>Disks</samp></li><li>Click the <samp>X</samp> to detach the disk from the VM</li><li>Now search for <samp>Disks</samp> and locate the unattached disk</li><li>Click the disk then select <samp>Encryption</samp></li><li>Change your encryption type, then select your encryption set</li><li>Click <samp>Save</samp></li><li>Go back to the VM and re-attach the dsk</li></ol></p><p><b>Path</b>: virtualmachines.subscriptions.id.disks.id</p><p><b>Conditions</b>: and,or,virtualmachines.subscriptions.id.disks.id.encryption_type,null,,virtualmachines.subscriptions.id.disks.id.encryption_type,equal,EncryptionAtRestWithPlatformKey,virtualmachines.subscriptions.id.disks.id.encryption_ade,false,</p>",
+        "tags":
+        [
+            "CIS Microsoft Azure Foundations v1.2.0 ref:7.2",
+            "https://learn.microsoft.com/en-us/azure/security/fundamentals/azure-disk-encryption-vms-vmss",
+            "https://learn.microsoft.com/en-us/azure/security-center/asset-inventory?toc=%2Fazure%2Fsecurity%2Ftoc.json",
+            "https://learn.microsoft.com/en-us/azure/security/fundamentals/data-encryption-best-practices#protect-data-at-rest",
+            "https://learn.microsoft.com/en-us/rest/api/compute/disks/delete",
+            "https://learn.microsoft.com/en-us/rest/api/compute/disks/update#encryptionsettings",
+            "https://learn.microsoft.com/en-us/azure/security/benchmarks/security-controls-v2-data-protection#dp-5-encrypt-sensitive-data-at-rest"
+        ],
+        "sort_order": 80
+    },
+    {
+        "testcase": "Disks - Unattached Disks Not Encrypted with CMK",
+        "code": "encryption_type",
+        "details": "<p>Managed disks are encrypted by default with Platform-managed keys. Using Customer-managed keys may provide an additional level of security or meet an organization's regulatory requirements. Encrypting managed disks ensures that its entire content is fully unrecoverable without a key and thus protects the volume from unwarranted reads. Even if the disk is not attached to any of the VMs, there is always a risk where a compromised user account with administrative access to VM service can mount/attach these data disks which may lead to sensitive information disclosure and tampering.</p><p><b>Recommendation</b>: If data stored in the disk is no longer useful, refer to Azure documentation to delete unattached data disks at : <ol><li>https://learn.microsoft.com/en-us/rest/api/compute/disks/delete</li><li>https://learn.microsoft.com/en-us/cli/azure/disk?view=azure-cli-latest#az-disk-delete</li></ol><br> If data stored in the disk is important, To encrypt the disk refer azure documentation at: <ol><li>https://learn.microsoft.com/en-us/azure/virtual-machines/disks-enable-customer-managed-keys-portal</li><li>https://learn.microsoft.com/en-us/rest/api/compute/disks/update#encryptionsettings</li></ol></p><p><b>Path</b>: virtualmachines.subscriptions.id.disks.id</p><p><b>Conditions</b>: and,virtualmachines.subscriptions.id.disks.id.disk_state,equal,Unattached,or,virtualmachines.subscriptions.id.disks.id.encryption_type,null,,virtualmachines.subscriptions.id.disks.id.encryption_type,equal,EncryptionAtRestWithPlatformKey,virtualmachines.subscriptions.id.disks.id.encryption_ade,false,</p>",
+        "tags":
+        [
+            "CIS Microsoft Azure Foundations v1.2.0 ref:7.3",
+            "https://learn.microsoft.com/en-us/azure/security/fundamentals/azure-disk-encryption-vms-vmss",
+            "https://learn.microsoft.com/en-us/azure/security-center/asset-inventory?toc=%2Fazure%2Fsecurity%2Ftoc.json",
+            "https://learn.microsoft.com/en-us/rest/api/compute/disks/delete",
+            "https://learn.microsoft.com/en-us/cli/azure/disk?view=azure-cli-latest#az-disk-delete",
+            "https://learn.microsoft.com/en-us/rest/api/compute/disks/update#encryptionsettings",
+            "https://learn.microsoft.com/en-us/cli/azure/disk?view=azure-cli-latest#az-disk-update",
+            "https://learn.microsoft.com/en-us/azure/security/benchmarks/security-controls-v2-data-protection#dp-5-encrypt-sensitive-data-at-rest"
+        ],
+        "sort_order": 81
+    }
+]
