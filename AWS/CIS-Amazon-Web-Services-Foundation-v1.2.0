@@ -1,0 +1,1491 @@
+[
+    {
+        "testcase": "Certificates - ACM Certificate Expiring in Less Than _ARG_0_ Days",
+        "code": "NotAfter",
+        "details": "<p>Ensure that certificates which are in use are not about to expire.</p><p><b>Path</b>: acm.regions.id.certificates.id</p><p><b>Conditions</b>: and,acm.regions.id.certificates.id,withKey,NotAfter,acm.regions.id.certificates.id.NotAfter,newerThan,_ARG_0_,days</p>",
+        "tags":
+        [],
+        "sort_order": 1
+    },
+    {
+        "testcase": "Certificates - ACM Certificate with Transparency Logging Set to Disabled",
+        "code": "CertificateTransparencyLoggingPreference",
+        "details": "<p>Disabling Transparency Logging may result in browsers not trusting your certificate. As of April 30 2018, Google Chrome no longer trusts public SSL/TLS certificates that are not recorded in a certificate transparency log. Transparency Logging should be enabled as a best practice.</p><p><b>Path</b>: acm.regions.id.certificates.id</p><p><b>Conditions</b>: and,acm.regions.id.certificates.id.Options.CertificateTransparencyLoggingPreference,equal,DISABLED</p>",
+        "tags":
+        [
+            "https://aws.amazon.com/blogs/security/how-to-get-ready-for-certificate-transparency/"
+        ],
+        "sort_order": 2
+    },
+    {
+        "testcase": "Stacks - Role Passed to Stack",
+        "details": "<p>Passing a role to CloudFormation stacks may result in privilege escalation because IAM users with privileges within the CloudFormation scope implicitly inherit the stack's role's permissions. Consequently, it should be ensured that the IAM privileges assigned to the stack's role follow the principle of least privilege.</p><p><b>Path</b>: cloudformation.regions.id.stacks.id</p><p><b>Conditions</b>: and,this,withKey,iam_role,this.iam_role.id,notEmpty,</p>",
+        "tags":
+        [
+            "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/best-practices.html"
+        ],
+        "sort_order": 3
+    },
+    {
+        "testcase": "Distributions - Content Distribution with Clear-Text Origin TLS Policy",
+        "code": "config_policy",
+        "details": "<p>Distributing content between AWS CloudFront distributions and their custom origins over clear-text HTTP, without using AWS encryption solutions, can potentially expose sensitive data.</p><p><b>Path</b>: cloudfront.distributions.id</p><p><b>Conditions</b>: or,cloudfront.distributions.id.origins,containString,http-only,cloudfront.distributions.id.origins,containString,match-viewer</p>",
+        "tags":
+        [
+            "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-cloudfront-distribution-customoriginconfig.html"
+        ],
+        "sort_order": 4
+    },
+    {
+        "testcase": "Distributions - Content Distribution with Insecure Origin TLS Policy",
+        "code": "minimum_ssl_version",
+        "details": "<p>Distributing content between AWS CloudFront distributions and their custom origins over HTTPS using older SSL/TLS protocols can potentially expose sensitive data.</p><p><b>Path</b>: cloudfront.distributions.id</p><p><b>Conditions</b>: and,cloudfront.distributions.id.viewer_certificate.MinimumProtocolVersion.,containNoneOf,TLSv1.1,TLSv1.1_2016,TLSv1.2_2018,TLSv1.2_2019,TLSv1.2_2021</p>",
+        "tags":
+        [
+            "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-cloudfront-distribution-customoriginconfig.html"
+        ],
+        "sort_order": 5
+    },
+    {
+        "testcase": "Distributions - Content Distribution with Insufficient Viewer Security Policy",
+        "code": "viewer_certificate",
+        "details": "<p>Distributing content between AWS CloudFront distributions and their custom origins without the use of a valid certificate, can potentially expose sensitive data.</p><p><b>Path</b>: cloudfront.distributions.id</p><p><b>Conditions</b>: or,this,withoutKey,viewer_certificate</p>",
+        "tags":
+        [
+            "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-cloudfront-distribution-viewercertificate.html"
+        ],
+        "sort_order": 6
+    },
+    {
+        "testcase": "Configurations - Global Service Logging Duplicated",
+        "code": "IncludeGlobalServiceEvents",
+        "details": "<p>Global service logging is enabled in multiple Trails. While this does not jeopardize the security of the environment, duplicated entries in logs increase the difficulty to investigate potential incidents.</p><p><b>Path</b>: cloudtrail.regions.id.trails.id</p><p><b>Conditions</b>: and,cloudtrail.DuplicatedGlobalServiceEvents,true,,this,withKey,IncludeGlobalServiceEvents,IncludeGlobalServiceEvents,true,,IsLogging,true,</p>",
+        "tags":
+        [
+            "https://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudtrail-concepts.html#cloudtrail-concepts-global-service-events"
+        ],
+        "sort_order": 7
+    },
+    {
+        "testcase": "Configurations - Trail Is Not Integrated with CloudWatch",
+        "code": "TrailCloudwatchNoIntegration",
+        "details": "<p>The lack of integration with CloudWatch hinders real-time and historic activity logging as well as not allowing the configuration of alarms and notifications for anomalous account activity.</p><p><b>Recommendation</b>: Configure each Trail to have a CloudWatch Logs group attached</p><p><b>Display Path</b>: cloudtrail.regions.id.trails.id</p><p><b>Path</b>: cloudtrail.regions.id.trails.id</p><p><b>Conditions</b>: and,cloudtrail.regions.id.trails.id.,withKey,LatestCloudWatchLogsDeliveryTime,or,cloudtrail.regions.id.trails.id.LatestCloudWatchLogsDeliveryTime,null,,cloudtrail.regions.id.trails.id.LatestCloudWatchLogsDeliveryTime,olderThan,1,days</p>",
+        "tags":
+        [
+            "CIS Amazon Web Services Foundations v1.0.0 ref:2.4",
+            "CIS Amazon Web Services Foundations v1.1.0 ref:2.4",
+            "CIS Amazon Web Services Foundations v1.2.0 ref:2.4"
+        ],
+        "sort_order": 8
+    },
+    {
+        "testcase": "Configurations - Data Events Logging Not Configured",
+        "code": "cloudtrail-data-events-disabled",
+        "details": "<p>CloudTrail Data Logging is not configured, which means that S3 access and Lambda invocations are not logged. <br><br>Note: S3 bucket logging can be used in place of CloudTrail data events for S3. If that is the case, logs for Lambda invocations may still be missing.</p><p><b>Display Path</b>: cloudtrail.regions.id.trails.id</p><p><b>Path</b>: cloudtrail.regions.id.trails.id</p><p><b>Conditions</b>: and,this,withKey,DataEventsEnabled,DataEventsEnabled,false,</p>",
+        "tags":
+        [
+            "https://docs.aws.amazon.com/awscloudtrail/latest/userguide/logging-data-events-with-cloudtrail.html"
+        ],
+        "sort_order": 9
+    },
+    {
+        "testcase": "Configurations - CloudTrail Logs Not Encrypted with KMS Customer Master Keys (CMKs)",
+        "code": "cloudtrail-kms-key-unused",
+        "details": "<p>Not encrypting CloudTrail logs with SSE-KMS affects the confidentiality of the log data.</p><p><b>Recommendation</b>: Ensure each Trail is encrypted with a KMS key</p><p><b>Display Path</b>: cloudtrail.regions.id.trails.id</p><p><b>Path</b>: cloudtrail.regions.id.trails.id</p><p><b>Conditions</b>: and,cloudtrail.regions.id.trails.id.,withoutKey,scout_link,or,cloudtrail.regions.id.trails.id.,withoutKey,KmsKeyId,and,cloudtrail.regions.id.trails.id.,withKey,KmsKeyId,cloudtrail.regions.id.trails.id.KmsKeyId,null,</p>",
+        "tags":
+        [
+            "CIS Amazon Web Services Foundations v1.0.0 ref:2.7",
+            "CIS Amazon Web Services Foundations v1.1.0 ref:2.7",
+            "CIS Amazon Web Services Foundations v1.2.0 ref:2.7",
+            "https://docs.aws.amazon.com/awscloudtrail/latest/userguide/encrypting-cloudtrail-log-files-with-aws-kms.html"
+        ],
+        "sort_order": 10
+    },
+    {
+        "testcase": "Configurations - Global Service Logging Disabled",
+        "code": "IncludeGlobalServiceEvents",
+        "details": "<p>API activity for global services such as IAM and STS is not logged. Investigation of incidents will be incomplete due to the lack of information.</p><p><b>Path</b>: cloudtrail.regions.id.trails.id</p><p><b>Conditions</b>: and,cloudtrail.IncludeGlobalServiceEvents,false,,this,withKey,IncludeGlobalServiceEvents</p>",
+        "tags":
+        [
+            "https://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudtrail-concepts.html#cloudtrail-concepts-global-service-events"
+        ],
+        "sort_order": 11
+    },
+    {
+        "testcase": "Configurations - Log File Validation Is Disabled",
+        "code": "LogFileValidationDisabled",
+        "details": "<p>The lack of log file validation prevents from verifying the integrity of CloudTrail log files.</p><p><b>Recommendation</b>: Ensure that each Trail has Enable log file validation set to Yes</p><p><b>Display Path</b>: cloudtrail.regions.id.trails.id</p><p><b>Path</b>: cloudtrail.regions.id.trails.id</p><p><b>Conditions</b>: and,cloudtrail.regions.id.trails.id.,withKey,LogFileValidationEnabled,cloudtrail.regions.id.trails.id.LogFileValidationEnabled,false,</p>",
+        "tags":
+        [
+            "CIS Amazon Web Services Foundations v1.0.0 ref:2.2",
+            "CIS Amazon Web Services Foundations v1.1.0 ref:2.2",
+            "CIS Amazon Web Services Foundations v1.2.0 ref:2.2",
+            "https://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudtrail-log-file-validation-intro.html"
+        ],
+        "sort_order": 12
+    },
+    {
+        "testcase": "Configurations - Disabled Trails",
+        "code": "IsLogging",
+        "details": "<p>Logging is disabled for a given Trail. Depending on the configuration, logs for important API activity may be missing.</p><p><b>Recommendation</b>: Configure all Trails to enable Logging, set Apply trail to all regions and ensure that Read/Write Events are set to ALL</p><p><b>Path</b>: cloudtrail.regions.id.trails.id</p><p><b>Conditions</b>: and,cloudtrail.regions.id.trails.id.,withKey,IsLogging,cloudtrail.regions.id.trails.id.IsLogging,false,</p>",
+        "tags":
+        [
+            "CIS Amazon Web Services Foundations v1.0.0 ref:2.1",
+            "CIS Amazon Web Services Foundations v1.1.0 ref:2.1",
+            "CIS Amazon Web Services Foundations v1.2.0 ref:2.1",
+            "https://docs.aws.amazon.com/awscloudtrail/latest/userguide/best-practices-security.html"
+        ],
+        "sort_order": 13
+    },
+    {
+        "testcase": "Regions - CloudTrail Service Not Configured",
+        "code": "NotConfigured",
+        "details": "<p>CloudTrail is not configured, which means that API activity is not logged.</p><p><b>Path</b>: cloudtrail.regions.id</p><p><b>Conditions</b>: and,trails_count,equal,0</p>",
+        "tags":
+        [
+            "https://docs.aws.amazon.com/awscloudtrail/latest/userguide/best-practices-security.html"
+        ],
+        "sort_order": 14
+    },
+    {
+        "testcase": "Configurations - Data Logging Configuration Not Covering All Resources",
+        "code": "cloudtrail-data-events-disabled",
+        "details": "<p>CloudTrail Data Logging is not configured to cover all S3 or Lambda resources, which means that all S3 access and Lambda invocations are not logged. <br><br>Note: S3 bucket logging can be used in place of CloudTrail data events for S3. If that is the case, logs for Lambda invocations may still be missing.</p><p><b>Display Path</b>: cloudtrail.regions.id.trails.id</p><p><b>Path</b>: cloudtrail.regions.id.trails.id</p><p><b>Conditions</b>: and,this,withKey,wildcard_data_logging,wildcard_data_logging,false,</p>",
+        "tags":
+        [
+            "https://docs.aws.amazon.com/awscloudtrail/latest/userguide/logging-data-events-with-cloudtrail.html"
+        ],
+        "sort_order": 15
+    },
+    {
+        "testcase": "Alarms - Alarm without Action",
+        "code": "NoActions",
+        "details": "<p>Each alarm should have at least one action</p><p><b>Path</b>: cloudwatch.regions.id.alarms.id</p><p><b>Conditions</b>: and,cloudwatch.regions.id.alarms.id.AlarmActions,empty,</p>",
+        "tags":
+        [
+            "https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/AlarmThatSendsEmail.html"
+        ],
+        "sort_order": 16
+    },
+    {
+        "testcase": "Regions - AWS Config Not Enabled",
+        "code": "NotConfigured",
+        "details": "<p>No AWS Config recorders are configured, which means that changes in AWS resource configuration are not logged. This hinders security analysis, resource change tracking and compliance auditing.</p><p><b>Recommendation</b>: Enable AWS Config in all regions, define the resources you want to record in each region and include global resources (IAM resources)</p><p><b>Path</b>: config.regions.id</p><p><b>Conditions</b>: and,recorders_count,equal,0</p>",
+        "tags":
+        [
+            "CIS Amazon Web Services Foundations v1.0.0 ref:2.5",
+            "CIS Amazon Web Services Foundations v1.1.0 ref:2.5",
+            "CIS Amazon Web Services Foundations v1.2.0 ref:2.5",
+            "https://aws.amazon.com/blogs/mt/aws-config-best-practices/"
+        ],
+        "sort_order": 17
+    },
+    {
+        "testcase": "Images - Publicly Accessible AMI",
+        "code": "image_is_public",
+        "details": "<p>AMIs should never intentionally be made public. If they need to be shared this can be done with specific AWS accounts.</p><p><b>Path</b>: ec2.regions.id.images.id</p><p><b>Conditions</b>: and,Public,true,</p>",
+        "tags":
+        [
+            "https://aws.amazon.com/security/security-bulletins/reminder-about-safely-sharing-and-using-public-amis/"
+        ],
+        "sort_order": 18
+    },
+    {
+        "testcase": "Security groups - Default Security Groups in Use",
+        "code": "default_in_use",
+        "details": "<p>The use of default security groups can indicate a lack of intentional enforcement of the principle of least privilege. Use custom security groups to ensure you are properly minimizing privilege and access.</p><p><b>Recommendation</b>: Ensure resources are not within default security groups. Instead, create a custom security group tailored to each resource needs.</p><p><b>Path</b>: ec2.regions.id.vpcs.id.security_groups.id</p><p><b>Conditions</b>: and,ec2.regions.id.vpcs.id.security_groups.id.name,equal,default,ec2.regions.id.vpcs.id.security_groups.id.,withKey,used_by,ec2.regions.id.vpcs.id.security_groups.id.is_default_configuration,true,</p>",
+        "tags":
+        [
+            "CIS Amazon Web Services Foundations v1.0.0 ref:4.4",
+            "CIS Amazon Web Services Foundations v1.1.0 ref:4.4",
+            "CIS Amazon Web Services Foundations v1.2.0 ref:4.3",
+            "https://docs.aws.amazon.com/securityhub/latest/userguide/securityhub-cis-controls.html#securityhub-cis-controls-4.3"
+        ],
+        "sort_order": 19
+    },
+    {
+        "testcase": "Rulesets - Non-empty Rulesets for Default Security Groups",
+        "code": "default_with_rules",
+        "details": "<p>The default security group created in each VPC comes with rules allowing all inbound traffic from instances assigned to the same security group, as well as all outbound traffic. In order to improve system hardening, you should remove all rules from the default security groups so that they restricts all traffic. Should an instance be created without custom security groups, it will inherit the default security group and be unable to communicate with other instances within the VPC until the required custom security groups are assigned.</p><p><b>Recommendation</b>: Ensure the default security group of every VPC restricts all traffic</p><p><b>Display Path</b>: ec2.regions.id.vpcs.id.security_groups.id</p><p><b>Path</b>: ec2.regions.id.vpcs.id.security_groups.id.rules.id</p><p><b>Conditions</b>: and,ec2.regions.id.vpcs.id.security_groups.id.name,equal,default,ec2.regions.id.vpcs.id.security_groups.id.rules.id.protocols,notEmpty,,ec2.regions.id.vpcs.id.security_groups.id.is_default_configuration,true,</p>",
+        "tags":
+        [
+            "CIS Amazon Web Services Foundations v1.0.0 ref:4.4",
+            "CIS Amazon Web Services Foundations v1.1.0 ref:4.4",
+            "CIS Amazon Web Services Foundations v1.2.0 ref:4.3",
+            "https://docs.aws.amazon.com/securityhub/latest/userguide/securityhub-cis-controls.html#securityhub-cis-controls-4.3"
+        ],
+        "sort_order": 20
+    },
+    {
+        "testcase": "Regions - EBS Encryption By Default Is Disabled",
+        "code": "NoDefaultEBSEncryption",
+        "details": "<p>Enabling EBS encryption by default ensures that all EBS Volumes created in the region are encrypted even if the operator neglects to opt into encryption when creating a Volume.</p><p><b>Recommendation</b>: Enable encryption by default for EBS volumes in all regions.</p><p><b>Path</b>: ec2.regions.id.regional_settings.id</p><p><b>Conditions</b>: and,ebs_encryption_default,false,</p>",
+        "tags":
+        [
+            "https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSEncryption.html#encryption-by-default"
+        ],
+        "sort_order": 21
+    },
+    {
+        "testcase": "Snapshots - EBS Snapshot Not Encrypted",
+        "code": "encrypted",
+        "details": "<p>Data-at-rest should be encrypted.</p><p><b>Path</b>: ec2.regions.id.snapshots.id</p><p><b>Conditions</b>: and,encrypted,false,</p>",
+        "tags":
+        [
+            "https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSEncryption.html"
+        ],
+        "sort_order": 22
+    },
+    {
+        "testcase": "Snapshots - Public EBS Snapshot",
+        "code": "public",
+        "details": "<p>Snapshots should never be public, as this risks exposing sensitive data.</p><p><b>Path</b>: ec2.regions.id.snapshots.id</p><p><b>Conditions</b>: and,public,true,</p>",
+        "tags":
+        [
+            "https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-modifying-snapshot-permissions.html"
+        ],
+        "sort_order": 23
+    },
+    {
+        "testcase": "Volumes - EBS Volume Not Encrypted",
+        "code": "encrypted",
+        "details": "<p>Enabling encryption of EBS volumes ensures that data is encrypted both at-rest and in-transit (between an instance and its attached EBS storage).</p><p><b>Path</b>: ec2.regions.id.volumes.id</p><p><b>Conditions</b>: and,Encrypted,false,</p>",
+        "tags":
+        [
+            "https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSEncryption.html"
+        ],
+        "sort_order": 24
+    },
+    {
+        "testcase": "Instances - EC2 Instance Belongs to Specific Security Group",
+        "details": "<p>This configuration goes against organizational policies.</p><p><b>Path</b>: ec2.regions.id.vpcs.id.instances.id</p><p><b>Argument Names</b>:<ul><li>ID of the security group EC2 instances may not belong to.</li></ul></p><p><b>Conditions</b>: and,ec2.regions.id.vpcs.id.instances.id.security_groups,match,.*_ARG_0_.*</p>",
+        "tags":
+        [],
+        "sort_order": 25
+    },
+    {
+        "testcase": "Instances - Use of _ARG_0_ Instances",
+        "details": "<p>Policies dictate EC2 instances of type _ARG_0_ should not be used in this environment</p><p><b>Path</b>: ec2.regions.id.vpcs.id.instances.id</p><p><b>Key</b>: ec2-instance-type-_STRIPDOTS_(_ARG_0_)</p><p><b>Argument Names</b>:<ul><li>Type of EC2 instance (e.g. t2.micro)</li></ul></p><p><b>Conditions</b>: and,InstanceType,equal,_ARG_0_</p>",
+        "tags":
+        [
+            "https://aws.amazon.com/ec2/instance-types/"
+        ],
+        "sort_order": 26
+    },
+    {
+        "testcase": "Instances - Use of _ARG_0_ Instances",
+        "details": "<p>Policies dictate _ARG_0_ EC2 instances should not be used in this environment</p><p><b>Path</b>: ec2.regions.id.vpcs.id.instances.id</p><p><b>Key</b>: ec2-instance-type-_STRIPDOTS_(_ARG_0_)</p><p><b>Argument Names</b>:<ul><li>Display name of types of instances</li><li>Type of EC2 instances that may not be used.</li></ul></p><p><b>Conditions</b>: and,InstanceType,containAtLeastOneOf,_ARG_1_</p>",
+        "tags":
+        [
+            "https://aws.amazon.com/ec2/instance-types/"
+        ],
+        "sort_order": 27
+    },
+    {
+        "testcase": "Network interfaces - Instance with a Public IP Address",
+        "details": "<p>It is good practice to maintain a list of known, publicly accessible instances and flag all other instances that meet this criteria.</p><p><b>Display Path</b>: ec2.regions.id.vpcs.id.instances.id</p><p><b>Path</b>: ec2.regions.id.vpcs.id.instances.id.network_interfaces.id</p><p><b>Conditions</b>: and,Association,notNull,,ec2.regions.id.vpcs.id.instances.id.network_interfaces.id.Association.PublicIp,notNull,</p>",
+        "tags":
+        [
+            "https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-instance-addressing.html"
+        ],
+        "sort_order": 28
+    },
+    {
+        "testcase": "Instances - Potential Secret in Instance User Data",
+        "code": "potential_secrets",
+        "details": "<p>It was detected that the EC2 instance was configured with user data, which could potentially include secrets. Although user data can only be accessed from within the instance itself, the data is not protected by cryptographic methods. Anyone who can access the instance can view its metadata. It should therefore be ensured that sensitive data, such as passwords and SSH keys, are not stored as user data.</p><p><b>Path</b>: ec2.regions.id.vpcs.id.instances.id</p><p><b>Conditions</b>: and,ec2.regions.id.vpcs.id.instances.id.user_data_secrets,notEmpty,</p>",
+        "tags":
+        [
+            "https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-instance-metadata.html"
+        ],
+        "sort_order": 29
+    },
+    {
+        "testcase": "Rules - Security Group Opens All Ports to All",
+        "details": "<p>It was detected that all ports in the security group are open, and any source IP address could send traffic to these ports, which creates a wider attack surface for resources assigned to it. Open ports should be reduced to the minimum needed to correctly operate and, when possible, source address restrictions should be implemented.</p><p><b>Display Path</b>: ec2.regions.id.vpcs.id.security_groups.id</p><p><b>Path</b>: ec2.regions.id.vpcs.id.security_groups.id.rules.id.protocols.id.ports.id.cidrs.id.CIDR</p><p><b>Conditions</b>: and,_INCLUDE_(conditions/cidr-is-all.json),,,_INCLUDE_(conditions/security-group-opens-all-ports.json),,</p>",
+        "tags":
+        [],
+        "sort_order": 30
+    },
+    {
+        "testcase": "Rules - Unrestricted Network Traffic within Security Group",
+        "details": "<p>This configuration goes against organizational policies.</p><p><b>Display Path</b>: ec2.regions.id.vpcs.id.security_groups.id</p><p><b>Path</b>: ec2.regions.id.vpcs.id.security_groups.id.rules.id.protocols.id.ports.id.security_groups.id</p><p><b>Conditions</b>: and,_INCLUDE_(conditions/security-group-opens-all-ports.json),,,ec2.regions.id.vpcs.id.security_groups.id.rules.id.protocols.id.ports.id.security_groups.id.GroupId,equal,_GET_VALUE_AT_(ec2.regions.id.vpcs.id.security_groups.id)</p>",
+        "tags":
+        [],
+        "sort_order": 31
+    },
+    {
+        "testcase": "Rules - Security Group Opens All Ports",
+        "details": "<p>It was detected that all ports in the security group are open, which creates a wider attack surface for resources assigned to it. Open ports should be reduced to the minimum needed to correctly operate.</p><p><b>Display Path</b>: ec2.regions.id.vpcs.id.security_groups.id</p><p><b>Path</b>: ec2.regions.id.vpcs.id.security_groups.id.rules.id.protocols.id.ports.id</p><p><b>Conditions</b>: and,_INCLUDE_(conditions/security-group-opens-all-ports.json),,</p>",
+        "tags":
+        [],
+        "sort_order": 32
+    },
+    {
+        "testcase": "Rules - Security Group Allows ICMP Traffic to All",
+        "details": "<p>ICMP traffic was allowed to the resources assigned to this security group without restriction of the source address. This could potentially be leveraged by an attacker trying to perform an attack or gather information about the deployed infrastructure.</p><p><b>Display Path</b>: ec2.regions.id.vpcs.id.security_groups.id</p><p><b>Path</b>: ec2.regions.id.vpcs.id.security_groups.id.rules.id.protocols.id.ports.id.cidrs.id.CIDR</p><p><b>Conditions</b>: and,_INCLUDE_(conditions/cidr-is-all.json),,,ec2.regions.id.vpcs.id.security_groups.id.rules.id,equal,ingress,ec2.regions.id.vpcs.id.security_groups.id.rules.id.protocols.id,equal,ICMP</p>",
+        "tags":
+        [],
+        "sort_order": 33
+    },
+    {
+        "testcase": "Rules - Security Group Opens _ARG_0_ Port to All",
+        "details": "<p>The security group was found to be exposing a well-known port to all source addresses. Well-known ports are commonly probed by automated scanning tools, and could be an indicator of sensitive services exposed to Internet. If such services need to be exposed, a restriction on the source address could help to reduce the attack surface of the infrastructure.</p><p><b>Recommendation</b>: Remove the inbound rules that expose open ports</p><p><b>Display Path</b>: ec2.regions.id.vpcs.id.security_groups.id</p><p><b>Path</b>: ec2.regions.id.vpcs.id.security_groups.id.rules.id.protocols.id.ports.id.cidrs.id.CIDR</p><p><b>Key</b>: ec2-security-group-opens-_ARG_0_-port-to-all</p><p><b>Argument Names</b>:<ul><li>Network protocol name</li><li>Transport protocol name</li><li>Port number</li></ul></p><p><b>Conditions</b>: and,_INCLUDE_(conditions/cidr-is-all.json),,,ec2.regions.id.vpcs.id.security_groups.id.rules.id,equal,ingress,ec2.regions.id.vpcs.id.security_groups.id.rules.id.protocols.id,equal,_ARG_1_,ec2.regions.id.vpcs.id.security_groups.id.rules.id.protocols.id.ports.id,equal,_ARG_2_</p>",
+        "tags":
+        [
+            "CIS Amazon Web Services Foundations v1.0.0 ref:4.1",
+            "CIS Amazon Web Services Foundations v1.0.0 ref:4.2",
+            "CIS Amazon Web Services Foundations v1.1.0 ref:4.1",
+            "CIS Amazon Web Services Foundations v1.1.0 ref:4.2",
+            "CIS Amazon Web Services Foundations v1.2.0 ref:4.1",
+            "CIS Amazon Web Services Foundations v1.2.0 ref:4.2"
+        ],
+        "sort_order": 34
+    },
+    {
+        "testcase": "Rules - Security Group Opens _ARG_0_ Port",
+        "details": "<p>Ports associated with plaintext protocols have been found to be open in this security group. Plaintext protocols should be replaced with more secure alternatives, as the data in transit may be monitored and could, potentially, be subject to tampering.</p><p><b>Display Path</b>: ec2.regions.id.vpcs.id.security_groups.id</p><p><b>Path</b>: ec2.regions.id.vpcs.id.security_groups.id.rules.id.protocols.id.ports.id</p><p><b>Key</b>: ec2-security-group-opens-plaintext-port-_ARG_0_</p><p><b>Argument Names</b>:<ul><li>Network protocol name</li><li>Transport protocol name</li><li>Port number</li></ul></p><p><b>Conditions</b>: and,ec2.regions.id.vpcs.id.security_groups.id.rules.id,equal,ingress,ec2.regions.id.vpcs.id.security_groups.id.rules.id.protocols.id,equal,_ARG_1_,ec2.regions.id.vpcs.id.security_groups.id.rules.id.protocols.id.ports.id,equal,_ARG_2_</p>",
+        "tags":
+        [],
+        "sort_order": 35
+    },
+    {
+        "testcase": "Rules - Security Group Uses Port Range",
+        "details": "<p>It was found that the security group was using port ranges. Sometimes, ranges could include unintended ports that should not be exposed. As a result, when possible, explicit port lists should be used instead</p><p><b>Display Path</b>: ec2.regions.id.vpcs.id.security_groups.id</p><p><b>Path</b>: ec2.regions.id.vpcs.id.security_groups.id.rules.id.protocols.id.ports.id</p><p><b>Conditions</b>: and,ec2.regions.id.vpcs.id.security_groups.id.rules.id,equal,ingress,ec2.regions.id.vpcs.id.security_groups.id.rules.id.protocols.id,containAtLeastOneOf,ALL,UDP,TCP,ec2.regions.id.vpcs.id.security_groups.id.rules.id.protocols.id.ports.id,match,[0-9]+-[0-9]+,ec2.regions.id.vpcs.id.security_groups.id.rules.id.protocols.id.ports.id,notEqual,0-65535,ec2.regions.id.vpcs.id.security_groups.id.rules.id.protocols.id.ports.id,notEqual,1-65535</p>",
+        "tags":
+        [],
+        "sort_order": 36
+    },
+    {
+        "testcase": "Rules - Security Group Opens _ARG_0_ Port to All",
+        "details": "<p>The security group was found to be exposing a port to all source addresses. Ports are commonly probed by automated scanning tools, and could be an indicator of sensitive services exposed to Internet. If such services need to be exposed, a restriction on the source address could help to reduce the attack surface of the infrastructure.</p><p><b>Display Path</b>: ec2.regions.id.vpcs.id.security_groups.id</p><p><b>Path</b>: ec2.regions.id.vpcs.id.security_groups.id.rules.id.protocols.id.ports.id.cidrs.id.CIDR</p><p><b>Key</b>: ec2-security-group-opens-_ARG_0_-port-to-all</p><p><b>Argument Names</b>:<ul><li>Network transport protocol</li></ul></p><p><b>Conditions</b>: and,_INCLUDE_(conditions/cidr-is-all.json),,,ec2.regions.id.vpcs.id.security_groups.id.rules.id,equal,ingress,ec2.regions.id.vpcs.id.security_groups.id.rules.id.protocols.id,equal,_ARG_0_,ec2.regions.id.vpcs.id.security_groups.id.rules.id.protocols.id.ports.id,containNoneOf,22,25,80,443,1433,1521,3306,3389,5432,27017</p>",
+        "tags":
+        [],
+        "sort_order": 37
+    },
+    {
+        "testcase": "Rules - Security Group Whitelists AWS IPs Outside the USA",
+        "details": "<p>This configuration goes against organizational policies.</p><p><b>Path</b>: ec2.regions.id.vpcs.id.security_groups.id.rules.id.protocols.id.ports.id.cidrs.id.CIDR</p><p><b>Conditions</b>: and,this,inSubnets,_IP_RANGES_FROM_FILE_(aws/ip-ranges/aws.json, []),this,notInSubnets,_IP_RANGES_FROM_FILE_(aws/ip-ranges/aws-in-us.json, [])</p>",
+        "tags":
+        [],
+        "sort_order": 38
+    },
+    {
+        "testcase": "Rules - Security Group Whitelists AWS CIDRs",
+        "details": "<p>The AWS IP ranges contain addresses which can be assigned to EC2 instances in any AWS account, as well as services which can be used to interact with any AWS account. Consequently, allowing these ranges potentially exposes your AWS account to external interactions.</p><p><b>Display Path</b>: ec2.regions.id.vpcs.id.security_groups.id</p><p><b>Path</b>: ec2.regions.id.vpcs.id.security_groups.id.rules.id.protocols.id.ports.id.cidrs.id.CIDR</p><p><b>Conditions</b>: and,this,inSubnets,_IP_RANGES_FROM_FILE_(aws/ip-ranges/aws.json, [])</p>",
+        "tags":
+        [],
+        "sort_order": 39
+    },
+    {
+        "testcase": "Rules - Security Group Whitelists Non-Elastic IP Addresses",
+        "details": "<p>This configuration goes against organizational policies.</p><p><b>Path</b>: ec2.regions.id.vpcs.id.security_groups.id.rules.id.protocols.id.ports.id.cidrs.id</p><p><b>Keys</b>:<ul><li>ec2.regions.id.vpcs.id.security_groups.id</li><li>this</li></ul></p><p><b>Conditions</b>: and,this,inSubnets,_IP_RANGES_FROM_FILE_(ip-ranges-from-args, []),this,inSubnets,_IP_RANGES_FROM_FILE_(ip-ranges-from-args, [[\"is_elastic\", \"false\", \"\"]])</p>",
+        "tags":
+        [],
+        "sort_order": 40
+    },
+    {
+        "testcase": "Rules - Security Group Whitelists Unknown AWS CIDRs",
+        "details": "<p>This configuration goes against organizational policies.</p><p><b>Display Path</b>: ec2.regions.id.vpcs.id.security_groups.id</p><p><b>Path</b>: ec2.regions.id.vpcs.id.security_groups.id.rules.id.protocols.id.ports.id.cidrs.id.CIDR</p><p><b>Conditions</b>: and,this,inSubnets,_IP_RANGES_FROM_FILE_(aws/ip-ranges/aws.json, []),this,notInSubnets,_IP_RANGES_FROM_FILE_(ip-ranges-from-args, [])</p>",
+        "tags":
+        [],
+        "sort_order": 41
+    },
+    {
+        "testcase": "Rules - Security Group Whitelists Unknown CIDRs",
+        "details": "<p>This configuration goes against organizational policies.</p><p><b>Display Path</b>: ec2.regions.id.vpcs.id.security_groups.id</p><p><b>Path</b>: ec2.regions.id.vpcs.id.security_groups.id.rules.id.protocols.id.ports.id.cidrs.id.CIDR</p><p><b>Conditions</b>: and,this,notEqual,0.0.0.0/0,this,notEqual,::/0,this,notInSubnets,_IP_RANGES_FROM_FILE_(aws/ip-ranges/aws.json, []),this,notInSubnets,_IP_RANGES_FROM_FILE_(ip-ranges-from-args, []),_INCLUDE_(conditions/ip-not-in-private-space.json),,</p>",
+        "tags":
+        [],
+        "sort_order": 42
+    },
+    {
+        "testcase": "Security groups - Unused Security Group",
+        "details": "<p> Non-default security groups were defined which were unused and may not be required. This being the case, their existence in the configuration increases the risk that they may be inappropriately assigned. The unused security groups should be reviewed and removed if no longer required.</p><p><b>Path</b>: ec2.regions.id.vpcs.id.security_groups.id</p><p><b>Conditions</b>: and,ec2.regions.id.vpcs.id.security_groups.id.,withoutKey,used_by,ec2.regions.id.vpcs.id.security_groups.id.name,notEqual,default</p>",
+        "tags":
+        [
+            "https://docs.aws.amazon.com/vpc/latest/userguide/VPC_SecurityGroups.html"
+        ],
+        "sort_order": 43
+    },
+    {
+        "testcase": "Load Balancer Listeners - Load Balancer Allowing Clear Text (HTTP) Communication",
+        "details": "<p>Use of a secure protocol (HTTPS or SSL) is best practice for encrypted communication. A load balancer without a listener using an encrypted protocol can be vulnerable to eavesdropping and man-in-the-middle attacks.</p><p><b>Display Path</b>: elb.regions.id.vpcs.id.elbs.id</p><p><b>Path</b>: elb.regions.id.vpcs.id.elbs.id.listeners.id</p><p><b>Conditions</b>: and,elb.regions.id.vpcs.id.elbs.id.listeners.id.Protocol,containNoneOf,HTTPS,SSL,elb.regions.id.vpcs.id.elbs.id.listeners.id.LoadBalancerPort,containNoneOf,443</p>",
+        "tags":
+        [
+            "https://docs.aws.amazon.com/elasticloadbalancing/latest/classic/elb-listener-config.html"
+        ],
+        "sort_order": 44
+    },
+    {
+        "testcase": "Load Balancers - Lack of ELB Access Logs",
+        "details": "<p>Elastic Load Balancing provides access logs that capture detailed information about requests sent to your load balancer. Each log contains information such as the time the request was received, the client's IP address, latencies, request paths, and server responses. You can use these access logs to analyze traffic patterns and identify security issues.</p><p><b>Path</b>: elb.regions.id.vpcs.id.elbs.id</p><p><b>Conditions</b>: and,elb.regions.id.vpcs.id.elbs.id.attributes.AccessLog.Enabled,false,</p>",
+        "tags":
+        [
+            "https://docs.aws.amazon.com/elasticloadbalancing/latest/classic/access-log-collection.html"
+        ],
+        "sort_order": 45
+    },
+    {
+        "testcase": "Load Balancer Listeners Security Policy - Older SSL/TLS Policy",
+        "details": "<p>Use of the latest TLS policies is best practice. The recommended predefined security policies are:<ul><li>ELBSecurityPolicy-2016-08</li><li>ELBSecurityPolicy-FS-2018-06</li><li>ELBSecurityPolicy-TLS-1-1-2017-01</li><li>ELBSecurityPolicy-TLS-1-2-2017-01</li><li>ELBSecurityPolicy-TLS-1-2-Ext-2018-06</li><li>ELBSecurityPolicy-FS-1-1-2019-08</li><li>ELBSecurityPolicy-FS-1-2-2019-08</li><li>ELBSecurityPolicy-FS-1-2-Res-2019-08</li><li>ELBSecurityPolicy-FS-1-2-Res-2020-10</li></ul></p><p><b>Display Path</b>: elb.regions.id.elb_policies.id.reference_security_policy</p><p><b>Path</b>: elb.regions.id.elb_policies.id.reference_security_policy</p><p><b>Conditions</b>: and,this,containNoneOf,ELBSecurityPolicy-2016-08,ELBSecurityPolicy-TLS-1-1-2017-01,ELBSecurityPolicy-TLS-1-2-2017-01,ELBSecurityPolicy-TLS-1-2-Ext-2018-06,ELBSecurityPolicy-FS-2018-06,ELBSecurityPolicy-FS-1-1-2019-08,ELBSecurityPolicy-FS-1-2-2019-08,ELBSecurityPolicy-FS-1-2-Res-2019-08,ELBSecurityPolicy-FS-1-2-Res-2020-10,ELBSecurityPolicy-TLS13-1-2-2021-06,ELBSecurityPolicy-TLS13-1-2-Res-2021-06,ELBSecurityPolicy-TLS13-1-2-Ext1-2021-06,ELBSecurityPolicy-TLS13-1-2-Ext2-2021-06,ELBSecurityPolicy-TLS13-1-1-2021-06,ELBSecurityPolicy-TLS13-1-0-2021-06,ELBSecurityPolicy-TLS13-1-3-2021-06</p>",
+        "tags":
+        [
+            "https://docs.aws.amazon.com/elasticloadbalancing/latest/classic/elb-security-policy-table.html"
+        ],
+        "sort_order": 46
+    },
+    {
+        "testcase": "Load Balancer Attributes - Drop Invalid Header Fields Disabled",
+        "details": "<p>Dropping invalid header fields should be enabled in order to mitigate the risk of request smuggling attacks.</p><p><b>Display Path</b>: elbv2.regions.id.vpcs.id.lbs.id</p><p><b>Path</b>: elbv2.regions.id.vpcs.id.lbs.id.attributes.id</p><p><b>Conditions</b>: and,Key,equal,routing.http.drop_invalid_header_fields.enabled,Value,equal,false</p>",
+        "tags":
+        [
+            "https://docs.aws.amazon.com/elasticloadbalancing/latest/APIReference/API_LoadBalancerAttribute.html",
+            "https://medium.com/@emilefugulin/http-desync-attacks-with-python-and-aws-1ba07d2c860f",
+            "https://99designs.com/blog/engineering/request-smuggling/",
+            "https://portswigger.net/web-security/request-smuggling"
+        ],
+        "sort_order": 47
+    },
+    {
+        "testcase": "Load Balancer Listeners - Load Balancer Allowing Clear Text (HTTP) Communication",
+        "details": "<p>Use of a secure protocol (HTTPS or SSL) is best practice for encrypted communication. A load balancer without a listener using an encrypted protocol can be vulnerable to eavesdropping and man-in-the-middle attacks.</p><p><b>Display Path</b>: elbv2.regions.id.vpcs.id.lbs.id</p><p><b>Path</b>: elbv2.regions.id.vpcs.id.lbs.id.listeners.id</p><p><b>Conditions</b>: and,elbv2.regions.id.vpcs.id.lbs.id.listeners.id.Protocol,equal,HTTP,or,elbv2.regions.id.vpcs.id.lbs.id.listeners.id.DefaultActions,notContainString,'Type': 'redirect',elbv2.regions.id.vpcs.id.lbs.id.listeners.id.DefaultActions,notContainString,'Protocol': 'HTTPS'</p>",
+        "tags":
+        [
+            "https://docs.aws.amazon.com/elasticloadbalancing/latest/classic/elb-https-load-balancers.html",
+            "https://docs.aws.amazon.com/elasticloadbalancing/latest/application/create-https-listener.html",
+            "https://docs.aws.amazon.com/elasticloadbalancing/latest/network/create-tls-listener.html"
+        ],
+        "sort_order": 48
+    },
+    {
+        "testcase": "Load Balancer Attributes - Lack of ELBv2 Access Logs",
+        "details": "<p>Elastic Load Balancing provides access logs that capture detailed information about requests sent to your load balancer. Each log contains information such as the time the request was received, the client's IP address, latencies, request paths, and server responses. You can use these access logs to analyze traffic patterns and identify security issues.<br><br>Note that for Network Load Balancers, access logs are created only if the load balancer has a TLS listener.</p><p><b>Display Path</b>: elbv2.regions.id.vpcs.id.lbs.id</p><p><b>Path</b>: elbv2.regions.id.vpcs.id.lbs.id.attributes.id</p><p><b>Conditions</b>: and,Key,equal,access_logs.s3.enabled,Value,equal,false,or,elbv2.regions.id.vpcs.id.lbs.id.Type,equal,application,and,elbv2.regions.id.vpcs.id.lbs.id.Type,equal,network,elbv2.regions.id.vpcs.id.lbs._GET_VALUE_AT_(elbv2.regions.id.vpcs.id.lbs.id).listener_protocols,containAtLeastOneOf,TLS</p>",
+        "tags":
+        [
+            "https://docs.aws.amazon.com/elasticloadbalancing/latest/application/load-balancer-access-logs.html",
+            "https://docs.aws.amazon.com/elasticloadbalancing/latest/network/load-balancer-access-logs.html"
+        ],
+        "sort_order": 49
+    },
+    {
+        "testcase": "Load Balancer Attributes - Lack of Deletion Protection",
+        "details": "<p>Enabling deletion protection on load balancers mitigates risks of accidental deletion.</p><p><b>Display Path</b>: elbv2.regions.id.vpcs.id.lbs.id</p><p><b>Path</b>: elbv2.regions.id.vpcs.id.lbs.id.attributes.id</p><p><b>Conditions</b>: and,Key,equal,deletion_protection.enabled,Value,equal,false</p>",
+        "tags":
+        [
+            "https://docs.aws.amazon.com/elasticloadbalancing/latest/application/application-load-balancers.html#deletion-protection"
+        ],
+        "sort_order": 50
+    },
+    {
+        "testcase": "Load Balancer Listeners - Older SSL/TLS Policy",
+        "details": "<p>Use of the latest TLS policies is best practice. The recommended predefined security policies are:<ul><li>ELBSecurityPolicy-2016-08</li><li>ELBSecurityPolicy-FS-2018-06</li><li>ELBSecurityPolicy-TLS-1-1-2017-01</li><li>ELBSecurityPolicy-TLS-1-2-2017-01</li><li>ELBSecurityPolicy-TLS-1-2-Ext-2018-06</li><li>ELBSecurityPolicy-FS-1-1-2019-08</li><li>ELBSecurityPolicy-FS-1-2-2019-08</li><li>ELBSecurityPolicy-FS-1-2-Res-2019-08</li><li>ELBSecurityPolicy-FS-1-2-Res-2020-10</li></ul></p><p><b>Display Path</b>: elbv2.regions.id.vpcs.id.lbs.id</p><p><b>Path</b>: elbv2.regions.id.vpcs.id.lbs.id.listeners.id.SslPolicy</p><p><b>Conditions</b>: and,this,containNoneOf,ELBSecurityPolicy-2016-08,ELBSecurityPolicy-TLS-1-1-2017-01,ELBSecurityPolicy-TLS-1-2-2017-01,ELBSecurityPolicy-TLS-1-2-Ext-2018-06,ELBSecurityPolicy-FS-2018-06,ELBSecurityPolicy-FS-1-1-2019-08,ELBSecurityPolicy-FS-1-2-2019-08,ELBSecurityPolicy-FS-1-2-Res-2019-08,ELBSecurityPolicy-FS-1-2-Res-2020-10,ELBSecurityPolicy-TLS13-1-2-2021-06,ELBSecurityPolicy-TLS13-1-2-Res-2021-06,ELBSecurityPolicy-TLS13-1-2-Ext1-2021-06,ELBSecurityPolicy-TLS13-1-2-Ext2-2021-06,ELBSecurityPolicy-TLS13-1-1-2021-06,ELBSecurityPolicy-TLS13-1-0-2021-06,ELBSecurityPolicy-TLS13-1-3-2021-06</p>",
+        "tags":
+        [
+            "https://docs.aws.amazon.com/elasticloadbalancing/latest/application/create-https-listener.html#describe-ssl-policies"
+        ],
+        "sort_order": 51
+    },
+    {
+        "testcase": "Roles - Cross-Account AssumeRole Policy Lacks External ID and MFA",
+        "details": "<p>When authorizing cross-account role assumption, either an External ID or MFA should be required. If the role is intended for use by a service, an External ID can prevent \"confused deputy\" attacks. If the role is intended for use by an external user, then MFA will strengthen the authentication by requiring a second factor.</p><p><b>Display Path</b>: iam.roles.id</p><p><b>Path</b>: iam.roles.id.assume_role_policy.PolicyDocument.Statement.id</p><p><b>Conditions</b>: and,iam.roles.id.assume_role_policy.PolicyDocument.Statement.id.Effect,equal,Allow,iam.roles.id.assume_role_policy.PolicyDocument.Statement.id.,containAction,sts:AssumeRole,iam.roles.id.assume_role_policy.PolicyDocument.Statement.id.Principal,withKeyCaseInsensitive,AWS,iam.roles.id.assume_role_policy.PolicyDocument.Statement.id.Principal.AWS,isCrossAccount,_ACCOUNT_ID_,or,iam.roles.id.assume_role_policy.PolicyDocument.Statement.id.,withoutKey,Condition,and,or,iam.roles.id.assume_role_policy.PolicyDocument.Statement.id.Condition,withoutKey,Bool,iam.roles.id.assume_role_policy.PolicyDocument.Statement.id.Condition.Bool.,withoutKey,aws:MultiFactorAuthPresent,iam.roles.id.assume_role_policy.PolicyDocument.Statement.id.Condition.Bool.aws:MultiFactorAuthPresent,notTrue,,or,iam.roles.id.assume_role_policy.PolicyDocument.Statement.id.Condition,withoutKey,BoolIfExists,iam.roles.id.assume_role_policy.PolicyDocument.Statement.id.Condition.BoolIfExists.,withoutKey,aws:MultiFactorAuthPresent,iam.roles.id.assume_role_policy.PolicyDocument.Statement.id.Condition.BoolIfExists.aws:MultiFactorAuthPresent,notTrue,,or,iam.roles.id.assume_role_policy.PolicyDocument.Statement.id.,withoutKey,Condition,and,or,iam.roles.id.assume_role_policy.PolicyDocument.Statement.id.Condition,withoutKey,StringEquals,iam.roles.id.assume_role_policy.PolicyDocument.Statement.id.Condition.StringEquals.,withoutKey,sts:ExternalId,iam.roles.id.assume_role_policy.PolicyDocument.Statement.id.Condition.StringEquals.sts:ExternalId,empty,,or,iam.roles.id.assume_role_policy.PolicyDocument.Statement.id.Condition,withoutKey,StringLike,iam.roles.id.assume_role_policy.PolicyDocument.Statement.id.Condition.StringLike.,withoutKey,sts:ExternalId,iam.roles.id.assume_role_policy.PolicyDocument.Statement.id.Condition.StringLike.sts:ExternalId,empty,</p>",
+        "tags":
+        [
+            "https://research.nccgroup.com/2019/12/18/demystifying-aws-assumerole-and-stsexternalid/",
+            "https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_create_for-user_externalid.html"
+        ],
+        "sort_order": 52
+    },
+    {
+        "testcase": "Roles - AssumeRole Policy Lacks MFA",
+        "details": "<p>When authorizing assumption, MFA should be required.</p><p><b>Display Path</b>: iam.roles.id</p><p><b>Path</b>: iam.roles.id.assume_role_policy.PolicyDocument.Statement.id</p><p><b>Conditions</b>: and,iam.roles.id.assume_role_policy.PolicyDocument.Statement.id.Effect,equal,Allow,iam.roles.id.assume_role_policy.PolicyDocument.Statement.id.,containAction,sts:AssumeRole,iam.roles.id.assume_role_policy.PolicyDocument.Statement.id.Principal,withKeyCaseInsensitive,AWS,or,iam.roles.id.assume_role_policy.PolicyDocument.Statement.id.,withoutKey,Condition,iam.roles.id.assume_role_policy.PolicyDocument.Statement.id.Condition,withoutKey,Bool,iam.roles.id.assume_role_policy.PolicyDocument.Statement.id.Condition.Bool.,withoutKey,aws:MultiFactorAuthPresent,iam.roles.id.assume_role_policy.PolicyDocument.Statement.id.Condition.Bool.aws:MultiFactorAuthPresent,notTrue,</p>",
+        "tags":
+        [
+            "https://research.nccgroup.com/2019/12/18/demystifying-aws-assumerole-and-stsexternalid/"
+        ],
+        "sort_order": 53
+    },
+    {
+        "testcase": "Roles - AssumeRole Policy Allows All Principals",
+        "details": "<p>Setting the AssumeRole policy's principal attribute to \"AWS:*\" means that anyone is authorized to assume the role and access the AWS account.</p><p><b>Display Path</b>: iam.roles.id</p><p><b>Path</b>: iam.roles.id.assume_role_policy.PolicyDocument.Statement.id</p><p><b>Conditions</b>: and,iam.roles.id.assume_role_policy.PolicyDocument.Statement.id.Effect,equal,Allow,iam.roles.id.assume_role_policy.PolicyDocument.Statement.id.,containAction,sts:AssumeRole,_INCLUDE_(conditions/policy-statement-any-principal.json),_STATEMENT_,iam.roles.id.assume_role_policy.PolicyDocument.Statement.id,_INCLUDE_(conditions/policy-statement-poor-condition.json),_STATEMENT_,iam.roles.id.assume_role_policy.PolicyDocument.Statement.id</p>",
+        "tags":
+        [
+            "https://research.nccgroup.com/2019/12/18/demystifying-aws-assumerole-and-stsexternalid/"
+        ],
+        "sort_order": 54
+    },
+    {
+        "testcase": "Roles - Unused Role for EC2 Service",
+        "code": "instances",
+        "details": "<p>An EC2 role is defined which is unused and may not be required. This being the case, its existence in the configuration increases the risk that it may be inappropriately assigned. The unused role should be reviewed and removed if no longer required.</p><p><b>Display Path</b>: iam.roles.id</p><p><b>Path</b>: iam.roles.id.assume_role_policy.Statement.id.Principal</p><p><b>Keys</b>:<ul><li>iam.roles.id.name</li><li>this</li></ul></p><p><b>Conditions</b>: and,iam.roles.id.instances_count,equal,0,iam.roles.id.assume_role_policy.PolicyDocument.Statement.id.Principal.,withKey,Service,iam.roles.id.assume_role_policy.PolicyDocument.Statement.id.Principal.Service,equal,ec2.amazonaws.com</p>",
+        "tags":
+        [
+            "https://aws.amazon.com/about-aws/whats-new/2019/11/identify-unused-iam-roles-easily-and-remove-them-confidently-by-using-the-last-used-timestamp/"
+        ],
+        "sort_order": 55
+    },
+    {
+        "testcase": "Groups - Group with Inline Policies",
+        "code": "inline_policies",
+        "details": "<p>An inline policy is a policy that's embedded in an IAM identity (a user, group, or role). These policies are harder to audit and manage, and should be deprecated in favor of managed policies.</p><p><b>Path</b>: iam.groups.id</p><p><b>Conditions</b>: and,iam.groups.id.,withKey,inline_policies,iam.groups.id.inline_policies,notEmpty,</p>",
+        "tags":
+        [
+            "https://docs.aws.amazon.com/IAM/latest/UserGuide/best-practices.html#best-practice-managed-vs-inline",
+            "https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_managed-vs-inline.html"
+        ],
+        "sort_order": 56
+    },
+    {
+        "testcase": "groups - Group with No Users",
+        "details": "<p>Groups with no users should be reviewed and deleted if not necessary.</p><p><b>Path</b>: iam.groups.id</p><p><b>Conditions</b>: and,iam.groups.id.users,empty,</p>",
+        "tags":
+        [
+            "https://docs.aws.amazon.com/IAM/latest/UserGuide/best-practices.html#use-groups-for-permissions"
+        ],
+        "sort_order": 57
+    },
+    {
+        "testcase": "Users - Human User with _ARG_1_ Policies",
+        "code": "_ARG_1_",
+        "details": "<p>This configuration goes against organizational policies.</p><p><b>Path</b>: iam.users.id</p><p><b>Key</b>: iam-human-user-with-_ARG_1_-policies</p><p><b>Argument Names</b>:<ul><li>Name of IAM group</li><li>Type of policy</li><li>Path to policies</li></ul></p><p><b>Conditions</b>: and,iam.users.id.groups,containAtLeastOneOf,_ARG_0_,iam.users.id.,withKey,_ARG_2_,iam.users.id._ARG_2_,notEmpty,</p>",
+        "tags":
+        [],
+        "sort_order": 58
+    },
+    {
+        "testcase": "Statements - Inline _ARG_0_ Policy Allows \"NotActions\"",
+        "details": "<p>The combination of \"effect = allow\" and \"NotAction\" results in the policy allowing every action except those listed in the statement. The target policy does not follow the principle of least privilege because thousands of actions exist in AWS and because this policy automatically authorizes users to perform new actions created, regardless of their nature.</p><p><b>Display Path</b>: iam._ARG_0_s.id</p><p><b>Path</b>: iam._ARG_0_s.id.inline_policies.id.PolicyDocument.Statement.id</p><p><b>Key</b>: iam-inline-_ARG_0_-policy-allows-NotActions</p><p><b>Argument Names</b>:<ul><li>IAM entity type</li></ul></p><p><b>Conditions</b>: and,iam._ARG_0_s.id.inline_policies.id.PolicyDocument.Statement.id.Effect,equal,Allow,iam._ARG_0_s.id.inline_policies.id.PolicyDocument.Statement.id.,withKey,NotAction</p>",
+        "tags":
+        [
+            "https://docs.aws.amazon.com/IAM/latest/UserGuide/best-practices.html",
+            "https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_elements_notaction.html",
+            "https://aws.amazon.com/blogs/security/back-to-school-understanding-the-iam-policy-grammar/"
+        ],
+        "sort_order": 59
+    },
+    {
+        "testcase": "Statements - Inline _ARG_0_ Policy Allows Non STS Action",
+        "details": "<p>When the principle of least privilege is implemented by exclusively using roles for privilege management, users should only be granted permissions to assume roles. This policy may violate that organizational standard.</p><p><b>Display Path</b>: iam._ARG_0_s.id</p><p><b>Path</b>: iam._ARG_0_s.id.inline_policies.id.PolicyDocument.Statement.id</p><p><b>Key</b>: iam-inline-_ARG_0_-policy-allows-non-sts-action</p><p><b>Argument Names</b>:<ul><li>IAM entity type</li><li>Service</li><li>Action</li></ul></p><p><b>Conditions</b>: and,iam._ARG_0_s.id.inline_policies.id.PolicyDocument.Statement.id.Effect,equal,Allow,or,iam._ARG_0_s.id.inline_policies.id.PolicyDocument.Statement.id.,withoutKey,Action,iam._ARG_0_s.id.inline_policies.id.PolicyDocument.Statement.id.Action,containAtLeastOneDifferentFrom,sts:AssumeRole</p>",
+        "tags":
+        [
+            "https://docs.aws.amazon.com/IAM/latest/UserGuide/best-practices.html"
+        ],
+        "sort_order": 60
+    },
+    {
+        "testcase": "Policies - Inline _ARG_0_ Policy Allows \"_ARG_1_:_ARG_2_\" For All Resources",
+        "details": "<p>Using \"*\" for the resource field might grant permissions to more resources than necessary, potentially introducing privilege escalation scenarios.</p><p><b>Display Path</b>: iam._ARG_0_s.id</p><p><b>Path</b>: iam._ARG_0_s.id.inline_policies.id.PolicyDocument.Statement.id</p><p><b>Key</b>: iam-inline-_ARG_0_-policy-allows-_ARG_1_-_ARG_2_</p><p><b>Keys</b>:<ul><li>iam._ARG_0_s.id.inline_policies.id.name</li></ul></p><p><b>Argument Names</b>:<ul><li>IAM entity type</li><li>Service</li><li>Action</li></ul></p><p><b>Conditions</b>: and,iam._ARG_0_s.id.inline_policies.id.PolicyDocument.Statement.id.Effect,equal,Allow,or,and,iam._ARG_0_s.id.inline_policies.id.PolicyDocument.Statement.id.,withKey,Action,iam._ARG_0_s.id.inline_policies.id.PolicyDocument.Statement.id.Action,containNoneOf,*,*:*,iam._ARG_0_s.id.inline_policies.id.PolicyDocument.Statement.id.,withKey,NotAction,iam._ARG_0_s.id.inline_policies.id.PolicyDocument.Statement.id.,containAction,_ARG_1_:_ARG_2_,_INCLUDE_(conditions/policy-statement-any-resource.json),_STATEMENT_,iam._ARG_0_s.id.inline_policies.id.PolicyDocument.Statement.id,_INCLUDE_(conditions/policy-statement-poor-condition.json),_STATEMENT_,iam._ARG_0_s.id.inline_policies.id.PolicyDocument.Statement.id</p>",
+        "tags":
+        [
+            "https://docs.aws.amazon.com/IAM/latest/UserGuide/best-practices.html"
+        ],
+        "sort_order": 61
+    },
+    {
+        "testcase": "Policies - Policy with Denied User Actions for Group Objects",
+        "details": "<p>When a deny policy is specified for User object actions on a group resource, this will only affect the specific IAM group but not the group members. This could lead to privilege escalation if the user can perform other privileged actions targeting the specific members of the group.</p><p><b>Recommendation</b>: Define all relevant users in the resource field of the affected policies to avoid ineffective IAM actions and deny all group actions. The alternative would be to use the condition \"iam:ResourceTag\" in the policy.</p><p><b>Display Path</b>: iam.policies.id</p><p><b>Path</b>: iam.policies.id.PolicyDocument.Statement.id</p><p><b>Conditions</b>: and,iam.policies.id.PolicyDocument.Statement.id.Effect,equal,Deny,iam.policies.id.PolicyDocument.Statement.id.,withKey,Resource,iam.policies.id.PolicyDocument.Statement.id.Resource,matchInList,arn:aws:iam::[0-9]+:group/.*,and,iam.policies.id.PolicyDocument.Statement.id.,withKey,Action,iam.policies.id.PolicyDocument.Statement.id.Action,containAtLeastOneOf,*,iam:CreateUser,iam:GetUser,iam:UpdateUser,iam:DeleteUser,iam:GetUserPolicy,iam:PutUserPolicy,iam:DeleteUserPolicy,iam:ListUserPolicies,iam:AttachUserPolicy,iam:DetachUserPolicy,iam:ListAttachedUserPolicies,iam:SimulatePrincipalPolicy,iam:GetContextKeysForPrincipalPolicy,iam:TagUser,iam:UpdateSSHPublicKey,iam:UntagUser,iam:GetSSHPublicKey,iam:ListUserTags,iam:DeleteSSHPublicKey,iam:GetLoginProfile,iam:GetAccessKeyLastUsed,iam:UpdateLoginProfile,iam:UploadSigningCertificate,iam:DeleteLoginProfile,iam:ListSigningCertificates,iam:CreateLoginProfile,iam:UpdateSigningCertificate,iam:EnableMFADevice,iam:DeleteSigningCertificate,iam:ResyncMFADevice,iam:ListServiceSpecificCredentials,iam:ListMFADevices,iam:ResetServiceSpecificCredential,iam:DeactivateMFADevice,iam:CreateServiceSpecificCredential,iam:ChangePassword,iam:UpdateServiceSpecificCredential,iam:CreateAccessKey,iam:DeleteServiceSpecificCredential,iam:ListAccessKeys,iam:PutUserPermissionsBoundary,iam:UpdateAccessKey,iam:DeleteUserPermissionsBoundary,iam:DeleteAccessKey,iam:ListGroupsForUser,iam:ListSSHPublicKeys,iam:UploadSSHPublicKey</p>",
+        "tags":
+        [
+            "https://blog.lightspin.io/aws-iam-groups-authorization-bypass",
+            "https://github.com/lightspin-tech/red-shadow"
+        ],
+        "sort_order": 62
+    },
+    {
+        "testcase": "Statements - Managed Policy Allows \"NotActions\"",
+        "details": "<p>The combination of \"effect = allow\" and \"NotAction\" results in the policy allowing every action except those listed in the statement. The target policy does not follow the principle of least privilege because thousands of actions exist in AWS and because this policy automatically authorizes users to perform new actions created, regardless of their nature.</p><p><b>Display Path</b>: iam.policies.id</p><p><b>Path</b>: iam.policies.id.PolicyDocument.Statement.id</p><p><b>Conditions</b>: and,iam.policies.id.arn,notContainString,arn:aws:iam::aws:policy/aws-service-role,iam.policies.id.PolicyDocument.Statement.id.Effect,equal,Allow,iam.policies.id.PolicyDocument.Statement.id.,withKey,NotAction</p>",
+        "tags":
+        [
+            "https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_elements_notaction.html",
+            "https://aws.amazon.com/blogs/security/back-to-school-understanding-the-iam-policy-grammar/"
+        ],
+        "sort_order": 63
+    },
+    {
+        "testcase": "Statements - Managed Policy Allows All Actions",
+        "details": "<p>Providing full privileges instead of restricting to the minimum set of permissions that the principal requires exposes the resources to potentially unwanted actions.</p><p><b>Recommendation</b>: Ensure no managed policies are configured with <samp>Effect: Allow</samp>, <samp>Action: *</samp> and <samp>Resource: *</samp></p><p><b>Display Path</b>: iam.policies.id</p><p><b>Path</b>: iam.policies.id.PolicyDocument.Statement.id</p><p><b>Conditions</b>: and,iam.policies.id.arn,notContainString,arn:aws:iam::aws:policy/aws-service-role,iam.policies.id.PolicyDocument.Statement.id.Effect,equal,Allow,and,iam.policies.id.PolicyDocument.Statement.id.,withKey,Action,iam.policies.id.PolicyDocument.Statement.id.Action,containAtLeastOneOf,*,*:*,_INCLUDE_(conditions/policy-statement-poor-condition.json),_STATEMENT_,iam.policies.id.PolicyDocument.Statement.id,iam.policies.id.PolicyDocument.Statement.id.Resource,containAtLeastOneOf,*</p>",
+        "tags":
+        [
+            "CIS Amazon Web Services Foundations v1.1.0 ref:1.24",
+            "CIS Amazon Web Services Foundations v1.2.0 ref:1.22",
+            "https://docs.aws.amazon.com/IAM/latest/UserGuide/best-practices.html",
+            "https://aws.amazon.com/blogs/security/back-to-school-understanding-the-iam-policy-grammar/"
+        ],
+        "sort_order": 64
+    },
+    {
+        "testcase": "Statements - Managed Policy Allows Non STS Action",
+        "details": "<p>When the principle of least privilege is implemented by exclusively using roles for privilege management, users should only be granted permissions to assume roles. This policy may violate that organizational standard.</p><p><b>Display Path</b>: iam.policies.id</p><p><b>Path</b>: iam.policies.id.PolicyDocument.Statement.id</p><p><b>Argument Names</b>:<ul><li>Service</li><li>Action</li></ul></p><p><b>Conditions</b>: and,iam.policies.id.arn,notContainString,arn:aws:iam::aws:policy/aws-service-role,iam.policies.id.PolicyDocument.Statement.id.Effect,equal,Allow,or,iam.policies.id.PolicyDocument.Statement.id.,withoutKey,Action,iam.policies.id.PolicyDocument.Statement.id.Action,containAtLeastOneDifferentFrom,sts:AssumeRole</p>",
+        "tags":
+        [
+            "https://docs.aws.amazon.com/IAM/latest/UserGuide/best-practices.html"
+        ],
+        "sort_order": 65
+    },
+    {
+        "testcase": "Statements - Managed Policy Allows \"_ARG_0_:_ARG_1_\" For All Resources",
+        "details": "<p>Using \"*\" for the resource field might grant permissions to more resources than necessary, potentially introducing privilege escalation scenarios.</p><p><b>Display Path</b>: iam.policies.id</p><p><b>Path</b>: iam.policies.id.PolicyDocument.Statement.id</p><p><b>Key</b>: iam-managed-policy-allows-_ARG_0_-_ARG_1_</p><p><b>Keys</b>:<ul><li>iam.policies.id.name</li></ul></p><p><b>Argument Names</b>:<ul><li>Service</li><li>Action</li></ul></p><p><b>Conditions</b>: and,iam.policies.id.arn,notContainString,arn:aws:iam::aws:policy/aws-service-role,iam.policies.id.PolicyDocument.Statement.id.Effect,equal,Allow,or,and,iam.policies.id.PolicyDocument.Statement.id.,withKey,Action,iam.policies.id.PolicyDocument.Statement.id.Action,containNoneOf,*,*:*,iam.policies.id.PolicyDocument.Statement.id.,withKey,NotAction,iam.policies.id.PolicyDocument.Statement.id.,containAction,_ARG_0_:_ARG_1_,_INCLUDE_(conditions/policy-statement-any-resource.json),_STATEMENT_,iam.policies.id.PolicyDocument.Statement.id,_INCLUDE_(conditions/policy-statement-poor-condition.json),_STATEMENT_,iam.policies.id.PolicyDocument.Statement.id</p>",
+        "tags":
+        [
+            "https://docs.aws.amazon.com/IAM/latest/UserGuide/best-practices.html"
+        ],
+        "sort_order": 66
+    },
+    {
+        "testcase": "Policies - Managed Policy Not Attached to Any Entity",
+        "details": "<p>Customer Managed policies should be reviewed and deleted if not necessary.</p><p><b>Display Path</b>: iam.policies.id</p><p><b>Path</b>: iam.policies.id</p><p><b>Conditions</b>: and,iam.policies.id.attached_to,empty,</p>",
+        "tags":
+        [
+            "https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_managed-vs-inline.html#customer-managed-policies"
+        ],
+        "sort_order": 67
+    },
+    {
+        "testcase": "Policies - No Authorized User to Manage Incidents with AWS Support",
+        "details": "<p>The <samp>arn:aws:iam::aws:policy/AWSSupportAccess</samp> AWS Managed Policy was not found to be attached to any principal. There should be at least one user authorized to manage incidents with AWS Support.</p><p><b>Recommendation</b>: Attach the AWSSupportAccess to a role or group</p><p><b>Display Path</b>: iam.policies.id</p><p><b>Path</b>: iam.policies.id</p><p><b>Conditions</b>: and,iam.policies.id.arn,equal,arn:aws:iam::aws:policy/AWSSupportAccess,iam.policies.id.attached_to,empty,</p>",
+        "tags":
+        [
+            "CIS Amazon Web Services Foundations v1.1.0 ref:1.22",
+            "CIS Amazon Web Services Foundations v1.2.0 ref:1.20"
+        ],
+        "sort_order": 68
+    },
+    {
+        "testcase": "Password policy - Passwords Expire after _ARG_0_ Days",
+        "code": "MaxPasswordAge",
+        "details": "<p>Password expiration is disabled, or expiration time is set to a too high value. As a result, compromised credentials could be used by potential attackers for a larger period of time. Periodic password change enforced with an appropriate password expiration policy could help to mitigate this issue.</p><p><b>Recommendation</b>: Enable password expiration and set the expiration period to 90 days or less</p><p><b>Display Path</b>: iam.password_policy.MaxPasswordAge</p><p><b>Path</b>: iam.password_policy</p><p><b>Argument Names</b>:<ul><li>Maximum password age</li></ul></p><p><b>Conditions</b>: or,iam.password_policy.ExpirePasswords,false,,iam.password_policy.MaxPasswordAge,moreThan,_ARG_0_</p>",
+        "tags":
+        [
+            "CIS Amazon Web Services Foundations v1.0.0 ref:1.11",
+            "CIS Amazon Web Services Foundations v1.1.0 ref:1.11",
+            "CIS Amazon Web Services Foundations v1.2.0 ref:1.11",
+            "https://docs.aws.amazon.com/securityhub/latest/userguide/securityhub-cis-controls.html#securityhub-cis-controls-1.11"
+        ],
+        "sort_order": 69
+    },
+    {
+        "testcase": "Password policy - Minimum Password Length Too Short",
+        "details": "<p>The password policy did not enforce a minimum of _ARG_0_ characters. As a result, password complexity requirements were not in line with security best practice.</p><p><b>Recommendation</b>: Ensure the password policy is configured to require a minimum length</p><p><b>Path</b>: iam.password_policy.MinimumPasswordLength</p><p><b>Argument Names</b>:<ul><li>Minimum password length</li></ul></p><p><b>Conditions</b>: or,this,lessThan,_ARG_0_</p>",
+        "tags":
+        [
+            "CIS Amazon Web Services Foundations v1.0.0 ref:1.9",
+            "CIS Amazon Web Services Foundations v1.1.0 ref:1.9",
+            "CIS Amazon Web Services Foundations v1.2.0 ref:1.9",
+            "https://docs.aws.amazon.com/securityhub/latest/userguide/securityhub-cis-controls.html#securityhub-cis-controls-1.9",
+            "https://docs.aws.amazon.com/organizations/latest/userguide/orgs_best-practices_mgmt-acct.html#best-practices_mgmt-acct_complex-password",
+            "https://docs.aws.amazon.com/organizations/latest/userguide/best-practices_member-acct.html#best-practices_mbr-acct_complex-password"
+        ],
+        "sort_order": 70
+    },
+    {
+        "testcase": "Password policy - Password Expiration Disabled",
+        "details": "<p>Password expiration is disabled. As a result, compromised credentials could be used by potential attackers for a indefinite amount of time. Periodic password change enforced with an appropriate password expiration policy could help to mitigate this issue.</p><p><b>Path</b>: iam.password_policy.ExpirePasswords</p><p><b>Conditions</b>: or,this,false,</p>",
+        "tags":
+        [
+            "https://docs.aws.amazon.com/securityhub/latest/userguide/securityhub-cis-controls.html#securityhub-cis-controls-1.11"
+        ],
+        "sort_order": 71
+    },
+    {
+        "testcase": "Password policy - Password Policy Lacks Lowercase Requirement",
+        "details": "<p>The password policy did not require the use of at least one lowercase character. As a result, password complexity requirements were not in line with security best practice.</p><p><b>Recommendation</b>: Ensure the password policy is configured to require at least one lowercase letter</p><p><b>Path</b>: iam.password_policy.RequireLowercaseCharacters</p><p><b>Conditions</b>: or,this,false,</p>",
+        "tags":
+        [
+            "CIS Amazon Web Services Foundations v1.0.0 ref:1.6",
+            "CIS Amazon Web Services Foundations v1.1.0 ref:1.6",
+            "CIS Amazon Web Services Foundations v1.2.0 ref:1.6",
+            "https://docs.aws.amazon.com/securityhub/latest/userguide/securityhub-cis-controls.html#securityhub-cis-controls-1.6",
+            "https://docs.aws.amazon.com/organizations/latest/userguide/orgs_best-practices_mgmt-acct.html#best-practices_mgmt-acct_complex-password",
+            "https://docs.aws.amazon.com/organizations/latest/userguide/best-practices_member-acct.html#best-practices_mbr-acct_complex-password"
+        ],
+        "sort_order": 72
+    },
+    {
+        "testcase": "Password policy - Password Policy Lacks Number Requirement",
+        "details": "<p>The password policy did not require the use of at least one number. As a result, password complexity requirements were not in line with security best practice.</p><p><b>Recommendation</b>: Ensure the password policy is configured to require at least one number</p><p><b>Path</b>: iam.password_policy.RequireNumbers</p><p><b>Conditions</b>: or,this,false,</p>",
+        "tags":
+        [
+            "CIS Amazon Web Services Foundations v1.0.0 ref:1.8",
+            "CIS Amazon Web Services Foundations v1.1.0 ref:1.8",
+            "CIS Amazon Web Services Foundations v1.2.0 ref:1.8",
+            "https://docs.aws.amazon.com/securityhub/latest/userguide/securityhub-cis-controls.html#securityhub-cis-controls-1.8",
+            "https://docs.aws.amazon.com/organizations/latest/userguide/orgs_best-practices_mgmt-acct.html#best-practices_mgmt-acct_complex-password",
+            "https://docs.aws.amazon.com/organizations/latest/userguide/best-practices_member-acct.html#best-practices_mbr-acct_complex-password"
+        ],
+        "sort_order": 73
+    },
+    {
+        "testcase": "Password policy - Password Policy Lacks Symbol Requirement",
+        "details": "<p>The password policy did not require the use of at least one special character. As a result, password complexity requirements were not in line with security best practice.</p><p><b>Recommendation</b>: Ensure the password policy is configured to require at least one symbol</p><p><b>Path</b>: iam.password_policy.RequireSymbols</p><p><b>Conditions</b>: or,this,false,</p>",
+        "tags":
+        [
+            "CIS Amazon Web Services Foundations v1.0.0 ref:1.7",
+            "CIS Amazon Web Services Foundations v1.1.0 ref:1.7",
+            "CIS Amazon Web Services Foundations v1.2.0 ref:1.7",
+            "https://docs.aws.amazon.com/securityhub/latest/userguide/securityhub-cis-controls.html#securityhub-cis-controls-1.7",
+            "https://docs.aws.amazon.com/organizations/latest/userguide/orgs_best-practices_mgmt-acct.html#best-practices_mgmt-acct_complex-password",
+            "https://docs.aws.amazon.com/organizations/latest/userguide/best-practices_member-acct.html#best-practices_mbr-acct_complex-password"
+        ],
+        "sort_order": 74
+    },
+    {
+        "testcase": "Password policy - Password Policy Lacks Uppercase Requirement",
+        "details": "<p>The password policy did not require the use of at least one uppercase character. As a result, password complexity requirements were not in line with security best practice.</p><p><b>Recommendation</b>: Ensure the password policy is configured to require at least one uppercase letter</p><p><b>Path</b>: iam.password_policy.RequireUppercaseCharacters</p><p><b>Conditions</b>: or,this,false,</p>",
+        "tags":
+        [
+            "CIS Amazon Web Services Foundations v1.0.0 ref:1.5",
+            "CIS Amazon Web Services Foundations v1.1.0 ref:1.5",
+            "CIS Amazon Web Services Foundations v1.2.0 ref:1.5",
+            "https://docs.aws.amazon.com/securityhub/latest/userguide/securityhub-cis-controls.html#securityhub-cis-controls-1.5",
+            "https://docs.aws.amazon.com/organizations/latest/userguide/orgs_best-practices_mgmt-acct.html#best-practices_mgmt-acct_complex-password",
+            "https://docs.aws.amazon.com/organizations/latest/userguide/best-practices_member-acct.html#best-practices_mbr-acct_complex-password"
+        ],
+        "sort_order": 75
+    },
+    {
+        "testcase": "Password policy - Password Policy Allows the Reuse of Passwords",
+        "details": "<p>The password policy allowed password reuse. As a result, password complexity requirements were not in line with security best practice.</p><p><b>Recommendation</b>: Ensure the password policy is configured to prevent password reuse</p><p><b>Path</b>: iam.password_policy.PasswordReusePrevention</p><p><b>Conditions</b>: or,this,false,</p>",
+        "tags":
+        [
+            "CIS Amazon Web Services Foundations v1.0.0 ref:1.10",
+            "CIS Amazon Web Services Foundations v1.1.0 ref:1.10",
+            "CIS Amazon Web Services Foundations v1.2.0 ref:1.10",
+            "https://docs.aws.amazon.com/securityhub/latest/userguide/securityhub-cis-controls.html#securityhub-cis-controls-1.10"
+        ],
+        "sort_order": 76
+    },
+    {
+        "testcase": "Roles - Role with Inline Policies",
+        "code": "inline_policies",
+        "details": "<p>An inline policy is a policy that's embedded in an IAM identity (a user, group, or role). These policies are harder to audit and manage, and should be deprecated in favor of managed policies.</p><p><b>Path</b>: iam.roles.id</p><p><b>Conditions</b>: and,iam.roles.id.,withKey,inline_policies,iam.roles.id.inline_policies,notEmpty,</p>",
+        "tags":
+        [
+            "https://docs.aws.amazon.com/IAM/latest/UserGuide/best-practices.html#best-practice-managed-vs-inline",
+            "https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_managed-vs-inline.html"
+        ],
+        "sort_order": 77
+    },
+    {
+        "testcase": "Accounts - Root Account without Hardware MFA",
+        "code": "mfa_active_hardware",
+        "details": "<p>The root account is the most privileged user in an account. MFA adds an extra layer of protection on top of a user name and password. With MFA enabled, when a user signs in to an AWS website, they're prompted for their user name and password and for an authentication code from their AWS MFA device.</p><p><b>Recommendation</b>: Enable MFA for the root account</p><p><b>Path</b>: iam.credential_reports.id</p><p><b>Keys</b>:<ul><li>this</li></ul></p><p><b>Conditions</b>: and,iam.credential_reports.id.name,equal,<root_account>,or,iam.credential_reports.id.mfa_active,notTrue,,iam.credential_reports.id.mfa_active_hardware,false,,iam.credential_reports.id.partition,notEqual,aws-us-gov</p>",
+        "tags":
+        [
+            "CIS Amazon Web Services Foundations v1.0.0 ref:1.13",
+            "CIS Amazon Web Services Foundations v1.1.0 ref:1.14",
+            "CIS Amazon Web Services Foundations v1.2.0 ref:1.14",
+            "https://docs.aws.amazon.com/securityhub/latest/userguide/securityhub-cis-controls.html#securityhub-cis-controls-1.13",
+            "https://docs.aws.amazon.com/organizations/latest/userguide/orgs_best-practices_mgmt-acct.html#best-practices_mgmt-acct_mfa"
+        ],
+        "sort_order": 78
+    },
+    {
+        "testcase": "Accounts - Root Account without MFA",
+        "code": "mfa_active",
+        "details": "<p>The root account is the most privileged user in an account. MFA adds an extra layer of protection on top of a user name and password. With MFA enabled, when a user signs in to an AWS website, they're prompted for their user name and password and for an authentication code from their AWS MFA device.</p><p><b>Recommendation</b>: Enable MFA for the root account</p><p><b>Path</b>: iam.credential_reports.id</p><p><b>Keys</b>:<ul><li>this</li></ul></p><p><b>Conditions</b>: and,iam.credential_reports.id.name,equal,<root_account>,iam.credential_reports.id.mfa_active,notTrue,,iam.credential_reports.id.partition,notEqual,aws-us-gov</p>",
+        "tags":
+        [
+            "CIS Amazon Web Services Foundations v1.1.0 ref:1.13",
+            "CIS Amazon Web Services Foundations v1.2.0 ref:1.13",
+            "https://docs.aws.amazon.com/securityhub/latest/userguide/securityhub-cis-controls.html#securityhub-cis-controls-1.13",
+            "https://docs.aws.amazon.com/organizations/latest/userguide/orgs_best-practices_mgmt-acct.html#best-practices_mgmt-acct_mfa"
+        ],
+        "sort_order": 79
+    },
+    {
+        "testcase": "Root account - Root Account Used Recently",
+        "code": "password_last_used",
+        "details": "<p>The root account is the most privileged user in an account. As a best practice, the root account should only be used when required for root-only tasks.</p><p><b>Recommendation</b>: Follow the remediation instructions of the Ensure IAM policies are attached only to groups or roles recommendation</p><p><b>Path</b>: iam.credential_reports.id</p><p><b>Conditions</b>: and,iam.credential_reports.id.password_last_used,notNull,,iam.credential_reports.id.password_last_used,newerThan,90,days,iam.credential_reports.id.name,equal,<root_account></p>",
+        "tags":
+        [
+            "CIS Amazon Web Services Foundations v1.0.0 ref:1.1",
+            "CIS Amazon Web Services Foundations v1.1.0 ref:1.1",
+            "CIS Amazon Web Services Foundations v1.2.0 ref:1.1",
+            "https://docs.aws.amazon.com/securityhub/latest/userguide/securityhub-cis-controls.html#securityhub-standards-cis-controls-1.1",
+            "https://docs.aws.amazon.com/general/latest/gr/aws_tasks-that-require-root.html",
+            "https://docs.aws.amazon.com/organizations/latest/userguide/orgs_best-practices_mgmt-acct.html#best-practices_mgmt-use",
+            "https://docs.aws.amazon.com/organizations/latest/userguide/orgs_best-practices_mgmt-acct.html#best-practices_mgmt-acct_review-access",
+            "https://docs.aws.amazon.com/organizations/latest/userguide/orgs_best-practices_mgmt-acct.html#best-practices_mgmt-acct_document-processes",
+            "https://docs.aws.amazon.com/organizations/latest/userguide/orgs_best-practices_mgmt-acct.html#best-practices_mgmt-acct_monitor-access"
+        ],
+        "sort_order": 80
+    },
+    {
+        "testcase": "Root account - Root Account Has Active X.509 Certs",
+        "details": "<p>Root account X.509 certificates should be deleted as they may be used to make SOAP-protocol requests in the context of the root account.</p><p><b>Path</b>: iam.credential_reports.id</p><p><b>Conditions</b>: and,iam.credential_reports.id.name,equal,<root_account>,or,iam.credential_reports.id.cert_1_active,true,,iam.credential_reports.id.cert_2_active,true,</p>",
+        "tags":
+        [
+            "https://docs.aws.amazon.com/securityhub/latest/userguide/securityhub-cis-controls.html#securityhub-standards-cis-controls-1.1",
+            "https://docs.aws.amazon.com/organizations/latest/userguide/orgs_best-practices_mgmt-acct.html#best-practices_mgmt-use"
+        ],
+        "sort_order": 81
+    },
+    {
+        "testcase": "Root account - Root Account Has Active Keys",
+        "details": "<p>AWS root account access keys should be deleted as they provide unrestricted access to the AWS Account.</p><p><b>Recommendation</b>: Delete or disable active root account access keys</p><p><b>Path</b>: iam.credential_reports.id</p><p><b>Conditions</b>: and,iam.credential_reports.id.name,equal,<root_account>,or,iam.credential_reports.id.access_key_1_active,true,,iam.credential_reports.id.access_key_2_active,true,</p>",
+        "tags":
+        [
+            "CIS Amazon Web Services Foundations v1.0.0 ref:1.12",
+            "CIS Amazon Web Services Foundations v1.1.0 ref:1.12",
+            "CIS Amazon Web Services Foundations v1.2.0 ref:1.12",
+            "https://docs.aws.amazon.com/securityhub/latest/userguide/securityhub-cis-controls.html#securityhub-standards-cis-controls-1.1",
+            "https://docs.aws.amazon.com/organizations/latest/userguide/orgs_best-practices_mgmt-acct.html#best-practices_mgmt-use",
+            "https://docs.aws.amazon.com/organizations/latest/userguide/orgs_best-practices_mgmt-acct.html#best-practices_mgmt-acct_review-access",
+            "https://docs.aws.amazon.com/organizations/latest/userguide/orgs_best-practices_mgmt-acct.html#best-practices_mgmt-acct_document-processes"
+        ],
+        "sort_order": 82
+    },
+    {
+        "testcase": "Users - Service User with Password Enabled",
+        "details": "<p>A user meant to be used for a service or application not hosted in AWS was found to have password authentication enabled. This goes against security best practice, which recommends that these types of users should only have API authentication enabled, to minimize the likeliness of account compromise.</p><p><b>Path</b>: iam.users.id</p><p><b>Argument Names</b>:<ul><li>Group for service users</li></ul></p><p><b>Conditions</b>: and,iam.users.id.,withKey,LoginProfile,iam.users.id.groups,containAtLeastOneOf,_ARG_0_</p>",
+        "tags":
+        [],
+        "sort_order": 83
+    },
+    {
+        "testcase": "Users - Credentials Unused for _ARG_0_ Days or Greater Are Not Disabled",
+        "code": "unused_credentials",
+        "details": "<p>Disabling or removing unnecessary credentials will reduce the window of opportunity for compromised accounts to be used.</p><p><b>Recommendation</b>: Ensure that all credentials (including passwords and access keys) have been used and changed in the last _ARG_0_ days</p><p><b>Path</b>: iam.credential_reports.id</p><p><b>Argument Names</b>:<ul><li>Period in days</li></ul></p><p><b>Conditions</b>: or,and,iam.credential_reports.id.password_enabled,true,,and,iam.credential_reports.id.password_last_used,notNull,,iam.credential_reports.id.password_last_used,olderThan,_ARG_0_,days,and,iam.credential_reports.id.access_key_1_active,true,,and,iam.credential_reports.id.access_key_1_last_used_date,notNull,,iam.credential_reports.id.access_key_1_last_used_date,olderThan,_ARG_0_,days,and,iam.credential_reports.id.access_key_2_active,true,,and,iam.credential_reports.id.access_key_2_last_used_date,notNull,,iam.credential_reports.id.access_key_2_last_used_date,olderThan,_ARG_0_,days</p>",
+        "tags":
+        [
+            "CIS Amazon Web Services Foundations v1.0.0 ref:1.3",
+            "CIS Amazon Web Services Foundations v1.1.0 ref:1.3",
+            "CIS Amazon Web Services Foundations v1.2.0 ref:1.3"
+        ],
+        "sort_order": 84
+    },
+    {
+        "testcase": "Access keys - Lack of Key Rotation for _ARG_1_ Days (Key Status: _ARG_0_)",
+        "details": "<p>In case of access key compromise, the lack of credential rotation increases the period during which an attacker has access to the AWS account.</p><p><b>Recommendation</b>: Rotate access keys that have not been changed recently</p><p><b>Display Path</b>: iam.users.id</p><p><b>Path</b>: iam.users.id.AccessKeys.id</p><p><b>Key</b>: iam-user-no-_ARG_0_-key-rotation.json</p><p><b>Argument Names</b>:<ul><li>Key status</li><li>Rotation period</li></ul></p><p><b>Conditions</b>: and,iam.users.id.AccessKeys.id.Status,equal,_ARG_0_,iam.users.id.AccessKeys.id.CreateDate,olderThan,_ARG_1_,days</p>",
+        "tags":
+        [
+            "CIS Amazon Web Services Foundations v1.0.0 ref:1.4",
+            "CIS Amazon Web Services Foundations v1.1.0 ref:1.4",
+            "CIS Amazon Web Services Foundations v1.2.0 ref:1.4",
+            "https://docs.aws.amazon.com/IAM/latest/UserGuide/best-practices.html#rotate-credentials"
+        ],
+        "sort_order": 85
+    },
+    {
+        "testcase": "Users - User Not in Category Group",
+        "code": "user_groups",
+        "details": "<p>This configuration goes against organizational policies.</p><p><b>Path</b>: iam.users.id</p><p><b>Argument Names</b>:<ul><li>Category groups</li></ul></p><p><b>Conditions</b>: and,iam.users.id.groups,containNoneOf,_ARG_0_</p>",
+        "tags":
+        [],
+        "sort_order": 86
+    },
+    {
+        "testcase": "Users - User Not in Common Group",
+        "code": "user_groups",
+        "details": "<p>This configuration goes against organizational policies.</p><p><b>Path</b>: iam.users.id</p><p><b>Argument Names</b>:<ul><li>Common group</li></ul></p><p><b>Conditions</b>: and,iam.users.id.groups,containNoneOf,_ARG_0_</p>",
+        "tags":
+        [],
+        "sort_order": 87
+    },
+    {
+        "testcase": "Users - Users with Access Keys Created during Initial Setup and Not Used",
+        "code": "unused_access_keys",
+        "details": "<p>Not creating access keys during initial user setup will avoid unnecessary management work and give more control over keys used somewhere in the organization.</p><p><b>Recommendation</b>: Do not setup access keys during initial user setup. Instead, require users to create the keys themselves or put in a support ticket to have them created</p><p><b>Path</b>: iam.credential_reports.id</p><p><b>Conditions</b>: or,and,iam.credential_reports.id.access_key_1_active,true,,iam.credential_reports.id.access_key_1_last_used_date,equal,None,and,iam.credential_reports.id.access_key_2_active,true,,iam.credential_reports.id.access_key_2_last_used_date,equal,None</p>",
+        "tags":
+        [
+            "CIS Amazon Web Services Foundations v1.1.0 ref:1.23",
+            "CIS Amazon Web Services Foundations v1.2.0 ref:1.21"
+        ],
+        "sort_order": 88
+    },
+    {
+        "testcase": "Users - User with Multiple API Keys",
+        "code": "multiple_api_keys",
+        "details": "<p>The user was configured to have more than one active API keys associated with the account. Redundant or unused API keys should be removed.</p><p><b>Path</b>: iam.users.id</p><p><b>Keys</b>:<ul><li>iam.users.id.name</li><li>iam.users.id.AccessKeys</li></ul></p><p><b>Conditions</b>: and,iam.users.id.AccessKeys,lengthMoreThan,1,iam.users.id.AccessKeys.0.Status,equal,Active,iam.users.id.AccessKeys.1.Status,equal,Active</p>",
+        "tags":
+        [
+            "https://docs.aws.amazon.com/general/latest/gr/aws-access-keys-best-practices.html"
+        ],
+        "sort_order": 89
+    },
+    {
+        "testcase": "Users - User with Password and Keys Enabled",
+        "code": "password_and_keys",
+        "details": "<p>The user was found to have configured with both password and API keys for authentication. This is considered against security best practice.</p><p><b>Path</b>: iam.users.id</p><p><b>Keys</b>:<ul><li>iam.users.id.name</li></ul></p><p><b>Conditions</b>: and,iam.users.id.,withKey,LoginProfile,iam.users.id.AccessKeys,notEmpty,</p>",
+        "tags":
+        [
+            "https://docs.aws.amazon.com/general/latest/gr/aws-access-keys-best-practices.html",
+            "https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_passwords_admin-change-user.html"
+        ],
+        "sort_order": 90
+    },
+    {
+        "testcase": "Users - User with _ARG_0_ Policies",
+        "code": "_ARG_1_",
+        "details": "<p>The user was found to be attached to inline policies. This can increase the complexity in user and policy management, and increase the risk of the user being assigned or retaining excessive permissions.</p><p><b>Recommendation</b>: Ensure IAM policies are only attached to groups or roles</p><p><b>Path</b>: iam.users.id</p><p><b>Key</b>: iam-user-with-_ARG_0_-policies</p><p><b>Argument Names</b>:<ul><li>Type of policy</li><li>Path to policies</li></ul></p><p><b>Conditions</b>: and,iam.users.id.,withKey,_ARG_1_,iam.users.id._ARG_1_,notEmpty,</p>",
+        "tags":
+        [
+            "CIS Amazon Web Services Foundations v1.0.0 ref:1.15",
+            "CIS Amazon Web Services Foundations v1.1.0 ref:1.16",
+            "CIS Amazon Web Services Foundations v1.2.0 ref:1.16"
+        ],
+        "sort_order": 91
+    },
+    {
+        "testcase": "Users - User without MFA",
+        "code": "mfa_enabled",
+        "details": "<p>All IAM users should have MFA. MFA adds an extra layer of protection on top of a user name and password. With MFA enabled, when a user signs in to an AWS website, they're prompted for their user name and password and for an authentication code from their AWS MFA device.</p><p><b>Recommendation</b>: Enable MFA for all users in the AWS account</p><p><b>Path</b>: iam.users.id</p><p><b>Keys</b>:<ul><li>iam.users.id.name</li></ul></p><p><b>Conditions</b>: and,iam.users.id.,withKey,LoginProfile,iam.users.id.MFADevices,empty,</p>",
+        "tags":
+        [
+            "CIS Amazon Web Services Foundations v1.0.0 ref:1.2",
+            "CIS Amazon Web Services Foundations v1.1.0 ref:1.2",
+            "CIS Amazon Web Services Foundations v1.2.0 ref:1.2",
+            "https://docs.aws.amazon.com/IAM/latest/UserGuide/best-practices.html#enable-mfa-for-privileged-users",
+            "https://docs.aws.amazon.com/organizations/latest/userguide/best-practices_member-acct.html#best-practices_mbr-acct_mfa"
+        ],
+        "sort_order": 92
+    },
+    {
+        "testcase": "Keys - KMS Customer Master Keys (CMKs) with Rotation Disabled",
+        "code": "rotation_enabled",
+        "details": "<p>Cryptographic best practices discourage extensive reuse of encryption keys. Consequently, Customer Master Keys (CMKs) should be rotated to prevent usage of compromised keys.<br><br>Note that AWS KMS supports optional automatic key rotation only for customer managed CMKs.</p><p><b>Recommendation</b>: For every KMS Customer Master Keys (CMKs), ensure that Rotate this key every year is enabled</p><p><b>Display Path</b>: kms.regions.id.keys.id</p><p><b>Path</b>: kms.regions.id.keys.id</p><p><b>Conditions</b>: and,kms.regions.id.keys.id.rotation_enabled,false,,kms.regions.id.keys.id.origin,equal,AWS_KMS,kms.regions.id.keys.id.key_manager,equal,CUSTOMER,kms.regions.id.keys.id.key_enabled,true,</p>",
+        "tags":
+        [
+            "CIS Amazon Web Services Foundations v1.0.0 ref:2.8",
+            "CIS Amazon Web Services Foundations v1.1.0 ref:2.8",
+            "CIS Amazon Web Services Foundations v1.2.0 ref:2.8",
+            "https://docs.aws.amazon.com/kms/latest/developerguide/rotate-keys.html"
+        ],
+        "sort_order": 93
+    },
+    {
+        "testcase": "Alarms - No CloudWatch Alarm for \"AWS Configuration Changes\"",
+        "details": "<p>There was no CloudWatch alarm to monitor AWS configuration changes. Monitoring for AWS configuration changes will help ensure sustained visibility to changes performed in the AWS account.</p><p><b>Recommendation</b>: Enable a CloudWatch alarm to detect AWS configuration changes.</p><p><b>Path</b>: cloudwatch.regions.id.metric_filters.id</p><p><b>Conditions</b>: or,cloudwatch.regions.id.metric_filters_pattern_checks.aws_configuration_changes,false,</p>",
+        "tags":
+        [
+            "CIS Amazon Web Services Foundations v1.0.0 ref:3.9",
+            "CIS Amazon Web Services Foundations v1.1.0 ref:3.9",
+            "CIS Amazon Web Services Foundations v1.2.0 ref:3.9"
+        ],
+        "sort_order": 94
+    },
+    {
+        "testcase": "Alarms - No CloudWatch Alarm for \"CloudTrail Configuration Changes\"",
+        "details": "<p>There was no CloudWatch alarm to monitor CloudTrail configuration changes. Monitoring for CloudTrail policy changes will help ensure sustained visibility to activities performed in the AWS account.</p><p><b>Recommendation</b>: Enable a CloudWatch alarm to monitor CloudTrail configuration changes.</p><p><b>Path</b>: cloudwatch.regions.id.metric_filters.id</p><p><b>Conditions</b>: or,cloudwatch.regions.id.metric_filters_pattern_checks.cloudtrail_configuration_changes,false,</p>",
+        "tags":
+        [
+            "CIS Amazon Web Services Foundations v1.0.0 ref:3.5",
+            "CIS Amazon Web Services Foundations v1.1.0 ref:3.5",
+            "CIS Amazon Web Services Foundations v1.2.0 ref:3.5"
+        ],
+        "sort_order": 95
+    },
+    {
+        "testcase": "Alarms - No CloudWatch Alarm for \"Disabled or Deleted Master Keys\"",
+        "details": "<p>There was no CloudWatch alarm to alert about disabled or deleted master keys. Monitoring for disabled or deleted master keys can prevent permanent loss of data encrypted with such keys.</p><p><b>Recommendation</b>: Enable a CloudWatch alarm to detect recently disabled or deleted master keys.</p><p><b>Path</b>: cloudwatch.regions.id.metric_filters.id</p><p><b>Conditions</b>: or,cloudwatch.regions.id.metric_filters_pattern_checks.cmk_deletion,false,</p>",
+        "tags":
+        [
+            "CIS Amazon Web Services Foundations v1.0.0 ref:3.7",
+            "CIS Amazon Web Services Foundations v1.1.0 ref:3.7",
+            "CIS Amazon Web Services Foundations v1.2.0 ref:3.7"
+        ],
+        "sort_order": 96
+    },
+    {
+        "testcase": "Alarms - No CloudWatch Alarm for \"Failed Console Authentications\"",
+        "details": "<p>There was no CloudWatch alarm for failed console authentication requests. Monitoring for failed console authentications can decrease the lead time to detect brute force attacks.</p><p><b>Recommendation</b>: Enable a CloudWatch alarm to monitor failed authentication attempts.</p><p><b>Path</b>: cloudwatch.regions.id.metric_filters.id</p><p><b>Conditions</b>: or,cloudwatch.regions.id.metric_filters_pattern_checks.console_authentication_failures,false,</p>",
+        "tags":
+        [
+            "CIS Amazon Web Services Foundations v1.0.0 ref:3.6",
+            "CIS Amazon Web Services Foundations v1.1.0 ref:3.6",
+            "CIS Amazon Web Services Foundations v1.2.0 ref:3.6"
+        ],
+        "sort_order": 97
+    },
+    {
+        "testcase": "Alarms - No CloudWatch Alarm for \"IAM Policy Changes\"",
+        "details": "<p>There was no CloudWatch alarm to monitor IAM policy changes. Monitoring for IAM policy changes will help ensure authentication and authorization control remain intact.</p><p><b>Recommendation</b>: Enable a CloudWatch alarm to monitor the usage of the root account.</p><p><b>Path</b>: cloudwatch.regions.id.metric_filters.id</p><p><b>Conditions</b>: or,cloudwatch.regions.id.metric_filters_pattern_checks.iam_policy_changes,false,</p>",
+        "tags":
+        [
+            "CIS Amazon Web Services Foundations v1.0.0 ref:3.4",
+            "CIS Amazon Web Services Foundations v1.1.0 ref:3.4",
+            "CIS Amazon Web Services Foundations v1.2.0 ref:3.4"
+        ],
+        "sort_order": 98
+    },
+    {
+        "testcase": "Alarms - No CloudWatch Alarm for \"Network Access Control Lists Changes\"",
+        "details": "<p>There was no CloudWatch alarm to detect changes to NACL. Monitoring for NACL changes will help ensure that no service or resource is unintentionally exposed.</p><p><b>Recommendation</b>: Enable a CloudWatch alarm to detect NACL changes.</p><p><b>Path</b>: cloudwatch.regions.id.metric_filters.id</p><p><b>Conditions</b>: or,cloudwatch.regions.id.metric_filters_pattern_checks.nacl_changes,false,</p>",
+        "tags":
+        [
+            "CIS Amazon Web Services Foundations v1.0.0 ref:3.11",
+            "CIS Amazon Web Services Foundations v1.1.0 ref:3.11",
+            "CIS Amazon Web Services Foundations v1.2.0 ref:3.11"
+        ],
+        "sort_order": 99
+    },
+    {
+        "testcase": "Alarms - No CloudWatch Alarm for \"Network Gateways Changes\"",
+        "details": "<p>There was no CloudWatch alarm to monitor changes in network gateways. Monitoring for network gateways changes will help ensure that all traffic traverses the VPC border via a controlled path.</p><p><b>Recommendation</b>: Enable a CloudWatch alarm to detect network gateways changes.</p><p><b>Path</b>: cloudwatch.regions.id.metric_filters.id</p><p><b>Conditions</b>: or,cloudwatch.regions.id.metric_filters_pattern_checks.network_gateways_changes,false,</p>",
+        "tags":
+        [
+            "CIS Amazon Web Services Foundations v1.0.0 ref:3.12",
+            "CIS Amazon Web Services Foundations v1.1.0 ref:3.12",
+            "CIS Amazon Web Services Foundations v1.2.0 ref:3.12"
+        ],
+        "sort_order": 100
+    },
+    {
+        "testcase": "Alarms - No CloudWatch Alarm for \"Root Account Usage\"",
+        "details": "<p>There was no CloudWatch alarm for the usage of the root account. Monitoring for root account log ins will provide visibility into the use of a fully privileged account.</p><p><b>Recommendation</b>: Enable a CloudWatch alarm to monitor the usage of the root account.</p><p><b>Path</b>: cloudwatch.regions.id.metric_filters.id</p><p><b>Conditions</b>: or,cloudwatch.regions.id.metric_filters_pattern_checks.root_usage,false,</p>",
+        "tags":
+        [
+            "CIS Amazon Web Services Foundations v1.0.0 ref:3.3",
+            "CIS Amazon Web Services Foundations v1.1.0 ref:3.3",
+            "CIS Amazon Web Services Foundations v1.2.0 ref:3.3"
+        ],
+        "sort_order": 101
+    },
+    {
+        "testcase": "Alarms - No CloudWatch Alarm for \"Route Table Changes\"",
+        "details": "<p>There was no CloudWatch alarm to monitor changes in route tables. Monitoring for route table changes will help ensure that all VPC traffic flows thorough an expected path.</p><p><b>Recommendation</b>: Enable a CloudWatch alarm to detect route table changes.</p><p><b>Path</b>: cloudwatch.regions.id.metric_filters.id</p><p><b>Conditions</b>: or,cloudwatch.regions.id.metric_filters_pattern_checks.route_table_changes,false,</p>",
+        "tags":
+        [
+            "CIS Amazon Web Services Foundations v1.0.0 ref:3.13",
+            "CIS Amazon Web Services Foundations v1.1.0 ref:3.13",
+            "CIS Amazon Web Services Foundations v1.2.0 ref:3.13"
+        ],
+        "sort_order": 102
+    },
+    {
+        "testcase": "Alarms - No CloudWatch Alarm for \"S3 Bucket Policy Changes\"",
+        "details": "<p>There was no CloudWatch alarm to detect changes in S3 bucket policy changes. Monitoring for changes in S3 bucket policy changes may reduce the time to detect and fix permissive policies on sensitive S3 buckets.</p><p><b>Recommendation</b>: Enable a CloudWatch alarm to detect policy changes in S3 buckets.</p><p><b>Path</b>: cloudwatch.regions.id.metric_filters.id</p><p><b>Conditions</b>: or,cloudwatch.regions.id.metric_filters_pattern_checks.s3_policy_changes,false,</p>",
+        "tags":
+        [
+            "CIS Amazon Web Services Foundations v1.0.0 ref:3.8",
+            "CIS Amazon Web Services Foundations v1.1.0 ref:3.8",
+            "CIS Amazon Web Services Foundations v1.2.0 ref:3.8"
+        ],
+        "sort_order": 103
+    },
+    {
+        "testcase": "Alarms - No CloudWatch Alarm for \"Security Group Changes\"",
+        "details": "<p>There was no CloudWatch alarm to monitor changes to security groups. Monitoring for security group changes will help ensure that no service or resource is unintentionally exposed.</p><p><b>Recommendation</b>: Enable a CloudWatch alarm to monitor security group changes.</p><p><b>Path</b>: cloudwatch.regions.id.metric_filters.id</p><p><b>Conditions</b>: or,cloudwatch.regions.id.metric_filters_pattern_checks.security_group_changes,false,</p>",
+        "tags":
+        [
+            "CIS Amazon Web Services Foundations v1.0.0 ref:3.10",
+            "CIS Amazon Web Services Foundations v1.1.0 ref:3.10",
+            "CIS Amazon Web Services Foundations v1.2.0 ref:3.10"
+        ],
+        "sort_order": 104
+    },
+    {
+        "testcase": "Alarms - No CloudWatch Alarm for \"Console Logins without MFA\"",
+        "details": "<p>There was no CloudWatch alarm for console log ins without MFA. Monitoring for console log ins without MFA will provide visibility into the use of accounts not protected by Multi Factor Authentication (MFA).</p><p><b>Recommendation</b>: Enable a CloudWatch alarm to monitor console log ins without MFA.</p><p><b>Path</b>: cloudwatch.regions.id.metric_filters.id</p><p><b>Conditions</b>: or,cloudwatch.regions.id.metric_filters_pattern_checks.console_login_mfa,false,</p>",
+        "tags":
+        [
+            "CIS Amazon Web Services Foundations v1.0.0 ref:3.2",
+            "CIS Amazon Web Services Foundations v1.1.0 ref:3.2",
+            "CIS Amazon Web Services Foundations v1.2.0 ref:3.2"
+        ],
+        "sort_order": 105
+    },
+    {
+        "testcase": "Alarms - No CloudWatch Alarm for \"Unauthorized API Calls\"",
+        "details": "<p>There was no CloudWatch alarm for unauthorized API calls. Monitoring for unauthorized API calls helps reveal application errors and detect malicious activity.</p><p><b>Recommendation</b>: Enable a CloudWatch alarm to monitor unauthorized API calls.</p><p><b>Path</b>: cloudwatch.regions.id.metric_filters.id</p><p><b>Conditions</b>: or,cloudwatch.regions.id.metric_filters_pattern_checks.unauthorized_api_calls,false,</p>",
+        "tags":
+        [
+            "CIS Amazon Web Services Foundations v1.0.0 ref:3.1",
+            "CIS Amazon Web Services Foundations v1.1.0 ref:3.1",
+            "CIS Amazon Web Services Foundations v1.2.0 ref:3.1"
+        ],
+        "sort_order": 106
+    },
+    {
+        "testcase": "Alarms - No CloudWatch Alarm for \"VPC Changes\"",
+        "details": "<p>There was no CloudWatch alarm to monitor VPC changes. Monitoring for VPC changes will help ensure authentication and authorization controls remain intact.</p><p><b>Recommendation</b>: Enable a CloudWatch alarm to detect VPC changes.</p><p><b>Path</b>: cloudwatch.regions.id.metric_filters.id</p><p><b>Conditions</b>: or,cloudwatch.regions.id.metric_filters_pattern_checks.vpc_changes,false,</p>",
+        "tags":
+        [
+            "CIS Amazon Web Services Foundations v1.0.0 ref:3.14",
+            "CIS Amazon Web Services Foundations v1.1.0 ref:3.14",
+            "CIS Amazon Web Services Foundations v1.2.0 ref:3.14"
+        ],
+        "sort_order": 107
+    },
+    {
+        "testcase": "Instances - Instance Backups Disabled",
+        "code": "BackupRetentionPeriod",
+        "details": "<p>The backup retention period is a period of time between 0 and 35 days for which you can perform a point-in-time restore. Setting the backup retention period to 0 disables automated backups. Backups should be enabled to enable disaster recovery.</p><p><b>Path</b>: rds.regions.id.vpcs.id.instances.id</p><p><b>Conditions</b>: and,rds.regions.id.vpcs.id.instances.id.is_read_replica,false,,rds.regions.id.vpcs.id.instances.id.BackupRetentionPeriod,lessThan,1</p>",
+        "tags":
+        [
+            "https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_WorkingWithAutomatedBackups.html",
+            "https://aws.amazon.com/rds/details/backup/",
+            "https://aws.amazon.com/rds/faqs/"
+        ],
+        "sort_order": 108
+    },
+    {
+        "testcase": "Instances - Deprecated Certificate Authority Assigned to RDS Instance",
+        "code": "CACertificateIdentifier",
+        "details": "<p>Amazon Web Services is deprecating the RDS Certificate Authority created in 2015 (rds-ca-2015). Any endpoints using TLS to protect RDS communications will fail after March 5th, 2020.</p><p><b>Path</b>: rds.regions.id.vpcs.id.instances.id</p><p><b>Conditions</b>: and,rds.regions.id.vpcs.id.instances.id.CACertificateIdentifier,containAtLeastOneOf,rds-ca-2015</p>",
+        "tags":
+        [
+            "https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/UsingWithRDS.SSL-certificate-rotation.html"
+        ],
+        "sort_order": 109
+    },
+    {
+        "testcase": "Instances - Auto Minor Version Upgrade Disabled",
+        "code": "AutoMinorVersionUpgrade",
+        "details": "<p>Auto Minor Version Upgrade is a feature that you can enable to have your database automatically upgraded when a new minor database engine version is available. Minor version upgrades often patch security vulnerabilities and fix bugs, and therefor should be applied.</p><p><b>Path</b>: rds.regions.id.vpcs.id.instances.id</p><p><b>Conditions</b>: and,rds.regions.id.vpcs.id.instances.id.AutoMinorVersionUpgrade,false,,rds.regions.id.vpcs.id.instances.id.Engine,notEqual,sqlserver-se</p>",
+        "tags":
+        [
+            "https://aws.amazon.com/blogs/database/best-practices-for-upgrading-amazon-rds-to-major-and-minor-versions-of-postgresql/",
+            "https://aws.amazon.com/about-aws/whats-new/2018/12/amazon-rds-enhances-auto-minor-version-upgrades/"
+        ],
+        "sort_order": 110
+    },
+    {
+        "testcase": "Instances - RDS Instance Publicly Accessible",
+        "code": "PubliclyAccessible",
+        "details": "<p>Instances should not be publicly accessible as this risks exposing sensitive data.</p><p><b>Path</b>: rds.regions.id.vpcs.id.instances.id</p><p><b>Conditions</b>: and,rds.regions.id.vpcs.id.instances.id.PubliclyAccessible,true,</p>",
+        "tags":
+        [
+            "https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_VPC.WorkingWithRDSInstanceinaVPC.html#USER_VPC.Hiding"
+        ],
+        "sort_order": 111
+    },
+    {
+        "testcase": "Instances - Short Backup Retention Period",
+        "code": "BackupRetentionPeriod",
+        "details": "<p>The backup retention period is a period of time between 0 and 35 days for which you can perform a point-in-time restore. Setting the backup retention period to 0 disables automated backups.<br><br>It is recommended that the retention period is set to at least 30 days. Having a short retention period will impact how far back in time the database can be restored to, and may affect integrity and availability of data.</p><p><b>Path</b>: rds.regions.id.vpcs.id.instances.id</p><p><b>Conditions</b>: and,rds.regions.id.vpcs.id.instances.id.BackupRetentionPeriod,moreThan,0,rds.regions.id.vpcs.id.instances.id.BackupRetentionPeriod,lessThan,30</p>",
+        "tags":
+        [
+            "https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_WorkingWithAutomatedBackups.html",
+            "https://aws.amazon.com/rds/details/backup/",
+            "https://aws.amazon.com/rds/faqs/"
+        ],
+        "sort_order": 112
+    },
+    {
+        "testcase": "Instances - Single AZ RDS Instance",
+        "code": "MultiAZ",
+        "details": "<p>In case of failure, with a single-AZ deployment configuration, should an availability zone specific database failure occur, Amazon RDS can not automatically fail over to the standby availability zone.</p><p><b>Path</b>: rds.regions.id.vpcs.id.instances.id</p><p><b>Conditions</b>: and,rds.regions.id.vpcs.id.instances.id.MultiAZ,false,</p>",
+        "tags":
+        [
+            "https://aws.amazon.com/rds/features/multi-az/"
+        ],
+        "sort_order": 113
+    },
+    {
+        "testcase": "Instances - Instance Storage Not Encrypted",
+        "code": "StorageEncrypted",
+        "details": "<p>Data-at-rest should be encrypted.</p><p><b>Path</b>: rds.regions.id.vpcs.id.instances.id</p><p><b>Conditions</b>: and,rds.regions.id.vpcs.id.instances.id.StorageEncrypted,false,</p>",
+        "tags":
+        [
+            "https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Overview.Encryption.html"
+        ],
+        "sort_order": 114
+    },
+    {
+        "testcase": "Instances - Legacy SSL Certificate (PostgreSQL)",
+        "code": "pgsslcert",
+        "details": "<p>This instance was created prior to August 5, 2014. Consequently, it uses the DB instance endpoint in the Common Name (CN) field of the SSL certificate. Prior to August 5, 2014, SSL certificate verification was not available for VPC-based SQL Server instances. If you have a VPC-based SQL Server DB instance that was created before August 5, 2014, and you want to use SSL certificate verification and ensure that the instance endpoint is included as the CN for the SSL certificate for that DB instance, then rename the instance. When you rename a DB instance, a new certificate is deployed and the instance is rebooted to enable the new certificate.</p><p><b>Path</b>: rds.regions.id.vpcs.id.instances.id</p><p><b>Conditions</b>: and,rds.regions.id.vpcs.id.instances.id.Engine,equal,postgres,rds.regions.id.vpcs.id.instances.id.DBInstanceStatus,notEqual,creating,rds.regions.id.vpcs.id.instances.id.InstanceCreateTime,priorToDate,08/05/2014</p>",
+        "tags":
+        [
+            "https://aws.amazon.com/about-aws/whats-new/2017/02/amazon-rds-for-sql-server-supports-forced-ssl/",
+            "https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/SQLServer.Concepts.General.SSL.Using.html"
+        ],
+        "sort_order": 115
+    },
+    {
+        "testcase": "Security Groups - Security Group Allows All IP Addresses",
+        "details": "<p>The security group allows access to RDS instances from any source address, which creates a wider attack surface for resources assigned to it. Source address restrictions should be implemented</p><p><b>Display Path</b>: rds.regions.id.vpcs.id.security_groups.id</p><p><b>Path</b>: rds.regions.id.vpcs.id.security_groups.id.ip_ranges</p><p><b>Conditions</b>: and,rds.regions.id.vpcs.id.security_groups.id.ip_ranges,containAtLeastOneOf,0.0.0.0/0,::/0</p>",
+        "tags":
+        [],
+        "sort_order": 116
+    },
+    {
+        "testcase": "Snapshots - Publicly Accessible Snapshot",
+        "details": "<p>Snapshots should never be public, as this risks exposing sensitive data.</p><p><b>Display Path</b>: rds.regions.id.vpcs.id.snapshots.id</p><p><b>Path</b>: rds.regions.id.vpcs.id.snapshots.id.attributes.id</p><p><b>Conditions</b>: and,rds.regions.id.vpcs.id.snapshots.id.attributes.id.AttributeName,equal,restore,rds.regions.id.vpcs.id.snapshots.id.attributes.id.AttributeValues,containAtLeastOneOf,all</p>",
+        "tags":
+        [
+            "https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_ShareSnapshot.html"
+        ],
+        "sort_order": 117
+    },
+    {
+        "testcase": "Clusters - Cluster Database Encryption Disabled",
+        "code": "Encrypted",
+        "details": "<p>Data-at-rest should be encrypted.</p><p><b>Path</b>: redshift.regions.id.vpcs.id.clusters.id</p><p><b>Conditions</b>: and,redshift.regions.id.vpcs.id.clusters.id.Encrypted,false,</p>",
+        "tags":
+        [
+            "https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-db-encryption.html"
+        ],
+        "sort_order": 118
+    },
+    {
+        "testcase": "Clusters - Version Upgrade Disabled",
+        "code": "AllowVersionUpgrade",
+        "details": "<p>Version upgrade is necessary to ensure major version upgrades will be applied automatically to the cluster within the maintenance window.</p><p><b>Path</b>: redshift.regions.id.vpcs.id.clusters.id</p><p><b>Conditions</b>: and,redshift.regions.id.vpcs.id.clusters.id.AllowVersionUpgrade,false,</p>",
+        "tags":
+        [
+            "https://docs.aws.amazon.com/redshift/latest/APIReference/API_ModifyCluster.html"
+        ],
+        "sort_order": 119
+    },
+    {
+        "testcase": "Clusters - Cluster Publicly Accessible",
+        "code": "PubliclyAccessible",
+        "details": "<p>Redshift clusters should never be public, as this increases the risk of exposing sensitive data. Public accessibility means that other AWS users can access your cluster and the data stored in it.</p><p><b>Path</b>: redshift.regions.id.vpcs.id.clusters.id</p><p><b>Conditions</b>: and,redshift.regions.id.vpcs.id.clusters.id.PubliclyAccessible,true,</p>",
+        "tags":
+        [
+            "https://docs.aws.amazon.com/redshift/latest/gsg/getting-started.html"
+        ],
+        "sort_order": 120
+    },
+    {
+        "testcase": "Parameter Groups - User Activity Logging Disabled",
+        "code": "enable_user_activity_logging",
+        "details": "<p>Audit logging is not enabled by default in Amazon Redshift. A lack of user activity logging could impede the ability to investigate issues involving misuse, malicious access or performance.<br><br><b>Note</b> that this rule will only flag non-default parameter groups, as default parameter groups cannot be modified. It is recommended to use custom groups and configure them according to security best practice.</p><p><b>Path</b>: redshift.regions.id.parameter_groups.id</p><p><b>Conditions</b>: and,redshift.regions.id.parameter_groups.id.is_default,false,,redshift.regions.id.parameter_groups.id.parameters.enable_user_activity_logging.value,false,</p>",
+        "tags":
+        [
+            "https://docs.aws.amazon.com/redshift/latest/mgmt/db-auditing.html"
+        ],
+        "sort_order": 121
+    },
+    {
+        "testcase": "Parameter Groups - SSL Not Required",
+        "code": "require_ssl",
+        "details": "<p>Parameter groups associated with Redshift clusters should have the \"require_ssl\" parameter enabled, to ensure that data in transit is encrypted.<br><br><b>Note</b> that this rule will only flag non-default parameter groups, as default parameter groups cannot be modified. It is recommended to use custom groups and configure them according to security best practice.</p><p><b>Path</b>: redshift.regions.id.parameter_groups.id</p><p><b>Conditions</b>: and,redshift.regions.id.parameter_groups.id.is_default,false,,redshift.regions.id.parameter_groups.id.parameters.require_ssl.value,false,</p>",
+        "tags":
+        [
+            "https://docs.aws.amazon.com/redshift/latest/mgmt/connecting-ssl-support.html"
+        ],
+        "sort_order": 122
+    },
+    {
+        "testcase": "Security Groups - Security Group Allows All Traffic",
+        "details": "<p>The security group allows access to Redshift instances from any source address, which creates a wider attack surface for resources assigned to it. Source address restrictions should be implemented</p><p><b>Display Path</b>: redshift.regions.id.vpcs.id.security_groups.id</p><p><b>Path</b>: redshift.regions.id.vpcs.id.security_groups.id.IPRanges.id.CIDRIP</p><p><b>Conditions</b>: and,this,equal,0.0.0.0/0</p>",
+        "tags":
+        [],
+        "sort_order": 123
+    },
+    {
+        "testcase": "Domains - Automatic Renewal Not Set for Domain",
+        "code": "auto_renew",
+        "details": "<p>Enable automatic renewal to remove the risk of losing control over your domain names.</p><p><b>Path</b>: route53.regions.id.domains.id</p><p><b>Conditions</b>: and,auto_renew,false,</p>",
+        "tags":
+        [
+            "https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/domain-enable-disable-auto-renewal.html"
+        ],
+        "sort_order": 124
+    },
+    {
+        "testcase": "Domains - Domain Transfer Not Locked",
+        "code": "transfer_lock",
+        "details": "<p>A domain lock prevents someone from transferring your domain to another registrar without your permission.</p><p><b>Path</b>: route53.regions.id.domains.id</p><p><b>Conditions</b>: and,transfer_lock,false,</p>",
+        "tags":
+        [
+            "https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/domain-lock.html"
+        ],
+        "sort_order": 125
+    },
+    {
+        "testcase": "Domains - Domain Transfer Lock Not Supported by TLD",
+        "code": "transfer_lock",
+        "details": "<p>A domain lock prevents someone from transferring your domain to another registrar without your permission. Your domain's TLD does not support this feature.</p><p><b>Path</b>: route53.regions.id.domains.id</p><p><b>Conditions</b>: and,name,match,.*\\.ch$,.*\\.cl$,.*\\.co.nz$,.*\\.co.za$,.*\\.com.ar$,.*\\.com.au$,.*\\.de$,.*\\.es$,.*\\.eu$,.*\\.fi$,.*\\.fr$,.*\\.it$,.*\\.jp$,.*\\.net.au$,.*\\.net.nz$,.*\\.nl$,.*\\.org.nz$,.*\\.qa$,.*\\.ru$,.*\\.se$</p>",
+        "tags":
+        [
+            "https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/registrar-tld-list.html"
+        ],
+        "sort_order": 126
+    },
+    {
+        "testcase": "Buckets - Bucket Allowing Clear Text (HTTP) Communication",
+        "code": "secure_transport_enabled",
+        "details": "<p>If HTTPS is not enforced on the bucket policy, communication between clients and S3 buckets can use unencrypted HTTP. As a result, sensitive information could be transmitted in clear text over the network|Internet.</p><p><b>Path</b>: s3.buckets.id</p><p><b>Conditions</b>: and,s3.buckets.id.secure_transport_enabled,false,</p>",
+        "tags":
+        [
+            "https://docs.aws.amazon.com/AmazonS3/latest/dev/security-best-practices.html"
+        ],
+        "sort_order": 127
+    },
+    {
+        "testcase": "Buckets - Bucket without Default Encryption Enabled",
+        "code": "default_encryption_enabled",
+        "details": "<p>Amazon S3 default encryption provides a way to set the default encryption behavior for an S3 bucket. This will ensure data-at-rest is encrypted</p><p><b>Path</b>: s3.buckets.id</p><p><b>Conditions</b>: and,s3.buckets.id.default_encryption_enabled,false,</p>",
+        "tags":
+        [
+            "https://docs.aws.amazon.com/AmazonS3/latest/dev/security-best-practices.html",
+            "https://docs.aws.amazon.com/AmazonS3/latest/dev/bucket-encryption.html"
+        ],
+        "sort_order": 128
+    },
+    {
+        "testcase": "Buckets - Bucket Access Logging Disabled",
+        "code": "logging",
+        "details": "<p>Server access logging provides detailed records of the requests that are made to a bucket. Server access logs can assist you in security and access audits, help you learn about your customer base, and understand your Amazon S3 bill. <br><br>Note: CloudTrail data events can be used in place of S3 bucket logging. If that is the case, this finding can be considered a false positive.</p><p><b>Recommendation</b>: Ensure that S3 buckets have Logging enabled</p><p><b>Path</b>: s3.buckets.id</p><p><b>Conditions</b>: and,s3.buckets.id.logging,equal,Disabled</p>",
+        "tags":
+        [
+            "CIS Amazon Web Services Foundations v1.0.0 ref:2.6",
+            "CIS Amazon Web Services Foundations v1.1.0 ref:2.6",
+            "CIS Amazon Web Services Foundations v1.2.0 ref:2.6",
+            "https://docs.aws.amazon.com/AmazonS3/latest/dev/security-best-practices.html"
+        ],
+        "sort_order": 129
+    },
+    {
+        "testcase": "Buckets - Bucket without MFA Delete",
+        "code": "mfa_delete",
+        "details": "<p>Enable MFA delete to help protect objects from accidental or unauthorized deletion. It should be noted that MFA Delete can only be configured on buckets that have versioning enabled.</p><p><b>Path</b>: s3.buckets.id</p><p><b>Conditions</b>: and,s3.buckets.id.version_mfa_delete_enabled,false,</p>",
+        "tags":
+        [
+            "https://docs.aws.amazon.com/AmazonS3/latest/dev/security-best-practices.html"
+        ],
+        "sort_order": 130
+    },
+    {
+        "testcase": "Buckets - Bucket without Versioning",
+        "code": "versioning",
+        "details": "<p>Versioning is a means of keeping multiple variants of an object in the same bucket. With versioning, you can easily recover from both unintended user actions and application failures.</p><p><b>Path</b>: s3.buckets.id</p><p><b>Conditions</b>: and,s3.buckets.id.versioning_status_enabled,false,</p>",
+        "tags":
+        [
+            "https://docs.aws.amazon.com/AmazonS3/latest/dev/security-best-practices.html"
+        ],
+        "sort_order": 131
+    },
+    {
+        "testcase": "Bucket ACLs - _ARG_2_",
+        "code": "_ARG_1_",
+        "details": "<p>An S3 bucket has been found that was accessible for _ARG_0_. If sensitive information is stored in this bucket, it could be at risk of being accessed by potential attackers.</p><p><b>Display Path</b>: s3.buckets.id</p><p><b>Path</b>: s3.buckets.id.grantees.id</p><p><b>Key</b>: s3-bucket-_ARG_0_-_ARG_1_</p><p><b>Argument Names</b>:<ul><li>Grantee</li><li>Permission</li><li>Description</li><li>Level</li></ul></p><p><b>Conditions</b>: and,s3.buckets.id.grantees.id.,withKey,URI,s3.buckets.id.grantees.id.URI,equal,http://acs.amazonaws.com/groups/global/_ARG_0_,s3.buckets.id.grantees.id.permissions._ARG_1_,true,</p>",
+        "tags":
+        [],
+        "sort_order": 132
+    },
+    {
+        "testcase": "Bucket Policy Statements - _ARG_0_ Actions Authorized to All Principals",
+        "details": "<p>Allowing IAM actions to all principals is contrary to the principle of least privilege and presents an opportunity for abuse. This policy should be reviewed to ensure it is secure and in line with the resource's intended use.</p><p><b>Display Path</b>: s3.buckets.id</p><p><b>Path</b>: s3.buckets.id.policy.Statement.id</p><p><b>Key</b>: s3-bucket-world-_ARG_0_-policy</p><p><b>Keys</b>:<ul><li>s3.buckets.id</li><li>this</li><li>s3.buckets.id.policy.Statement.id.Principal</li></ul></p><p><b>Argument Names</b>:<ul><li>Action shortname</li><li>Service:Action</li></ul></p><p><b>Conditions</b>: and,s3.buckets.id.,withKey,policy,s3.buckets.id.policy.Statement.id.Effect,equal,Allow,s3.buckets.id.policy.Statement.id.,withoutKey,Condition,s3.buckets.id.policy.Statement.id.,containAction,_ARG_1_,s3.buckets.id.policy.Statement.id.Action,containNoneOf,s3:*,*,_INCLUDE_(conditions/policy-statement-any-principal.json),_STATEMENT_,s3.buckets.id.policy.Statement.id,_INCLUDE_(conditions/policy-statement-poor-condition.json),_STATEMENT_,s3.buckets.id.policy.Statement.id</p>",
+        "tags":
+        [],
+        "sort_order": 133
+    },
+    {
+        "testcase": "Bucket Policy Statements - All Actions Authorized to All Principals",
+        "details": "<p>Allowing IAM actions to all principals is contrary to the principle of least privilege and presents an opportunity for abuse. This policy should be reviewed to ensure it is secure and in line with the resource's intended use.</p><p><b>Recommendation</b>: Remove any Statement having an Effect set to Allow and a Principal set to \"*\" or {\"AWS\":\"*\"} in the affected bucket policy</p><p><b>Display Path</b>: s3.buckets.id</p><p><b>Path</b>: s3.buckets.id.policy.Statement.id</p><p><b>Argument Names</b>:<ul><li>Action shortname</li><li>Service:Action</li></ul></p><p><b>Conditions</b>: and,s3.buckets.id.,withKey,policy,s3.buckets.id.policy.Statement.id.Effect,equal,Allow,s3.buckets.id.policy.Statement.id.Action,containAtLeastOneOf,s3:*,*,_INCLUDE_(conditions/policy-statement-any-principal.json),_STATEMENT_,s3.buckets.id.policy.Statement.id,_INCLUDE_(conditions/policy-statement-poor-condition.json),_STATEMENT_,s3.buckets.id.policy.Statement.id</p>",
+        "tags":
+        [
+            "CIS Amazon Web Services Foundations v1.0.0 ref:2.3",
+            "CIS Amazon Web Services Foundations v1.1.0 ref:2.3",
+            "CIS Amazon Web Services Foundations v1.2.0 ref:2.3"
+        ],
+        "sort_order": 134
+    },
+    {
+        "testcase": "Identities - DKIM Not Enabled",
+        "details": "<p>DKIM signing is not enabled for emails sent from the identity.</p><p><b>Path</b>: ses.regions.id.identities.id</p><p><b>Conditions</b>: and,DkimEnabled,false,</p>",
+        "tags":
+        [
+            "https://docs.aws.amazon.com/ses/latest/DeveloperGuide/send-email-authentication-dkim.html"
+        ],
+        "sort_order": 135
+    },
+    {
+        "testcase": "Identities - DKIM Not Verified",
+        "details": "<p>Amazon SES has not verified the DKIM DNS records (tokens) published in the domain name's DNS.</p><p><b>Path</b>: ses.regions.id.identities.id</p><p><b>Conditions</b>: and,DkimEnabled,true,,DkimVerificationStatus,notEqual,Success</p>",
+        "tags":
+        [
+            "https://docs.aws.amazon.com/ses/latest/DeveloperGuide/send-email-authentication-dkim.html"
+        ],
+        "sort_order": 136
+    },
+    {
+        "testcase": "Statements - _ARG_0_ Authorized to All Principals",
+        "details": "<p>Allowing IAM actions to all principals is contrary to the principle of least privilege and presents an opportunity for abuse. This policy should be reviewed to ensure it is secure and in line with the resource's intended use.</p><p><b>Display Path</b>: ses.regions.id.identities.id</p><p><b>Path</b>: ses.regions.id.identities.id.policies.id.Statement.id</p><p><b>Key</b>: ses-identity-world-_ARG_0_-policy</p><p><b>Argument Names</b>:<ul><li>SES action</li></ul></p><p><b>Conditions</b>: and,ses.regions.id.identities.id.policies.id.Statement.id.Effect,equal,Allow,ses.regions.id.identities.id.policies.id.Statement.id.,containAction,ses:_ARG_0_,_INCLUDE_(conditions/policy-statement-any-principal.json),_STATEMENT_,ses.regions.id.identities.id.policies.id.Statement.id,_INCLUDE_(conditions/policy-statement-poor-condition.json),_STATEMENT_,ses.regions.id.identities.id.policies.id.Statement.id</p>",
+        "tags":
+        [],
+        "sort_order": 137
+    },
+    {
+        "testcase": "Statements - _ARG_0_ Authorized to All Principals",
+        "details": "<p>Allowing IAM actions to all principals is contrary to the principle of least privilege and presents an opportunity for abuse. This policy should be reviewed to ensure it is secure and in line with the resource's intended use.</p><p><b>Display Path</b>: sns.regions.id.topics.id</p><p><b>Path</b>: sns.regions.id.topics.id.Policy.Statement.id</p><p><b>Key</b>: sns-topic-world-_ARG_0_-policy</p><p><b>Argument Names</b>:<ul><li>SNS action</li></ul></p><p><b>Conditions</b>: and,sns.regions.id.topics.id.Policy,notNull,,sns.regions.id.topics.id.Policy.Statement.id.Effect,equal,Allow,sns.regions.id.topics.id.Policy.Statement.id.,containAction,SNS:_ARG_0_,_INCLUDE_(conditions/policy-statement-any-principal.json),_STATEMENT_,sns.regions.id.topics.id.Policy.Statement.id,_INCLUDE_(conditions/policy-statement-poor-condition.json),_STATEMENT_,sns.regions.id.topics.id.Policy.Statement.id</p>",
+        "tags":
+        [],
+        "sort_order": 138
+    },
+    {
+        "testcase": "Queues - Queue with Encryption Disabled",
+        "code": "server-side-encryption-disabled",
+        "details": "<p>SQS Server-Side Encryption ensures that the contents of messages in queues are encrypted.</p><p><b>Display Path</b>: sqs.regions.id.queues.id</p><p><b>Path</b>: sqs.regions.id.queues.id</p><p><b>Conditions</b>: and,sqs.regions.id.queues.id.kms_master_key_id,null,,sqs.regions.id.queues.id.sqs_managed_sse_enabled,false,</p>",
+        "tags":
+        [
+            "https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-server-side-encryption.html"
+        ],
+        "sort_order": 139
+    },
+    {
+        "testcase": "Statements - _ARG_0_ Authorized to All Principals",
+        "details": "<p>Allowing IAM actions to all principals is contrary to the principle of least privilege and presents an opportunity for abuse. This policy should be reviewed to ensure it is secure and in line with the resource's intended use.</p><p><b>Display Path</b>: sqs.regions.id.queues.id</p><p><b>Path</b>: sqs.regions.id.queues.id.Policy.Statement.id</p><p><b>Key</b>: sqs-queue-world-_ARG_0_-policy</p><p><b>Argument Names</b>:<ul><li>SQS action</li></ul></p><p><b>Conditions</b>: and,sqs.regions.id.queues.id.Policy,notNull,,sqs.regions.id.queues.id.Policy.Statement.id.Effect,equal,Allow,sqs.regions.id.queues.id.Policy.Statement.id.,containAction,sqs:_ARG_0_,_INCLUDE_(conditions/policy-statement-any-principal.json),_STATEMENT_,sqs.regions.id.queues.id.Policy.Statement.id,_INCLUDE_(conditions/policy-statement-poor-condition.json),_STATEMENT_,sqs.regions.id.queues.id.Policy.Statement.id</p>",
+        "tags":
+        [],
+        "sort_order": 140
+    },
+    {
+        "testcase": "Network ACLs - Network ACLs Allow All _ARG_0_ Traffic (custom)",
+        "code": "_ARG_0_._GET_VALUE_AT_(vpc.regions.id.vpcs.id.network_acls.id.allow_all__ARG_0__traffic)",
+        "details": "<p>Network ACLs are designed to provide a secondary layer of security. Adding a rule that allows all network traffic (all protocols, IPs, and _ARG_1_) prior to any deny rule defeats the purpose of network ACLs.</p><p><b>Path</b>: vpc.regions.id.vpcs.id.network_acls.id</p><p><b>Key</b>: vpc-custom-network-acls-allow-all-_ARG_0_</p><p><b>Argument Names</b>:<ul><li>Direction of traffic (ingress or egress)</li><li>Corresponding target (source or destination)</li></ul></p><p><b>Conditions</b>: and,allow_all__ARG_0__traffic,notEqual,0,use_default__ARG_0__rules,false,</p>",
+        "tags":
+        [],
+        "sort_order": 141
+    },
+    {
+        "testcase": "Network ACLs - Network ACLs Allow All _ARG_0_ Traffic (default)",
+        "code": "_ARG_0_._GET_VALUE_AT_(vpc.regions.id.vpcs.id.network_acls.id.allow_all__ARG_0__traffic)",
+        "details": "<p>Network ACLs are designed to provide a secondary layer of security. Adding a rule that allows all network traffic (all protocols, IPs, and _ARG_1_) prior to any deny rule defeats the purpose of network ACLs.</p><p><b>Path</b>: vpc.regions.id.vpcs.id.network_acls.id</p><p><b>Key</b>: vpc-default-network-acls-allow-all-_ARG_0_</p><p><b>Argument Names</b>:<ul><li>Direction of traffic (ingress or egress)</li><li>Corresponding target (source or destination)</li></ul></p><p><b>Conditions</b>: and,allow_all__ARG_0__traffic,notEqual,0,use_default__ARG_0__rules,true,</p>",
+        "tags":
+        [],
+        "sort_order": 142
+    },
+    {
+        "testcase": "Network ACLs - Unused Network ACLs",
+        "code": "unused",
+        "details": "<p>Maintaining unused resources increases risks of misconfigurations and increases the difficulty of audits.</p><p><b>Path</b>: vpc.regions.id.vpcs.id.network_acls.id</p><p><b>Conditions</b>: and,IsDefault,false,,Associations,empty,</p>",
+        "tags":
+        [],
+        "sort_order": 143
+    },
+    {
+        "testcase": "Rulesets - Routing Table with VPC Peering",
+        "code": "default_with_rules",
+        "details": "<p>Being highly selective in peering routing tables minimizes the impact of breach as resources outside of these routes are inaccessible to the peered VPC.</p><p><b>Recommendation</b>: Ensure route tables contain the least number of subnets or hosts as is required to accomplish the purpose for peering</p><p><b>Path</b>: vpc.regions.id.peering_connections.id</p><p><b>Conditions</b>: and,vpc.regions.id.peering_connections.id.VpcPeeringConnectionId,null,</p>",
+        "tags":
+        [
+            "CIS Amazon Web Services Foundations v1.1.0 ref:4.5",
+            "CIS Amazon Web Services Foundations v1.2.0 ref:4.4"
+        ],
+        "sort_order": 144
+    },
+    {
+        "testcase": "Subnets - Subnet with \"Allow All\" _ARG_0_ NACLs",
+        "code": "bad_nacls",
+        "details": "<p>Network ACLs associated with subnets and VPCs should not allow all _ARG_0_ traffic.</p><p><b>Path</b>: vpc.regions.id.vpcs.id.subnets.id</p><p><b>Key</b>: vpc-subnet-with-allow-all-_ARG_0_-acls</p><p><b>Argument Names</b>:<ul><li>Direction of traffic (ingress or egress)</li><li>Corresponding target (source or destination)</li></ul></p><p><b>Conditions</b>: and,vpc.regions.id.vpcs.id.network_acls._GET_VALUE_AT_(vpc.regions.id.vpcs.id.subnets.id.network_acl).allow_all__ARG_0__traffic,notEqual,0</p>",
+        "tags":
+        [],
+        "sort_order": 145
+    },
+    {
+        "testcase": "Subnets - Subnet with Default _ARG_0_ NACLs",
+        "code": "DefaultNACLs",
+        "details": "<p>Default _ARG_0_ network access control lists allow all network traffic (all protocols, IPs, and _ARG_1_), hence do not provide the secondary layer of security network ACLs are supposed to.</p><p><b>Path</b>: vpc.regions.id.vpcs.id.subnets.id</p><p><b>Key</b>: vpc-subnet-with-default-_ARG_0_-acls</p><p><b>Argument Names</b>:<ul><li>Direction of traffic (ingress or egress)</li><li>Corresponding target (source or destination)</li></ul></p><p><b>Conditions</b>: and,vpc.regions.id.vpcs.id.network_acls._GET_VALUE_AT_(vpc.regions.id.vpcs.id.subnets.id.network_acl).use_default__ARG_0__rules,true,</p>",
+        "tags":
+        [],
+        "sort_order": 146
+    },
+    {
+        "testcase": "Subnets - Subnet without a Flow Log",
+        "code": "no_flowlog",
+        "details": "<p>Flow logs enable the investigation of incidents involving unauthorized network traffic, such as an attacker exfiltrating data or pivoting to other hosts.</p><p><b>Recommendation</b>: Create a flow log for each subnet.</p><p><b>Path</b>: vpc.regions.id.vpcs.id.subnets.id</p><p><b>Conditions</b>: or,this,withoutKey,flow_logs,flow_logs,empty,</p>",
+        "tags":
+        [
+            "CIS Amazon Web Services Foundations v1.0.0 ref:4.3",
+            "CIS Amazon Web Services Foundations v1.1.0 ref:4.3",
+            "CIS Amazon Web Services Foundations v1.2.0 ref:2.9",
+            "https://docs.aws.amazon.com/vpc/latest/userguide/flow-logs.html"
+        ],
+        "sort_order": 147
+    }
+]
