@@ -1,0 +1,1880 @@
+[
+    {
+        "testcase": "ConfigMaps - Unnecessary Secrets in ConfigMap",
+        "details": "<p>Kubernetes administrators are encouraged to review secrets in ConfigMap manifests and remove the unnecessary ones.</p><p><b>Display Path</b>: config_map.v1.id</p><p><b>Path</b>: config_map.v1.resources.id</p><p><b>Conditions</b>: or,data,notNull,</p>",
+        "tags":
+        [
+            "https://kubernetes.io/docs/concepts/configuration/configmap/"
+        ],
+        "sort_order": 1
+    },
+    {
+        "testcase": "CronJobs - AppArmor Annotation Missing",
+        "details": "<p>The container.apparmor.security.beta.kubernetes.io annotation is missing. A compromised container with AppArmor disabled makes privilege escalation easier.</p><p><b>Display Path</b>: cron_job.v1-batch.id</p><p><b>Path</b>: cron_job.v1-batch.resources.id</p><p><b>Conditions</b>: or,cron_job.v1-batch.resources.id.metadata,withoutKey,annotations,cron_job.v1-batch.resources.id.metadata.annotations,withoutKey,container.apparmor.security.beta.kubernetes.io</p>",
+        "tags":
+        [
+            "https://kubernetes.io/docs/tutorials/security/apparmor/"
+        ],
+        "sort_order": 2
+    },
+    {
+        "testcase": "CronJobs - Automounted Service Account Token",
+        "details": "<p>Default service account with token mounted. automountServiceAccountToken should be set to 'false' on either the ServiceAccount or on the PodSpec or a non-default service account should be used.</p><p><b>Display Path</b>: cron_job.v1-batch.id</p><p><b>Path</b>: cron_job.v1-batch.resources.id</p><p><b>Conditions</b>: or,cron_job.v1-batch.resources.id.data.spec,withoutKey,automountServiceAccountToken,cron_job.v1-batch.resources.id.data.spec.automountServiceAccountToken,null,,cron_job.v1-batch.resources.id.data.spec.automountServiceAccountToken,true,</p>",
+        "tags":
+        [
+            "https://kubernetes.io/docs/tasks/configure-pod-container/configure-service-account/"
+        ],
+        "sort_order": 3
+    },
+    {
+        "testcase": "CronJobs - Container/InitContainer/EphemeralContainer Ability to Modify Root Filesystem",
+        "code": "readOnlyRootFilesystem",
+        "details": "<p>Root filesystems should be read-only where possible.</p><p><b>Recommendation</b>: spec.jobTemplate.spec.template.spec.(c|initC|ephemeralC)ontainers[].securityContext.readOnlyRootFilesystem should be explicitly set to true for the affected containers.</p><p><b>Display Path</b>: cron_job.v1-batch.id</p><p><b>Path</b>: cron_job.v1-batch.resources.id.data.spec.jobTemplate.spec.template.spec.containers.id</p><p><b>Conditions</b>: or,cron_job.v1-batch.resources.id.data.spec.jobTemplate.spec.template.spec.containers.id,withoutKey,securityContext,cron_job.v1-batch.resources.id.data.spec.jobTemplate.spec.template.spec.containers.id.securityContext,null,,cron_job.v1-batch.resources.id.data.spec.jobTemplate.spec.template.spec.containers.id.securityContext.readOnlyRootFilesystem,null,,cron_job.v1-batch.resources.id.data.spec.jobTemplate.spec.template.spec.containers.id.securityContext.readOnlyRootFilesystem,false,</p>",
+        "tags":
+        [
+            "https://kubernetes.io/docs/tasks/configure-pod-container/security-context/",
+            "https://kubernetes.io/docs/concepts/policy/pod-security-policy/"
+        ],
+        "sort_order": 4
+    },
+    {
+        "testcase": "CronJobs - Container/InitContainer/EphemeralContainer Allowing Privilege Escalation",
+        "code": "allowPrivilegeEscalation",
+        "details": "<p>A container should disallow privilege escalation where possible. allowPrivilegeEscalation should be explicitly set to false.</p><p><b>Display Path</b>: cron_job.v1-batch.id</p><p><b>Path</b>: cron_job.v1-batch.resources.id.data.spec.jobTemplate.spec.template.spec.containers.id</p><p><b>Conditions</b>: or,cron_job.v1-batch.resources.id.data.spec.jobTemplate.spec.template.spec.containers.id,withoutKey,securityContext,cron_job.v1-batch.resources.id.data.spec.jobTemplate.spec.template.spec.containers.id.securityContext,null,,cron_job.v1-batch.resources.id.data.spec.jobTemplate.spec.template.spec.containers.id.securityContext.allowPrivilegeEscalation,null,,cron_job.v1-batch.resources.id.data.spec.jobTemplate.spec.template.spec.containers.id.securityContext.allowPrivilegeEscalation,true,</p>",
+        "tags":
+        [
+            "https://kubernetes.io/docs/tasks/configure-pod-container/security-context/",
+            "https://kubernetes.io/docs/concepts/policy/pod-security-policy/"
+        ],
+        "sort_order": 5
+    },
+    {
+        "testcase": "CronJobs - Container/InitContainer/EphemeralContainer Running As Root Group",
+        "code": "runAsGroup",
+        "details": "<p>Where possible, runAsGroup should be set to a value greater than 0.</p><p><b>Display Path</b>: cron_job.v1-batch.id</p><p><b>Path</b>: cron_job.v1-batch.resources.id.data.spec.jobTemplate.spec.template.spec.containers.id</p><p><b>Conditions</b>: or,and,cron_job.v1-batch.resources.id.data.spec.jobTemplate.spec.template.spec.securityContext,notNull,,cron_job.v1-batch.resources.id.data.spec.jobTemplate.spec.template.spec.securityContext.runAsGroup,equal,0,and,cron_job.v1-batch.resources.id.data.spec.jobTemplate.spec.template.spec.containers.id.securityContext,notNull,,cron_job.v1-batch.resources.id.data.spec.jobTemplate.spec.template.spec.containers.id.securityContext.runAsGroup,equal,0</p>",
+        "tags":
+        [
+            "https://kubernetes.io/docs/tasks/configure-pod-container/security-context/",
+            "https://kubernetes.io/docs/concepts/policy/pod-security-policy/"
+        ],
+        "sort_order": 6
+    },
+    {
+        "testcase": "CronJobs - Container/InitContainer/EphemeralContainer Running As Root User",
+        "code": "runAsUser",
+        "details": "<p>Where possible, runAsUser should be set to a value greater than 0.</p><p><b>Display Path</b>: cron_job.v1-batch.id</p><p><b>Path</b>: cron_job.v1-batch.resources.id.data.spec.jobTemplate.spec.template.spec.containers.id</p><p><b>Conditions</b>: or,and,cron_job.v1-batch.resources.id.data.spec.jobTemplate.spec.template.spec.securityContext,notNull,,cron_job.v1-batch.resources.id.data.spec.jobTemplate.spec.template.spec.securityContext.runAsUser,equal,0,and,cron_job.v1-batch.resources.id.data.spec.jobTemplate.spec.template.spec.containers.id.securityContext,notNull,,cron_job.v1-batch.resources.id.data.spec.jobTemplate.spec.template.spec.containers.id.securityContext.runAsUser,equal,0</p>",
+        "tags":
+        [
+            "https://kubernetes.io/docs/tasks/configure-pod-container/security-context/",
+            "https://kubernetes.io/docs/concepts/policy/pod-security-policy/"
+        ],
+        "sort_order": 7
+    },
+    {
+        "testcase": "CronJobs - Container/InitContainer/EphemeralContainer with Permissive Capabilities",
+        "code": "capabilities.drop",
+        "details": "<p>A container should drop all and add the necessary capabilities by default.</p><p><b>Display Path</b>: cron_job.v1-batch.id</p><p><b>Path</b>: cron_job.v1-batch.resources.id.data.spec.jobTemplate.spec.template.spec.containers.id</p><p><b>Conditions</b>: or,cron_job.v1-batch.resources.id.data.spec.jobTemplate.spec.template.spec.containers.id,withoutKey,securityContext,cron_job.v1-batch.resources.id.data.spec.jobTemplate.spec.template.spec.containers.id.securityContext,null,,cron_job.v1-batch.resources.id.data.spec.jobTemplate.spec.template.spec.containers.id.securityContext,withoutKey,capabilities,cron_job.v1-batch.resources.id.data.spec.jobTemplate.spec.template.spec.containers.id.securityContext.capabilities,null,,cron_job.v1-batch.resources.id.data.spec.jobTemplate.spec.template.spec.containers.id.securityContext.capabilities.drop,null,</p>",
+        "tags":
+        [
+            "https://kubernetes.io/docs/tasks/configure-pod-container/security-context/",
+            "https://kubernetes.io/docs/concepts/policy/pod-security-policy/"
+        ],
+        "sort_order": 8
+    },
+    {
+        "testcase": "CronJobs - Container/InitContainer/EphemeralContainer with Possible Root Privileges",
+        "code": "runAsNonRoot",
+        "details": "<p>Where possible, runAsNonRoot should be set to true to prevent the container from running as root.</p><p><b>Display Path</b>: cron_job.v1-batch.id</p><p><b>Path</b>: cron_job.v1-batch.resources.id.data.spec.jobTemplate.spec.template.spec.containers.id</p><p><b>Conditions</b>: and,or,cron_job.v1-batch.resources.id.data.spec.jobTemplate.spec.template.spec.securityContext.runAsNonRoot,null,,cron_job.v1-batch.resources.id.data.spec.jobTemplate.spec.template.spec.securityContext.runAsNonRoot,false,,or,cron_job.v1-batch.resources.id.data.spec.jobTemplate.spec.template.spec.containers.id.securityContext.runAsNonRoot,null,,cron_job.v1-batch.resources.id.data.spec.jobTemplate.spec.template.spec.containers.id.securityContext.runAsNonRoot,false,</p>",
+        "tags":
+        [
+            "https://kubernetes.io/docs/tasks/configure-pod-container/security-context/",
+            "https://kubernetes.io/docs/concepts/policy/pod-security-policy/"
+        ],
+        "sort_order": 9
+    },
+    {
+        "testcase": "CronJobs - CronJobs Using Host IPC",
+        "code": "host_ipc",
+        "details": "<p>A compromised pod with hostIPC set to true in PodSpec can be used as a pivot to the host IPC.</p><p><b>Display Path</b>: cron_job.v1-batch.id</p><p><b>Path</b>: cron_job.v1-batch.resources.id.data.spec.jobTemplate.spec.template.spec</p><p><b>Conditions</b>: and,cron_job.v1-batch.resources.id.data.spec.jobTemplate.spec.template.spec,withKey,host_ipc,cron_job.v1-batch.resources.id.data.spec.jobTemplate.spec.template.spec.host_ipc,true,</p>",
+        "tags":
+        [
+            "https://kubernetes.io/docs/concepts/policy/pod-security-policy/"
+        ],
+        "sort_order": 10
+    },
+    {
+        "testcase": "CronJobs - CronJobs Using Host Networking",
+        "code": "host_network",
+        "details": "<p>A compromised pod with hostNetwork set to true in PodSpec can be used as a pivot to the host network.</p><p><b>Display Path</b>: cron_job.v1-batch.id</p><p><b>Path</b>: cron_job.v1-batch.resources.id.data.spec.jobTemplate.spec.template.spec</p><p><b>Conditions</b>: and,cron_job.v1-batch.resources.id.data.spec.jobTemplate.spec.template.spec,withKey,host_network,cron_job.v1-batch.resources.id.data.spec.jobTemplate.spec.template.spec.host_network,true,</p>",
+        "tags":
+        [
+            "https://kubernetes.io/docs/concepts/policy/pod-security-policy/"
+        ],
+        "sort_order": 11
+    },
+    {
+        "testcase": "CronJobs - CronJobs Using Host PID",
+        "code": "host_pid",
+        "details": "<p>A compromised pod with hostPID set to true in PodSpec can be used as a pivot to the host PID.</p><p><b>Display Path</b>: cron_job.v1-batch.id</p><p><b>Path</b>: cron_job.v1-batch.resources.id.data.spec.jobTemplate.spec.template.spec</p><p><b>Conditions</b>: and,cron_job.v1-batch.resources.id.data.spec.jobTemplate.spec.template.spec,withKey,host_pid,cron_job.v1-batch.resources.id.data.spec.jobTemplate.spec.template.spec.host_pid,true,</p>",
+        "tags":
+        [
+            "https://kubernetes.io/docs/concepts/policy/pod-security-policy/"
+        ],
+        "sort_order": 12
+    },
+    {
+        "testcase": "CronJobs - Kubernetes Container/InitContainer/EphemeralContainer Manifest Hardening",
+        "details": "<p>Several security options in the affected resources could be enabled to harden assocated containers.</p><p><b>Display Path</b>: cron_job.v1-batch.id</p><p><b>Path</b>: cron_job.v1-batch.resources.id.data.spec.jobTemplate.spec.template.spec.containers.id</p><p><b>Conditions</b>: or,cron_job.v1-batch.resources.id.data.spec.jobTemplate.spec.template.spec.containers.id,withoutKey,securityContext,cron_job.v1-batch.resources.id.data.spec.jobTemplate.spec.template.spec.containers.id.securityContext,null,,cron_job.v1-batch.resources.id.data.spec.jobTemplate.spec.template.spec.containers.id.securityContext,withoutKey,allowPrivilegeEscalation,cron_job.v1-batch.resources.id.data.spec.jobTemplate.spec.template.spec.containers.id.securityContext,withoutKey,readOnlyRootFilesystem,cron_job.v1-batch.resources.id.data.spec.jobTemplate.spec.template.spec.containers.id.securityContext,withoutKey,capabilities,cron_job.v1-batch.resources.id.data.spec.jobTemplate.spec.template.spec.containers.id.securityContext.allowPrivilegeEscalation,null,,cron_job.v1-batch.resources.id.data.spec.jobTemplate.spec.template.spec.containers.id.securityContext.readOnlyRootFilesystem,null,,cron_job.v1-batch.resources.id.data.spec.jobTemplate.spec.template.spec.containers.id.securityContext.capabilities,null,,cron_job.v1-batch.resources.id.data.spec.jobTemplate.spec.template.spec.containers.id.securityContext.capabilities.drop,null,</p>",
+        "tags":
+        [
+            "https://kubernetes.io/docs/tasks/configure-pod-container/security-context/",
+            "https://www.cisecurity.org/benchmark/docker/"
+        ],
+        "sort_order": 13
+    },
+    {
+        "testcase": "CronJobs - Privileged Container/InitContainer/EphemeralContainer Running",
+        "code": "privileged",
+        "details": "<p>Access to privileged container may result in privilege escalation. Administrators are encouraged to remove the privileged status of a pod if unncessary.</p><p><b>Display Path</b>: cron_job.v1-batch.id</p><p><b>Path</b>: cron_job.v1-batch.resources.id.data.spec.jobTemplate.spec.template.spec.containers.id</p><p><b>Conditions</b>: and,cron_job.v1-batch.resources.id.data.spec.jobTemplate.spec.template.spec.containers.id.securityContext,notNull,,cron_job.v1-batch.resources.id.data.spec.jobTemplate.spec.template.spec.containers.id.securityContext.privileged,true,</p>",
+        "tags":
+        [
+            "https://kubernetes.io/docs/tasks/configure-pod-container/security-context/"
+        ],
+        "sort_order": 14
+    },
+    {
+        "testcase": "CronJobs - Resources without Defined CPU Limit",
+        "code": "cpu",
+        "details": "<p>Unset resource limits could result in service denial through resource exhaustion.</p><p><b>Display Path</b>: cron_job.v1-batch.id</p><p><b>Path</b>: cron_job.v1-batch.resources.id.data.spec.jobTemplate.spec.template.spec.containers.id</p><p><b>Conditions</b>: or,cron_job.v1-batch.resources.id.data.spec.jobTemplate.spec.template.spec.containers.id.resources.limits,null,,cron_job.v1-batch.resources.id.data.spec.jobTemplate.spec.template.spec.containers.id.resources.limits,withoutKey,cpu,cron_job.v1-batch.resources.id.data.spec.jobTemplate.spec.template.spec.containers.id.resources.limits.cpu,null,</p>",
+        "tags":
+        [
+            "https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/"
+        ],
+        "sort_order": 15
+    },
+    {
+        "testcase": "CronJobs - Resources without Defined Limits",
+        "details": "<p>Unset resource limits could result in service denial through resource exhaustion.</p><p><b>Display Path</b>: cron_job.v1-batch.id</p><p><b>Path</b>: cron_job.v1-batch.resources.id.data.spec.jobTemplate.spec.template.spec.containers.id.resources</p><p><b>Conditions</b>: or,cron_job.v1-batch.resources.id.data.spec.jobTemplate.spec.template.spec.containers.id.resources,withoutKey,limits,cron_job.v1-batch.resources.id.data.spec.jobTemplate.spec.template.spec.containers.id.resources.limits,null,,cron_job.v1-batch.resources.id.data.spec.jobTemplate.spec.template.spec.containers.id.resources.limits,withoutKey,memory,cron_job.v1-batch.resources.id.data.spec.jobTemplate.spec.template.spec.containers.id.resources.limits,withoutKey,cpu</p>",
+        "tags":
+        [
+            "https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/"
+        ],
+        "sort_order": 16
+    },
+    {
+        "testcase": "CronJobs - Resources without Defined Memory Limit",
+        "code": "memory",
+        "details": "<p>Unset resource limits could result in service denial through resource exhaustion.</p><p><b>Display Path</b>: cron_job.v1-batch.id</p><p><b>Path</b>: cron_job.v1-batch.resources.id.data.spec.jobTemplate.spec.template.spec.containers.id</p><p><b>Conditions</b>: or,cron_job.v1-batch.resources.id.data.spec.jobTemplate.spec.template.spec.containers.id.resources.limits,null,,cron_job.v1-batch.resources.id.data.spec.jobTemplate.spec.template.spec.containers.id.resources.limits,withoutKey,memory,cron_job.v1-batch.resources.id.data.spec.jobTemplate.spec.template.spec.containers.id.resources.limits.memory,null,</p>",
+        "tags":
+        [
+            "https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/"
+        ],
+        "sort_order": 17
+    },
+    {
+        "testcase": "DaemonSets - AppArmor Annotation Missing",
+        "details": "<p>The container.apparmor.security.beta.kubernetes.io annotation is missing. A compromised container with AppArmor disabled makes privilege escalation easier.</p><p><b>Display Path</b>: daemon_set.v1-apps.id</p><p><b>Path</b>: daemon_set.v1-apps.resources.id</p><p><b>Conditions</b>: or,daemon_set.v1-apps.resources.id.metadata,withoutKey,annotations,daemon_set.v1-apps.resources.id.metadata.annotations,withoutKey,container.apparmor.security.beta.kubernetes.io</p>",
+        "tags":
+        [
+            "https://kubernetes.io/docs/tutorials/security/apparmor/"
+        ],
+        "sort_order": 18
+    },
+    {
+        "testcase": "DaemonSets - Automounted Service Account Token",
+        "details": "<p>Default service account with token mounted. automountServiceAccountToken should be set to 'false' on either the ServiceAccount or on the PodSpec or a non-default service account should be used.</p><p><b>Display Path</b>: daemon_set.v1-apps.id</p><p><b>Path</b>: daemon_set.v1-apps.resources.id</p><p><b>Conditions</b>: or,daemon_set.v1-apps.resources.id.data.spec,withoutKey,automountServiceAccountToken,daemon_set.v1-apps.resources.id.data.spec.automountServiceAccountToken,null,,daemon_set.v1-apps.resources.id.data.spec.automountServiceAccountToken,true,</p>",
+        "tags":
+        [
+            "https://kubernetes.io/docs/tasks/configure-pod-container/configure-service-account/"
+        ],
+        "sort_order": 19
+    },
+    {
+        "testcase": "DaemonSets - Container/InitContainer/EphemeralContainer Ability to Modify Root Filesystem",
+        "code": "readOnlyRootFilesystem",
+        "details": "<p>Root filesystems should be read-only where possible.</p><p><b>Recommendation</b>: spec.template.spec.(c|initC|ephemeralC)ontainers[].securityContext.readOnlyRootFilesystem should be explicitly set to true for the affected containers.</p><p><b>Display Path</b>: daemon_set.v1-apps.id</p><p><b>Path</b>: daemon_set.v1-apps.resources.id.data.spec.template.spec.containers.id</p><p><b>Conditions</b>: or,daemon_set.v1-apps.resources.id.data.spec.template.spec.containers.id,null,,daemon_set.v1-apps.resources.id.data.spec.template.spec.containers.id.readOnlyRootFilesystem,null,,daemon_set.v1-apps.resources.id.data.spec.template.spec.containers.id.readOnlyRootFilesystem,false,</p>",
+        "tags":
+        [
+            "https://kubernetes.io/docs/tasks/configure-pod-container/security-context/",
+            "https://kubernetes.io/docs/concepts/policy/pod-security-policy/"
+        ],
+        "sort_order": 20
+    },
+    {
+        "testcase": "DaemonSets - Container/InitContainer/EphemeralContainer Allowing Privilege Escalation",
+        "code": "allowPrivilegeEscalation",
+        "details": "<p>A container should disallow privilege escalation where possible. allowPrivilegeEscalation should be explicitly set to false.</p><p><b>Display Path</b>: daemon_set.v1-apps.id</p><p><b>Path</b>: daemon_set.v1-apps.resources.id.data.spec.template.spec.containers.id</p><p><b>Conditions</b>: or,daemon_set.v1-apps.resources.id.data.spec.template.spec.containers.id,null,,daemonset.v1-apps.resources.id.data.spec.template.spec.containers.id.securityContext.allowPrivilegeEscalation,null,,daemonset.v1-apps.resources.id.data.spec.template.spec.containers.id.securityContext.allowPrivilegeEscalation,true,</p>",
+        "tags":
+        [
+            "https://kubernetes.io/docs/tasks/configure-pod-container/security-context/",
+            "https://kubernetes.io/docs/concepts/policy/pod-security-policy/"
+        ],
+        "sort_order": 21
+    },
+    {
+        "testcase": "DaemonSets - Container/InitContainer/EphemeralContainer Running As Root Group",
+        "code": "runAsGroup",
+        "details": "<p>Where possible, runAsGroup should be set to a value greater than 0.</p><p><b>Display Path</b>: daemon_set.v1-apps.id</p><p><b>Path</b>: daemon_set.v1-apps.resources.id.data.spec.template.spec.containers.id</p><p><b>Conditions</b>: and,daemon_set.v1-apps.resources.id.data.spec.template.spec.containers.id,notNull,,daemon_set.v1-apps.resources.id.data.spec.template.spec.containers.id.securityContext.runAsGroup,equal,0</p>",
+        "tags":
+        [
+            "https://kubernetes.io/docs/tasks/configure-pod-container/security-context/",
+            "https://kubernetes.io/docs/concepts/policy/pod-security-policy/"
+        ],
+        "sort_order": 22
+    },
+    {
+        "testcase": "DaemonSets - Container/InitContainer/EphemeralContainer Running As Root User",
+        "code": "runAsUser",
+        "details": "<p>Where possible, runAsUser should be set to a value greater than 0.</p><p><b>Display Path</b>: daemon_set.v1-apps.id</p><p><b>Path</b>: daemon_set.v1-apps.resources.id.data.spec.template.spec.containers.id</p><p><b>Conditions</b>: and,daemon_set.v1-apps.resources.id.data.spec.template.spec.containers.id,notNull,,daemon_set.v1-apps.resources.id.data.spec.template.spec.containers.id.securityContext.runAsUser,equal,0</p>",
+        "tags":
+        [
+            "https://kubernetes.io/docs/tasks/configure-pod-container/security-context/",
+            "https://kubernetes.io/docs/concepts/policy/pod-security-policy/"
+        ],
+        "sort_order": 23
+    },
+    {
+        "testcase": "DaemonSets - Container/InitContainer/EphemeralContainer with Permissive Capabilities",
+        "code": "capabilities.drop",
+        "details": "<p>A container should drop all and add the necessary capabilities by default.</p><p><b>Display Path</b>: daemon_set.v1-apps.id</p><p><b>Path</b>: daemon_set.v1-apps.resources.id.data.spec.template.spec.containers.id</p><p><b>Conditions</b>: or,daemon_set.v1-apps.resources.id.data.spec.template.spec.containers.id,null,,daemon_set.v1-apps.resources.id.data.spec.template.spec.containers.id,withoutKey,capabilities,daemon_set.v1-apps.resources.id.data.spec.template.spec.containers.id.securityContext.capabilities,null,,daemon_set.v1-apps.resources.id.data.spec.template.spec.containers.id.securityContext.capabilities.drop,null,</p>",
+        "tags":
+        [
+            "https://kubernetes.io/docs/tasks/configure-pod-container/security-context/",
+            "https://kubernetes.io/docs/concepts/policy/pod-security-policy/"
+        ],
+        "sort_order": 24
+    },
+    {
+        "testcase": "DaemonSets - Container/InitContainer/EphemeralContainer with Possible Root Privileges",
+        "code": "runAsNonRoot",
+        "details": "<p>Where possible, runAsNonRoot should be set to true to prevent the container from running as root.</p><p><b>Display Path</b>: daemon_set.v1-apps.id</p><p><b>Path</b>: daemon_set.v1-apps.resources.id.data.spec.template.spec.containers.id</p><p><b>Conditions</b>: or,daemon_set.v1-apps.resources.id.data.spec.template.spec.containers.id,null,,daemon_set.v1-apps.resources.id.data.spec.template.spec.containers.id.runAsNonRoot,null,,daemon_set.v1-apps.resources.id.data.spec.template.spec.containers.id.runAsNonRoot,false,</p>",
+        "tags":
+        [
+            "https://kubernetes.io/docs/tasks/configure-pod-container/security-context/",
+            "https://kubernetes.io/docs/concepts/policy/pod-security-policy/"
+        ],
+        "sort_order": 25
+    },
+    {
+        "testcase": "DaemonSets - DaemonSets Using Host IPC",
+        "code": "host_ipc",
+        "details": "<p>A compromised pod with hostIPC set to true in PodSpec can be used as a pivot to the host IPC.</p><p><b>Display Path</b>: daemon_set.v1-apps.id</p><p><b>Path</b>: daemon_set.v1-apps.resources.id.data.spec.template.spec</p><p><b>Conditions</b>: and,daemon_set.v1-apps.resources.id.data.spec.template.spec,withKey,host_ipc,daemon_set.v1-apps.resources.id.data.spec.template.spec.host_ipc,true,</p>",
+        "tags":
+        [
+            "https://kubernetes.io/docs/concepts/policy/pod-security-policy/"
+        ],
+        "sort_order": 26
+    },
+    {
+        "testcase": "DaemonSets - DaemonSets Using Host Networking",
+        "code": "host_network",
+        "details": "<p>A compromised pod with hostNetwork set to true in PodSpec can be used as a pivot to the host network.</p><p><b>Display Path</b>: daemon_set.v1-apps.id</p><p><b>Path</b>: daemon_set.v1-apps.resources.id.data.spec.template.spec</p><p><b>Conditions</b>: and,daemon_set.v1-apps.resources.id.data.spec.template.spec,withKey,host_network,daemon_set.v1-apps.resources.id.data.spec.template.spec.host_network,true,</p>",
+        "tags":
+        [
+            "https://kubernetes.io/docs/concepts/policy/pod-security-policy/"
+        ],
+        "sort_order": 27
+    },
+    {
+        "testcase": "DaemonSets - DaemonSets Using Host PID",
+        "code": "host_pid",
+        "details": "<p>A compromised pod with hostPID set to true in PodSpec can be used as a pivot to the host PID.</p><p><b>Display Path</b>: daemon_set.v1-apps.id</p><p><b>Path</b>: daemon_set.v1-apps.resources.id.data.spec.template.spec</p><p><b>Conditions</b>: and,daemon_set.v1-apps.resources.id.data.spec.template.spec,withKey,host_pid,daemon_set.v1-apps.resources.id.data.spec.template.spec.host_pid,true,</p>",
+        "tags":
+        [
+            "https://kubernetes.io/docs/concepts/policy/pod-security-policy/"
+        ],
+        "sort_order": 28
+    },
+    {
+        "testcase": "DaemonSets - Kubernetes Container/InitContainer/EphemeralContainer Manifest Hardening",
+        "details": "<p>Several security options in the affected resources could be enabled to harden assocated containers.</p><p><b>Display Path</b>: daemon_set.v1-apps.id</p><p><b>Path</b>: daemon_set.v1-apps.resources.id.data.spec.template.spec.containers.id</p><p><b>Conditions</b>: or,daemon_set.v1-apps.resources.id.data.spec.template.spec.containers.id,null,,daemon_set.v1-apps.resources.id.data.spec.template.spec.containers.id,withoutKey,allowPrivilegeEscalation,daemon_set.v1-apps.resources.id.data.spec.template.spec.containers.id,withoutKey,readOnlyRootFilesystem,daemon_set.v1-apps.resources.id.data.spec.template.spec.containers.id,withoutKey,capabilities,daemon_set.v1-apps.resources.id.data.spec.template.spec.containers.id.securityContext.allowPrivilegeEscalation,null,,daemon_set.v1-apps.resources.id.data.spec.template.spec.containers.id.securityContext.readOnlyRootFilesystem,null,,daemon_set.v1-apps.resources.id.data.spec.template.spec.containers.id.securityContext.capabilities,null,,daemon_set.v1-apps.resources.id.data.spec.template.spec.containers.id.securityContext.capabilities.drop,null,</p>",
+        "tags":
+        [
+            "https://kubernetes.io/docs/tasks/configure-pod-container/security-context/",
+            "https://www.cisecurity.org/benchmark/docker/"
+        ],
+        "sort_order": 29
+    },
+    {
+        "testcase": "DaemonSets - Privileged Container/InitContainer/EphemeralContainer Running",
+        "code": "privileged",
+        "details": "<p>Access to privileged container may result in privilege escalation. Administrators are encouraged to remove the privileged status of a pod if unncessary.</p><p><b>Display Path</b>: daemon_set.v1-apps.id</p><p><b>Path</b>: daemon_set.v1-apps.resources.id.data.spec.template.spec.containers.id</p><p><b>Conditions</b>: and,daemon_set.v1-apps.resources.id.data.spec.template.spec.containers.id.securityContext,notNull,,daemon_set.v1-apps.resources.id.data.spec.template.spec.containers.id.securityContext.privileged,true,</p>",
+        "tags":
+        [
+            "https://kubernetes.io/docs/tasks/configure-pod-container/security-context/"
+        ],
+        "sort_order": 30
+    },
+    {
+        "testcase": "DaemonSets - Resources without Defined CPU Limit",
+        "code": "cpu",
+        "details": "<p>Unset resource limits could result in service denial through resource exhaustion.</p><p><b>Display Path</b>: daemon_set.v1-apps.id</p><p><b>Path</b>: daemon_set.v1-apps.resources.id.data.spec.template.spec.containers.id</p><p><b>Conditions</b>: or,daemon_set.v1-apps.resources.id.data.spec.template.spec.containers.id.resources.limits,null,,daemon_set.v1-apps.resources.id.data.spec.template.spec.containers.id.resources.limits,withoutKey,cpu,daemon_set.v1-apps.resources.id.data.spec.template.spec.containers.id.resources.limits.cpu,null,</p>",
+        "tags":
+        [
+            "https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/"
+        ],
+        "sort_order": 31
+    },
+    {
+        "testcase": "DaemonSets - Resources without Defined Limits",
+        "details": "<p>Unset resource limits could result in service denial through resource exhaustion.</p><p><b>Display Path</b>: daemon_set.v1-apps.id</p><p><b>Path</b>: daemon_set.v1-apps.resources.id.data.spec.template.spec.containers.id.resources</p><p><b>Conditions</b>: or,daemon_set.v1-apps.resources.id.data.spec.template.spec.containers.id.resources,withoutKey,limits,daemon_set.v1-apps.resources.id.data.spec.template.spec.containers.id.resources.limits,null,,and,daemon_set.v1-apps.resources.id.data.spec.template.spec.containers.id.resources.limits,withoutKey,memory,daemon_set.v1-apps.resources.id.data.spec.template.spec.containers.id.resources.limits,withoutKey,cpu</p>",
+        "tags":
+        [
+            "https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/"
+        ],
+        "sort_order": 32
+    },
+    {
+        "testcase": "DaemonSets - Resources without Defined Memory Limit",
+        "code": "memory",
+        "details": "<p>Unset resource limits could result in service denial through resource exhaustion.</p><p><b>Display Path</b>: daemon_set.v1-apps.id</p><p><b>Path</b>: daemon_set.v1-apps.resources.id.data.spec.template.spec.containers.id</p><p><b>Conditions</b>: or,daemon_set.v1-apps.resources.id.data.spec.template.spec.containers.id.resources.limits,null,,daemon_set.v1-apps.resources.id.data.spec.template.spec.containers.id.resources.limits,withoutKey,memory,daemon_set.v1-apps.resources.id.data.spec.template.spec.containers.id.resources.limits.memory,null,</p>",
+        "tags":
+        [
+            "https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/"
+        ],
+        "sort_order": 33
+    },
+    {
+        "testcase": "Deployments - AppArmor Annotation Missing",
+        "details": "<p>The container.apparmor.security.beta.kubernetes.io annotation is missing. A compromised container with AppArmor disabled makes privilege escalation easier.</p><p><b>Display Path</b>: deployment.v1-apps.id</p><p><b>Path</b>: deployment.v1-apps.resources.id</p><p><b>Conditions</b>: or,deployment.v1-apps.resources.id.metadata,withoutKey,annotations,deployment.v1-apps.resources.id.metadata.annotations,withoutKey,container.apparmor.security.beta.kubernetes.io</p>",
+        "tags":
+        [
+            "https://kubernetes.io/docs/tutorials/security/apparmor/"
+        ],
+        "sort_order": 34
+    },
+    {
+        "testcase": "Deployments - Automounted Service Account Token",
+        "details": "<p>Default service account with token mounted. automountServiceAccountToken should be set to 'false' on either the ServiceAccount or on the PodSpec or a non-default service account should be used.</p><p><b>Display Path</b>: deployment.v1-apps.id</p><p><b>Path</b>: deployment.v1-apps.resources.id</p><p><b>Conditions</b>: or,deployment.v1-apps.resources.id.data.spec,withoutKey,automountServiceAccountToken,deployment.v1-apps.resources.id.data.spec.automountServiceAccountToken,null,,deployment.v1-apps.resources.id.data.spec.automountServiceAccountToken,true,</p>",
+        "tags":
+        [
+            "https://kubernetes.io/docs/tasks/configure-pod-container/configure-service-account/"
+        ],
+        "sort_order": 35
+    },
+    {
+        "testcase": "Deployments - Container/InitContainer/EphemeralContainer Ability to Modify Root Filesystem",
+        "code": "readOnlyRootFilesystem",
+        "details": "<p>Root filesystems should be read-only where possible.</p><p><b>Recommendation</b>: spec.template.spec.(c|initC|ephemeralC)ontainers[].securityContext.readOnlyRootFilesystem should be explicitly set to true for the affected containers.</p><p><b>Display Path</b>: deployment.v1-apps.id</p><p><b>Path</b>: deployment.v1-apps.resources.id.data.spec.template.spec.containers.id</p><p><b>Conditions</b>: or,deployment.v1-apps.resources.id.data.spec.template.spec.containers.id,withoutKey,securityContext,deployment.v1-apps.resources.id.data.spec.template.spec.containers.id.securityContext,null,,deployment.v1-apps.resources.id.data.spec.template.spec.containers.id.securityContext.readOnlyRootFilesystem,null,,deployment.v1-apps.resources.id.data.spec.template.spec.containers.id.securityContext.readOnlyRootFilesystem,false,</p>",
+        "tags":
+        [
+            "https://kubernetes.io/docs/tasks/configure-pod-container/security-context/",
+            "https://kubernetes.io/docs/concepts/policy/pod-security-policy/"
+        ],
+        "sort_order": 36
+    },
+    {
+        "testcase": "Deployments - Container/InitContainer/EphemeralContainer Allowing Privilege Escalation",
+        "code": "allowPrivilegeEscalation",
+        "details": "<p>A container should disallow privilege escalation where possible. allowPrivilegeEscalation should be explicitly set to false.</p><p><b>Display Path</b>: deployment.v1-apps.id</p><p><b>Path</b>: deployment.v1-apps.resources.id.data.spec.template.spec.containers.id</p><p><b>Conditions</b>: or,deployment.v1-apps.resources.id.data.spec.template.spec.containers.id,withoutKey,securityContext,deployment.v1-apps.resources.id.data.spec.template.spec.containers.id.securityContext,null,,deployment.v1-apps.resources.id.data.spec.template.spec.containers.id.securityContext.allowPrivilegeEscalation,null,,deployment.v1-apps.resources.id.data.spec.template.spec.containers.id.securityContext.allowPrivilegeEscalation,true,</p>",
+        "tags":
+        [
+            "https://kubernetes.io/docs/tasks/configure-pod-container/security-context/",
+            "https://kubernetes.io/docs/concepts/policy/pod-security-policy/"
+        ],
+        "sort_order": 37
+    },
+    {
+        "testcase": "Deployments - Container/InitContainer/EphemeralContainer Running As Root Group",
+        "code": "runAsGroup",
+        "details": "<p>Where possible, runAsGroup should be set to a value greater than 0.</p><p><b>Display Path</b>: deployment.v1-apps.id</p><p><b>Path</b>: deployment.v1-apps.resources.id.data.spec.template.spec.containers.id</p><p><b>Conditions</b>: or,and,deployment.v1-apps.resources.id.data.spec.template.spec.securityContext,notNull,,deployment.v1-apps.resources.id.data.spec.template.spec.securityContext.runAsGroup,equal,0,and,deployment.v1-apps.resources.id.data.spec.template.spec.containers.id.securityContext,notNull,,deployment.v1-apps.resources.id.data.spec.template.spec.containers.id.securityContext.runAsGroup,equal,0</p>",
+        "tags":
+        [
+            "https://kubernetes.io/docs/tasks/configure-pod-container/security-context/",
+            "https://kubernetes.io/docs/concepts/policy/pod-security-policy/"
+        ],
+        "sort_order": 38
+    },
+    {
+        "testcase": "Deployments - Container/InitContainer/EphemeralContainer Running As Root User",
+        "code": "runAsUser",
+        "details": "<p>Where possible, runAsUser should be set to a value greater than 0.</p><p><b>Display Path</b>: deployment.v1-apps.id</p><p><b>Path</b>: deployment.v1-apps.resources.id.data.spec.template.spec.containers.id</p><p><b>Conditions</b>: or,and,deployment.v1-apps.resources.id.data.spec.template.spec.securityContext,notNull,,deployment.v1-apps.resources.id.data.spec.template.spec.securityContext.runAsUser,equal,0,and,deployment.v1-apps.resources.id.data.spec.template.spec.containers.id.securityContext,notNull,,deployment.v1-apps.resources.id.data.spec.template.spec.containers.id.securityContext.runAsUser,equal,0</p>",
+        "tags":
+        [
+            "https://kubernetes.io/docs/tasks/configure-pod-container/security-context/",
+            "https://kubernetes.io/docs/concepts/policy/pod-security-policy/"
+        ],
+        "sort_order": 39
+    },
+    {
+        "testcase": "Deployments - Container/InitContainer/EphemeralContainer with Permissive Capabilities",
+        "code": "capabilities.drop",
+        "details": "<p>A container should drop all and add the necessary capabilities by default.</p><p><b>Display Path</b>: deployment.v1-apps.id</p><p><b>Path</b>: deployment.v1-apps.resources.id.data.spec.template.spec.containers.id</p><p><b>Conditions</b>: or,deployment.v1-apps.resources.id.data.spec.template.spec.containers.id,withoutKey,securityContext,deployment.v1-apps.resources.id.data.spec.template.spec.containers.id.securityContext,null,,deployment.v1-apps.resources.id.data.spec.template.spec.containers.id.securityContext,withoutKey,capabilities,deployment.v1-apps.resources.id.data.spec.template.spec.containers.id.securityContext.capabilities,null,,deployment.v1-apps.resources.id.data.spec.template.spec.containers.id.securityContext.capabilities.drop,null,</p>",
+        "tags":
+        [
+            "https://kubernetes.io/docs/tasks/configure-pod-container/security-context/",
+            "https://kubernetes.io/docs/concepts/policy/pod-security-policy/"
+        ],
+        "sort_order": 40
+    },
+    {
+        "testcase": "Deployments - Container/InitContainer/EphemeralContainer with Possible Root Privileges",
+        "code": "runAsNonRoot",
+        "details": "<p>Where possible, runAsNonRoot should be set to true to prevent the container from running as root.</p><p><b>Display Path</b>: deployment.v1-apps.id</p><p><b>Path</b>: deployment.v1-apps.resources.id.data.spec.template.spec.containers.id</p><p><b>Conditions</b>: and,or,deployment.v1-apps.resources.id.data.spec.template.spec.securityContext.runAsNonRoot,null,,deployment.v1-apps.resources.id.data.spec.template.spec.securityContext.runAsNonRoot,false,,or,deployment.v1-apps.resources.id.data.spec.template.spec.containers.id.securityContext.runAsNonRoot,null,,deployment.v1-apps.resources.id.data.spec.template.spec.containers.id.securityContext.runAsNonRoot,false,</p>",
+        "tags":
+        [
+            "https://kubernetes.io/docs/tasks/configure-pod-container/security-context/",
+            "https://kubernetes.io/docs/concepts/policy/pod-security-policy/"
+        ],
+        "sort_order": 41
+    },
+    {
+        "testcase": "Deployments - Deployments Using Host IPC",
+        "code": "host_ipc",
+        "details": "<p>A compromised pod with hostIPC set to true in PodSpec can be used as a pivot to the host IPC.</p><p><b>Display Path</b>: deployment.v1-apps.id</p><p><b>Path</b>: deployment.v1-apps.resources.id.data.spec.template.spec</p><p><b>Conditions</b>: and,deployment.v1-apps.resources.id.data.spec.template.spec,withKey,host_ipc,deployment.v1-apps.resources.id.data.spec.template.spec.host_ipc,true,</p>",
+        "tags":
+        [
+            "https://kubernetes.io/docs/concepts/policy/pod-security-policy/"
+        ],
+        "sort_order": 42
+    },
+    {
+        "testcase": "Deployments - Deployments Using Host Networking",
+        "code": "host_network",
+        "details": "<p>A compromised pod with hostNetwork set to true in PodSpec can be used as a pivot to the host network.</p><p><b>Display Path</b>: deployment.v1-apps.id</p><p><b>Path</b>: deployment.v1-apps.resources.id.data.spec.template.spec</p><p><b>Conditions</b>: and,deployment.v1-apps.resources.id.data.spec.template.spec,withKey,host_network,deployment.v1-apps.resources.id.data.spec.template.spec.host_network,true,</p>",
+        "tags":
+        [
+            "https://kubernetes.io/docs/concepts/policy/pod-security-policy/"
+        ],
+        "sort_order": 43
+    },
+    {
+        "testcase": "Deployments - Deployments Using Host PID",
+        "code": "host_pid",
+        "details": "<p>A compromised pod with hostPID set to true in PodSpec can be used as a pivot to the host PID.</p><p><b>Display Path</b>: deployment.v1-apps.id</p><p><b>Path</b>: deployment.v1-apps.resources.id.data.spec.template.spec</p><p><b>Conditions</b>: and,deployment.v1-apps.resources.id.data.spec.template.spec,withKey,host_pid,deployment.v1-apps.resources.id.data.spec.template.spec.host_pid,true,</p>",
+        "tags":
+        [
+            "https://kubernetes.io/docs/concepts/policy/pod-security-policy/"
+        ],
+        "sort_order": 44
+    },
+    {
+        "testcase": "Deployments - Kubernetes Container/InitContainer/EphemeralContainer Manifest Hardening",
+        "details": "<p>Several security options in the affected resources could be enabled to harden assocated containers.</p><p><b>Display Path</b>: deployment.v1-apps.id</p><p><b>Path</b>: deployment.v1-apps.resources.id.data.spec.template.spec.containers.id</p><p><b>Conditions</b>: or,deployment.v1-apps.resources.id.data.spec.template.spec.containers.id,withoutKey,securityContext,deployment.v1-apps.resources.id.data.spec.template.spec.containers.id.securityContext,null,,deployment.v1-apps.resources.id.data.spec.template.spec.containers.id.securityContext,withoutKey,allowPrivilegeEscalation,deployment.v1-apps.resources.id.data.spec.template.spec.containers.id.securityContext,withoutKey,readOnlyRootFilesystem,deployment.v1-apps.resources.id.data.spec.template.spec.containers.id.securityContext,withoutKey,capabilities,deployment.v1-apps.resources.id.data.spec.template.spec.containers.id.securityContext.allowPrivilegeEscalation,null,,deployment.v1-apps.resources.id.data.spec.template.spec.containers.id.securityContext.readOnlyRootFilesystem,null,,deployment.v1-apps.resources.id.data.spec.template.spec.containers.id.securityContext.capabilities,null,,deployment.v1-apps.resources.id.data.spec.template.spec.containers.id.securityContext.capabilities.drop,null,</p>",
+        "tags":
+        [
+            "https://kubernetes.io/docs/tasks/configure-pod-container/security-context/",
+            "https://www.cisecurity.org/benchmark/docker/"
+        ],
+        "sort_order": 45
+    },
+    {
+        "testcase": "Deployments - Privileged Container/InitContainer/EphemeralContainer Running",
+        "code": "privileged",
+        "details": "<p>Access to privileged container may result in privilege escalation. Administrators are encouraged to remove the privileged status of a pod if unncessary.</p><p><b>Display Path</b>: deployment.v1-apps.id</p><p><b>Path</b>: deployment.v1-apps.resources.id.data.spec.template.spec.containers.id</p><p><b>Conditions</b>: and,deployment.v1-apps.resources.id.data.spec.template.spec.containers.id.securityContext,notNull,,deployment.v1-apps.resources.id.data.spec.template.spec.containers.id.securityContext.privileged,true,</p>",
+        "tags":
+        [
+            "https://kubernetes.io/docs/tasks/configure-pod-container/security-context/"
+        ],
+        "sort_order": 46
+    },
+    {
+        "testcase": "Deployments - Resources without Defined CPU Limit",
+        "code": "cpu",
+        "details": "<p>Unset resource limits could result in service denial through resource exhaustion.</p><p><b>Display Path</b>: deployment.v1-apps.id</p><p><b>Path</b>: deployment.v1-apps.resources.id.data.spec.template.spec.containers.id</p><p><b>Conditions</b>: or,deployment.v1-apps.resources.id.data.spec.template.spec.containers.id.resources.limits,null,,deployment.v1-apps.resources.id.data.spec.template.spec.containers.id.resources.limits,withoutKey,cpu,deployment.v1-apps.resources.id.data.spec.template.spec.containers.id.resources.limits.cpu,null,</p>",
+        "tags":
+        [
+            "https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/"
+        ],
+        "sort_order": 47
+    },
+    {
+        "testcase": "Deployments - Resources without Defined Limits",
+        "details": "<p>Unset resource limits could result in service denial through resource exhaustion.</p><p><b>Display Path</b>: deployment.v1-apps.id</p><p><b>Path</b>: deployment.v1-apps.resources.id.data.spec.template.spec.containers.id.resources</p><p><b>Conditions</b>: or,deployment.v1-apps.resources.id.data.spec.template.spec.containers.id.resources,withoutKey,limits,deployment.v1-apps.resources.id.data.spec.template.spec.containers.id.resources.limits,null,,deployment.v1-apps.resources.id.data.spec.template.spec.containers.id.resources.limits,withoutKey,memory,deployment.v1-apps.resources.id.data.spec.template.spec.containers.id.resources.limits,withoutKey,cpu</p>",
+        "tags":
+        [
+            "https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/"
+        ],
+        "sort_order": 48
+    },
+    {
+        "testcase": "Deployments - Resources without Defined Memory Limit",
+        "code": "memory",
+        "details": "<p>Unset resource limits could result in service denial through resource exhaustion.</p><p><b>Display Path</b>: deployment.v1-apps.id</p><p><b>Path</b>: deployment.v1-apps.resources.id.data.spec.template.spec.containers.id</p><p><b>Conditions</b>: or,deployment.v1-apps.resources.id.data.spec.template.spec.containers.id.resources.limits,null,,deployment.v1-apps.resources.id.data.spec.template.spec.containers.id.resources.limits,withoutKey,memory,deployment.v1-apps.resources.id.data.spec.template.spec.containers.id.resources.limits.memory,null,</p>",
+        "tags":
+        [
+            "https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/"
+        ],
+        "sort_order": 49
+    },
+    {
+        "testcase": "Configurations - Insufficient Control Plane Logging",
+        "code": "enabled",
+        "details": "<p>Certain logging options are disabled in the EKS control plane, creating difficulties in asserting accountability.</p><p><b>Path</b>: eks.logging.id</p><p><b>Conditions</b>: or,enabled,false,</p>",
+        "tags":
+        [
+            "https://docs.aws.amazon.com/eks/latest/userguide/control-plane-logs.html"
+        ],
+        "sort_order": 50
+    },
+    {
+        "testcase": "Configurations - KMS Encryption Disabled",
+        "details": "<p>Without KMS encryption, it may be easier to obtain Kubernetes cluster secrets unauthorized.</p><p><b>Display Path</b>: eks.encryption.id</p><p><b>Path</b>: eks</p><p><b>Conditions</b>: or,eks.encryption_count,equal,0</p>",
+        "tags":
+        [
+            "https://docs.aws.amazon.com/eks/latest/userguide/create-cluster.html",
+            "https://kubernetes.io/docs/tasks/administer-cluster/encrypt-data/",
+            "https://docs.aws.amazon.com/kms/latest/developerguide/key-policy-modifying-external-accounts.html",
+            "https://docs.aws.amazon.com/kms/latest/developerguide/overview.html",
+            "https://docs.aws.amazon.com/kms/latest/developerguide/create-keys.html"
+        ],
+        "sort_order": 51
+    },
+    {
+        "testcase": "VPC Configs - Publically Accessible API Server",
+        "details": "<p> A publically accessible Kubernetes API server may enable arbitrary view or modification of cluster data.</p><p><b>Path</b>: eks.vpc.config</p><p><b>Conditions</b>: and,eks.vpc.config.endpointPublicAccess,true,,eks.vpc.config.publicAccessCidrs,containAtLeastOneOf,0.0.0.0/0</p>",
+        "tags":
+        [
+            "https://kubernetes.io/docs/reference/command-line-tools-reference/kube-apiserver/",
+            "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-eks-cluster-resourcesvpcconfig.html"
+        ],
+        "sort_order": 52
+    },
+    {
+        "testcase": "Jobs - AppArmor Annotation Missing",
+        "details": "<p>The container.apparmor.security.beta.kubernetes.io annotation is missing. A compromised container with AppArmor disabled makes privilege escalation easier.</p><p><b>Display Path</b>: job.v1-batch.id</p><p><b>Path</b>: job.v1-batch.resources.id</p><p><b>Conditions</b>: or,job.v1-batch.resources.id.metadata,withoutKey,annotations,job.v1-batch.resources.id.metadata.annotations,withoutKey,container.apparmor.security.beta.kubernetes.io</p>",
+        "tags":
+        [
+            "https://kubernetes.io/docs/tutorials/security/apparmor/"
+        ],
+        "sort_order": 53
+    },
+    {
+        "testcase": "Jobs - Automounted Service Account Token",
+        "details": "<p>Default service account with token mounted. automountServiceAccountToken should be set to 'false' on either the ServiceAccount or on the PodSpec or a non-default service account should be used.</p><p><b>Display Path</b>: job.v1-batch.id</p><p><b>Path</b>: job.v1-batch.resources.id</p><p><b>Conditions</b>: or,job.v1-batch.resources.id.data.spec,withoutKey,automountServiceAccountToken,job.v1-batch.resources.id.data.spec.automountServiceAccountToken,null,,job.v1-batch.resources.id.data.spec.automountServiceAccountToken,true,</p>",
+        "tags":
+        [
+            "https://kubernetes.io/docs/tasks/configure-pod-container/configure-service-account/"
+        ],
+        "sort_order": 54
+    },
+    {
+        "testcase": "Jobs - Container/InitContainer/EphemeralContainer Ability to Modify Root Filesystem",
+        "code": "readOnlyRootFilesystem",
+        "details": "<p>Root filesystems should be read-only where possible.</p><p><b>Recommendation</b>: spec.template.spec.(c|initC|ephemeralC)ontainers[].securityContext.readOnlyRootFilesystem should be explicitly set to true for the affected containers.</p><p><b>Display Path</b>: job.v1-batch.id</p><p><b>Path</b>: job.v1-batch.resources.id.data.spec.template.spec.containers.id</p><p><b>Conditions</b>: or,job.v1-batch.resources.id.data.spec.template.spec.containers.id,withoutKey,securityContext,job.v1-batch.resources.id.data.spec.template.spec.containers.id.securityContext,null,,job.v1-batch.resources.id.data.spec.template.spec.containers.id.securityContext.readOnlyRootFilesystem,null,,job.v1-batch.resources.id.data.spec.template.spec.containers.id.securityContext.readOnlyRootFilesystem,false,</p>",
+        "tags":
+        [
+            "https://kubernetes.io/docs/tasks/configure-pod-container/security-context/",
+            "https://kubernetes.io/docs/concepts/policy/pod-security-policy/"
+        ],
+        "sort_order": 55
+    },
+    {
+        "testcase": "Jobs - Container/InitContainer/EphemeralContainer Allowing Privilege Escalation",
+        "code": "allowPrivilegeEscalation",
+        "details": "<p>A container should disallow privilege escalation where possible. allowPrivilegeEscalation should be explicitly set to false.</p><p><b>Display Path</b>: job.v1-batch.id</p><p><b>Path</b>: job.v1-batch.resources.id.data.spec.template.spec.containers.id</p><p><b>Conditions</b>: or,job.v1-batch.resources.id.data.spec.template.spec.containers.id,withoutKey,securityContext,job.v1-batch.resources.id.data.spec.template.spec.containers.id.securityContext,null,,job.v1-batch.resources.id.data.spec.template.spec.containers.id.securityContext.allowPrivilegeEscalation,null,,job.v1-batch.resources.id.data.spec.template.spec.containers.id.securityContext.allowPrivilegeEscalation,true,</p>",
+        "tags":
+        [
+            "https://kubernetes.io/docs/tasks/configure-pod-container/security-context/",
+            "https://kubernetes.io/docs/concepts/policy/pod-security-policy/"
+        ],
+        "sort_order": 56
+    },
+    {
+        "testcase": "Jobs - Container/InitContainer/EphemeralContainer Running As Root Group",
+        "code": "runAsGroup",
+        "details": "<p>Where possible, runAsGroup should be set to a value greater than 0.</p><p><b>Display Path</b>: job.v1-batch.id</p><p><b>Path</b>: job.v1-batch.resources.id.data.spec.template.spec.containers.id</p><p><b>Conditions</b>: or,and,job.v1-batch.resources.id.data.spec.template.spec.securityContext,notNull,,job.v1-batch.resources.id.data.spec.template.spec.securityContext.runAsGroup,equal,0,and,job.v1-batch.resources.id.data.spec.template.spec.containers.id.securityContext,notNull,,job.v1-batch.resources.id.data.spec.template.spec.containers.id.securityContext.runAsGroup,equal,0</p>",
+        "tags":
+        [
+            "https://kubernetes.io/docs/tasks/configure-pod-container/security-context/",
+            "https://kubernetes.io/docs/concepts/policy/pod-security-policy/"
+        ],
+        "sort_order": 57
+    },
+    {
+        "testcase": "Jobs - Container/InitContainer/EphemeralContainer Running As Root User",
+        "code": "runAsUser",
+        "details": "<p>Where possible, runAsUser should be set to a value greater than 0.</p><p><b>Display Path</b>: job.v1-batch.id</p><p><b>Path</b>: job.v1-batch.resources.id.data.spec.template.spec.containers.id</p><p><b>Conditions</b>: or,and,job.v1-batch.resources.id.data.spec.template.spec.securityContext,notNull,,job.v1-batch.resources.id.data.spec.template.spec.securityContext.runAsUser,equal,0,and,job.v1-batch.resources.id.data.spec.template.spec.containers.id.securityContext,notNull,,job.v1-batch.resources.id.data.spec.template.spec.containers.id.securityContext.runAsUser,equal,0</p>",
+        "tags":
+        [
+            "https://kubernetes.io/docs/tasks/configure-pod-container/security-context/",
+            "https://kubernetes.io/docs/concepts/policy/pod-security-policy/"
+        ],
+        "sort_order": 58
+    },
+    {
+        "testcase": "Jobs - Container/InitContainer/EphemeralContainer with Permissive Capabilities",
+        "code": "capabilities.drop",
+        "details": "<p>A container should drop all and add the necessary capabilities by default.</p><p><b>Display Path</b>: job.v1-batch.id</p><p><b>Path</b>: job.v1-batch.resources.id.data.spec.template.spec.containers.id</p><p><b>Conditions</b>: or,job.v1-batch.resources.id.data.spec.template.spec.containers.id,withoutKey,securityContext,job.v1-batch.resources.id.data.spec.template.spec.containers.id.securityContext,null,,job.v1-batch.resources.id.data.spec.template.spec.containers.id.securityContext,withoutKey,capabilities,job.v1-batch.resources.id.data.spec.template.spec.containers.id.securityContext.capabilities,null,,job.v1-batch.resources.id.data.spec.template.spec.containers.id.securityContext.capabilities.drop,null,</p>",
+        "tags":
+        [
+            "https://kubernetes.io/docs/tasks/configure-pod-container/security-context/",
+            "https://kubernetes.io/docs/concepts/policy/pod-security-policy/"
+        ],
+        "sort_order": 59
+    },
+    {
+        "testcase": "Jobs - Container/InitContainer/EphemeralContainer with Possible Root Privileges",
+        "code": "runAsNonRoot",
+        "details": "<p>Where possible, runAsNonRoot should be set to true to prevent the container from running as root.</p><p><b>Display Path</b>: job.v1-batch.id</p><p><b>Path</b>: job.v1-batch.resources.id.data.spec.template.spec.containers.id</p><p><b>Conditions</b>: and,or,job.v1-batch.resources.id.data.spec.template.spec.securityContext.runAsNonRoot,null,,job.v1-batch.resources.id.data.spec.template.spec.securityContext.runAsNonRoot,false,,or,job.v1-batch.resources.id.data.spec.template.spec.containers.id.securityContext.runAsNonRoot,null,,job.v1-batch.resources.id.data.spec.template.spec.containers.id.securityContext.runAsNonRoot,false,</p>",
+        "tags":
+        [
+            "https://kubernetes.io/docs/tasks/configure-pod-container/security-context/",
+            "https://kubernetes.io/docs/concepts/policy/pod-security-policy/"
+        ],
+        "sort_order": 60
+    },
+    {
+        "testcase": "Jobs - Jobs Using Host IPC",
+        "code": "host_ipc",
+        "details": "<p>A compromised pod with hostIPC set to true in PodSpec can be used as a pivot to the host IPC.</p><p><b>Display Path</b>: job.v1-batch.id</p><p><b>Path</b>: job.v1-batch.resources.id.data.spec.template.spec</p><p><b>Conditions</b>: and,job.v1-batch.resources.id.data.spec.template.spec,withKey,host_ipc,job.v1-batch.resources.id.data.spec.template.spec.host_ipc,true,</p>",
+        "tags":
+        [
+            "https://kubernetes.io/docs/concepts/policy/pod-security-policy/"
+        ],
+        "sort_order": 61
+    },
+    {
+        "testcase": "Jobs - Jobs Using Host Networking",
+        "code": "host_network",
+        "details": "<p>A compromised pod with hostNetwork set to true in PodSpec can be used as a pivot to the host network.</p><p><b>Display Path</b>: job.v1-batch.id</p><p><b>Path</b>: job.v1-batch.resources.id.data.spec.template.spec</p><p><b>Conditions</b>: and,job.v1-batch.resources.id.data.spec.template.spec,withKey,host_network,job.v1-batch.resources.id.data.spec.template.spec.host_network,true,</p>",
+        "tags":
+        [
+            "https://kubernetes.io/docs/concepts/policy/pod-security-policy/"
+        ],
+        "sort_order": 62
+    },
+    {
+        "testcase": "Jobs - Jobs Using Host PID",
+        "code": "host_pid",
+        "details": "<p>A compromised pod with hostPID set to true in PodSpec can be used as a pivot to the host PID.</p><p><b>Display Path</b>: job.v1-batch.id</p><p><b>Path</b>: job.v1-batch.resources.id.data.spec.template.spec</p><p><b>Conditions</b>: and,job.v1-batch.resources.id.data.spec.template.spec,withKey,host_pid,job.v1-batch.resources.id.data.spec.template.spec.host_pid,true,</p>",
+        "tags":
+        [
+            "https://kubernetes.io/docs/concepts/policy/pod-security-policy/"
+        ],
+        "sort_order": 63
+    },
+    {
+        "testcase": "Jobs - Kubernetes Container/InitContainer/EphemeralContainer Manifest Hardening",
+        "details": "<p>Several security options in the affected resources could be enabled to harden assocated containers.</p><p><b>Display Path</b>: job.v1-batch.id</p><p><b>Path</b>: job.v1-batch.resources.id.data.spec.template.spec.containers.id</p><p><b>Conditions</b>: or,job.v1-batch.resources.id.data.spec.template.spec.containers.id,withoutKey,securityContext,job.v1-batch.resources.id.data.spec.template.spec.containers.id.securityContext,null,,job.v1-batch.resources.id.data.spec.template.spec.containers.id.securityContext,withoutKey,allowPrivilegeEscalation,job.v1-batch.resources.id.data.spec.template.spec.containers.id.securityContext,withoutKey,readOnlyRootFilesystem,job.v1-batch.resources.id.data.spec.template.spec.containers.id.securityContext,withoutKey,capabilities,job.v1-batch.resources.id.data.spec.template.spec.containers.id.securityContext.allowPrivilegeEscalation,null,,job.v1-batch.resources.id.data.spec.template.spec.containers.id.securityContext.readOnlyRootFilesystem,null,,job.v1-batch.resources.id.data.spec.template.spec.containers.id.securityContext.capabilities,null,,job.v1-batch.resources.id.data.spec.template.spec.containers.id.securityContext.capabilities.drop,null,</p>",
+        "tags":
+        [
+            "https://kubernetes.io/docs/tasks/configure-pod-container/security-context/",
+            "https://www.cisecurity.org/benchmark/docker/"
+        ],
+        "sort_order": 64
+    },
+    {
+        "testcase": "Jobs - Privileged Container/InitContainer/EphemeralContainer Running",
+        "code": "privileged",
+        "details": "<p>Access to privileged container may result in privilege escalation. Administrators are encouraged to remove the privileged status of a pod if unncessary.</p><p><b>Display Path</b>: job.v1-batch.id</p><p><b>Path</b>: job.v1-batch.resources.id.data.spec.template.spec.containers.id</p><p><b>Conditions</b>: and,job.v1-batch.resources.id.data.spec.template.spec.containers.id.securityContext,notNull,,job.v1-batch.resources.id.data.spec.template.spec.containers.id.securityContext.privileged,true,</p>",
+        "tags":
+        [
+            "https://kubernetes.io/docs/tasks/configure-pod-container/security-context/"
+        ],
+        "sort_order": 65
+    },
+    {
+        "testcase": "Jobs - Resources without Defined CPU Limit",
+        "code": "cpu",
+        "details": "<p>Unset resource limits could result in service denial through resource exhaustion.</p><p><b>Display Path</b>: job.v1-batch.id</p><p><b>Path</b>: job.v1-batch.resources.id.data.spec.template.spec.containers.id</p><p><b>Conditions</b>: or,job.v1-batch.resources.id.data.spec.template.spec.containers.id.resources.limits,null,,job.v1-batch.resources.id.data.spec.template.spec.containers.id.resources.limits,withoutKey,cpu,job.v1-batch.resources.id.data.spec.template.spec.containers.id.resources.limits.cpu,null,</p>",
+        "tags":
+        [
+            "https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/"
+        ],
+        "sort_order": 66
+    },
+    {
+        "testcase": "Jobs - Resources without Defined Limits",
+        "details": "<p>Unset resource limits could result in service denial through resource exhaustion.</p><p><b>Display Path</b>: job.v1-batch.id</p><p><b>Path</b>: job.v1-batch.resources.id.data.spec.template.spec.containers.id.resources</p><p><b>Conditions</b>: or,job.v1-batch.resources.id.data.spec.template.spec.containers.id.resources,withoutKey,limits,job.v1-batch.resources.id.data.spec.template.spec.containers.id.resources.limits,null,,job.v1-batch.resources.id.data.spec.template.spec.containers.id.resources.limits,withoutKey,memory,job.v1-batch.resources.id.data.spec.template.spec.containers.id.resources.limits,withoutKey,cpu</p>",
+        "tags":
+        [
+            "https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/"
+        ],
+        "sort_order": 67
+    },
+    {
+        "testcase": "Jobs - Resources without Defined Memory Limit",
+        "code": "memory",
+        "details": "<p>Unset resource limits could result in service denial through resource exhaustion.</p><p><b>Display Path</b>: job.v1-batch.id</p><p><b>Path</b>: job.v1-batch.resources.id.data.spec.template.spec.containers.id</p><p><b>Conditions</b>: or,job.v1-batch.resources.id.data.spec.template.spec.containers.id.resources.limits,null,,job.v1-batch.resources.id.data.spec.template.spec.containers.id.resources.limits,withoutKey,memory,job.v1-batch.resources.id.data.spec.template.spec.containers.id.resources.limits.memory,null,</p>",
+        "tags":
+        [
+            "https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/"
+        ],
+        "sort_order": 68
+    },
+    {
+        "testcase": "Clusters - Basic Authentication Enabled",
+        "code": "basic_authentication_enabled",
+        "details": "<p>Basic authentication allows a user to authenticate to the cluster with a username and password and it is stored in plain text without any encryption. Disabling Basic authentication will prevent attacks like brute force. Its recommended to use either client certificate or IAM for authentication.</p><p><b>Path</b>: kubernetesengine.projects.id.clusters.id</p><p><b>Conditions</b>: and,kubernetesengine.projects.id.clusters.id.basic_authentication_enabled,true,</p>",
+        "tags":
+        [
+            "CIS Google Cloud Platform Foundations v1.0.0 ref:7.10",
+            "CIS GKE Benchmark v1.0.0 ref:6.8.1",
+            "https://www.cisecurity.org/benchmark/kubernetes/",
+            "https://cloud.google.com/kubernetes-engine/docs/how-to/hardening-your-cluster#restrict_authn_methods",
+            "https://cloud.google.com/kubernetes-engine/docs/concepts/cis-benchmarks#evaluation_on"
+        ],
+        "sort_order": 69
+    },
+    {
+        "testcase": "Clusters - Certificate Authentication Enabled",
+        "code": "client_certificate_enabled",
+        "details": "<p>Unless applications use the client certificate authentication method, it should be disabled.</p><p><b>Path</b>: kubernetesengine.projects.id.clusters.id</p><p><b>Conditions</b>: and,kubernetesengine.projects.id.clusters.id.client_certificate_enabled,true,</p>",
+        "tags":
+        [
+            "CIS GKE Benchmark v1.0.0 ref:6.8.2",
+            "https://www.cisecurity.org/benchmark/kubernetes/",
+            "https://cloud.google.com/kubernetes-engine/docs/how-to/hardening-your-cluster#restrict_authn_methods",
+            "https://cloud.google.com/kubernetes-engine/docs/concepts/cis-benchmarks#evaluation_on"
+        ],
+        "sort_order": 70
+    },
+    {
+        "testcase": "Clusters - Alias IP Disabled",
+        "code": "alias_ip_disabled",
+        "details": "<p>With Alias IPs ranges enabled, Kubernetes Engine clusters can allocate IP addresses from a CIDR block known to Google Cloud Platform. This makes your cluster more scalable and allows your cluster to better interact with other GCP products and entities.</p><p><b>Path</b>: kubernetesengine.projects.id.clusters.id</p><p><b>Conditions</b>: and,kubernetesengine.projects.id.clusters.id.alias_ip_enabled,false,</p>",
+        "tags":
+        [
+            "CIS Google Cloud Platform Foundations v1.0.0 ref:7.13",
+            "CIS GKE Benchmark v1.0.0 ref:6.6.2",
+            "https://www.cisecurity.org/benchmark/kubernetes/",
+            "https://cloud.google.com/kubernetes-engine/docs/how-to/hardening-your-cluster#restrict_network_access_to_the_control_plane_and_nodes",
+            "https://cloud.google.com/kubernetes-engine/docs/concepts/cis-benchmarks#default_values_on"
+        ],
+        "sort_order": 71
+    },
+    {
+        "testcase": "Clusters - Application-Layer Secrets Encryption Disabled",
+        "code": "application_layer_encryption_enabled",
+        "details": "<p>By default, GKE encrypts customer content stored at rest, including Secrets. GKE handles and manages this default encryption without any additional action.<br>Application-layer Secrets Encryption provides an additional layer of security for sensitive data, such as user defined Secrets and Secrets required for the operation of the cluster, such as service account keys, which are all stored in etcd.<br>Using this functionality, you can use a key, that you manage in Cloud KMS, to encrypt data at the application layer. This protects against attackers in the event that they manage to gain access to etcd.</p><p><b>Path</b>: kubernetesengine.projects.id.clusters.id</p><p><b>Conditions</b>: and,application_layer_encryption_enabled,false,</p>",
+        "tags":
+        [
+            "CIS GKE Benchmark v1.0.0 ref:6.3.1",
+            "https://www.cisecurity.org/benchmark/kubernetes/",
+            "https://cloud.google.com/kubernetes-engine/docs/how-to/encrypting-secrets"
+        ],
+        "sort_order": 72
+    },
+    {
+        "testcase": "Clusters - Binary Authorization Disabled",
+        "code": "binary_authorization_enabled",
+        "details": "<p>Binary Authorization provides software supply-chain security for images that you deploy to GKE from Google Container Registry (GCR) or another container image registry.<br>Binary Authorization requires images to be signed by trusted authorities during the development process. These signatures are then validated at deployment time. By enforcing validation, you can gain tighter control over your container environment by ensuring only verified images are integrated into the build-and-release process.</p><p><b>Path</b>: kubernetesengine.projects.id.clusters.id</p><p><b>Conditions</b>: and,kubernetesengine.projects.id.clusters.id.binary_authorization_enabled,false,</p>",
+        "tags":
+        [
+            "CIS GKE Benchmark v1.0.0 ref:6.10.5",
+            "https://www.cisecurity.org/benchmark/kubernetes/",
+            "https://cloud.google.com/binary-authorization/"
+        ],
+        "sort_order": 73
+    },
+    {
+        "testcase": "Clusters - Clusters Lacking Labels",
+        "code": "has_no_labels",
+        "details": "<p>Labels enable users to map their own organizational structures onto system objects in a loosely coupled fashion, without requiring clients to store these mappings. Labels can also be used to apply specific security settings and auto configure objects at creation.</p><p><b>Path</b>: kubernetesengine.projects.id.clusters.id</p><p><b>Conditions</b>: and,kubernetesengine.projects.id.clusters.id.has_labels,false,</p>",
+        "tags":
+        [
+            "CIS Google Cloud Platform Foundations v1.0.0 ref:7.5",
+            "https://cloud.google.com/kubernetes-engine/docs/how-to/hardening-your-cluster#use_namespaces_and_rbac_to_restrict_access_to_cluster_resources"
+        ],
+        "sort_order": 74
+    },
+    {
+        "testcase": "Clusters - Cluster Logging Disabled",
+        "code": "logging_disabled",
+        "details": "<p>You should enable cluster logging and use a logging service so your cluster can export logs about its activities.</p><p><b>Path</b>: kubernetesengine.projects.id.clusters.id</p><p><b>Conditions</b>: and,kubernetesengine.projects.id.clusters.id.logging_enabled,false,</p>",
+        "tags":
+        [
+            "CIS Google Cloud Platform Foundations v1.0.0 ref:7.1",
+            "CIS GKE Benchmark v1.0.0 ref:6.7.1",
+            "https://www.cisecurity.org/benchmark/kubernetes/",
+            "https://kubernetes.io/docs/tasks/debug-application-cluster/audit/",
+            "https://cloud.google.com/kubernetes-engine/docs/how-to/hardening-your-cluster#stackdriver_logging",
+            "https://cloud.google.com/kubernetes-engine/docs/concepts/cis-benchmarks#default_values_on"
+        ],
+        "sort_order": 75
+    },
+    {
+        "testcase": "Clusters - Master Authorized Networks Disabled",
+        "code": "master_authorized_networks_disabled",
+        "details": "<p>Master authorized networks blocks untrusted IP addresses from outside Google Cloud Platform. Addresses from inside GCP can still reach your master through HTTPS provided that they have the necessary Kubernetes credentials.</p><p><b>Path</b>: kubernetesengine.projects.id.clusters.id</p><p><b>Conditions</b>: and,kubernetesengine.projects.id.clusters.id.master_authorized_networks_enabled,false,</p>",
+        "tags":
+        [
+            "CIS Google Cloud Platform Foundations v1.0.0 ref:7.4",
+            "CIS GKE Benchmark v1.0.0 ref:6.6.3",
+            "https://www.cisecurity.org/benchmark/kubernetes/",
+            "https://cloud.google.com/kubernetes-engine/docs/how-to/authorized-networks",
+            "https://cloud.google.com/kubernetes-engine/docs/how-to/hardening-your-cluster#restrict_network_access_to_the_control_plane_and_nodes",
+            "https://cloud.google.com/kubernetes-engine/docs/concepts/cis-benchmarks#default_values_on"
+        ],
+        "sort_order": 76
+    },
+    {
+        "testcase": "Clusters - GKE Metadata Server Disabled",
+        "code": "metadata_server_enabled",
+        "details": "<p>Every GKE node stores its metadata on a metadata server. Some of this metadata, such as kubelet credentials and the VM instance identity token, is sensitive and should not be exposed to a Kubernetes workload.<br>Enabling the GKE Metadata server prevents pods (that are not running on the host network) from accessing this metadata and facilitates Workload Identity.<br>When unspecified, the default setting allows running pods to have full access to the node's underlying metadata server.</p><p><b>Path</b>: kubernetesengine.projects.id.clusters.id</p><p><b>Conditions</b>: and,metadata_server_enabled,false,</p>",
+        "tags":
+        [
+            "CIS GKE Benchmark v1.0.0 ref:6.4.2",
+            "https://www.cisecurity.org/benchmark/kubernetes/",
+            "https://cloud.google.com/kubernetes-engine/docs/how-to/protecting-cluster-metadata#concealment"
+        ],
+        "sort_order": 77
+    },
+    {
+        "testcase": "Clusters - Cluster Monitoring Disabled",
+        "code": "monitoring_disabled",
+        "details": "<p>You should enable cluster monitoring and use a monitoring service so your cluster can export metrics about its activities.</p><p><b>Path</b>: kubernetesengine.projects.id.clusters.id</p><p><b>Conditions</b>: and,kubernetesengine.projects.id.clusters.id.monitoring_enabled,false,</p>",
+        "tags":
+        [
+            "CIS Google Cloud Platform Foundations v1.0.0 ref:7.2",
+            "CIS GKE Benchmark v1.0.0 ref:6.7.1",
+            "https://www.cisecurity.org/benchmark/kubernetes/",
+            "https://cloud.google.com/kubernetes-engine/docs/how-to/hardening-your-cluster#stackdriver_logging",
+            "https://cloud.google.com/monitoring/kubernetes-engine#about-skm",
+            "https://cloud.google.com/kubernetes-engine/docs/concepts/cis-benchmarks#default_values_on"
+        ],
+        "sort_order": 78
+    },
+    {
+        "testcase": "Clusters - Network Policy Disabled",
+        "code": "network_policy_disabled",
+        "details": "<p>By default, pods are non-isolated; they accept traffic from any source. Pods become isolated by having a NetworkPolicy that selects them. Once there is any NetworkPolicy in a namespace selecting a particular pod, that pod will reject any connections that are not allowed by any NetworkPolicy.</p><p><b>Path</b>: kubernetesengine.projects.id.clusters.id</p><p><b>Conditions</b>: and,kubernetesengine.projects.id.clusters.id.network_policy_enabled,false,</p>",
+        "tags":
+        [
+            "CIS Google Cloud Platform Foundations v1.0.0 ref:7.11",
+            "CIS GKE Benchmark v1.0.0 ref:6.6.7",
+            "https://www.cisecurity.org/benchmark/kubernetes/",
+            "https://cloud.google.com/kubernetes-engine/docs/how-to/hardening-your-cluster#restrict_with_network_policy",
+            "https://cloud.google.com/kubernetes-engine/docs/concepts/security-overview#network_security",
+            "https://cloud.google.com/kubernetes-engine/docs/concepts/cis-benchmarks#default_values_on"
+        ],
+        "sort_order": 79
+    },
+    {
+        "testcase": "Clusters - Pod Security Policy Disabled",
+        "code": "pod_security_policy_enabled",
+        "details": "<p>A Pod Security Policy is a cluster-level resource that controls security sensitive aspects of the pod specification. The PodSecurityPolicy objects define a set of conditions that a pod must run with in order to be accepted into the system, as well as defaults for the related fields.</p><p><b>Recommendation</b>: Enable the Pod Security Policy. By default, Pod Security Policy is disabled when you create a new cluster.</p><p><b>Path</b>: kubernetesengine.projects.id.clusters.id</p><p><b>Conditions</b>: and,kubernetesengine.projects.id.clusters.id.pod_security_policy_enabled,false,</p>",
+        "tags":
+        [
+            "CIS Google Cloud Platform Foundations v1.0.0 ref:7.14",
+            "CIS GKE Benchmark v1.0.0 ref:6.10.3",
+            "https://www.cisecurity.org/benchmark/kubernetes/",
+            "https://cloud.google.com/kubernetes-engine/docs/how-to/pod-security-policies",
+            "https://kubernetes.io/docs/concepts/policy/pod-security-policy",
+            "https://cloud.google.com/kubernetes-engine/docs/concepts/cis-benchmarks#default_values_on"
+        ],
+        "sort_order": 80
+    },
+    {
+        "testcase": "Clusters - Private Cluster Endpoint Disabled",
+        "code": "private_endpoint_enabled",
+        "details": "<p>In a private cluster, the master node has two endpoints, a private and public endpoint. The private endpoint is the internal IP address of the master, behind an internal load balancer in the master's VPC network. Nodes communicate with the master using the private endpoint. The public endpoint enables the Kubernetes API to be accessed from outside the master's VPC network.<br>Although Kubernetes API requires an authorized token to perform sensitive actions, a vulnerability could potentially expose the Kubernetes publicly with unrestricted access. Additionally, an attacker may be able to identify the current cluster and Kubernetes API version and determine whether it is vulnerable to an attack.<br>Unless required, disabling public endpoint will help prevent such threats, and require the attacker to be on the master's VPC network to perform any attack on the Kubernetes API.</p><p><b>Path</b>: kubernetesengine.projects.id.clusters.id</p><p><b>Conditions</b>: and,kubernetesengine.projects.id.clusters.id.private_endpoint_enabled,false,</p>",
+        "tags":
+        [
+            "CIS Google Cloud Platform Foundations v1.0.0 ref:7.15",
+            "CIS GKE Benchmark v1.0.0 ref:6.6.4",
+            "https://www.cisecurity.org/benchmark/kubernetes/",
+            "https://cloud.google.com/kubernetes-engine/docs/how-to/hardening-your-cluster#restrict_network_access_to_the_control_plane_and_nodes",
+            "https://cloud.google.com/kubernetes-engine/docs/concepts/cis-benchmarks#default_values_on",
+            "https://cloud.google.com/kubernetes-engine/docs/how-to/private-clusters"
+        ],
+        "sort_order": 81
+    },
+    {
+        "testcase": "Clusters - Private Google Access Disabled",
+        "code": "private_ip_google_access_disabled",
+        "details": "<p>Enabling Private Google Access allows hosts on a subnetwork to use a private IP address to reach Google APIs rather than an external IP address.</p><p><b>Path</b>: kubernetesengine.projects.id.clusters.id</p><p><b>Conditions</b>: and,kubernetesengine.projects.id.clusters.id.private_ip_google_access_enabled,false,</p>",
+        "tags":
+        [
+            "CIS Google Cloud Platform Foundations v1.0.0 ref:7.16",
+            "https://cloud.google.com/kubernetes-engine/docs/how-to/hardening-your-cluster#restrict_network_access_to_the_control_plane_and_nodes"
+        ],
+        "sort_order": 82
+    },
+    {
+        "testcase": "Clusters - Cluster Not Subscribed to Release Channel",
+        "code": "release_channel",
+        "details": "<p>Release Channels signal a graduating level of stability and production-readiness. These are based on observed performance of GKE clusters running that version and represent experience and confidence in the cluster version.<br>The Regular release channel upgrades every few weeks and is for production users who need features not yet offered in the Stable channel. These versions have passed internal validation, but don't have enough historical data to guarantee their stability. Known issues generally have known workarounds.<br>The Stable release channel upgrades every few months and is for production users who need stability above all else, and for whom frequent upgrades are too risky. These versions have passed internal validation and have been shown to be stable and reliable in production, based on the observed performance of those clusters.<br>Critical security patches are delivered to all release channels.</p><p><b>Path</b>: kubernetesengine.projects.id.clusters.id</p><p><b>Conditions</b>: and,kubernetesengine.projects.id.clusters.id.release_channel,containNoneOf,REGULAR,STABLE</p>",
+        "tags":
+        [
+            "CIS GKE Benchmark v1.0.0 ref:6.5.4",
+            "https://www.cisecurity.org/benchmark/kubernetes/",
+            "https://cloud.google.com/kubernetes-engine/docs/concepts/release-channels"
+        ],
+        "sort_order": 83
+    },
+    {
+        "testcase": "Clusters - Shielded GKE Nodes Disabled",
+        "code": "shielded_nodes_enabled",
+        "details": "<p>Shielded GKE nodes protects clusters against boot- or kernel-level malware or rootkits which persist beyond infected OS.<br>Shielded GKE nodes run firmware which is signed and verified using Google's Certificate Authority, ensuring that the nodes' firmware is unmodified and establishing the root of trust for Secure Boot. GKE node identity is strongly protected via virtual Trusted Platform Module (vTPM) and verified remotely by the master node before the node joins the cluster.</p><p><b>Path</b>: kubernetesengine.projects.id.clusters.id</p><p><b>Conditions</b>: and,kubernetesengine.projects.id.clusters.id.shielded_nodes_enabled,false,</p>",
+        "tags":
+        [
+            "CIS GKE Benchmark v1.0.0 ref:6.5.5",
+            "https://www.cisecurity.org/benchmark/kubernetes/",
+            "https://cloud.google.com/kubernetes-engine/docs/how-to/shielded-gke-nodes"
+        ],
+        "sort_order": 84
+    },
+    {
+        "testcase": "Clusters - Workload Identity Disabled",
+        "code": "workload_identity_enabled",
+        "details": "<p>Enabling Workload Identity manages the distribution and rotation of Service account keys for the workloads to use.<br>Kubernetes workloads should not use cluster node service accounts to authenticate to Google Cloud APIs. Each Kubernetes Workload that needs to authenticate to other Google services using Cloud IAM should be provisioned a dedicated Service account.</p><p><b>Path</b>: kubernetesengine.projects.id.clusters.id</p><p><b>Conditions</b>: and,workload_identity_enabled,true,</p>",
+        "tags":
+        [
+            "CIS GKE Benchmark v1.0.0 ref:6.2.2",
+            "https://www.cisecurity.org/benchmark/kubernetes/",
+            "https://cloud.google.com/kubernetes-engine/docs/how-to/workload-identity"
+        ],
+        "sort_order": 85
+    },
+    {
+        "testcase": "Clusters - Kubernetes Dashboard Enabled",
+        "code": "dashboard_status",
+        "details": "<p>You should disable the Kubernetes Web UI (Dashboard) when running on Kubernetes Engine. The Kubernetes Web UI (Dashboard) is backed by a highly privileged Kubernetes Service Account. The Cloud Console provides much of the same functionality, so you don't need this functionality.</p><p><b>Path</b>: kubernetesengine.projects.id.clusters.id</p><p><b>Conditions</b>: and,kubernetesengine.projects.id.clusters.id.dashboard_status,equal,Enabled</p>",
+        "tags":
+        [
+            "CIS Google Cloud Platform Foundations v1.0.0 ref:7.6",
+            "CIS GKE Benchmark v1.0.0 ref:6.10.1",
+            "https://www.cisecurity.org/benchmark/kubernetes/",
+            "https://cloud.google.com/kubernetes-engine/docs/how-to/hardening-your-cluster#disable_kubernetes_dashboard",
+            "https://cloud.google.com/kubernetes-engine/docs/concepts/cis-benchmarks#default_values_on"
+        ],
+        "sort_order": 86
+    },
+    {
+        "testcase": "Clusters - Default Service Account in Use",
+        "code": "default_service_account_used",
+        "details": "<p>Each GKE node has a Service Account associated with it. By default, nodes are given the Compute Engine default service account. This account has broad access by default, making it useful to wide variety of applications, but it has more permissions than are required to run your Kubernetes Engine cluster. You should create and use a minimally privileged service account to run your GKE cluster instead of using the Compute Engine default service account.</p><p><b>Path</b>: kubernetesengine.projects.id.clusters.id</p><p><b>Conditions</b>: and,kubernetesengine.projects.id.clusters.id.service_account,equal,default</p>",
+        "tags":
+        [
+            "CIS Google Cloud Platform Foundations v1.0.0 ref:7.17",
+            "CIS GKE Benchmark v1.0.0 ref:6.2.1",
+            "https://www.cisecurity.org/benchmark/kubernetes/",
+            "https://cloud.google.com/kubernetes-engine/docs/how-to/hardening-your-cluster#use_least_privilege_sa",
+            "https://cloud.google.com/kubernetes-engine/docs/concepts/cis-benchmarks#default_values_on"
+        ],
+        "sort_order": 87
+    },
+    {
+        "testcase": "Clusters - Legacy Authorization (ABAC) Enabled",
+        "code": "legacy_abac_enabled",
+        "details": "<p>The legacy authorizer in Kubernetes grants broad, statically defined permissions. To ensure that RBAC limits permissions correctly, you must disable the legacy authorizer. RBAC has significant security advantages, can help you ensure that users only have access to cluster resources within their own namespace and is now stable in Kubernetes.</p><p><b>Path</b>: kubernetesengine.projects.id.clusters.id</p><p><b>Conditions</b>: and,kubernetesengine.projects.id.clusters.id.legacy_abac_enabled,true,</p>",
+        "tags":
+        [
+            "CIS Google Cloud Platform Foundations v1.0.0 ref:7.3",
+            "CIS GKE Benchmark v1.0.0 ref:6.8.4",
+            "https://www.cisecurity.org/benchmark/kubernetes/",
+            "https://cloud.google.com/kubernetes-engine/docs/how-to/hardening-your-cluster#leave_abac_disabled_default_for_110",
+            "https://cloud.google.com/kubernetes-engine/docs/concepts/cis-benchmarks#default_values_on"
+        ],
+        "sort_order": 88
+    },
+    {
+        "testcase": "Clusters - Legacy Metadata Endpoints Enabled",
+        "code": "legacy_metadata_endpoints_enabled",
+        "details": "<p>The instance metadata server exposed legacy v0.1 and v1beta1 endpoints, which do not enforce metadata query headers. This is a feature in the v1 APIs that makes it more difficult for a potential attacker to retrieve instance metadata, such as Server-Side Request Forgery (SSRF). Unless specifically required, we recommend you disable these legacy APIs.</p><p><b>Display Path</b>: kubernetesengine.projects.id.clusters.id</p><p><b>Path</b>: kubernetesengine.projects.id.clusters.id.node_pools.id</p><p><b>Conditions</b>: and,kubernetesengine.projects.id.clusters.id.node_pools.id.legacy_metadata_endpoints_enabled,true,</p>",
+        "tags":
+        [
+            "CIS GKE Benchmark v1.0.0 ref:6.4.1",
+            "https://www.cisecurity.org/benchmark/kubernetes/",
+            "https://cloud.google.com/kubernetes-engine/docs/how-to/hardening-your-cluster#protect_node_metadata_default_for_112",
+            "https://cloud.google.com/kubernetes-engine/docs/concepts/cis-benchmarks#default_values_on"
+        ],
+        "sort_order": 89
+    },
+    {
+        "testcase": "Clusters - Nodes with Auto-Repair Disabled",
+        "code": "auto_repair_disabled",
+        "details": "<p>Auto-repair helps maintain the cluster nodes in a healthy, running state.</p><p><b>Display Path</b>: kubernetesengine.projects.id.clusters.id</p><p><b>Path</b>: kubernetesengine.projects.id.clusters.id.node_pools.id</p><p><b>Conditions</b>: and,kubernetesengine.projects.id.clusters.id.node_pools.id.auto_repair_enabled,false,</p>",
+        "tags":
+        [
+            "CIS Google Cloud Platform Foundations v1.0.0 ref:7.7",
+            "CIS GKE Benchmark v1.0.0 ref:6.5.2",
+            "https://www.cisecurity.org/benchmark/kubernetes/",
+            "https://cloud.google.com/kubernetes-engine/docs/how-to/node-auto-repair",
+            "https://cloud.google.com/kubernetes-engine/docs/concepts/cis-benchmarks#default_values_on"
+        ],
+        "sort_order": 90
+    },
+    {
+        "testcase": "Clusters - Nodes with Auto-Upgrade Disabled",
+        "code": "auto_upgrade_disabled",
+        "details": "<p>Auto-upgrades automatically ensures that security updates are applied and kept up to date.</p><p><b>Display Path</b>: kubernetesengine.projects.id.clusters.id</p><p><b>Path</b>: kubernetesengine.projects.id.clusters.id.node_pools.id</p><p><b>Conditions</b>: and,kubernetesengine.projects.id.clusters.id.node_pools.id.auto_upgrade_enabled,false,</p>",
+        "tags":
+        [
+            "CIS Google Cloud Platform Foundations v1.0.0 ref:7.8",
+            "CIS GKE Benchmark v1.0.0 ref:6.5.3",
+            "https://www.cisecurity.org/benchmark/kubernetes/",
+            "https://cloud.google.com/kubernetes-engine/docs/how-to/node-auto-upgrades",
+            "https://cloud.google.com/kubernetes-engine/docs/concepts/cis-benchmarks#default_values_on"
+        ],
+        "sort_order": 91
+    },
+    {
+        "testcase": "Clusters - Lack of Container-Optimized OS Node Images",
+        "code": "container_optimized_os_not_used",
+        "details": "<p>It is recommended to use container-optimized OS images, as they provide improved support, security and stability.</p><p><b>Path</b>: kubernetesengine.projects.id.clusters.id</p><p><b>Conditions</b>: and,kubernetesengine.projects.id.clusters.id.image_type,containNoneOf,COS,COS_CONTAINERD</p>",
+        "tags":
+        [
+            "CIS Google Cloud Platform Foundations v1.0.0 ref:7.9",
+            "CIS GKE Benchmark v1.0.0 ref:6.5.1",
+            "https://www.cisecurity.org/benchmark/kubernetes/",
+            "https://cloud.google.com/container-optimized-os/docs/concepts/features-and-benefits",
+            "https://cloud.google.com/kubernetes-engine/docs/concepts/cis-benchmarks#default_values_on",
+            "https://cloud.google.com/kubernetes-engine/docs/concepts/node-images"
+        ],
+        "sort_order": 92
+    },
+    {
+        "testcase": "Clusters - Nodes with Integrity Monitoring Disabled",
+        "code": "integrity_monitoring_enabled",
+        "details": "<p>The Integrity Monitoring feature should be enabled for GKE cluster nodes in order to monitor and automatically check the runtime boot integrity of shielded cluster nodes using Cloud Monitoring service.</p><p><b>Display Path</b>: kubernetesengine.projects.id.clusters.id</p><p><b>Path</b>: kubernetesengine.projects.id.clusters.id.node_pools.id</p><p><b>Conditions</b>: and,kubernetesengine.projects.id.clusters.id.node_pools.id.integrity_monitoring_enabled,false,</p>",
+        "tags":
+        [
+            "https://www.cisecurity.org/benchmark/kubernetes/",
+            "https://cloud.google.com/kubernetes-engine/docs/how-to/hardening-your-cluster",
+            "https://cloud.google.com/kubernetes-engine/docs/how-to/shielded-gke-nodes"
+        ],
+        "sort_order": 93
+    },
+    {
+        "testcase": "Clusters - Nodes with Secure Boot Disabled",
+        "code": "secure_boot_enabled",
+        "details": "<p>The Secure Boot feature should be enabled for GKE cluster nodes in order to protect them against malware and rootkits. Secure Boot helps ensure that the system runs only authentic software by verifying the digital signature of all boot components, and halting the boot process if the signature verification fails.</p><p><b>Display Path</b>: kubernetesengine.projects.id.clusters.id</p><p><b>Path</b>: kubernetesengine.projects.id.clusters.id.node_pools.id</p><p><b>Conditions</b>: and,kubernetesengine.projects.id.clusters.id.node_pools.id.secure_boot_enabled,false,</p>",
+        "tags":
+        [
+            "https://www.cisecurity.org/benchmark/kubernetes/",
+            "https://cloud.google.com/kubernetes-engine/docs/how-to/hardening-your-cluster",
+            "https://cloud.google.com/kubernetes-engine/docs/how-to/shielded-gke-nodes"
+        ],
+        "sort_order": 94
+    },
+    {
+        "testcase": "Clusters - Private Cluster Nodes Disabled",
+        "code": "private_nodes_enabled",
+        "details": "<p>Private Nodes are nodes with no public IP addresses. Disabling public IP addresses on cluster nodes restricts access to only internal networks, forcing attackers to obtain local network access before attempting to compromise the underlying Kubernetes hosts.</p><p><b>Path</b>: kubernetesengine.projects.id.clusters.id</p><p><b>Conditions</b>: and,kubernetesengine.projects.id.clusters.id.private_nodes_enabled,false,</p>",
+        "tags":
+        [
+            "CIS Google Cloud Platform Foundations v1.0.0 ref:7.15",
+            "CIS GKE Benchmark v1.0.0 ref:6.6.5",
+            "https://www.cisecurity.org/benchmark/kubernetes/",
+            "https://cloud.google.com/kubernetes-engine/docs/how-to/hardening-your-cluster#restrict_network_access_to_the_control_plane_and_nodes",
+            "https://cloud.google.com/kubernetes-engine/docs/concepts/cis-benchmarks#default_values_on",
+            "https://cloud.google.com/kubernetes-engine/docs/how-to/private-clusters"
+        ],
+        "sort_order": 95
+    },
+    {
+        "testcase": "Clusters - Lack of Access Scope Limitation",
+        "code": "scopes_not_limited",
+        "details": "<p>If you are not creating a separate service account for your nodes, you should limit the scopes of the node service account to reduce the oportunity for privilege escalation. This ensures that the default service account does not have permissions beyond those necessary to run your cluster. While the default scopes are limited, they may include scopes beyond the minimally required ones needed to run your cluster. If you are accessing private images in Google Container Registry, the minimally required scopes are only logging.write, monitoring, and devstorage.read_only.</p><p><b>Path</b>: kubernetesengine.projects.id.clusters.id</p><p><b>Conditions</b>: and,kubernetesengine.projects.id.clusters.id.has_limited_scopes,false,</p>",
+        "tags":
+        [
+            "CIS Google Cloud Platform Foundations v1.0.0 ref:7.18",
+            "https://cloud.google.com/kubernetes-engine/docs/how-to/access-scopes"
+        ],
+        "sort_order": 96
+    },
+    {
+        "testcase": "Diagnostic Settings - Diagnostic Setting Does Not Exist",
+        "code": "diagnostic_exist",
+        "details": "<p>A diagnostic setting controls how a diagnostic log is exported. By default, logs are retained only for 90 days. Diagnostic settings should be defined so that logs can be exported and stored for a longer duration in order to analyze security activities within an Azure subscription.</p><p><b>Recommendation</b>: In the Azure console: <ol> <li>Go to <samp>Diagnostic settings</samp></li> <li>Click on <samp>Add diagnostic setting</samp>.</li> <li></li> <li>Add rules to allow traffic from specific network.</li>Configure the setting including the export location (This may be Log Analytics/Storage account or Event Hub) <li>Click on <samp>Save</samp></li> </ol></p><p><b>Path</b>: loggingmonitoring.subscriptions.id.diagnostic_settings.id</p><p><b>Conditions</b>: and,loggingmonitoring.subscriptions.id.diagnostic_settings.id.diagnostic_exist,false,</p>",
+        "tags":
+        [
+            "CIS Microsoft Azure Foundations v1.2.0 ref:5.1.1",
+            "https://learn.microsoft.com/en-us/azure/azure-monitor/essentials/platform-logs-overview#export-the-activity-log-with-a-log-profile",
+            "https://learn.microsoft.com/en-us/cli/azure/monitor/log-profiles?view=azure-cli-latest#az_monitor_log_profiles_create",
+            "https://learn.microsoft.com/en-us/azure/security/benchmarks/security-controls-v2-logging-threat-detection#lt-5-centralize-security-log-management-and-analysis"
+        ],
+        "sort_order": 97
+    },
+    {
+        "testcase": "Alert Rules - Activity Log Alert Does Not Exist for Create Policy Assignment",
+        "code": "create_policy_assignment_exist",
+        "details": "<p>Monitoring for \"Create Policy Assignment\" events gives insight into changes done in \"azure policy -assignments\" and can reduce the time it takes to detect unsolicited changes.</p><p><b>Recommendation</b>: In the Azure console: <ol><li>Go to Monitor service on Azure Security Center</li><li>Select Alerts blade</li><li>Click On New alert Rule</li><li>Under Scope, click Select resource</li><li>Select the appropriate subscription under Filter by subscription</li><li>Select Policy Assignment under Filter by resource type</li><li>Select All for Filter by location</li><li>Click on the subscription from the entries populated under Resource</li><li>Verify Selection preview shows All Policy assignment (policyAssignments) and your selected subscription name</li><li>Under Condition click Select Condition</li><li>Select Create policy assignment signal</li><li>Click Done</li><li>Under Action group, select appropriate action group</li><li>Under Alert rule details, enter rule name and description</li><li>Select appropriate resource group</li><li>Check Enable alert rule upon creation checkbox</li><li>Click Create alert rule</li> </ol></p><p><b>Path</b>: loggingmonitoring.subscriptions.id.log_alerts.id</p><p><b>Conditions</b>: or,loggingmonitoring.subscriptions.id.log_alerts.id.create_policy_assignment_exist,false,,loggingmonitoring.subscriptions.id.log_alerts.id.create_policy_assignment_exist,null,</p>",
+        "tags":
+        [
+            "CIS Microsoft Azure Foundations v1.2.0 ref:5.2.1",
+            "https://azure.microsoft.com/en-us/updates/classic-alerting-monitoring-retirement/",
+            "https://learn.microsoft.com/en-in/azure/azure-monitor/alerts/alerts-activity-log",
+            "https://learn.microsoft.com/en-in/rest/api/monitor/activitylogalerts/createorupdate",
+            "https://learn.microsoft.com/en-in/rest/api/monitor/activitylogalerts/listbysubscriptionid",
+            "https://learn.microsoft.com/en-us/azure/security/benchmarks/security-controls-v2-logging-threat-detection#lt-4-enable-logging-for-azure-resources"
+        ],
+        "sort_order": 98
+    },
+    {
+        "testcase": "Alert Rules - Activity Log Alert Does Not Exist for _ARG_0_",
+        "code": "_ARG_2_",
+        "details": "<p>Monitoring for \"_ARG_0_\" events gives insight into network access changes and may reduce the time it takes to detect suspicious activity.</p><p><b>Recommendation</b>: In the Azure console: <ol><li>Go to Monitor service on Azure Security Center</li><li>Select Alerts blade</li><li>Click On New alert Rule</li><li>Under Scope, click Select resource</li><li>Select the appropriate subscription under Filter by subscription</li><li>Select Policy Assignment under Filter by resource type</li><li>Select All for Filter by location</li><li>Click on the subscription from the entries populated under Resource</li><li>Verify Selection preview shows All Policy assignment (policyAssignments) and your selected subscription name</li><li>Under Condition click Select Condition</li><li>Select Create policy assignment signal</li><li>Click Done</li><li>Under Action group, select appropriate action group</li><li>Under Alert rule details, enter rule name and description</li><li>Select appropriate resource group</li><li>Check Enable alert rule upon creation checkbox</li><li>Click Create alert rule</li> </ol></p><p><b>Path</b>: loggingmonitoring.subscriptions.id.log_alerts.id</p><p><b>Key</b>: _ARG_2_</p><p><b>Argument Names</b>:<ul><li>Event</li><li>Associated CIS rule</li><li>Dictionary Value</li></ul></p><p><b>Conditions</b>: or,loggingmonitoring.subscriptions.id.log_alerts.id._ARG_2_,false,,loggingmonitoring.subscriptions.id.log_alerts.id._ARG_2_,null,</p>",
+        "tags":
+        [
+            "CIS Microsoft Azure Foundations v1.2.0 ref:_ARG_1_",
+            "https://azure.microsoft.com/en-us/updates/classic-alerting-monitoring-retirement/",
+            "https://learn.microsoft.com/en-in/azure/azure-monitor/alerts/alerts-activity-log",
+            "https://learn.microsoft.com/en-in/rest/api/monitor/activitylogalerts/createorupdate",
+            "https://learn.microsoft.com/en-in/rest/api/monitor/activitylogalerts/listbysubscriptionid",
+            "https://learn.microsoft.com/en-us/azure/security/benchmarks/security-controls-v2-logging-threat-detection#lt-4-enable-logging-for-azure-resources"
+        ],
+        "sort_order": 99
+    },
+    {
+        "testcase": "Alert Rules - Activity Log Alert Does Not Exist for _ARG_0_",
+        "code": "_ARG_2_",
+        "details": "<p>Monitoring for \"_ARG_0_\" events gives insight into changes to the active security solutions and may reduce the time it takes to detect suspicious activity.</p><p><b>Recommendation</b>: In the Azure console: <ol><li>Go to Monitor service on Azure Security Center</li><li>Select Alerts blade</li><li>Click On New alert Rule</li><li>Under Scope, click Select resource</li><li>Select the appropriate subscription under Filter by subscription</li><li>Select Policy Assignment under Filter by resource type</li><li>Select All for Filter by location</li><li>Click on the subscription from the entries populated under Resource</li><li>Verify Selection preview shows All Policy assignment (policyAssignments) and your selected subscription name</li><li>Under Condition click Select Condition</li><li>Select Create policy assignment signal</li><li>Click Done</li><li>Under Action group, select appropriate action group</li><li>Under Alert rule details, enter rule name and description</li><li>Select appropriate resource group</li><li>Check Enable alert rule upon creation checkbox</li><li>Click Create alert rule</li> </ol></p><p><b>Path</b>: loggingmonitoring.subscriptions.id.log_alerts.id</p><p><b>Key</b>: _ARG_2_</p><p><b>Argument Names</b>:<ul><li>Event</li><li>Associated CIS rule</li><li>Dictionary Value</li></ul></p><p><b>Conditions</b>: or,loggingmonitoring.subscriptions.id.log_alerts.id._ARG_2_,false,,loggingmonitoring.subscriptions.id.log_alerts.id._ARG_2_,null,</p>",
+        "tags":
+        [
+            "CIS Microsoft Azure Foundations v1.2.0 ref:_ARG_1_",
+            "https://azure.microsoft.com/en-us/updates/classic-alerting-monitoring-retirement/",
+            "https://learn.microsoft.com/en-in/azure/azure-monitor/alerts/alerts-activity-log",
+            "https://learn.microsoft.com/en-in/rest/api/monitor/activitylogalerts/createorupdate",
+            "https://learn.microsoft.com/en-in/rest/api/monitor/activitylogalerts/listbysubscriptionid",
+            "https://learn.microsoft.com/en-us/azure/security/benchmarks/security-controls-v2-logging-threat-detection#lt-4-enable-logging-for-azure-resources"
+        ],
+        "sort_order": 100
+    },
+    {
+        "testcase": "Key Vaults - Logging for Azure Key Vault Is Disabled",
+        "code": "diagnostic_key_vault_audit_event_enabled",
+        "details": "<p>Monitoring how and when key vaults are accessed, and by whom enables an audit trail of interactions with confidential information, keys and certificates managed by Azure Keyvault. Enabling logging for Key Vault saves information in an Azure storage account that the user provides. This creates a new container named insights-logs-auditevent automatically for the specified storage account, andthis same storage account can be used for collecting logs for multiple key vaults.</p><p><b>Recommendation</b>: Follow Microsoft Azure documentation and setup Azure Key Vault Logging.</p><p><b>Path</b>: loggingmonitoring.subscriptions.id.resources_logging.id</p><p><b>Conditions</b>: and,loggingmonitoring.subscriptions.id.resources_logging.id.diagnostic_key_vault.audit_event_enabled,false,</p>",
+        "tags":
+        [
+            "CIS Microsoft Azure Foundations v1.2.0 ref:5.1.5",
+            "https://learn.microsoft.com/en-us/azure/key-vault/general/logging?tabs=Vault",
+            "https://learn.microsoft.com/en-us/azure/security/benchmarks/security-controls-v2-logging-threat-detection#lt-4-enable-logging-for-azure-resources"
+        ],
+        "sort_order": 101
+    },
+    {
+        "testcase": "Profile - Audit Profile Does Not Capture All Activities",
+        "code": "captures_all_activities",
+        "details": "<p>A log profile controls how the activity log is exported. Configuring the log profile to collect logs for the categories \"write\", \"delete\" and \"action\" ensures that all the control/management plane activities performed on the subscription are exported.</p><p><b>Recommendation</b>: On Azure portal there is no provision to check or set categories.</p><p><b>Path</b>: loggingmonitoring.subscriptions.id.log_profiles.id</p><p><b>Conditions</b>: and,loggingmonitoring.subscriptions.id.log_profiles.id.captures_all_activities,false,</p>",
+        "tags":
+        [
+            "CIS Microsoft Azure Foundations v1.2.0 ref:5.1.2",
+            "https://learn.microsoft.com/en-us/cli/azure/monitor/log-profiles?view=azure-cli-latest#az-monitor-log-profiles-update",
+            "https://learn.microsoft.com/en-us/azure/security/benchmarks/security-controls-v2-logging-threat-detection#lt-4-enable-logging-for-azure-resources"
+        ],
+        "sort_order": 102
+    },
+    {
+        "testcase": "Network Policies - Unrestricted Cluster Network Access",
+        "details": "<p>Unrestricted cluster networks allow any compromised pod to interact with any other pods.</p><p><b>Display Path</b>: network_policy.v1.id</p><p><b>Path</b>: network_policy</p><p><b>Conditions</b>: or,network_policy.v1_count,equal,0</p>",
+        "tags":
+        [
+            "https://kubernetes.io/docs/concepts/cluster-administration/networking/",
+            "https://kubernetes.io/docs/concepts/services-networking/network-policies/"
+        ],
+        "sort_order": 103
+    },
+    {
+        "testcase": "Network Policies - Unrestricted Cluster Network Egress",
+        "details": "<p>Unrestricted cluster egress controls allow any compromised pod to interact with any other pods.</p><p><b>Display Path</b>: network_policy.v1-networking-k8s-io.id</p><p><b>Path</b>: network_policy.v1-networking-k8s-io.resources.id.data.spec.egress.id.data</p><p><b>Conditions</b>: and,network_policy.v1-networking-k8s-io.resources.id.data.spec.egress,notNull,,network_policy.v1-networking-k8s-io.resources.id.data.spec.egress.id.ports,null,,network_policy.v1-networking-k8s-io.resources.id.data.spec.egress.id.to,null,</p>",
+        "tags":
+        [
+            "https://kubernetes.io/docs/concepts/cluster-administration/networking/",
+            "https://kubernetes.io/docs/concepts/services-networking/network-policies/"
+        ],
+        "sort_order": 104
+    },
+    {
+        "testcase": "Network Policies - Unrestricted Cluster Network Ingress",
+        "details": "<p>Unrestricted cluster ingress controls allow any compromised pod to interact with any other pods.</p><p><b>Display Path</b>: network_policy.v1-networking-k8s-io.id</p><p><b>Path</b>: network_policy.v1-networking-k8s-io.resources.id.data.spec</p><p><b>Conditions</b>: or,and,network_policy.v1-networking-k8s-io.resources.id.data.spec,withKey,policy_types,network_policy.v1-networking-k8s-io.resources.id.data.spec.policy_types,notNull,,network_policy.v1-networking-k8s-io.resources.id.data.spec.policy_types,notContainString,Ingress,and,network_policy.v1-networking-k8s-io.resources.id.data.spec.ingress,notNull,,network_policy.v1-networking-k8s-io.resources.id.data.spec.ingress.id.ports,null,,network_policy.v1-networking-k8s-io.resources.id.data.spec.ingress.id.from,null,</p>",
+        "tags":
+        [
+            "https://kubernetes.io/docs/concepts/cluster-administration/networking/",
+            "https://kubernetes.io/docs/concepts/services-networking/network-policies/"
+        ],
+        "sort_order": 105
+    },
+    {
+        "testcase": "Pods - AppArmor Annotation Missing",
+        "details": "<p>The container.apparmor.security.beta.kubernetes.io annotation is missing. A compromised container with AppArmor disabled makes privilege escalation easier.</p><p><b>Display Path</b>: pod.v1.id</p><p><b>Path</b>: pod.v1.resources.id</p><p><b>Conditions</b>: or,pod.v1.resources.id.metadata,withoutKey,annotations,pod.v1.resources.id.metadata.annotations,withoutKey,container.apparmor.security.beta.kubernetes.io</p>",
+        "tags":
+        [
+            "https://kubernetes.io/docs/tutorials/security/apparmor/"
+        ],
+        "sort_order": 106
+    },
+    {
+        "testcase": "Pods - Automounted Service Account Token",
+        "details": "<p>Default service account with token mounted. automountServiceAccountToken should be set to 'false' on either the ServiceAccount or on the PodSpec or a non-default service account should be used.</p><p><b>Display Path</b>: pod.v1.id</p><p><b>Path</b>: pod.v1.resources.id</p><p><b>Conditions</b>: or,pod.v1.resources.id.data.spec,withoutKey,automountServiceAccountToken,pod.v1.resources.id.data.spec.automountServiceAccountToken,null,,pod.v1.resources.id.data.spec.automountServiceAccountToken,true,</p>",
+        "tags":
+        [
+            "https://kubernetes.io/docs/tasks/configure-pod-container/configure-service-account/"
+        ],
+        "sort_order": 107
+    },
+    {
+        "testcase": "Pods - Container/InitContainer/EphemeralContainer Ability to Modify Root Filesystem",
+        "code": "readOnlyRootFilesystem",
+        "details": "<p>Root filesystems should be read-only where possible.</p><p><b>Recommendation</b>: spec.(c|initC|ephemeralC)ontainers[].securityContext.readOnlyRootFilesystem should be explicitly set to true for the affected containers.</p><p><b>Display Path</b>: pod.v1.id</p><p><b>Path</b>: pod.v1.resources.id.data.spec.containers.id</p><p><b>Conditions</b>: or,pod.v1.resources.id.data.spec.containers.id,withoutKey,securityContext,pod.v1.resources.id.data.spec.containers.id.securityContext,null,,pod.v1.resources.id.data.spec.containers.id.securityContext.readOnlyRootFilesystem,null,,pod.v1.resources.id.data.spec.containers.id.securityContext.readOnlyRootFilesystem,false,</p>",
+        "tags":
+        [
+            "https://kubernetes.io/docs/tasks/configure-pod-container/security-context/",
+            "https://kubernetes.io/docs/concepts/policy/pod-security-policy/"
+        ],
+        "sort_order": 108
+    },
+    {
+        "testcase": "Pods - Container/InitContainer/EphemeralContainer Allowing Privilege Escalation",
+        "code": "allowPrivilegeEscalation",
+        "details": "<p>A container should disallow privilege escalation where possible. allowPrivilegeEscalation should be explicitly set to false.</p><p><b>Display Path</b>: pod.v1.id</p><p><b>Path</b>: pod.v1.resources.id.data.spec.containers.id</p><p><b>Conditions</b>: or,pod.v1.resources.id.data.spec.containers.id,withoutKey,securityContext,pod.v1.resources.id.data.spec.containers.id.securityContext,null,,pod.v1.resources.id.data.spec.containers.id.securityContext.allowPrivilegeEscalation,null,,pod.v1.resources.id.data.spec.containers.id.securityContext.allowPrivilegeEscalation,true,</p>",
+        "tags":
+        [
+            "https://kubernetes.io/docs/tasks/configure-pod-container/security-context/",
+            "https://kubernetes.io/docs/concepts/policy/pod-security-policy/"
+        ],
+        "sort_order": 109
+    },
+    {
+        "testcase": "Pods - Container/InitContainer/EphemeralContainer Running As Root Group",
+        "code": "runAsGroup",
+        "details": "<p>Where possible, runAsGroup should be set to a value greater than 0.</p><p><b>Display Path</b>: pod.v1.id</p><p><b>Path</b>: pod.v1.resources.id.data.spec.containers.id</p><p><b>Conditions</b>: or,and,pod.v1.resources.id.data.spec.securityContext,notNull,,pod.v1.resources.id.data.spec.securityContext.runAsGroup,equal,0,and,pod.v1.resources.id.data.spec.containers.id.securityContext,notNull,,pod.v1.resources.id.data.spec.containers.id.securityContext.runAsGroup,equal,0</p>",
+        "tags":
+        [
+            "https://kubernetes.io/docs/tasks/configure-pod-container/security-context/",
+            "https://kubernetes.io/docs/concepts/policy/pod-security-policy/"
+        ],
+        "sort_order": 110
+    },
+    {
+        "testcase": "Pods - Container/InitContainer/EphemeralContainer Running As Root User",
+        "code": "runAsUser",
+        "details": "<p>Where possible, runAsUser should be set to a value greater than 0.</p><p><b>Display Path</b>: pod.v1.id</p><p><b>Path</b>: pod.v1.resources.id.data.spec.containers.id</p><p><b>Conditions</b>: or,and,pod.v1.resources.id.data.spec.securityContext,notNull,,pod.v1.resources.id.data.spec.securityContext.runAsUser,equal,0,and,pod.v1.resources.id.data.spec.containers.id.securityContext,notNull,,pod.v1.resources.id.data.spec.containers.id.securityContext.runAsUser,equal,0</p>",
+        "tags":
+        [
+            "https://kubernetes.io/docs/tasks/configure-pod-container/security-context/",
+            "https://kubernetes.io/docs/concepts/policy/pod-security-policy/"
+        ],
+        "sort_order": 111
+    },
+    {
+        "testcase": "Pods - Container/InitContainer/EphemeralContainer with Permissive Capabilities",
+        "code": "capabilities.drop",
+        "details": "<p>A container should drop all and add the necessary capabilities by default.</p><p><b>Display Path</b>: pod.v1.id</p><p><b>Path</b>: pod.v1.resources.id.data.spec.containers.id</p><p><b>Conditions</b>: or,pod.v1.resources.id.data.spec.containers.id,withoutKey,securityContext,pod.v1.resources.id.data.spec.containers.id.securityContext,null,,pod.v1.resources.id.data.spec.containers.id.securityContext,withoutKey,capabilities,pod.v1.resources.id.data.spec.containers.id.securityContext.capabilities,null,,pod.v1.resources.id.data.spec.containers.id.securityContext.capabilities.drop,null,</p>",
+        "tags":
+        [
+            "https://kubernetes.io/docs/tasks/configure-pod-container/security-context/",
+            "https://kubernetes.io/docs/concepts/policy/pod-security-policy/"
+        ],
+        "sort_order": 112
+    },
+    {
+        "testcase": "Pods - Container/InitContainer/EphemeralContainer with Possible Root Privileges",
+        "code": "runAsNonRoot",
+        "details": "<p>Where possible, runAsNonRoot should be set to true to prevent the container from running as root.</p><p><b>Display Path</b>: pod.v1.id</p><p><b>Path</b>: pod.v1.resources.id.data.spec.containers.id</p><p><b>Conditions</b>: and,or,pod.v1.resources.id.data.spec.securityContext.runAsNonRoot,null,,pod.v1.resources.id.data.spec.securityContext.runAsNonRoot,false,,or,pod.v1.resources.id.data.spec.containers.id.securityContext.runAsNonRoot,null,,pod.v1.resources.id.data.spec.containers.id.securityContext.runAsNonRoot,false,</p>",
+        "tags":
+        [
+            "https://kubernetes.io/docs/tasks/configure-pod-container/security-context/",
+            "https://kubernetes.io/docs/concepts/policy/pod-security-policy/"
+        ],
+        "sort_order": 113
+    },
+    {
+        "testcase": "Pods - Helm/Tiller in Use",
+        "details": "<p>Helm 2 and Tiller have been deprecated since 2020.</p><p><b>Display Path</b>: pod.v1.id</p><p><b>Path</b>: pod.v1.resources.id</p><p><b>Conditions</b>: or,pod.v1.resources.id.data.name,containString,tiller,pod.v1.resources.id.data.name,containString,tiller-deploy</p>",
+        "tags":
+        [
+            "https://helm.sh/blog/helm-v2-deprecation-timeline/",
+            "https://github.com/markround/tiller#status"
+        ],
+        "sort_order": 114
+    },
+    {
+        "testcase": "Pods - Pods Using Host IPC",
+        "code": "host_ipc",
+        "details": "<p>A compromised pod with hostIPC set to true in PodSpec can be used as a pivot to the host IPC.</p><p><b>Display Path</b>: pod.v1.id</p><p><b>Path</b>: pod.v1.resources.id.data.spec</p><p><b>Conditions</b>: and,pod.v1.resources.id.data.spec,withKey,host_ipc,pod.v1.resources.id.data.spec.host_ipc,true,</p>",
+        "tags":
+        [
+            "https://kubernetes.io/docs/concepts/policy/pod-security-policy/"
+        ],
+        "sort_order": 115
+    },
+    {
+        "testcase": "Pods - Pods Using Host Networking",
+        "code": "host_network",
+        "details": "<p>A compromised pod with hostNetwork set to true in PodSpec can be used as a pivot to the host network.</p><p><b>Display Path</b>: pod.v1.id</p><p><b>Path</b>: pod.v1.resources.id.data.spec</p><p><b>Conditions</b>: and,pod.v1.resources.id.data.spec,withKey,host_network,host_network,true,</p>",
+        "tags":
+        [
+            "https://kubernetes.io/docs/concepts/policy/pod-security-policy/"
+        ],
+        "sort_order": 116
+    },
+    {
+        "testcase": "Pods - Pods Using Host PID",
+        "code": "host_pid",
+        "details": "<p>A compromised pod with hostPID set to true in PodSpec can be used as a pivot to the host PID.</p><p><b>Display Path</b>: pod.v1.id</p><p><b>Path</b>: pod.v1.resources.id.data.spec</p><p><b>Conditions</b>: and,pod.v1.resources.id.data.spec,withKey,host_pid,pod.v1.resources.id.data.spec.host_pid,true,</p>",
+        "tags":
+        [
+            "https://kubernetes.io/docs/concepts/policy/pod-security-policy/"
+        ],
+        "sort_order": 117
+    },
+    {
+        "testcase": "Pods - Kubernetes Container/InitContainer/EphemeralContainer Manifest Hardening",
+        "code": "hardening_required",
+        "details": "<p>Several security options in the affected resources could be enabled to harden assocated containers.</p><p><b>Display Path</b>: pod.v1.id</p><p><b>Path</b>: pod.v1.resources.id.data.spec.containers.id</p><p><b>Conditions</b>: or,pod.v1.resources.id.data.spec.containers.id,withoutKey,securityContext,pod.v1.resources.id.data.spec.containers.id.securityContext,null,,pod.v1.resources.id.data.spec.containers.id.securityContext,withoutKey,allowPrivilegeEscalation,pod.v1.resources.id.data.spec.containers.id.securityContext,withoutKey,readOnlyRootFilesystem,pod.v1.resources.id.data.spec.containers.id.securityContext,withoutKey,capabilities,pod.v1.resources.id.data.spec.containers.id.securityContext.allowPrivilegeEscalation,null,,pod.v1.resources.id.data.spec.containers.id.securityContext.readOnlyRootFilesystem,null,,pod.v1.resources.id.data.spec.containers.id.securityContext.capabilities,null,,pod.v1.resources.id.data.spec.containers.id.securityContext.capabilities.drop,null,</p>",
+        "tags":
+        [
+            "https://kubernetes.io/docs/tasks/configure-pod-container/security-context/",
+            "https://www.cisecurity.org/benchmark/docker/"
+        ],
+        "sort_order": 118
+    },
+    {
+        "testcase": "Pods - Privileged Container/InitContainer/EphemeralContainer Running",
+        "details": "<p>Access to privileged container may result in privilege escalation. Administrators are encouraged to remove the privileged status of a pod if unncessary. privileged should be explicitly set to false.</p><p><b>Display Path</b>: pod.v1.id</p><p><b>Path</b>: pod.v1.resources.id.data.spec.containers.id</p><p><b>Conditions</b>: and,pod.v1.resources.id.data.spec.containers.id.securityContext,notNull,,pod.v1.resources.id.data.spec.containers.id.securityContext.privileged,true,</p>",
+        "tags":
+        [
+            "https://kubernetes.io/docs/tasks/configure-pod-container/security-context/",
+            "https://kubernetes.io/docs/concepts/policy/pod-security-policy/"
+        ],
+        "sort_order": 119
+    },
+    {
+        "testcase": "Pods - Resources without Defined CPU Limit",
+        "code": "cpu",
+        "details": "<p>Unset resource limits could result in service denial through resource exhaustion.</p><p><b>Display Path</b>: pod.v1.id</p><p><b>Path</b>: pod.v1.resources.id.data.spec.containers.id</p><p><b>Conditions</b>: or,pod.v1.resources.id.data.spec.containers.id.resources.limits,null,,pod.v1.resources.id.data.spec.containers.id.resources.limits,withoutKey,cpu,pod.v1.resources.id.data.spec.containers.id.resources.limits.cpu,null,</p>",
+        "tags":
+        [
+            "https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/"
+        ],
+        "sort_order": 120
+    },
+    {
+        "testcase": "Pods - Resources without Defined Limits",
+        "details": "<p>Unset resource limits could result in service denial through resource exhaustion.</p><p><b>Display Path</b>: pod.v1.id</p><p><b>Path</b>: pod.v1.resources.id.data.spec.containers.id</p><p><b>Conditions</b>: or,pod.v1.resources.id.data.spec.containers.id.resources.limits,null,,pod.v1.resources.id.data.spec.containers.id.resources.limits,withoutKey,cpu,pod.v1.resources.id.data.spec.containers.id.resources.limits,withoutKey,memory,pod.v1.resources.id.data.spec.containers.id.resources.limits.cpu,null,,pod.v1.resources.id.data.spec.containers.id.resources.limits.memory,null,</p>",
+        "tags":
+        [
+            "https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/"
+        ],
+        "sort_order": 121
+    },
+    {
+        "testcase": "Pods - Resources without Defined Memory Limit",
+        "code": "memory",
+        "details": "<p>Unset resource limits could result in service denial through resource exhaustion.</p><p><b>Display Path</b>: pod.v1.id</p><p><b>Path</b>: pod.v1.resources.id.data.spec.containers.id</p><p><b>Conditions</b>: or,pod.v1.resources.id.data.spec.containers.id.resources.limits,null,,pod.v1.resources.id.data.spec.containers.id.resources.limits,withoutKey,memory,pod.v1.resources.id.data.spec.containers.id.resources.limits.memory,null,</p>",
+        "tags":
+        [
+            "https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/"
+        ],
+        "sort_order": 122
+    },
+    {
+        "testcase": "PodTemplates - AppArmor Annotation Missing",
+        "details": "<p>The container.apparmor.security.beta.kubernetes.io annotation is missing. A compromised container with AppArmor disabled makes privilege escalation easier.</p><p><b>Display Path</b>: pod_template.v1-apps.id</p><p><b>Path</b>: pod_template.v1-apps.resources.id</p><p><b>Conditions</b>: or,pod_template.v1-apps.resources.id.metadata,withoutKey,annotations,pod_template.v1-apps.resources.id.metadata.annotations,withoutKey,container.apparmor.security.beta.kubernetes.io</p>",
+        "tags":
+        [
+            "https://kubernetes.io/docs/tutorials/security/apparmor/"
+        ],
+        "sort_order": 123
+    },
+    {
+        "testcase": "PodTemplates - Automounted Service Account Token",
+        "details": "<p>Default service account with token mounted. automountServiceAccountToken should be set to 'false' on either the ServiceAccount or on the PodSpec or a non-default service account should be used.</p><p><b>Display Path</b>: pod_template.v1.id</p><p><b>Path</b>: pod_template.v1.resources.id</p><p><b>Conditions</b>: or,pod_template.v1.resources.id.data.spec,withoutKey,automountServiceAccountToken,pod_template.v1.resources.id.data.sspec.automountServiceAccountToken,null,,pod_template.v1.resources.id.data.sspec.automountServiceAccountToken,true,</p>",
+        "tags":
+        [
+            "https://kubernetes.io/docs/tasks/configure-pod-container/configure-service-account/"
+        ],
+        "sort_order": 124
+    },
+    {
+        "testcase": "PodTemplates - Container/InitContainer/EphemeralContainer Ability to Modify Root Filesystem",
+        "code": "readOnlyRootFilesystem",
+        "details": "<p>Root filesystems should be read-only where possible.</p><p><b>Recommendation</b>: spec.template.spec.(c|initC|ephemeralC)ontainers[].securityContext.readOnlyRootFilesystem should be explicitly set to true for the affected containers.</p><p><b>Display Path</b>: pod_template.v1.id</p><p><b>Path</b>: pod_template.v1.resources.id.data.spec.template.spec.containers.id</p><p><b>Conditions</b>: or,pod_template.v1.resources.id.data.spec.template.spec.containers.id,withoutKey,securityContext,pod_template.v1.resources.id.data.spec.template.spec.containers.id.securityContext,null,,pod_template.v1.resources.id.data.spec.template.spec.containers.id.securityContext.readOnlyRootFilesystem,null,,pod_template.v1.resources.id.data.spec.template.spec.containers.id.securityContext.readOnlyRootFilesystem,false,</p>",
+        "tags":
+        [
+            "https://kubernetes.io/docs/tasks/configure-pod-container/security-context/",
+            "https://kubernetes.io/docs/concepts/policy/pod-security-policy/"
+        ],
+        "sort_order": 125
+    },
+    {
+        "testcase": "PodTemplates - Container/InitContainer/EphemeralContainer Allowing Privilege Escalation",
+        "code": "allowPrivilegeEscalation",
+        "details": "<p>A container should disallow privilege escalation where possible. allowPrivilegeEscalation should be explicitly set to false.</p><p><b>Display Path</b>: pod_template.v1.id</p><p><b>Path</b>: pod_template.v1.resources.id.data.spec.template.spec.containers.id</p><p><b>Conditions</b>: or,pod_template.v1.resources.id.data.spec.template.spec.containers.id,withoutKey,securityContext,pod_template.v1.resources.id.data.spec.template.spec.containers.id.securityContext,null,,pod_template.v1.resources.id.data.spec.template.spec.containers.id.securityContext.allowPrivilegeEscalation,null,,pod_template.v1.resources.id.data.spec.template.spec.containers.id.securityContext.allowPrivilegeEscalation,true,</p>",
+        "tags":
+        [
+            "https://kubernetes.io/docs/tasks/configure-pod-container/security-context/",
+            "https://kubernetes.io/docs/concepts/policy/pod-security-policy/"
+        ],
+        "sort_order": 126
+    },
+    {
+        "testcase": "PodTemplates - Container/InitContainer/EphemeralContainer Running As Root Group",
+        "code": "runAsGroup",
+        "details": "<p>Where possible, runAsGroup should be set to a value greater than 0.</p><p><b>Display Path</b>: pod_template.v1.id</p><p><b>Path</b>: pod_template.v1.resources.id.data.spec.template.spec.containers.id</p><p><b>Conditions</b>: or,and,pod_template.v1.resources.id.data.spec.template.spec.securityContext,notNull,,pod_template.v1.resources.id.data.spec.template.spec.securityContext.runAsGroup,equal,0,and,pod_template.v1.resources.id.data.spec.template.spec.containers.id.securityContext,notNull,,pod_template.v1.resources.id.data.spec.template.spec.containers.id.securityContext.runAsGroup,equal,0</p>",
+        "tags":
+        [
+            "https://kubernetes.io/docs/tasks/configure-pod-container/security-context/",
+            "https://kubernetes.io/docs/concepts/policy/pod-security-policy/"
+        ],
+        "sort_order": 127
+    },
+    {
+        "testcase": "PodTemplates - Container/InitContainer/EphemeralContainer Running As Root User",
+        "code": "runAsUser",
+        "details": "<p>Where possible, runAsUser should be set to a value greater than 0.</p><p><b>Display Path</b>: pod_template.v1.id</p><p><b>Path</b>: pod_template.v1.resources.id.data.spec.template.spec.containers.id</p><p><b>Conditions</b>: or,and,pod_template.v1.resources.id.data.spec.template.spec.securityContext,notNull,,pod_template.v1.resources.id.data.spec.template.spec.securityContext.runAsUser,equal,0,and,pod_template.v1.resources.id.data.spec.template.spec.containers.id.securityContext,notNull,,pod_template.v1.resources.id.data.spec.template.spec.containers.id.securityContext.runAsUser,equal,0</p>",
+        "tags":
+        [
+            "https://kubernetes.io/docs/tasks/configure-pod-container/security-context/",
+            "https://kubernetes.io/docs/concepts/policy/pod-security-policy/"
+        ],
+        "sort_order": 128
+    },
+    {
+        "testcase": "PodTemplates - Container/InitContainer/EphemeralContainer with Permissive Capabilities",
+        "code": "capabilities.drop",
+        "details": "<p>A container should drop all and add the necessary capabilities by default.</p><p><b>Display Path</b>: pod_template.v1.id</p><p><b>Path</b>: pod_template.v1.resources.id.data.spec.template.spec.containers.id</p><p><b>Conditions</b>: or,pod_template.v1.resources.id.data.spec.template.spec.containers.id,withoutKey,securityContext,pod_template.v1.resources.id.data.spec.template.spec.containers.id.securityContext,null,,pod_template.v1.resources.id.data.spec.template.spec.containers.id.securityContext,withoutKey,capabilities,pod_template.v1.resources.id.data.spec.template.spec.containers.id.securityContext.capabilities,null,,pod_template.v1.resources.id.data.spec.template.spec.containers.id.securityContext.capabilities.drop,null,</p>",
+        "tags":
+        [
+            "https://kubernetes.io/docs/tasks/configure-pod-container/security-context/",
+            "https://kubernetes.io/docs/concepts/policy/pod-security-policy/"
+        ],
+        "sort_order": 129
+    },
+    {
+        "testcase": "PodTemplates - Container/InitContainer/EphemeralContainer with Possible Root Privileges",
+        "code": "runAsNonRoot",
+        "details": "<p>Where possible, runAsNonRoot should be set to true to prevent the container from running as root.</p><p><b>Display Path</b>: pod_template.v1.id</p><p><b>Path</b>: pod_template.v1.resources.id.data.spec.template.spec.containers.id</p><p><b>Conditions</b>: and,or,pod_template.v1.resources.id.data.spec.template.spec.securityContext.runAsNonRoot,null,,pod_template.v1.resources.id.data.spec.template.spec.securityContext.runAsNonRoot,false,,or,pod_template.v1.resources.id.data.spec.template.spec.containers.id.securityContext.runAsNonRoot,null,,pod_template.v1.resources.id.data.spec.template.spec.containers.id.securityContext.runAsNonRoot,false,</p>",
+        "tags":
+        [
+            "https://kubernetes.io/docs/tasks/configure-pod-container/security-context/",
+            "https://kubernetes.io/docs/concepts/policy/pod-security-policy/"
+        ],
+        "sort_order": 130
+    },
+    {
+        "testcase": "PodTemplates - PodTemplates Using Host IPC",
+        "code": "host_ipc",
+        "details": "<p>A compromised pod with hostIPC set to true in PodSpec can be used as a pivot to the host IPC.</p><p><b>Display Path</b>: pod_template.v1.id</p><p><b>Path</b>: pod_template.v1.resources.id.data.spec.template.spec</p><p><b>Conditions</b>: and,pod_template.v1.resources.id.data.spec.template.spec,withKey,host_ipc,pod_template.v1.resources.id.data.spec.template.spec.host_ipc,true,</p>",
+        "tags":
+        [
+            "https://kubernetes.io/docs/concepts/policy/pod-security-policy/"
+        ],
+        "sort_order": 131
+    },
+    {
+        "testcase": "PodTemplates - PodTemplates Using Host Networking",
+        "code": "host_network",
+        "details": "<p>A compromised pod with hostNetwork set to true in PodSpec can be used as a pivot to the host network.</p><p><b>Display Path</b>: pod_template.v1.id</p><p><b>Path</b>: pod_template.v1.resources.id.data.spec.template.spec</p><p><b>Conditions</b>: and,pod_template.v1.resources.id.data.spec.template.spec,withKey,host_network,pod_template.v1.resources.id.data.spec.template.spec.host_network,true,</p>",
+        "tags":
+        [
+            "https://kubernetes.io/docs/concepts/policy/pod-security-policy/"
+        ],
+        "sort_order": 132
+    },
+    {
+        "testcase": "PodTemplates - PodTemplates Using Host PID",
+        "code": "host_pid",
+        "details": "<p>A compromised pod with hostPID set to true in PodSpec can be used as a pivot to the host PID.</p><p><b>Display Path</b>: pod_template.v1.id</p><p><b>Path</b>: pod_template.v1.resources.id.data.spec.template.spec</p><p><b>Conditions</b>: and,pod_template.v1.resources.id.data.spec.template.spec,withKey,host_pid,pod_template.v1.resources.id.data.spec.template.spec.host_pid,true,</p>",
+        "tags":
+        [
+            "https://kubernetes.io/docs/concepts/policy/pod-security-policy/"
+        ],
+        "sort_order": 133
+    },
+    {
+        "testcase": "PodTemplates - Privileged Container/InitContainer/EphemeralContainer Running",
+        "code": "privileged",
+        "details": "<p>Access to privileged container may result in privilege escalation. Administrators are encouraged to remove the privileged status of a pod if unncessary.</p><p><b>Display Path</b>: pod_template.v1.id</p><p><b>Path</b>: pod_template.v1.resources.id.data.spec.template.spec.containers.id</p><p><b>Conditions</b>: and,pod_template.v1.resources.id.data.spec.template.spec.containers.id.securityContext,notNull,,pod_template.v1.resources.id.data.spec.template.spec.containers.id.securityContext.privileged,true,</p>",
+        "tags":
+        [
+            "https://kubernetes.io/docs/tasks/configure-pod-container/security-context/"
+        ],
+        "sort_order": 134
+    },
+    {
+        "testcase": "PodTemplates - Resources without Defined CPU Limit",
+        "code": "cpu",
+        "details": "<p>Unset resource limits could result in service denial through resource exhaustion.</p><p><b>Display Path</b>: pod_template.v1.id</p><p><b>Path</b>: pod_template.v1.resources.id.data.spec.template.spec.containers.id</p><p><b>Conditions</b>: or,pod_template.v1.resources.id.data.spec.template.spec.containers.id.resources.limits,null,,pod_template.v1.resources.id.data.spec.template.spec.containers.id.resources.limits,withoutKey,cpu,pod_template.v1.resources.id.data.spec.template.spec.containers.id.resources.limits.cpu,null,</p>",
+        "tags":
+        [
+            "https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/"
+        ],
+        "sort_order": 135
+    },
+    {
+        "testcase": "Pods - Resources without Defined Limits",
+        "details": "<p>Unset resource limits could result in service denial through resource exhaustion.</p><p><b>Display Path</b>: pod_template.v1.id</p><p><b>Path</b>: pod_template.v1.resources.id.data.spec.containers.id</p><p><b>Conditions</b>: or,pod_template.v1.resources.id.data.spec.containers.id.resources.limits,null,,pod_template.v1.resources.id.data.spec.containers.id.resources.limits,withoutKey,cpu,pod_template.v1.resources.id.data.spec.containers.id.resources.limits,withoutKey,memory,pod_template.v1.resources.id.data.spec.containers.id.resources.limits.cpu,null,,pod_template.v1.resources.id.data.spec.containers.id.resources.limits.memory,null,</p>",
+        "tags":
+        [
+            "https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/"
+        ],
+        "sort_order": 136
+    },
+    {
+        "testcase": "PodTemplates - Resources without Defined Memory Limit",
+        "code": "memory",
+        "details": "<p>Unset resource limits could result in service denial through resource exhaustion.</p><p><b>Display Path</b>: pod_template.v1.id</p><p><b>Path</b>: pod_template.v1.resources.id.data.spec.template.spec.containers.id</p><p><b>Conditions</b>: or,pod_template.v1.resources.id.data.spec.template.spec.containers.id.resources.limits,null,,pod_template.v1.resources.id.data.spec.template.spec.containers.id.resources.limits,withoutKey,memory,pod_template.v1.resources.id.data.spec.template.spec.containers.id.resources.limits.memory,null,</p>",
+        "tags":
+        [
+            "https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/"
+        ],
+        "sort_order": 137
+    },
+    {
+        "testcase": "RBAC grants - Dangerous Grants in Role-based Access Control (RBAC) Definition",
+        "details": "<p>Insufficient RBAC restrictions could enable unauthorized privilege escalation. The administrator should review the dangerous grants under RBAC.</p><p><b>Path</b>: rbac.dangerous_grants</p><p><b>Conditions</b>: not,rbac.dangerous_grants_count,equal,0</p>",
+        "tags":
+        [
+            "https://kubernetes.io/docs/reference/access-authn-authz/rbac/"
+        ],
+        "sort_order": 138
+    },
+    {
+        "testcase": "RBAC subjects - Dodgy Subkects in Role-based Access Control (RBAC) Definition",
+        "details": "<p>Insufficient RBAC restrictions could enable unauthorized privilege escalation. The administrator should review the dodgy subjects under RBAC.</p><p><b>Path</b>: rbac.dodgy_subjects</p><p><b>Conditions</b>: not,rbac.dodgy_subjects_count,equal,0</p>",
+        "tags":
+        [
+            "https://kubernetes.io/docs/reference/access-authn-authz/rbac/"
+        ],
+        "sort_order": 139
+    },
+    {
+        "testcase": "RBAC bindings - Permissive Bindings in Role-based Access Control (RBAC) Definition",
+        "details": "<p>Insufficient RBAC restrictions could enable unauthorized privilege escalation. The administrator should review the permissive bindings under RBAC.</p><p><b>Path</b>: rbac.permissive_bindings</p><p><b>Conditions</b>: not,rbac.permissive_bindings_count,equal,0</p>",
+        "tags":
+        [
+            "https://kubernetes.io/docs/reference/access-authn-authz/rbac/"
+        ],
+        "sort_order": 140
+    },
+    {
+        "testcase": "ReplicaSets - AppArmor Annotation Missing",
+        "details": "<p>The container.apparmor.security.beta.kubernetes.io annotation is missing. A compromised container with AppArmor disabled makes privilege escalation easier.</p><p><b>Display Path</b>: replica_set.v1-apps.id</p><p><b>Path</b>: replica_set.v1-apps.resources.id</p><p><b>Conditions</b>: or,replica_set.v1-apps.resources.id.metadata,withoutKey,annotations,replica_set.v1-apps.resources.id.metadata.annotations,withoutKey,container.apparmor.security.beta.kubernetes.io</p>",
+        "tags":
+        [
+            "https://kubernetes.io/docs/tutorials/security/apparmor/"
+        ],
+        "sort_order": 141
+    },
+    {
+        "testcase": "ReplicaSets - Automounted Service Account Token",
+        "details": "<p>Default service account with token mounted. automountServiceAccountToken should be set to 'false' on either the ServiceAccount or on the PodSpec or a non-default service account should be used.</p><p><b>Display Path</b>: replica_set.v1-apps.id</p><p><b>Path</b>: replica_set.v1-apps.resources.id</p><p><b>Conditions</b>: or,replica_set.v1-apps.resources.id.data.spec,withoutKey,automountServiceAccountToken,replica_set.v1-apps.resources.id.data.spec.automountServiceAccountToken,null,,replica_set.v1-apps.resources.id.data.spec.automountServiceAccountToken,true,</p>",
+        "tags":
+        [
+            "https://kubernetes.io/docs/tasks/configure-pod-container/configure-service-account/"
+        ],
+        "sort_order": 142
+    },
+    {
+        "testcase": "ReplicaSets - Container/InitContainer/EphemeralContainer Ability to Modify Root Filesystem",
+        "code": "readOnlyRootFilesystem",
+        "details": "<p>Root filesystems should be read-only where possible.</p><p><b>Recommendation</b>: spec.template.spec.(c|initC|ephemeralC)ontainers[].securityContext.readOnlyRootFilesystem should be explicitly set to true for the affected containers.</p><p><b>Display Path</b>: replica_set.v1-apps.id</p><p><b>Path</b>: replica_set.v1-apps.resources.id.data.spec.template.spec.containers.id</p><p><b>Conditions</b>: or,replica_set.v1-apps.resources.id.data.spec.template.spec.containers.id,withoutKey,securityContext,replica_set.v1-apps.resources.id.data.spec.template.spec.containers.id.securityContext,null,,replica_set.v1-apps.resources.id.data.spec.template.spec.containers.id.securityContext.readOnlyRootFilesystem,null,,replica_set.v1-apps.resources.id.data.spec.template.spec.containers.id.securityContext.readOnlyRootFilesystem,false,</p>",
+        "tags":
+        [
+            "https://kubernetes.io/docs/tasks/configure-pod-container/security-context/",
+            "https://kubernetes.io/docs/concepts/policy/pod-security-policy/"
+        ],
+        "sort_order": 143
+    },
+    {
+        "testcase": "ReplicaSets - Container/InitContainer/EphemeralContainer Allowing Privilege Escalation",
+        "code": "allowPrivilegeEscalation",
+        "details": "<p>A container should disallow privilege escalation where possible. allowPrivilegeEscalation should be explicitly set to false.</p><p><b>Display Path</b>: replica_set.v1-apps.id</p><p><b>Path</b>: replica_set.v1-apps.resources.id.data.spec.template.spec.containers.id</p><p><b>Conditions</b>: or,replica_set.v1-apps.resources.id.data.spec.template.spec.containers.id,withoutKey,securityContext,replica_set.v1-apps.resources.id.data.spec.template.spec.containers.id.securityContext,null,,replica_set.v1-apps.resources.id.data.spec.template.spec.containers.id.securityContext.allowPrivilegeEscalation,null,,replica_set.v1-apps.resources.id.data.spec.template.spec.containers.id.securityContext.allowPrivilegeEscalation,true,</p>",
+        "tags":
+        [
+            "https://kubernetes.io/docs/tasks/configure-pod-container/security-context/",
+            "https://kubernetes.io/docs/concepts/policy/pod-security-policy/"
+        ],
+        "sort_order": 144
+    },
+    {
+        "testcase": "ReplicaSets - Container/InitContainer/EphemeralContainer Running As Root Group",
+        "code": "runAsGroup",
+        "details": "<p>Where possible, runAsGroup should be set to a value greater than 0.</p><p><b>Display Path</b>: replica_set.v1-apps.id</p><p><b>Path</b>: replica_set.v1-apps.resources.id.data.spec.template.spec.containers.id</p><p><b>Conditions</b>: or,and,replica_set.v1-apps.resources.id.data.spec.template.spec.securityContext,notNull,,replica_set.v1-apps.resources.id.data.spec.template.spec.securityContext.runAsGroup,equal,0,and,replica_set.v1-apps.resources.id.data.spec.template.spec.containers.id.securityContext,notNull,,replica_set.v1-apps.resources.id.data.spec.template.spec.containers.id.securityContext.runAsGroup,equal,0</p>",
+        "tags":
+        [
+            "https://kubernetes.io/docs/tasks/configure-pod-container/security-context/",
+            "https://kubernetes.io/docs/concepts/policy/pod-security-policy/"
+        ],
+        "sort_order": 145
+    },
+    {
+        "testcase": "ReplicaSets - Container/InitContainer/EphemeralContainer Running As Root User",
+        "code": "runAsUser",
+        "details": "<p>Where possible, runAsUser should be set to a value greater than 0.</p><p><b>Display Path</b>: replica_set.v1-apps.id</p><p><b>Path</b>: replica_set.v1-apps.resources.id.data.spec.template.spec.containers.id</p><p><b>Conditions</b>: or,and,replica_set.v1-apps.resources.id.data.spec.template.spec.securityContext,notNull,,replica_set.v1-apps.resources.id.data.spec.template.spec.securityContext.runAsUser,equal,0,and,replica_set.v1-apps.resources.id.data.spec.template.spec.containers.id.securityContext,notNull,,replica_set.v1-apps.resources.id.data.spec.template.spec.containers.id.securityContext.runAsUser,equal,0</p>",
+        "tags":
+        [
+            "https://kubernetes.io/docs/tasks/configure-pod-container/security-context/",
+            "https://kubernetes.io/docs/concepts/policy/pod-security-policy/"
+        ],
+        "sort_order": 146
+    },
+    {
+        "testcase": "ReplicaSets - Container/InitContainer/EphemeralContainer with Permissive Capabilities",
+        "code": "capabilities.drop",
+        "details": "<p>A container should drop all and add the necessary capabilities by default.</p><p><b>Display Path</b>: replica_set.v1-apps.id</p><p><b>Path</b>: replica_set.v1-apps.resources.id.data.spec.template.spec.containers.id</p><p><b>Conditions</b>: or,replica_set.v1-apps.resources.id.data.spec.template.spec.containers.id,withoutKey,securityContext,replica_set.v1-apps.resources.id.data.spec.template.spec.containers.id.securityContext,null,,replica_set.v1-apps.resources.id.data.spec.template.spec.containers.id.securityContext,withoutKey,capabilities,replica_set.v1-apps.resources.id.data.spec.template.spec.containers.id.securityContext.capabilities,null,,replica_set.v1-apps.resources.id.data.spec.template.spec.containers.id.securityContext.capabilities.drop,null,</p>",
+        "tags":
+        [
+            "https://kubernetes.io/docs/tasks/configure-pod-container/security-context/",
+            "https://kubernetes.io/docs/concepts/policy/pod-security-policy/"
+        ],
+        "sort_order": 147
+    },
+    {
+        "testcase": "ReplicaSets - Container/InitContainer/EphemeralContainer with Possible Root Privileges",
+        "code": "runAsNonRoot",
+        "details": "<p>Where possible, runAsNonRoot should be set to true to prevent the container from running as root.</p><p><b>Display Path</b>: replica_set.v1-apps.id</p><p><b>Path</b>: replica_set.v1-apps.resources.id.data.spec.template.spec.containers.id</p><p><b>Conditions</b>: and,or,replica_set.v1-apps.resources.id.data.spec.template.spec.securityContext.runAsNonRoot,null,,replica_set.v1-apps.resources.id.data.spec.template.spec.securityContext.runAsNonRoot,false,,or,replica_set.v1-apps.resources.id.data.spec.template.spec.containers.id.securityContext.runAsNonRoot,null,,replica_set.v1-apps.resources.id.data.spec.template.spec.containers.id.securityContext.runAsNonRoot,false,</p>",
+        "tags":
+        [
+            "https://kubernetes.io/docs/tasks/configure-pod-container/security-context/",
+            "https://kubernetes.io/docs/concepts/policy/pod-security-policy/"
+        ],
+        "sort_order": 148
+    },
+    {
+        "testcase": "ReplicaSets - ReplicaSets Using Host IPC",
+        "code": "host_ipc",
+        "details": "<p>A compromised pod with hostIPC set to true in PodSpec can be used as a pivot to the host IPC.</p><p><b>Display Path</b>: replica_set.v1-apps.id</p><p><b>Path</b>: replica_set.v1-apps.resources.id.data.spec.template.spec</p><p><b>Conditions</b>: and,replica_set.v1-apps.resources.id.data.spec.template.spec,withKey,host_ipc,replica_set.v1-apps.resources.id.data.spec.template.spec.host_ipc,true,</p>",
+        "tags":
+        [
+            "https://kubernetes.io/docs/concepts/policy/pod-security-policy/"
+        ],
+        "sort_order": 149
+    },
+    {
+        "testcase": "ReplicaSets - ReplicaSets Using Host Networking",
+        "code": "host_network",
+        "details": "<p>A compromised pod with hostNetwork set to true in PodSpec can be used as a pivot to the host network.</p><p><b>Display Path</b>: replica_set.v1-apps.id</p><p><b>Path</b>: replica_set.v1-apps.resources.id.data.spec.template.spec</p><p><b>Conditions</b>: and,replica_set.v1-apps.resources.id.data.spec.template.spec,withKey,host_network,replica_set.v1-apps.resources.id.data.spec.template.spec.host_network,true,</p>",
+        "tags":
+        [
+            "https://kubernetes.io/docs/concepts/policy/pod-security-policy/"
+        ],
+        "sort_order": 150
+    },
+    {
+        "testcase": "ReplicaSets - ReplicaSets Using Host PID",
+        "code": "host_pid",
+        "details": "<p>A compromised pod with hostPID set to true in PodSpec can be used as a pivot to the host PID.</p><p><b>Display Path</b>: replica_set.v1-apps.id</p><p><b>Path</b>: replica_set.v1-apps.resources.id.data.spec.template.spec</p><p><b>Conditions</b>: and,replica_set.v1-apps.resources.id.data.spec.template.spec,withKey,host_pid,replica_set.v1-apps.resources.id.data.spec.template.spec.host_pid,true,</p>",
+        "tags":
+        [
+            "https://kubernetes.io/docs/concepts/policy/pod-security-policy/"
+        ],
+        "sort_order": 151
+    },
+    {
+        "testcase": "ReplicaSets - Kubernetes Container/InitContainer/EphemeralContainer Manifest Hardening",
+        "details": "<p>Several security options in the affected resources could be enabled to harden assocated containers.</p><p><b>Display Path</b>: replica_set.v1-apps.id</p><p><b>Path</b>: replica_set.v1-apps.resources.id.data.spec.template.spec.containers.id</p><p><b>Conditions</b>: or,replica_set.v1-apps.resources.id.data.spec.template.spec.containers.id,withoutKey,securityContext,replica_set.v1-apps.resources.id.data.spec.template.spec.containers.id.securityContext,null,,replica_set.v1-apps.resources.id.data.spec.template.spec.containers.id.securityContext,withoutKey,allowPrivilegeEscalation,replica_set.v1-apps.resources.id.data.spec.template.spec.containers.id.securityContext,withoutKey,readOnlyRootFilesystem,replica_set.v1-apps.resources.id.data.spec.template.spec.containers.id.securityContext,withoutKey,capabilities,replica_set.v1-apps.resources.id.data.spec.template.spec.containers.id.securityContext.allowPrivilegeEscalation,null,,replica_set.v1-apps.resources.id.data.spec.template.spec.containers.id.securityContext.readOnlyRootFilesystem,null,,replica_set.v1-apps.resources.id.data.spec.template.spec.containers.id.securityContext.capabilities,null,,replica_set.v1-apps.resources.id.data.spec.template.spec.containers.id.securityContext.capabilities.drop,null,</p>",
+        "tags":
+        [
+            "https://kubernetes.io/docs/tasks/configure-pod-container/security-context/",
+            "https://www.cisecurity.org/benchmark/docker/"
+        ],
+        "sort_order": 152
+    },
+    {
+        "testcase": "ReplicaSets - Privileged Container/InitContainer/EphemeralContainer Running",
+        "code": "privileged",
+        "details": "<p>Access to privileged container may result in privilege escalation. Administrators are encouraged to remove the privileged status of a pod if unncessary.</p><p><b>Display Path</b>: replica_set.v1-apps.id</p><p><b>Path</b>: replica_set.v1-apps.resources.id.data.spec.template.spec.containers.id</p><p><b>Conditions</b>: and,replica_set.v1-apps.resources.id.data.spec.template.spec.containers.id.securityContext,notNull,,replica_set.v1-apps.resources.id.data.spec.template.spec.containers.id.securityContext.privileged,true,</p>",
+        "tags":
+        [
+            "https://kubernetes.io/docs/tasks/configure-pod-container/security-context/"
+        ],
+        "sort_order": 153
+    },
+    {
+        "testcase": "ReplicaSets - Resources without Defined CPU Limit",
+        "code": "cpu",
+        "details": "<p>Unset resource limits could result in service denial through resource exhaustion.</p><p><b>Display Path</b>: replica_set.v1-apps.id</p><p><b>Path</b>: replica_set.v1-apps.resources.id.data.spec.template.spec.containers.id</p><p><b>Conditions</b>: or,replica_set.v1-apps.resources.id.data.spec.template.spec.containers.id.resources.limits,null,,replica_set.v1-apps.resources.id.data.spec.template.spec.containers.id.resources.limits,withoutKey,cpu,replica_set.v1-apps.resources.id.data.spec.template.spec.containers.id.resources.limits.cpu,null,</p>",
+        "tags":
+        [
+            "https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/"
+        ],
+        "sort_order": 154
+    },
+    {
+        "testcase": "ReplicaSets - Resources without Defined Limits",
+        "details": "<p>Unset resource limits could result in service denial through resource exhaustion.</p><p><b>Display Path</b>: replica_set.v1-apps.id</p><p><b>Path</b>: replica_set.v1-apps.resources.id.data.spec.template.spec.containers.id.resources</p><p><b>Conditions</b>: or,replica_set.v1-apps.resources.id.data.spec.template.spec.containers.id.resources,withoutKey,limits,replica_set.v1-apps.resources.id.data.spec.template.spec.containers.id.resources.limits,null,,replica_set.v1-apps.resources.id.data.spec.template.spec.containers.id.resources.limits,withoutKey,memory,replica_set.v1-apps.resources.id.data.spec.template.spec.containers.id.resources.limits,withoutKey,cpu</p>",
+        "tags":
+        [
+            "https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/"
+        ],
+        "sort_order": 155
+    },
+    {
+        "testcase": "ReplicaSets - Resources without Defined Memory Limit",
+        "code": "memory",
+        "details": "<p>Unset resource limits could result in service denial through resource exhaustion.</p><p><b>Display Path</b>: replica_set.v1-apps.id</p><p><b>Path</b>: replica_set.v1-apps.resources.id.data.spec.template.spec.containers.id</p><p><b>Conditions</b>: or,replica_set.v1-apps.resources.id.data.spec.template.spec.containers.id.resources.limits,null,,replica_set.v1-apps.resources.id.data.spec.template.spec.containers.id.resources.limits,withoutKey,memory,replica_set.v1-apps.resources.id.data.spec.template.spec.containers.id.resources.limits.memory,null,</p>",
+        "tags":
+        [
+            "https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/"
+        ],
+        "sort_order": 156
+    },
+    {
+        "testcase": "Services - Helm/Tiller in Use",
+        "details": "<p>Helm 2 and Tiller have been deprecated since 2020.</p><p><b>Display Path</b>: service.v1.id</p><p><b>Path</b>: service.v1.resources.id</p><p><b>Conditions</b>: or,service.v1.resources.id.data.name,containString,tiller,service.v1.resources.id.data.name,containString,tiller-deploy</p>",
+        "tags":
+        [
+            "https://helm.sh/blog/helm-v2-deprecation-timeline/",
+            "https://github.com/markround/tiller#status"
+        ],
+        "sort_order": 157
+    },
+    {
+        "testcase": "Service Accounts - Automounted Service Account Token",
+        "details": "<p>Default service account with token mounted. automountServiceAccountToken should be set to 'false' on either the ServiceAccount or on the PodSpec or a non-default service account should be used.</p><p><b>Display Path</b>: service_account.v1.id</p><p><b>Path</b>: service_account.v1.resources.id</p><p><b>Conditions</b>: or,service_account.v1.resources.id.data,withoutKey,automountServiceAccountToken,service_account.v1.resources.id.data.automountServiceAccountToken,null,,service_account.v1.resources.id.data.automountServiceAccountToken,true,</p>",
+        "tags":
+        [
+            "https://kubernetes.io/docs/tasks/configure-pod-container/configure-service-account/"
+        ],
+        "sort_order": 158
+    },
+    {
+        "testcase": "StatefulSets - AppArmor Annotation Missing",
+        "details": "<p>The container.apparmor.security.beta.kubernetes.io annotation is missing. A compromised container with AppArmor disabled makes privilege escalation easier.</p><p><b>Display Path</b>: stateful_set.v1-apps.id</p><p><b>Path</b>: stateful_set.v1-apps.resources.id</p><p><b>Conditions</b>: or,stateful_set.v1-apps.resources.id.metadata,withoutKey,annotations,stateful_set.v1-apps.resources.id.metadata.annotations,withoutKey,container.apparmor.security.beta.kubernetes.io</p>",
+        "tags":
+        [
+            "https://kubernetes.io/docs/tutorials/security/apparmor/"
+        ],
+        "sort_order": 159
+    },
+    {
+        "testcase": "StatefulSets - Automounted Service Account Token",
+        "details": "<p>Default service account with token mounted. automountServiceAccountToken should be set to 'false' on either the ServiceAccount or on the PodSpec or a non-default service account should be used.</p><p><b>Display Path</b>: stateful_set.v1-apps.id</p><p><b>Path</b>: stateful_set.v1-apps.resources.id</p><p><b>Conditions</b>: or,stateful_set.v1-apps.resources.id.data.spec,withoutKey,automountServiceAccountToken,stateful_set.v1-apps.resources.id.data.spec.automountServiceAccountToken,null,,stateful_set.v1-apps.resources.id.data.spec.automountServiceAccountToken,true,</p>",
+        "tags":
+        [
+            "https://kubernetes.io/docs/tasks/configure-pod-container/configure-service-account/"
+        ],
+        "sort_order": 160
+    },
+    {
+        "testcase": "StatefulSets - Container/InitContainer/EphemeralContainer Ability to Modify Root Filesystem",
+        "code": "readOnlyRootFilesystem",
+        "details": "<p>Root filesystems should be read-only where possible.</p><p><b>Recommendation</b>: spec.template.spec.(c|initC|ephemeralC)ontainers[].securityContext.readOnlyRootFilesystem should be explicitly set to true for the affected containers.</p><p><b>Display Path</b>: stateful_set.v1-apps.id</p><p><b>Path</b>: stateful_set.v1-apps.resources.id.data.spec.template.spec.containers.id</p><p><b>Conditions</b>: or,stateful_set.v1-apps.resources.id.data.spec.template.spec.containers.id,withoutKey,securityContext,stateful_set.v1-apps.resources.id.data.spec.template.spec.containers.id.securityContext,null,,stateful_set.v1-apps.resources.id.data.spec.template.spec.containers.id.securityContext.readOnlyRootFilesystem,null,,stateful_set.v1-apps.resources.id.data.spec.template.spec.containers.id.securityContext.readOnlyRootFilesystem,false,</p>",
+        "tags":
+        [
+            "https://kubernetes.io/docs/tasks/configure-pod-container/security-context/",
+            "https://kubernetes.io/docs/concepts/policy/pod-security-policy/"
+        ],
+        "sort_order": 161
+    },
+    {
+        "testcase": "StatefulSets - Container/InitContainer/EphemeralContainer Allowing Privilege Escalation",
+        "code": "allowPrivilegeEscalation",
+        "details": "<p>A container should disallow privilege escalation where possible. allowPrivilegeEscalation should be explicitly set to false.</p><p><b>Display Path</b>: stateful_set.v1-apps.id</p><p><b>Path</b>: stateful_set.v1-apps.resources.id.data.spec.template.spec.containers.id</p><p><b>Conditions</b>: or,stateful_set.v1-apps.resources.id.data.spec.template.spec.containers.id,withoutKey,securityContext,stateful_set.v1-apps.resources.id.data.spec.template.spec.containers.id.securityContext,null,,stateful_set.v1-apps.resources.id.data.spec.template.spec.containers.id.securityContext.allowPrivilegeEscalation,null,,stateful_set.v1-apps.resources.id.data.spec.template.spec.containers.id.securityContext.allowPrivilegeEscalation,true,</p>",
+        "tags":
+        [
+            "https://kubernetes.io/docs/tasks/configure-pod-container/security-context/",
+            "https://kubernetes.io/docs/concepts/policy/pod-security-policy/"
+        ],
+        "sort_order": 162
+    },
+    {
+        "testcase": "StatefulSets - Container/InitContainer/EphemeralContainer Running As Root Group",
+        "code": "runAsGroup",
+        "details": "<p>Where possible, runAsGroup should be set to a value greater than 0.</p><p><b>Display Path</b>: stateful_set.v1-apps.id</p><p><b>Path</b>: stateful_set.v1-apps.resources.id.data.spec.template.spec.containers.id</p><p><b>Conditions</b>: or,and,stateful_set.v1-apps.resources.id.data.spec.template.spec.securityContext,notNull,,stateful_set.v1-apps.resources.id.data.spec.template.spec.securityContext.runAsGroup,equal,0,and,stateful_set.v1-apps.resources.id.data.spec.template.spec.containers.id.securityContext,notNull,,stateful_set.v1-apps.resources.id.data.spec.template.spec.containers.id.securityContext.runAsGroup,equal,0</p>",
+        "tags":
+        [
+            "https://kubernetes.io/docs/tasks/configure-pod-container/security-context/",
+            "https://kubernetes.io/docs/concepts/policy/pod-security-policy/"
+        ],
+        "sort_order": 163
+    },
+    {
+        "testcase": "StatefulSets - Container/InitContainer/EphemeralContainer Running As Root User",
+        "code": "runAsUser",
+        "details": "<p>Where possible, runAsUser should be set to a value greater than 0.</p><p><b>Display Path</b>: stateful_set.v1-apps.id</p><p><b>Path</b>: stateful_set.v1-apps.resources.id.data.spec.template.spec.containers.id</p><p><b>Conditions</b>: or,and,stateful_set.v1-apps.resources.id.data.spec.template.spec.securityContext,notNull,,stateful_set.v1-apps.resources.id.data.spec.template.spec.securityContext.runAsUser,equal,0,and,stateful_set.v1-apps.resources.id.data.spec.template.spec.containers.id.securityContext,notNull,,stateful_set.v1-apps.resources.id.data.spec.template.spec.containers.id.securityContext.runAsUser,equal,0</p>",
+        "tags":
+        [
+            "https://kubernetes.io/docs/tasks/configure-pod-container/security-context/",
+            "https://kubernetes.io/docs/concepts/policy/pod-security-policy/"
+        ],
+        "sort_order": 164
+    },
+    {
+        "testcase": "StatefulSets - Container/InitContainer/EphemeralContainer with Permissive Capabilities",
+        "code": "capabilities.drop",
+        "details": "<p>A container should drop all and add the necessary capabilities by default.</p><p><b>Display Path</b>: stateful_set.v1-apps.id</p><p><b>Path</b>: stateful_set.v1-apps.resources.id.data.spec.template.spec.containers.id</p><p><b>Conditions</b>: or,stateful_set.v1-apps.resources.id.data.spec.template.spec.containers.id,withoutKey,securityContext,stateful_set.v1-apps.resources.id.data.spec.template.spec.containers.id.securityContext,null,,stateful_set.v1-apps.resources.id.data.spec.template.spec.containers.id.securityContext,withoutKey,capabilities,stateful_set.v1-apps.resources.id.data.spec.template.spec.containers.id.securityContext.capabilities,null,,stateful_set.v1-apps.resources.id.data.spec.template.spec.containers.id.securityContext.capabilities.drop,null,</p>",
+        "tags":
+        [
+            "https://kubernetes.io/docs/tasks/configure-pod-container/security-context/",
+            "https://kubernetes.io/docs/concepts/policy/pod-security-policy/"
+        ],
+        "sort_order": 165
+    },
+    {
+        "testcase": "StatefulSets - Container/InitContainer/EphemeralContainer with Possible Root Privileges",
+        "code": "runAsNonRoot",
+        "details": "<p>Where possible, runAsNonRoot should be set to true to prevent the container from running as root.</p><p><b>Display Path</b>: stateful_set.v1-apps.id</p><p><b>Path</b>: stateful_set.v1-apps.resources.id.data.spec.template.spec.containers.id</p><p><b>Conditions</b>: and,or,stateful_set.v1-apps.resources.id.data.spec.template.spec.securityContext.runAsNonRoot,null,,stateful_set.v1-apps.resources.id.data.spec.template.spec.securityContext.runAsNonRoot,false,,or,stateful_set.v1-apps.resources.id.data.spec.template.spec.containers.id.securityContext.runAsNonRoot,null,,stateful_set.v1-apps.resources.id.data.spec.template.spec.containers.id.securityContext.runAsNonRoot,false,</p>",
+        "tags":
+        [
+            "https://kubernetes.io/docs/tasks/configure-pod-container/security-context/",
+            "https://kubernetes.io/docs/concepts/policy/pod-security-policy/"
+        ],
+        "sort_order": 166
+    },
+    {
+        "testcase": "StatefulSets - StatefulSets Using Host IPC",
+        "code": "host_ipc",
+        "details": "<p>A compromised pod with hostIPC set to true in PodSpec can be used as a pivot to the host IPC.</p><p><b>Display Path</b>: stateful_set.v1-apps.id</p><p><b>Path</b>: stateful_set.v1-apps.resources.id.data.spec.template.spec</p><p><b>Conditions</b>: and,stateful_set.v1-apps.resources.id.data.spec.template.spec,withKey,host_ipc,stateful_set.v1-apps.resources.id.data.spec.template.spec.host_ipc,true,</p>",
+        "tags":
+        [
+            "https://kubernetes.io/docs/concepts/policy/pod-security-policy/"
+        ],
+        "sort_order": 167
+    },
+    {
+        "testcase": "StatefulSets - StatefulSets Using Host Networking",
+        "code": "host_network",
+        "details": "<p>A compromised pod with hostNetwork set to true in PodSpec can be used as a pivot to the host network.</p><p><b>Display Path</b>: stateful_set.v1-apps.id</p><p><b>Path</b>: stateful_set.v1-apps.resources.id.data.spec.template.spec</p><p><b>Conditions</b>: and,stateful_set.v1-apps.resources.id.data.spec.template.spec,withKey,host_network,stateful_set.v1-apps.resources.id.data.spec.template.spec.host_network,true,</p>",
+        "tags":
+        [
+            "https://kubernetes.io/docs/concepts/policy/pod-security-policy/"
+        ],
+        "sort_order": 168
+    },
+    {
+        "testcase": "StatefulSets - StatefulSets Using Host PID",
+        "code": "host_pid",
+        "details": "<p>A compromised pod with hostPID set to true in PodSpec can be used as a pivot to the host PID.</p><p><b>Display Path</b>: stateful_set.v1-apps.id</p><p><b>Path</b>: stateful_set.v1-apps.resources.id.data.spec.template.spec</p><p><b>Conditions</b>: and,stateful_set.v1-apps.resources.id.data.spec.template.spec,withKey,host_pid,stateful_set.v1-apps.resources.id.data.spec.template.spec.host_pid,true,</p>",
+        "tags":
+        [
+            "https://kubernetes.io/docs/concepts/policy/pod-security-policy/"
+        ],
+        "sort_order": 169
+    },
+    {
+        "testcase": "StatefulSets - Kubernetes Container/InitContainer/EphemeralContainer Manifest Hardening",
+        "details": "<p>Several security options in the affected resources could be enabled to harden assocated containers.</p><p><b>Display Path</b>: stateful_set.v1-apps.id</p><p><b>Path</b>: stateful_set.v1-apps.resources.id.data.spec.template.spec.containers.id</p><p><b>Conditions</b>: or,stateful_set.v1-apps.resources.id.data.spec.template.spec.containers.id,withoutKey,securityContext,stateful_set.v1-apps.resources.id.data.spec.template.spec.containers.id.securityContext,null,,stateful_set.v1-apps.resources.id.data.spec.template.spec.containers.id.securityContext,withoutKey,allowPrivilegeEscalation,stateful_set.v1-apps.resources.id.data.spec.template.spec.containers.id.securityContext,withoutKey,readOnlyRootFilesystem,stateful_set.v1-apps.resources.id.data.spec.template.spec.containers.id.securityContext,withoutKey,capabilities,stateful_set.v1-apps.resources.id.data.spec.template.spec.containers.id.securityContext.allowPrivilegeEscalation,null,,stateful_set.v1-apps.resources.id.data.spec.template.spec.containers.id.securityContext.readOnlyRootFilesystem,null,,stateful_set.v1-apps.resources.id.data.spec.template.spec.containers.id.securityContext.capabilities,null,,stateful_set.v1-apps.resources.id.data.spec.template.spec.containers.id.securityContext.capabilities.drop,null,</p>",
+        "tags":
+        [
+            "https://kubernetes.io/docs/tasks/configure-pod-container/security-context/",
+            "https://www.cisecurity.org/benchmark/docker/"
+        ],
+        "sort_order": 170
+    },
+    {
+        "testcase": "StatefulSets - Privileged Container/InitContainer/EphemeralContainer Running",
+        "code": "privileged",
+        "details": "<p>Access to privileged container may result in privilege escalation. Administrators are encouraged to remove the privileged status of a pod if unncessary.</p><p><b>Display Path</b>: stateful_set.v1-apps.id</p><p><b>Path</b>: stateful_set.v1-apps.resources.id.data.spec.template.spec.containers.id</p><p><b>Conditions</b>: and,stateful_set.v1-apps.resources.id.data.spec.template.spec.containers.id.securityContext,notNull,,stateful_set.v1-apps.resources.id.data.spec.template.spec.containers.id.securityContext.privileged,true,</p>",
+        "tags":
+        [
+            "https://kubernetes.io/docs/tasks/configure-pod-container/security-context/"
+        ],
+        "sort_order": 171
+    },
+    {
+        "testcase": "StatefulSets - Resources without Defined CPU Limit",
+        "code": "cpu",
+        "details": "<p>Unset resource limits could result in service denial through resource exhaustion.</p><p><b>Display Path</b>: stateful_set.v1-apps.id</p><p><b>Path</b>: stateful_set.v1-apps.resources.id.data.spec.template.spec.containers.id</p><p><b>Conditions</b>: or,stateful_set.v1-apps.resources.id.data.spec.template.spec.containers.id.resources.limits,null,,stateful_set.v1-apps.resources.id.data.spec.template.spec.containers.id.resources.limits,withoutKey,cpu,stateful_set.v1-apps.resources.id.data.spec.template.spec.containers.id.resources.limits.cpu,null,</p>",
+        "tags":
+        [
+            "https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/"
+        ],
+        "sort_order": 172
+    },
+    {
+        "testcase": "StatefulSets - Resources without Defined Limits",
+        "details": "<p>Unset resource limits could result in service denial through resource exhaustion.</p><p><b>Display Path</b>: stateful_set.v1-apps.id</p><p><b>Path</b>: stateful_set.v1-apps.resources.id.data.spec.template.spec.containers.id.resources</p><p><b>Conditions</b>: or,stateful_set.v1-apps.resources.id.data.spec.template.spec.containers.id.resources,withoutKey,limits,stateful_set.v1-apps.resources.id.data.spec.template.spec.containers.id.resources.limits,null,,stateful_set.v1-apps.resources.id.data.spec.template.spec.containers.id.resources.limits,withoutKey,memory,stateful_set.v1-apps.resources.id.data.spec.template.spec.containers.id.resources.limits,withoutKey,cpu</p>",
+        "tags":
+        [
+            "https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/"
+        ],
+        "sort_order": 173
+    },
+    {
+        "testcase": "StatefulSets - Resources without Defined Memory Limit",
+        "code": "memory",
+        "details": "<p>Unset resource limits could result in service denial through resource exhaustion.</p><p><b>Display Path</b>: stateful_set.v1-apps.id</p><p><b>Path</b>: stateful_set.v1-apps.resources.id.data.spec.template.spec.containers.id</p><p><b>Conditions</b>: or,stateful_set.v1-apps.resources.id.data.spec.template.spec.containers.id.resources.limits,null,,stateful_set.v1-apps.resources.id.data.spec.template.spec.containers.id.resources.limits,withoutKey,memory,stateful_set.v1-apps.resources.id.data.spec.template.spec.containers.id.resources.limits.memory,null,</p>",
+        "tags":
+        [
+            "https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/"
+        ],
+        "sort_order": 174
+    }
+]
