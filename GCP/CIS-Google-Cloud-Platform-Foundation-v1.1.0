@@ -1,0 +1,1458 @@
+[
+    {
+        "testcase": "Datasets - Datasets Accessible by \"_ARG_0_\"",
+        "code": "permissions",
+        "details": "<p>Allowing anonymous and/or public access grants permissions to anyone to access the dataset's content. Such access might not be desired if you are storing any sensitive data. Hence, ensure that anonymous and/or public access to a dataset is not allowed.</p><p><b>Recommendation</b>: Delete any permissions assigned to the <samp>allUsers</samp> and <samp>allAuthenticatedUsers</samp> members.</p><p><b>Display Path</b>: bigquery.projects.id.datasets.id</p><p><b>Path</b>: bigquery.projects.id.datasets.id</p><p><b>Key</b>: bigquery-dataset-_ARG_0_</p><p><b>Argument Names</b>:<ul><li>Member</li></ul></p><p><b>Conditions</b>: or,bigquery.projects.id.datasets.id.bindings,containString,_ARG_0_</p>",
+        "tags":
+        [],
+        "sort_order": 1
+    },
+    {
+        "testcase": "Datasets - Dataset Not Encrypted with Customer-Managed Keys (CMKs)",
+        "code": "default_encryption_configuration",
+        "details": "<p>Encrypting datasets with Cloud KMS Customer-Managed Keys (CMKs) will allow for a more granular control over data encryption/decryption process.</p><p><b>Display Path</b>: bigquery.projects.id.datasets.id</p><p><b>Path</b>: bigquery.projects.id.datasets.id</p><p><b>Conditions</b>: or,bigquery.projects.id.datasets.id.default_encryption_configuration,null,</p>",
+        "tags":
+        [],
+        "sort_order": 2
+    },
+    {
+        "testcase": "Instances - Instance Allows Root Login from Any Host",
+        "code": "root_access_from_any_host",
+        "details": "<p>Root access to MySQL Database Instances should be allowed only through trusted IPs.</p><p><b>Path</b>: cloudsql.projects.id.instances.id</p><p><b>Conditions</b>: and,cloudsql.projects.id.instances.id.database_version,match,MYSQL.*,cloudsql.projects.id.instances.id.,withKey,users,cloudsql.projects.id.instances.id.users,withKey,root,or,cloudsql.projects.id.instances.id.users.root.host,equal,%,cloudsql.projects.id.instances.id.users.root.host,equal,0.0.0.0,cloudsql.projects.id.instances.id.users.root.host,equal,/0</p>",
+        "tags":
+        [
+            "CIS Google Cloud Platform Foundations v1.0.0 ref:6.4",
+            "https://forsetisecurity.org/docs/latest/concepts/best-practices.html#cloud-sql",
+            "https://cloud.google.com/blog/products/gcp/best-practices-for-securing-your-google-cloud-databases"
+        ],
+        "sort_order": 3
+    },
+    {
+        "testcase": "Instances - Instance with Automatic Backups Disabled",
+        "code": "automatic_backup_enabled",
+        "details": "<p>Backups provide a way to restore a Cloud SQL instance to recover lost data or recover from a problem with that instance. Automated backups need to be set for any instance that contains data that should be protected from loss or damage.</p><p><b>Recommendation</b>: From console:<ol><li>Go to the Cloud SQL Instances page in the Google Cloud Console by visiting https://console.cloud.google.com/sql/instances.</li><li>Select the instance where the backups need to be configured.</li><li>Click <samp>Edit</samp></li><li>In the <samp>Backups</samp> section, check `Enable automated backups', and choose a backup window.</li><li>Click <samp>Save</samp></li></ol></p><p><b>Path</b>: cloudsql.projects.id.instances.id</p><p><b>Conditions</b>: and,cloudsql.projects.id.instances.id.automatic_backup_enabled,false,,cloudsql.projects.id.instances.id.is_failover_replica,false,</p>",
+        "tags":
+        [
+            "CIS Google Cloud Platform Foundations v1.1.0 ref:6.7",
+            "https://cloud.google.com/sql/docs/mysql/backup-recovery/backups",
+            "https://cloud.google.com/sql/docs/postgres/backup-recovery/backing-up"
+        ],
+        "sort_order": 4
+    },
+    {
+        "testcase": "Authorized Networks - Database Instances Allowing Access from Public Ranges",
+        "code": "open_to_the_world",
+        "details": "<p>To minimize attack surface on a Database server instance, only trusted/known and required IP(s) should be allow-listed to connect to it. An authorized network should not have IPs/networks configured to broad public ranges which will allow access to the instance from arbitrary hosts.</p><p><b>Recommendation</b>: From console:<ol><li>Go to the Cloud SQL Instances page in the Google Cloud Console by visiting https://console.cloud.google.com/sql/instances.</li><li>Click the instance name to open its Instance details page.</li><li>Under the <samp>Configuration</samp> section click <samp>Edit configurations</samp>.</li><li>Under <samp>Configuration options</samp> expand the <samp>Connectivity</samp> section.</li><li>Click the <samp>delete</samp> icon for the egregious authorized network</li><li>Click <samp>Save</samp> to update the instance.</li></ol></p><p><b>Display Path</b>: cloudsql.projects.id.instances.id</p><p><b>Path</b>: cloudsql.projects.id.instances.id.authorized_networks.id</p><p><b>Conditions</b>: and,cloudsql.projects.id.instances.id.public_ip,notEmpty,,cloudsql.projects.id.instances.id.public_ip,notEqual,None,cloudsql.projects.id.instances.id.authorized_networks.id.value,isPublicSubnet,,cloudsql.projects.id.instances.id.authorized_networks.id.value,isSubnetRange,</p>",
+        "tags":
+        [
+            "https://cloud.google.com/sql/docs/mysql/configure-ip",
+            "https://console.cloud.google.com/iam-admin/orgpolicies/sql-restrictAuthorizedNetworks",
+            "https://cloud.google.com/resource-manager/docs/organization-policy/org-policy-constraints",
+            "https://cloud.google.com/sql/docs/mysql/connection-org-policy"
+        ],
+        "sort_order": 5
+    },
+    {
+        "testcase": "Authorized Networks - Database Instances Allowing Public Access (0.0.0.0/0)",
+        "code": "open_to_the_world",
+        "details": "<p>To minimize attack surface on a Database server instance, only trusted/known and required IP(s) should be allow-listed to connect to it. An authorized network should not have IPs/networks configured to 0.0.0.0/0 which will allow access to the instance from anywhere in the world.</p><p><b>Recommendation</b>: From console:<ol><li>Go to the Cloud SQL Instances page in the Google Cloud Console by visiting https://console.cloud.google.com/sql/instances.</li><li>Click the instance name to open its Instance details page.</li><li>Under the <samp>Configuration</samp> section click <samp>Edit configurations</samp>.</li><li>Under <samp>Configuration options</samp> expand the <samp>Connectivity</samp> section.</li><li>Click the <samp>delete</samp> icon for the authorized network <samp>0.0.0.0/0.</samp></li><li>Click <samp>Save</samp> to update the instance.</li></ol></p><p><b>Display Path</b>: cloudsql.projects.id.instances.id</p><p><b>Path</b>: cloudsql.projects.id.instances.id.authorized_networks.id</p><p><b>Conditions</b>: and,cloudsql.projects.id.instances.id.public_ip,notEmpty,,cloudsql.projects.id.instances.id.public_ip,notEqual,None,cloudsql.projects.id.instances.id.authorized_networks.id.value,match,.*/0</p>",
+        "tags":
+        [
+            "CIS Google Cloud Platform Foundations v1.0.0 ref:6.2",
+            "CIS Google Cloud Platform Foundations v1.1.0 ref:6.5",
+            "https://cloud.google.com/sql/docs/mysql/configure-ip",
+            "https://console.cloud.google.com/iam-admin/orgpolicies/sql-restrictAuthorizedNetworks",
+            "https://cloud.google.com/resource-manager/docs/organization-policy/org-policy-constraints",
+            "https://cloud.google.com/sql/docs/mysql/connection-org-policy"
+        ],
+        "sort_order": 6
+    },
+    {
+        "testcase": "Instances - Instance with Binary Logging Disabled",
+        "code": "log_enabled",
+        "details": "<p>The benefits of enabling binary logs (replication, scalability, auditability, point-in-time data recovery, etc.) can improve the security posture of the Cloud SQL instance.</p><p><b>Path</b>: cloudsql.projects.id.instances.id</p><p><b>Conditions</b>: and,or,cloudsql.projects.id.instances.id.log_enabled,false,,cloudsql.projects.id.instances.id.log_enabled,null,,cloudsql.projects.id.instances.id.is_failover_replica,false,</p>",
+        "tags":
+        [
+            "https://cloud.google.com/sql/docs/mysql/instance-settings",
+            "https://cloud.google.com/sql/docs/mysql/replication/tips"
+        ],
+        "sort_order": 7
+    },
+    {
+        "testcase": "Instances - Instance Not Requiring Mutual TLS Authentication for Incoming Connections",
+        "code": "ssl_required",
+        "details": "<p>SQL database connections if successfully trapped (MITM) can reveal sensitive data such as credentials, database queries, query outputs etc. For improved security, it is recommended to require mutual authentication, which involves using certificates to authenticate both the client and server.</p><p><b>Recommendation</b>: From console:<ol><li>Go to  https://console.cloud.google.com/sql/instances.</li><li>Click on an instance name to see its configuration overview.</li><li>In the left-side panel, select <samp>Connections</samp></li><li>In the <samp>SSL connections</samp> section, click <samp>Allow only SSL connections.</samp></li><li>Under <samp>Configure SSL server certificates</samp> click <samp>Create new certificate.</samp></li><li>Under <samp>Configure SSL server certificates</samp> click <samp>Create a client certificate.</samp></li><li>Follow the instructions shown to learn how to connect to your instance.</li></ol></p><p><b>Path</b>: cloudsql.projects.id.instances.id</p><p><b>Conditions</b>: and,or,cloudsql.projects.id.instances.id.ssl_required,null,,cloudsql.projects.id.instances.id.ssl_required,false,,cloudsql.projects.id.instances.id.is_failover_replica,false,</p>",
+        "tags":
+        [
+            "CIS Google Cloud Platform Foundations v1.0.0 ref:6.1",
+            "CIS Google Cloud Platform Foundations v1.1.0 ref:6.4",
+            "https://cloud.google.com/sql/docs/postgres/configure-ssl-instance"
+        ],
+        "sort_order": 8
+    },
+    {
+        "testcase": "Instances - Instance with No Backups",
+        "code": "last_backup_timestamp",
+        "details": "<p>Weekly or monthly backups should be created of all databases holding sensitive information.</p><p><b>Path</b>: cloudsql.projects.id.instances.id</p><p><b>Conditions</b>: and,cloudsql.projects.id.instances.id,withKey,backups,cloudsql.projects.id.instances.id.backups,empty,,cloudsql.projects.id.instances.id.is_failover_replica,false,</p>",
+        "tags":
+        [
+            "https://cloud.google.com/sql/docs/mysql/backup-recovery/backups"
+        ],
+        "sort_order": 9
+    },
+    {
+        "testcase": "Instances - Database Instances with Public IPs",
+        "code": "public_ip",
+        "details": "<p>To lower the organization's attack surface, Cloud SQL databases should not have public IPs. Private IPs provide improved network security and lower latency for your application.</p><p><b>Recommendation</b>: From console:<ol><li>Go to the Cloud SQL Instances page in the Google Cloud Console by visiting https://console.cloud.google.com/sql/instances.</li><li>Click the instance name to open its Instance details page.</li><li>Select the <samp>Connections</samp> tab.</li><li>Deselect the <samp>Public IP</samp> checkbox.</li><li>Click <samp>Save</samp> to update the instance.</li></ol></p><p><b>Path</b>: cloudsql.projects.id.instances.id</p><p><b>Conditions</b>: and,cloudsql.projects.id.instances.id.public_ip,notEmpty,,cloudsql.projects.id.instances.id.public_ip,notEqual,None</p>",
+        "tags":
+        [
+            "CIS Google Cloud Platform Foundations v1.1.0 ref:6.6",
+            "https://cloud.google.com/sql/docs/mysql/configure-private-ip",
+            "https://cloud.google.com/sql/docs/mysql/private-ip",
+            "https://cloud.google.com/resource-manager/docs/organization-policy/org-policy-constraints",
+            "https://console.cloud.google.com/iam-admin/orgpolicies/sql-restrictPublicIp"
+        ],
+        "sort_order": 10
+    },
+    {
+        "testcase": "Instances - Local Infile Database Flag for MySQL Instance Is on",
+        "code": "local_infile_off",
+        "details": "<p>The local_infile flag controls the server-side LOCAL capability for LOAD DATA statements. Depending on the local_infile setting, the server refuses or permits local data loading by clients that have LOCAL enabled on the client side. To explicitly cause the server to refuse LOAD DATA LOCAL statements (regardless of how client programs and libraries are configured at build time or runtime), start mysqld with local_infile disabled. local_infile can also be set at runtime.</p><p><b>Recommendation</b>: From console:<ol><li>Go to the Cloud SQL Instances page in the Google Cloud Console by visiting https://console.cloud.google.com/sql/instances.</li><li>Select the MySQL instance where the database flag needs to be enabled.</li><li>Click <samp>Edit</samp></li><li>Scroll down to the <samp>Flags</samp> section.</li><li>To set a flag that has not been set on the instance before, click <samp>Add item</samp>, choose the flag <samp>local_infile</samp> from the drop-down menu, and set its value to <samp>off</samp>.</li><li>Click <samp>Save</samp></li><li>Confirm the changes under <samp>Flags</samp> on the Overview page.</li></ol></p><p><b>Path</b>: cloudsql.projects.id.instances.id</p><p><b>Conditions</b>: and,cloudsql.projects.id.instances.id.local_infile_off,false,</p>",
+        "tags":
+        [
+            "CIS Google Cloud Platform Foundations v1.1.0 ref:6.1.2",
+            "https://cloud.google.com/sql/docs/mysql/flags",
+            "https://dev.mysql.com/doc/refman/5.7/en/server-system-variables.html#sysvar_local_infile",
+            "https://dev.mysql.com/doc/refman/5.7/en/load-data-local.html"
+        ],
+        "sort_order": 11
+    },
+    {
+        "testcase": "Instances - Log Checkpoints Database Flag for PostgreSQL Instance Is off",
+        "code": "log_checkpoints_on",
+        "details": "<p>Enabling log_checkpoints causes checkpoints and restart points to be logged in the server log. Some statistics are included in the log messages, including the number of buffers written and the time spent writing them. This parameter can only be set in the postgresql.conf file or on the server command line. This recommendation is applicable to PostgreSQL database instances.</p><p><b>Recommendation</b>: From console:<ol><li>Go to the Cloud SQL Instances page in the Google Cloud Console by visiting https://console.cloud.google.com/sql/instances.</li><li>Select the PostgreSQL instance where the database flag needs to be enabled.</li><li>Click <samp>Edit</samp></li><li>Scroll down to the <samp>Flags</samp> section.</li><li>To set a flag that has not been set on the instance before, click <samp>Add item</samp>, choose the flag <samp>log_checkpoints</samp> from the drop-down menu, and set its value to <samp>off</samp>.</li><li>Click <samp>Save</samp></li><li>Confirm the changes under <samp>Flags</samp> on the Overview page.</li></ol></p><p><b>Path</b>: cloudsql.projects.id.instances.id</p><p><b>Conditions</b>: and,cloudsql.projects.id.instances.id.log_checkpoints_on,false,</p>",
+        "tags":
+        [
+            "CIS Google Cloud Platform Foundations v1.1.0 ref:6.2.1",
+            "https://www.postgresql.org/docs/9.6/runtime-config-logging.html#RUNTIME-CONFIG-LOGGING-WHAT",
+            "https://cloud.google.com/sql/docs/postgres/flags#setting_a_database_flag"
+        ],
+        "sort_order": 12
+    },
+    {
+        "testcase": "Instances - Log Connections Database Flag for PostgreSQL Instance Is off",
+        "code": "log_connections_on",
+        "details": "<p>PostgreSQL does not log attempted connections by default. Enabling the log_connections setting will create log entries for each attempted connection as well as successful completion of client authentication which can be useful in troubleshooting issues and to determine any unusual connection attempts to the server. This recommendation is applicable to PostgreSQL database instances.</p><p><b>Recommendation</b>: From console:<ol><li>Go to the Cloud SQL Instances page in the Google Cloud Console by visiting https://console.cloud.google.com/sql/instances.</li><li>Select the PostgreSQL instance where the database flag needs to be enabled.</li><li>Click <samp>Edit</samp></li><li>Scroll down to the <samp>Flags</samp> section.</li><li>To set a flag that has not been set on the instance before, click <samp>Add item</samp>, choose the flag <samp>log_connections</samp> from the drop-down menu, and set its value to <samp>off</samp>.</li><li>Click <samp>Save</samp></li><li>Confirm the changes under <samp>Flags</samp> on the Overview page.</li></ol></p><p><b>Path</b>: cloudsql.projects.id.instances.id</p><p><b>Conditions</b>: and,cloudsql.projects.id.instances.id.log_connections_on,false,</p>",
+        "tags":
+        [
+            "CIS Google Cloud Platform Foundations v1.1.0 ref:6.2.2",
+            "https://www.postgresql.org/docs/9.6/runtime-config-logging.html#RUNTIME-CONFIG-LOGGING-WHAT",
+            "https://cloud.google.com/sql/docs/postgres/flags"
+        ],
+        "sort_order": 13
+    },
+    {
+        "testcase": "Instances - Log Disconnections Database Flag for PostgreSQL Instance Is off",
+        "code": "log_disconnections_on",
+        "details": "<p>PostgreSQL does not log session details such as duration and session end by default. Enabling the log_disconnections setting will create log entries at the end of each session which can be useful in troubleshooting issues and determine any unusual activity across a time period. The log_disconnections and log_connections work hand in hand and generally, the pair would be enabled/disabled together. This recommendation is applicable to PostgreSQL database instances.</p><p><b>Recommendation</b>: From console:<ol><li>Go to the Cloud SQL Instances page in the Google Cloud Console by visiting https://console.cloud.google.com/sql/instances.</li><li>Select the PostgreSQL instance where the database flag needs to be enabled.</li><li>Click <samp>Edit</samp></li><li>Scroll down to the <samp>Flags</samp> section.</li><li>To set a flag that has not been set on the instance before, click <samp>Add item</samp>, choose the flag <samp>log_disconnections</samp> from the drop-down menu, and set its value to <samp>off</samp>.</li><li>Click <samp>Save</samp></li><li>Confirm the changes under <samp>Flags</samp> on the Overview page.</li></ol></p><p><b>Path</b>: cloudsql.projects.id.instances.id</p><p><b>Conditions</b>: and,cloudsql.projects.id.instances.id.log_disconnections_on,false,</p>",
+        "tags":
+        [
+            "CIS Google Cloud Platform Foundations v1.1.0 ref:6.2.3",
+            "https://www.postgresql.org/docs/9.6/runtime-config-logging.html#RUNTIME-CONFIG-LOGGING-WHAT",
+            "https://cloud.google.com/sql/docs/postgres/flags"
+        ],
+        "sort_order": 14
+    },
+    {
+        "testcase": "Instances - Log Lock Waits Database Flag for PostgreSQL Instance Is off",
+        "code": "log_lock_waits_on",
+        "details": "<p>The deadlock timeout defines the time to wait on a lock before checking for any conditions. Frequent run overs on deadlock timeout can be an indication of an underlying issue. Logging such waits on locks by enabling the log_lock_waits flag can be used to identify poor performance due to locking delays or if a specially-crafted SQL is attempting to starve resources through holding locks for excessive amounts of time. This recommendation is applicable to PostgreSQL database instances.</p><p><b>Recommendation</b>: From console:<ol><li>Go to the Cloud SQL Instances page in the Google Cloud Console by visiting https://console.cloud.google.com/sql/instances.</li><li>Select the PostgreSQL instance where the database flag needs to be enabled.</li><li>Click <samp>Edit</samp></li><li>Scroll down to the <samp>Flags</samp> section.</li><li>To set a flag that has not been set on the instance before, click <samp>Add item</samp>, choose the flag <samp>log_lock_waits</samp> from the drop-down menu, and set its value to <samp>off</samp>.</li><li>Click <samp>Save</samp></li><li>Confirm the changes under <samp>Flags</samp> on the Overview page.</li></ol></p><p><b>Path</b>: cloudsql.projects.id.instances.id</p><p><b>Conditions</b>: and,cloudsql.projects.id.instances.id.log_lock_waits_on,false,</p>",
+        "tags":
+        [
+            "CIS Google Cloud Platform Foundations v1.1.0 ref:6.2.4",
+            "https://www.postgresql.org/docs/9.6/runtime-config-logging.html#GUC-LOG-MIN-DURATION-STATEMENT",
+            "https://cloud.google.com/sql/docs/postgres/flags"
+        ],
+        "sort_order": 15
+    },
+    {
+        "testcase": "Instances - Log Min Duration Statement Database Flag for PostgreSQL Instance Is Not Set to -1",
+        "code": "log_min_duration_statement_-1",
+        "details": "<p>Logging SQL statements may include sensitive information that should not be recorded in logs. This recommendation is applicable to PostgreSQL database instances.</p><p><b>Recommendation</b>: From console:<ol><li>Go to the Cloud SQL Instances page in the Google Cloud Console by visiting https://console.cloud.google.com/sql/instances.</li><li>Select the PostgreSQL instance where the database flag needs to be enabled.</li><li>Click <samp>Edit</samp></li><li>Scroll down to the <samp>Flags</samp> section.</li><li>To set a flag that has not been set on the instance before, click <samp>Add item</samp>, choose the flag <samp>log_min_duration_statement</samp> from the drop-down menu, and set its value to <samp>-1</samp>.</li><li>Click <samp>Save</samp></li><li>Confirm the changes under <samp>Flags</samp> on the Overview page.</li></ol></p><p><b>Path</b>: cloudsql.projects.id.instances.id</p><p><b>Conditions</b>: and,cloudsql.projects.id.instances.id.log_min_duration_statement_-1,false,</p>",
+        "tags":
+        [
+            "CIS Google Cloud Platform Foundations v1.1.0 ref:6.2.7",
+            "https://www.postgresql.org/docs/current/runtime-config-logging.html#RUNTIME-CONFIG-LOGGING-WHAT",
+            "https://cloud.google.com/sql/docs/postgres/flags"
+        ],
+        "sort_order": 16
+    },
+    {
+        "testcase": "Instances - Log Min Messages Database Flag for PostgreSQL Instance Is Not Set",
+        "code": "log_min_messages",
+        "details": "<p>Auditing helps in troubleshooting operational problems and also permits forensic analysis. If log_min_error_statement is not set to the correct value, messages may not be classified as error messages appropriately. Considering general log messages as error messages would make it difficult to find actual errors, while considering only stricter severity levels as error messages may skip actual errors to log their SQL statements. The log_min_error_statement flag should be set in accordance with the organization's logging policy. This recommendation is applicable to PostgreSQL database instances.</p><p><b>Recommendation</b>: From console:<ol><li>Go to the Cloud SQL Instances page in the Google Cloud Console by visiting https://console.cloud.google.com/sql/instances.</li><li>Select the PostgreSQL instance where the database flag needs to be enabled.</li><li>Click <samp>Edit</samp></li><li>Scroll down to the <samp>Flags</samp> section.</li><li>To set a flag that has not been set on the instance before, click <samp>Add item</samp>, choose the flag <samp>log_min_error_statement</samp> from the drop-down menu, and set appropriate value.</li><li>Click <samp>Save</samp></li><li>Confirm the changes under <samp>Flags</samp> on the Overview page.</li></ol></p><p><b>Path</b>: cloudsql.projects.id.instances.id</p><p><b>Conditions</b>: and,cloudsql.projects.id.instances.id.log_min_messages,false,</p>",
+        "tags":
+        [
+            "CIS Google Cloud Platform Foundations v1.1.0 ref:6.2.5",
+            "https://www.postgresql.org/docs/9.6/runtime-config-logging.html#RUNTIME-CONFIG-LOGGING-WHEN",
+            "https://cloud.google.com/sql/docs/postgres/flags"
+        ],
+        "sort_order": 17
+    },
+    {
+        "testcase": "Instances - Log Temp Files Database Flag for PostgreSQL Instance Is Not Set to 0",
+        "code": "log_temp_files_0",
+        "details": "<p>If all temporary files are not logged, it may be more difficult to identify potential performance issues that may be due to either poor application coding or deliberate resource starvation attempts.</p><p><b>Recommendation</b>: From console:<ol><li>Go to the Cloud SQL Instances page in the Google Cloud Console by visiting https://console.cloud.google.com/sql/instances.</li><li>Select the PostgreSQL instance where the database flag needs to be enabled.</li><li>Click <samp>Edit</samp></li><li>Scroll down to the <samp>Flags</samp> section.</li><li>To set a flag that has not been set on the instance before, click <samp>Add item</samp>, choose the flag <samp>log_temp_files</samp> from the drop-down menu, and set its value to <samp>0</samp>.</li><li>Click <samp>Save</samp></li><li>Confirm the changes under <samp>Flags</samp> on the Overview page.</li></ol></p><p><b>Path</b>: cloudsql.projects.id.instances.id</p><p><b>Conditions</b>: and,cloudsql.projects.id.instances.id.log_temp_files_0,false,</p>",
+        "tags":
+        [
+            "CIS Google Cloud Platform Foundations v1.1.0 ref:6.2.6",
+            "https://www.postgresql.org/docs/9.6/runtime-config-logging.html#GUC-LOG-TEMP-FILES",
+            "https://cloud.google.com/sql/docs/postgres/flags"
+        ],
+        "sort_order": 18
+    },
+    {
+        "testcase": "Instances - Contained Database Authentication Database Flag for SQLServers Instance Is on",
+        "code": "contained_database_authentication_off",
+        "details": "<p>A contained database includes all database settings and metadata required to define the database and has no configuration dependencies on the instance of the Database Engine where the database is installed. Users can connect to the database without authenticating a login at the Database Engine level. Isolating the database from the Database Engine makes it possible to easily move the database to another instance of SQL Server. Contained databases have some unique threats that should be understood and mitigated by SQL Server Database Engine administrators. Most of the threats are related to the USER WITH PASSWORD authentication process, which moves the authentication boundary from the Database Engine level to the database level, hence this is recommended to disable this flag.</p><p><b>Recommendation</b>: From console:<ol><li>Go to the Cloud SQL Instances page in the Google Cloud Console by visiting https://console.cloud.google.com/sql/instances.</li><li>Select the MySQL instance where the database flag needs to be enabled.</li><li>Click <samp>Edit</samp></li><li>Scroll down to the <samp>Flags</samp> section.</li><li>To set a flag that has not been set on the instance before, click <samp>Add item</samp>, choose the flag <samp>contained database authentication</samp> from the drop-down menu, and set its value to <samp>off</samp>.</li><li>Click <samp>Save</samp></li><li>Confirm the changes under <samp>Flags</samp> on the Overview page.</li></ol></p><p><b>Path</b>: cloudsql.projects.id.instances.id</p><p><b>Conditions</b>: and,cloudsql.projects.id.instances.id.contained_database_authentication_off,false,</p>",
+        "tags":
+        [
+            "CIS Google Cloud Platform Foundations v1.1.0 ref:6.3.2",
+            "https://cloud.google.com/sql/docs/sqlserver/flags",
+            "https://learn.microsoft.com/en-us/sql/database-engine/configure-windows/contained-database-authentication-server-configuration-option?view=sql-server-ver15",
+            "https://learn.microsoft.com/en-us/sql/relational-databases/databases/security-best-practices-with-contained-databases?view=sql-server-ver15"
+        ],
+        "sort_order": 19
+    },
+    {
+        "testcase": "Instances - Cross DB Ownership Chaining Database Flag for SQLServers Instance Is on",
+        "code": "cross_db_ownership_chaining_off",
+        "details": "<p>Use the cross db ownership for chaining option to configure cross-database ownership chaining for an instance of Microsoft SQL Server. This server option allows you to control cross-database ownership chaining at the database level or to allow cross-database ownership chaining for all databases. Enabling cross db ownership is not recommended unless all of the databases hosted by the instance of SQL Server must participate in cross-database ownership chaining and you are aware of the security implications of this setting. This recommendation is applicable to SQL Server database instances.</p><p><b>Recommendation</b>: From console:<ol><li>Go to the Cloud SQL Instances page in the Google Cloud Console by visiting https://console.cloud.google.com/sql/instances.</li><li>Select the MySQL instance where the database flag needs to be enabled.</li><li>Click <samp>Edit</samp></li><li>Scroll down to the <samp>Flags</samp> section.</li><li>To set a flag that has not been set on the instance before, click <samp>Add item</samp>, choose the flag <samp>cross db ownership chaining</samp> from the drop-down menu, and set its value to <samp>off</samp>.</li><li>Click <samp>Save</samp></li><li>Confirm the changes under <samp>Flags</samp> on the Overview page.</li></ol></p><p><b>Path</b>: cloudsql.projects.id.instances.id</p><p><b>Conditions</b>: and,cloudsql.projects.id.instances.id.cross_db_ownership_chaining_off,false,</p>",
+        "tags":
+        [
+            "CIS Google Cloud Platform Foundations v1.1.0 ref:6.3.1",
+            "https://cloud.google.com/sql/docs/sqlserver/flags",
+            "https://learn.microsoft.com/en-us/sql/database-engine/configure-windows/cross-db-ownership-chaining-server-configuration-option?view=sql-server-ver15"
+        ],
+        "sort_order": 20
+    },
+    {
+        "testcase": "Buckets - Bucket Accessible by \"_ARG_0_\"",
+        "code": "_ARG_0_",
+        "details": "<p>Allowing anonymous and/or public access grants permissions to anyone to access bucket content. Such access might not be desired if you are storing any sensitive data. Hence, ensure that anonymous and/or public access to a bucket is not allowed.</p><p><b>Recommendation</b>: \"From console:<ol><li>Go to <samp>Storage browser</samp> by visiting https://console.cloud.google.com/storage/browser.</li><li>Click on the bucket name to go to its <samp>Bucket details</samp> page.</li><li>Click on the <samp>Permissions</samp> tab.</li><li>Click <samp>Delete</samp> button in front of <samp>allUsers</samp> and <samp>allAuthenticatedUsers</samp> to remove that particular role assignment.</li></ol></p><p><b>Display Path</b>: cloudstorage.projects.id.buckets.id</p><p><b>Path</b>: cloudstorage.projects.id.buckets.id</p><p><b>Key</b>: cloudstorage-bucket-_ARG_0_</p><p><b>Argument Names</b>:<ul><li>Member</li><li>Description</li></ul></p><p><b>Conditions</b>: and,or,cloudstorage.projects.id.buckets.id.member_bindings,withKey,_ARG_0_,cloudstorage.projects.id.buckets.id.acls,containString,_ARG_0_,cloudstorage.projects.id.buckets.id.public_access_prevention,notEqual,enforced,cloudstorage.projects.id.buckets.id.public_access_prevention,notEqual,inherited</p>",
+        "tags":
+        [
+            "CIS Google Cloud Platform Foundations v1.0.0 ref:5.1",
+            "CIS Google Cloud Platform Foundations v1.1.0 ref:5.1",
+            "https://cloud.google.com/storage/docs/access-control/iam-reference",
+            "https://cloud.google.com/storage/docs/access-control/making-data-public",
+            "https://cloud.google.com/storage/docs/gsutil/commands/iam"
+        ],
+        "sort_order": 21
+    },
+    {
+        "testcase": "Buckets - Bucket with Logging Disabled",
+        "code": "logging_enabled",
+        "details": "<p>Enable access and storage logs, in order to capture all events which may affect objects within target buckets.</p><p><b>Path</b>: cloudstorage.projects.id.buckets.id</p><p><b>Conditions</b>: and,cloudstorage.projects.id.buckets.id.logging_enabled,false,</p>",
+        "tags":
+        [
+            "CIS Google Cloud Platform Foundations v1.0.0 ref:5.3",
+            "https://cloud.google.com/storage/docs/access-logs"
+        ],
+        "sort_order": 22
+    },
+    {
+        "testcase": "Buckets - Bucket with Private Access Prevention Not Enforced",
+        "code": "public_access_prevention",
+        "details": "<p>Public access prevention protects Cloud Storage buckets and objects from being accidentally exposed to the public. When you enforce public access prevention, no one can make data in applicable buckets public through IAM policies or ACLs.<br><br>Note that even if a bucket does not have public access prevention explicitly enforced in its settings, it might still inherit public access prevention, which occurs if the organization policy constraint <samp>storage.publicAccessPrevention</samp> is set on the project, folder, or organization that the bucket exists within. For this reason, the bucket state can only be set to <samp>enforced</samp> or <samp>inherited</samp>.</p><p><b>Path</b>: cloudstorage.projects.id.buckets.id</p><p><b>Conditions</b>: and,cloudstorage.projects.id.buckets.id.public_access_prevention,notEqual,enforced,cloudstorage.projects.id.buckets.id.public_access_prevention,notEqual,inherited</p>",
+        "tags":
+        [
+            "https://cloud.google.com/storage/docs/public-access-prevention"
+        ],
+        "sort_order": 23
+    },
+    {
+        "testcase": "Buckets - Bucket with Versioning Disabled",
+        "code": "versioning_enabled",
+        "details": "<p>Enable Object Versioning to protect Cloud Storage data from being overwritten or accidentally deleted.</p><p><b>Path</b>: cloudstorage.projects.id.buckets.id</p><p><b>Conditions</b>: and,cloudstorage.projects.id.buckets.id.versioning_enabled,false,</p>",
+        "tags":
+        [
+            "https://cloud.google.com/storage/docs/using-object-versioning"
+        ],
+        "sort_order": 24
+    },
+    {
+        "testcase": "Buckets - Uniform Bucket-Level Access Is Disabled",
+        "code": "uniform_bucket_level_access",
+        "details": "<p>It is recommended to use uniform bucket-level access to unify and simplify how you grant access to your Cloud Storage resources. In order to support a uniform permissioning system, Cloud Storage has uniform bucket-level access. Using this feature disables ACLs for all Cloud Storage resources: access to Cloud Storage resources then is granted exclusively through Cloud IAM. Enabling uniform bucket-level access guarantees that if a Storage bucket is not publicly accessible, no object in the bucket is publicly accessible either.</p><p><b>Recommendation</b>: From console:<ol><li>Open the Cloud Storage browser in the Google Cloud Console by visiting: https://console.cloud.google.com/storage/browser</li><li>In the list of buckets, click on the name of the desired bucket.</li><li>Select the <samp>Permissions</samp> tab near the top of the page.</li><li>In the text box that starts with <samp>This bucket uses fine-grained access control</samp>..., click <samp>Edit</samp>.</li><li>In the pop-up menu that appears, select <samp>Uniform</samp>.</li><li>Click <samp>Save</samp>.</li></ol></p><p><b>Display Path</b>: cloudstorage.projects.id.buckets.id</p><p><b>Path</b>: cloudstorage.projects.id.buckets.id</p><p><b>Conditions</b>: or,cloudstorage.projects.id.buckets.id.uniform_bucket_level_access,false,,cloudstorage.projects.id.buckets.id.uniform_bucket_level_access,equal,None</p>",
+        "tags":
+        [
+            "CIS Google Cloud Platform Foundations v1.1.0 ref:5.2",
+            "https://cloud.google.com/storage/docs/uniform-bucket-level-access",
+            "https://cloud.google.com/storage/docs/using-uniform-bucket-level-access",
+            "https://cloud.google.com/storage/docs/org-policy-constraints#uniform-bucket"
+        ],
+        "sort_order": 25
+    },
+    {
+        "testcase": "Firewall Rule - Default Firewall Rule in Use",
+        "code": "name",
+        "details": "<p>Some default firewall rules were in use. This could potentially expose sensitive services or protocols to other networks.</p><p><b>Path</b>: computeengine.projects.id.firewalls.id</p><p><b>Conditions</b>: and,computeengine.projects.id.firewalls.id.name,containAtLeastOneOf,default-allow-internal,default-allow-icmp,default-allow-rdp,default-allow-ssh,auto-mode-vpc-allow-icmp,auto-mode-vpc-allow-internal,auto-mode-vpc-allow-rdp,auto-mode-vpc-allow-ssh,computeengine.projects.id.firewalls.id.disabled,false,</p>",
+        "tags":
+        [],
+        "sort_order": 26
+    },
+    {
+        "testcase": "Firewall Rule Elements - Firewall Rule Opens All Ports (0-65535)",
+        "code": "permissive_ports",
+        "details": "<p>The firewall rule allows access to all ports. This widens the attack surface of the infrastructure and makes it easier for an attacker to reach potentially sensitive services over the network.</p><p><b>Display Path</b>: computeengine.projects.id.firewalls.id</p><p><b>Path</b>: computeengine.projects.id.firewalls.id.allowed_traffic.id.ports.id</p><p><b>Conditions</b>: and,computeengine.projects.id.firewalls.id.action,equal,allowed,computeengine.projects.id.firewalls.id.disabled,notTrue,,computeengine.projects.id.firewalls.id.direction,equal,INGRESS,or,computeengine.projects.id.firewalls.id.allowed_traffic.id.,equal,0-65535,computeengine.projects.id.firewalls.id.allowed_traffic.id.,equal,1-65535</p>",
+        "tags":
+        [],
+        "sort_order": 27
+    },
+    {
+        "testcase": "Firewall Rule Elements - Firewall Rule Allows Internal Traffic",
+        "code": "permissive_ports",
+        "details": "<p>Firewall rule allows ingress connections for all protocols and ports among instances in the network.</p><p><b>Display Path</b>: computeengine.projects.id.firewalls.id</p><p><b>Path</b>: computeengine.projects.id.firewalls.id.allowed_traffic.id.ports.id</p><p><b>Conditions</b>: and,computeengine.projects.id.firewalls.id.action,equal,allowed,computeengine.projects.id.firewalls.id.disabled,notTrue,,computeengine.projects.id.firewalls.id.direction,equal,INGRESS,computeengine.projects.id.firewalls.id.source_ranges,containAtLeastOneOf,10.128.0.0/9,or,computeengine.projects.id.firewalls.id.allowed_traffic.id.,equal,0-65535,computeengine.projects.id.firewalls.id.allowed_traffic.id.,equal,1-65535</p>",
+        "tags":
+        [],
+        "sort_order": 28
+    },
+    {
+        "testcase": "Firewall Rule Elements - Firewall Rule Allows Port Range(s)",
+        "code": "permissive_ports",
+        "details": "<p>It was found that the firewall rule was using port ranges. Sometimes, ranges could include unintended ports that should not be exposed. As a result, when possible, explicit port lists should be used instead.</p><p><b>Display Path</b>: computeengine.projects.id.firewalls.id</p><p><b>Path</b>: computeengine.projects.id.firewalls.id.allowed_traffic.id.ports.id</p><p><b>Conditions</b>: and,computeengine.projects.id.firewalls.id.action,equal,allowed,computeengine.projects.id.firewalls.id.disabled,notTrue,,computeengine.projects.id.firewalls.id.direction,equal,INGRESS,computeengine.projects.id.firewalls.id.allowed_traffic.id.,match,[0-9]+-[0-9]+,computeengine.projects.id.firewalls.id.allowed_traffic.id.,notEqual,0-65535,computeengine.projects.id.firewalls.id.allowed_traffic.id.,notEqual,1-65535</p>",
+        "tags":
+        [],
+        "sort_order": 29
+    },
+    {
+        "testcase": "Firewall Rules - Firewall Rule Allows Public Access (0.0.0.0/0)",
+        "code": "source_ranges",
+        "details": "<p>The firewall rule was found to be exposing potentially open ports to all source addresses. Ports are commonly probed by automated scanning tools, and could be an indicator of sensitive services exposed to Internet. If such services need to be exposed, a restriction on the source address could help to reduce the attack surface of the infrastructure.</p><p><b>Path</b>: computeengine.projects.id.firewalls.id</p><p><b>Conditions</b>: and,computeengine.projects.id.firewalls.id.action,equal,allowed,computeengine.projects.id.firewalls.id.disabled,notTrue,,computeengine.projects.id.firewalls.id.direction,equal,INGRESS,computeengine.projects.id.firewalls.id.source_ranges,containAtLeastOneOf,0.0.0.0/0</p>",
+        "tags":
+        [],
+        "sort_order": 30
+    },
+    {
+        "testcase": "Firewall Rule Elements - Firewall Rule Allows Public Access (0.0.0.0/0) to All Ports (0-65535)",
+        "code": "permissive_ports",
+        "details": "<p>The firewall rule was found to be exposing all ports to all source addresses. Ports are commonly probed by automated scanning tools, and could be an indicator of sensitive services exposed to Internet. If such services need to be exposed, a restriction on the source address could help to reduce the attack surface of the infrastructure.</p><p><b>Display Path</b>: computeengine.projects.id.firewalls.id</p><p><b>Path</b>: computeengine.projects.id.firewalls.id.allowed_traffic.id.ports.id</p><p><b>Conditions</b>: and,computeengine.projects.id.firewalls.id.action,equal,allowed,computeengine.projects.id.firewalls.id.disabled,notTrue,,computeengine.projects.id.firewalls.id.direction,equal,INGRESS,computeengine.projects.id.firewalls.id.source_ranges,containAtLeastOneOf,0.0.0.0/0,or,computeengine.projects.id.firewalls.id.allowed_traffic.id.,equal,0-65535,computeengine.projects.id.firewalls.id.allowed_traffic.id.,equal,1-65535</p>",
+        "tags":
+        [],
+        "sort_order": 31
+    },
+    {
+        "testcase": "Firewall Rule Elements - Firewall _ARG_0_ Rule Allows Public Access (0.0.0.0/0) to a Sensitive Port",
+        "code": "permissive_ports",
+        "details": "<p>The firewall rule was found to be exposing a well-known port to all source addresses. Well-known ports are commonly probed by automated scanning tools, and could be an indicator of sensitive services exposed to Internet. If such services need to be exposed, a restriction on the source address could help to reduce the attack surface of the infrastructure.</p><p><b>Display Path</b>: computeengine.projects.id.firewalls.id</p><p><b>Path</b>: computeengine.projects.id.firewalls.id.allowed_traffic.id.ports.id</p><p><b>Conditions</b>: and,computeengine.projects.id.firewalls.id.action,equal,allowed,computeengine.projects.id.firewalls.id.disabled,notTrue,,computeengine.projects.id.firewalls.id.direction,equal,_ARG_0_,computeengine.projects.id.firewalls.id.source_ranges,containAtLeastOneOf,0.0.0.0/0,computeengine.projects.id.firewalls.id.allowed_traffic.id.,containAtLeastOneOf,21,22,23,53,1433,1521,3306,3389,27017,54322</p>",
+        "tags":
+        [],
+        "sort_order": 32
+    },
+    {
+        "testcase": "Instances - Block Project SSH Keys Disabled",
+        "code": "block_project_ssh_keys_disabled",
+        "details": "<p>Project-wide SSH keys are stored in Compute/Project-meta-data. Project wide SSH keys can be used to login into all the instances within project. Using project-wide SSH keys eases the SSH key management but if compromised, poses the security risk which can impact all the instances within project.</p><p><b>Recommendation</b>: From console:<ol><li>Go to the <samp>VM instances</samp> page by visiting https://console.cloud.google.com/compute/instances.</li><li>Click on the name of the Impacted instance</li><li>Click <samp>Edit</samp> in the toolbar.</li><li>Under SSH Keys, go to the <samp>Block project-wide SSH keys</samp> checkbox.</li><li>To block users with project-wide SSH keys from connecting to this instance, select <samp>Block project-wide SSH keys</samp></li><li>Click <samp>Save</samp> at the bottom of the page</li><li>Repeat steps for every impacted Instance</li></ol></p><p><b>Path</b>: computeengine.projects.id.zones.id.instances.id</p><p><b>Conditions</b>: and,computeengine.projects.id.zones.id.instances.id.block_project_ssh_keys_enabled,false,</p>",
+        "tags":
+        [
+            "CIS Google Cloud Platform Foundations v1.1.0 ref:4.3",
+            "https://cloud.google.com/compute/docs/instances/adding-removing-ssh-keys"
+        ],
+        "sort_order": 33
+    },
+    {
+        "testcase": "Instances - Enable Connecting to Serial Ports Is Enabled",
+        "code": "serial_port_enabled",
+        "details": "<p>The interactive serial console does not support IP-based access restrictions such as IP allow-lists. If you enable the interactive serial console on an instance, clients can attempt to connect to that instance from any IP address. This allows anybody to connect to that instance if they know the correct SSH key, username, project ID, zone, and instance name.</p><p><b>Recommendation</b>: From console:<ol><li>Login to Google Cloud console</li><li>Go to Computer Engine</li><li>Go to VM instances</li><li>Click on the Specific VM</li><li>Click <samp>Edit</samp></li><li>Unselect <samp>Enable connecting to serial ports</samp> below <samp>Remote access</samp>block.</li><li>Click <samp>Save</samp></li></ol></p><p><b>Path</b>: computeengine.projects.id.zones.id.instances.id</p><p><b>Conditions</b>: and,computeengine.projects.id.zones.id.instances.id.serial_port_enabled,true,</p>",
+        "tags":
+        [
+            "CIS Google Cloud Platform Foundations v1.1.0 ref:4.5",
+            "https://cloud.google.com/compute/docs/instances/interacting-with-serial-console"
+        ],
+        "sort_order": 34
+    },
+    {
+        "testcase": "Instances - Instances Configured to Use Default Service Account",
+        "code": "service_account",
+        "details": "<p>The default Compute Engine service account has the Editor role on the project, which allows read and write access to most Google Cloud Services. To defend against privilege escalations if your VM is compromised and prevent an attacker from gaining access to all of your project, it is recommended to not use the default Compute Engine service account. Instead, you should create a new service account and assigning only the permissions needed by your instance.<br> The default Compute Engine service account is named [PROJECT_NUMBER]-compute@developer.gserviceaccount.com.</p><p><b>Recommendation</b>: From console:<ol><li>Go to the <samp>VM instances</samp> page by visiting https://console.cloud.google.com/compute/instances.</li><li>Click on the instance name to go to its <samp>VM instance details</samp> page.</li><li>Click <samp>STOP</samp> and then click <samp>Edit</samp></li><li>Under the section <samp>Service Account</samp>, select a service account other that the default Compute Engine service account. You may first need to create a new service account.</li><li>Click <samp>Save</samp> and then click <samp>START</samp></li></ol></p><p><b>Path</b>: computeengine.projects.id.zones.id.instances.id</p><p><b>Conditions</b>: and,computeengine.projects.id.zones.id.instances.id.default_service_account,true,</p>",
+        "tags":
+        [
+            "CIS Google Cloud Platform Foundations v1.1.0 ref:4.1",
+            "https://cloud.google.com/compute/docs/access/service-accounts",
+            "https://cloud.google.com/compute/docs/access/create-enable-service-accounts-for-instances",
+            "https://cloud.google.com/sdk/gcloud/reference/compute/instances/set-service-account"
+        ],
+        "sort_order": 35
+    },
+    {
+        "testcase": "Instances - VM Disks Not Customer-Supplied Encryption Keys (CSEK) Encrypted",
+        "code": "encrypted_with_csek",
+        "details": "<p>By default, Google Compute Engine encrypts all data at rest. Compute Engine handles and manages this encryption for you without any additional actions on your part. However, if you wanted to control and manage this encryption yourself, you can provide your own encryption keys.</p><p><b>Recommendation</b>: From console:<ol><li>Go to Compute Engine <samp>DIsks</samp> by visiting https://console.cloud.google.com/compute/disks.</li><li>Click <samp>CREATE DISK</samp>.</li><li>Set <samp>Encryption type</samp> to <samp>Customer supplied</samp></li><li>Provide the <samp>Key</samp> in the box.</li><li>Select <samp>Wrapped key</samp>.</li><li>Click <samp>Create</samp></li></ol></p><p><b>Display Path</b>: computeengine.projects.id.zones.id.instances.id</p><p><b>Path</b>: computeengine.projects.id.zones.id.instances.id.disks.id</p><p><b>Conditions</b>: and,computeengine.projects.id.zones.id.instances.id.disks.id.encrypted_with_csek,false,</p>",
+        "tags":
+        [
+            "CIS Google Cloud Platform Foundations v1.1.0 ref:4.7",
+            "https://cloud.google.com/compute/docs/disks/customer-supplied-encryption#encrypt_a_new_persistent_disk_with_your_own_keys",
+            "https://cloud.google.com/compute/docs/reference/rest/v1/disks/get",
+            "https://cloud.google.com/compute/docs/disks/customer-supplied-encryption#key_file"
+        ],
+        "sort_order": 36
+    },
+    {
+        "testcase": "Instances - Instance Disk without Snapshots",
+        "code": "latest_snapshot",
+        "details": "<p>You should have snapshots of your in-use or available disks taken on a regular basis to enable disaster recovery efforts.</p><p><b>Display Path</b>: computeengine.projects.id.zones.id.instances.id</p><p><b>Path</b>: computeengine.projects.id.zones.id.instances.id.disks.id</p><p><b>Conditions</b>: and,computeengine.projects.id.zones.id.instances.id.disks.id.snapshots,empty,</p>",
+        "tags":
+        [
+            "https://cloud.google.com/compute/docs/disks/create-snapshots",
+            "https://cloud.google.com/compute/docs/disks/scheduled-snapshots",
+            "https://cloud.google.com/compute/docs/disks/snapshot-best-practices"
+        ],
+        "sort_order": 37
+    },
+    {
+        "testcase": "Instances - Instances Configured to Use Default Service Account with Full Access to All Cloud APIs",
+        "code": "full_access_apis",
+        "details": "<p>When an instance is configured with Compute Engine default service account with Scope Allow full access to all Cloud APIs, based on IAM roles assigned to the user(s) accessing Instance, it may allow user to perform cloud operations/API calls that user is not supposed to perform leading to successful privilege escalation.</p><p><b>Recommendation</b>: From console:<ol><li>Go to the <samp>VM instances</samp> page by visiting https://console.cloud.google.com/compute/instances.</li><li>Click on the impacted VM instance.</li><li>If the instance is not stopped, click the <samp>Stop</samp> button. Wait for the instance to be stopped.</li><li>Next, click the <samp>Edit</samp> button.</li><li>Scroll down to the <samp>Service Account</samp> section.</li><li>Select a different service account or ensure that <samp>Allow full access to all Cloud APIs</samp> is not selected.</li><li>Click the <samp>Save</samp> button to save your changes and then click <samp>START</samp></li></ol></p><p><b>Path</b>: computeengine.projects.id.zones.id.instances.id</p><p><b>Conditions</b>: and,computeengine.projects.id.zones.id.instances.id.full_access_apis,true,</p>",
+        "tags":
+        [
+            "CIS Google Cloud Platform Foundations v1.1.0 ref:4.2",
+            "https://cloud.google.com/compute/docs/access/create-enable-service-accounts-for-instances",
+            "https://cloud.google.com/compute/docs/access/service-accounts"
+        ],
+        "sort_order": 38
+    },
+    {
+        "testcase": "Instances - IP Forwarding Is Enabled",
+        "code": "ip_forwarding_enabled",
+        "details": "<p>Compute Engine instance cannot forward a packet unless the source IP address of the packet matches the IP address of the instance. Similarly, GCP won't deliver a packet whose destination IP address is different than the IP address of the instance receiving the packet. However, both capabilities are required if you want to use instances to help route packets.</p><p><b>Recommendation</b>: From console:<ol><li>Go to the <samp>VM instances</samp> page by visiting https://console.cloud.google.com/compute/instances.</li><li>Select the <samp>VM Instance</samp> you want to remediate.</li><li>Click the <samp>Delete</samp> button.</li><li>On the 'VM Instances' page, click `CREATE INSTANCE'.</li><li>Create a new instance with the desired configuration. By default, the instance is configured to not allow IP forwarding.</li></ol></p><p><b>Path</b>: computeengine.projects.id.zones.id.instances.id</p><p><b>Conditions</b>: and,computeengine.projects.id.zones.id.instances.id.ip_forwarding_enabled,true,</p>",
+        "tags":
+        [
+            "CIS Google Cloud Platform Foundations v1.1.0 ref:4.6",
+            "https://cloud.google.com/vpc/docs/using-routes#canipforward"
+        ],
+        "sort_order": 39
+    },
+    {
+        "testcase": "Instances - OS Login Disabled",
+        "code": "oslogin_disabled",
+        "details": "<p>Enabling osLogin ensures that SSH keys used to connect to instances are mapped with IAM users. Revoking access to IAM user will revoke all the SSH keys associated with that particular user. It facilitates centralized and automated SSH key pair management which is useful in handling cases like response to compromised SSH key pairs and/or revocation of external/third-party/Vendor users.</p><p><b>Recommendation</b>: From console:<ol><li>Go to the VM compute metadata page by visiting https://console.cloud.google.com/compute/metadata.</li><li>Click <samp>Edit</samp>></li><li>Add a metadata entry where the key is <samp>enable-oslogin</samp> and the value is <samp>TRUE</samp>.</li><li>Click <samp>Save</samp> to apply the changes.</li><li>For every instances that overrides the project setting, go to the <samp>VM Instances</samp> page at https://console.cloud.google.com/compute/instances.</li><li>Click the name of the instance on which you want to remove the metadata value.</li><li>At the top of the instance details page, click <samp>Edit</samp> to edit the instance settings.</li><li>Under <samp>Custom metadata</samp>, remove any entry with key <samp>enable-oslogin</samp> and the value is <samp>FALSE</samp></li><li>At the bottom of the instance details page, click <samp>Save</samp> to apply your changes to the instance.</li></ol></p><p><b>Path</b>: computeengine.projects.id.zones.id.instances.id</p><p><b>Conditions</b>: and,computeengine.projects.id.zones.id.instances.id.oslogin_enabled,false,</p>",
+        "tags":
+        [
+            "CIS Google Cloud Platform Foundations v1.1.0 ref:4.4",
+            "https://cloud.google.com/compute/docs/instances/adding-removing-ssh-keys"
+        ],
+        "sort_order": 40
+    },
+    {
+        "testcase": "Instances - Instances Have Public IP Addresses",
+        "code": "public_ip_addresses",
+        "details": "<p>To reduce your attack surface, Compute instances should not have public IP addresses. Instead, instances should be configured behind load balancers, to minimize the instance's exposure to the internet.</p><p><b>Recommendation</b>: From console:<ol><li>Go to the <samp>VM instances</samp> page by visiting https://console.cloud.google.com/compute/instances.</li><li>Click on the instance name to go the <samp>Instance detail</samp> page.</li><li>Click <samp>Edit</samp></li><li>For each Network interface, ensure that <samp>External IP</samp> is set to <samp>None</samp>.</li><li>Click <samp>Done</samp> and then click <samp>Save</samp>.</li></ol></p><p><b>Path</b>: computeengine.projects.id.zones.id.instances.id</p><p><b>Conditions</b>: and,computeengine.projects.id.zones.id.instances.id.public_ip_addresses,true,</p>",
+        "tags":
+        [
+            "CIS Google Cloud Platform Foundations v1.1.0 ref:4.9",
+            "https://cloud.google.com/load-balancing/docs/backend-service#backends_and_external_ip_addresses",
+            "https://cloud.google.com/compute/docs/instances/connecting-advanced#sshbetweeninstances",
+            "https://cloud.google.com/compute/docs/instances/connecting-to-instance",
+            "https://cloud.google.com/compute/docs/ip-addresses/reserve-static-external-ip-address#unassign_ip",
+            "https://cloud.google.com/resource-manager/docs/organization-policy/org-policy-constraints"
+        ],
+        "sort_order": 41
+    },
+    {
+        "testcase": "Instances - Shielded VM Disabled",
+        "code": "shielded_enable",
+        "details": "<p>Shielded VM offers verifiable integrity of your Compute Engine VM instances, so you can be confident your instances haven't been compromised by boot-or kernel-level malware or rootkits. Shielded VM's verifiable integrity is achieved through the use of Secure Boot, virtual trusted platform module (vTPM)-enabled Measured Boot, and integrity monitoring.</p><p><b>Recommendation</b>: From console:<ol><li>Go to the <samp>VM instances</samp> page by visiting https://console.cloud.google.com/compute/instances.</li><li>Click on the instance name to see its <samp>VM Instance detail</samp> page.</li><li>Click <samp>STOP</samp> to stop the instance.<li>When the instance has stopped, click <samp>Edit</samp></li><li>In the Shielded VM section, select <samp>Turn on vTPM</samp> and <samp>Turn on Integrity Monitoring</samp>.</li><li>Optionally, if you do not use any custom or unsigned drivers on the instance, also select <samp>Turn on Secure Boot</samp>.</li><li>Click the <samp>Save</samp> button to modify the instance and then click <samp>START</samp> to restart it.</li></ol></p><p><b>Path</b>: computeengine.projects.id.zones.id.instances.id</p><p><b>Conditions</b>: and,computeengine.projects.id.zones.id.instances.id.shielded_enable,false,</p>",
+        "tags":
+        [
+            "CIS Google Cloud Platform Foundations v1.1.0 ref:4.8",
+            "https://cloud.google.com/compute/docs/instances/modifying-shielded-vm",
+            "https://cloud.google.com/shielded-vm",
+            "https://cloud.google.com/security/shielded-cloud/shielded-vm#organization-policy-constraint"
+        ],
+        "sort_order": 42
+    },
+    {
+        "testcase": "Instances - Instance without Deletion Protection",
+        "code": "deletion_protection_enabled",
+        "details": "<p>It is good practice to enable this feature on production instances, to ensure that they may not be deleted by accident.</p><p><b>Path</b>: computeengine.projects.id.zones.id.instances.id</p><p><b>Conditions</b>: and,computeengine.projects.id.zones.id.instances.id.deletion_protection_enabled,false,</p>",
+        "tags":
+        [
+            "https://cloud.google.com/compute/docs/instances/preventing-accidental-vm-deletion"
+        ],
+        "sort_order": 43
+    },
+    {
+        "testcase": "Forwarding Rule - External Load Balancer Rule Forwards a Non-Standard Port",
+        "details": "<p>The Load Balancer rule was found to be forwarding a non-standard port (80 or 443), potentially exposing a sensitive service. If such services need to be exposed, a restriction on the source address could help to reduce the attack surface of the infrastructure.</p><p><b>Path</b>: computeengine.projects.id.regions.id.forwarding_rules.id</p><p><b>Conditions</b>: and,computeengine.projects.id.regions.id.forwarding_rules.id.load_balancing_scheme,equal,EXTERNAL,or,computeengine.projects.id.regions.id.forwarding_rules.id.all_ports,true,,and,computeengine.projects.id.regions.id.forwarding_rules.id.port_range,notEqual,,computeengine.projects.id.regions.id.forwarding_rules.id.port_range,containNoneOf,80-80,443-443,80-80,443-443,and,computeengine.projects.id.regions.id.forwarding_rules.id.ports,notEmpty,,computeengine.projects.id.regions.id.forwarding_rules.id.ports,containNoneOf,80,443</p>",
+        "tags":
+        [],
+        "sort_order": 44
+    },
+    {
+        "testcase": "Forwarding Rule - External Load Balancer Global Rule Forwards a Non-Standard Port",
+        "details": "<p>The Load Balancer rule was found to be forwarding a non-standard port (80 or 443), potentially exposing a sensitive service. If such services need to be exposed, a restriction on the source address could help to reduce the attack surface of the infrastructure.</p><p><b>Path</b>: computeengine.projects.id.global_forwarding_rules.id</p><p><b>Conditions</b>: and,computeengine.projects.id.global_forwarding_rules.id.load_balancing_scheme,equal,EXTERNAL,or,computeengine.projects.id.global_forwarding_rules.id.all_ports,true,,and,computeengine.projects.id.global_forwarding_rules.id.port_range,notEqual,,computeengine.projects.id.global_forwarding_rules.id.port_range,containNoneOf,80-80,443-443,80-80,443-443,and,computeengine.projects.id.global_forwarding_rules.id.ports,notEmpty,,computeengine.projects.id.global_forwarding_rules.id.ports,containNoneOf,80,443</p>",
+        "tags":
+        [],
+        "sort_order": 45
+    },
+    {
+        "testcase": "Networks - Default Network Should Be Removed",
+        "code": "name",
+        "details": "<p>The default network has a preconfigured network configuration and automatically generates insecure firewall rules. These automatically created firewall rules do not get audit logged and cannot be configured to enable firewall rule logging.</p><p><b>Recommendation</b>: From  Console:<ol><li>Go to <samp>VPC networks</samp> page by visiting: https://console.cloud.google.com/networking/networks/list</li><li>Click the network named <samp>default</samp></li><li>On the network detail page, click <samp>EDIT</samp></li><li>Click <samp>DELETE VPC NETWORK</samp> </li><li>If needed, create a new network to replace the default network</li></ol></p><p><b>Path</b>: computeengine.projects.id.networks.id</p><p><b>Conditions</b>: and,computeengine.projects.id.networks.id.name,equal,default</p>",
+        "tags":
+        [
+            "CIS Google Cloud Platform Foundations v1.1.0 ref:3.1",
+            "https://cloud.google.com/compute/docs/networking#firewall_rules",
+            "https://cloud.google.com/compute/docs/reference/latest/networks/insert",
+            "https://cloud.google.com/compute/docs/reference/latest/networks/delete",
+            "https://cloud.google.com/vpc/docs/firewall-rules-logging",
+            "https://cloud.google.com/vpc/docs/vpc#default-network",
+            "https://cloud.google.com/sdk/gcloud/reference/compute/networks/delete"
+        ],
+        "sort_order": 46
+    },
+    {
+        "testcase": "Networks - Legacy Network Should Be Removed",
+        "code": "legacy_mode",
+        "details": "<p>Legacy networks have a single network IPv4 prefix range and a single gateway IP address for the whole network. The network is global in scope and spans all cloud regions. Subnetworks cannot be created in a legacy network and are unable to switch from legacy to auto or custom subnet networks. Legacy networks can have an impact for high network traffic projects and are subject to a single point of contention or failure.</p><p><b>Recommendation</b>: For each Google Cloud Platform project,<ol><li>1. Follow the documentation and create a non-legacy network suitable for the organization's requirements.</li><li>Follow the documentation and delete the networks in the <samp>legacy</samp> mode.</li></ol></p><p><b>Path</b>: computeengine.projects.id.networks.id</p><p><b>Conditions</b>: and,computeengine.projects.id.networks.id.legacy_mode,true,</p>",
+        "tags":
+        [
+            "CIS Google Cloud Platform Foundations v1.1.0 ref:3.2",
+            "https://cloud.google.com/vpc/docs/using-legacy#creating_a_legacy_network",
+            "https://cloud.google.com/vpc/docs/using-legacy#deleting_a_legacy_network"
+        ],
+        "sort_order": 47
+    },
+    {
+        "testcase": "Networks - Network without Instances",
+        "details": "<p>Maintaining unused resources increases risks of misconfigurations and increases the difficulty of audits.</p><p><b>Path</b>: computeengine.projects.id.networks.id</p><p><b>Conditions</b>: and,computeengine.projects.id.networks.id.instances,empty,</p>",
+        "tags":
+        [],
+        "sort_order": 48
+    },
+    {
+        "testcase": "Snapshots - Old Instance Disk Snapshot",
+        "details": "<p>Disk snapshots that are over 90 days are likely to be outdated.</p><p><b>Path</b>: computeengine.projects.id.snapshots.id</p><p><b>Conditions</b>: and,computeengine.projects.id.snapshots.id.status,equal,READY,computeengine.projects.id.snapshots.id.creation_timestamp,olderThan,90,days</p>",
+        "tags":
+        [
+            "https://cloud.google.com/compute/docs/disks/create-snapshots",
+            "https://cloud.google.com/compute/docs/disks/scheduled-snapshots",
+            "https://cloud.google.com/compute/docs/disks/snapshot-best-practices"
+        ],
+        "sort_order": 49
+    },
+    {
+        "testcase": "Subnetwork - VPC Flow Logs Not Enabled",
+        "code": "flowlogs_enabled",
+        "details": "<p>VPC Flow Logs were not enabled for this subnet. It is best practice to enable Flow Logs to some degree in order to have network visibility in the event of resource compromise, as well as source data for threat detections.</p><p><b>Path</b>: computeengine.projects.id.regions.id.subnetworks.id</p><p><b>Conditions</b>: and,computeengine.projects.id.regions.id.subnetworks.id.flowlogs_enabled,false,</p>",
+        "tags":
+        [
+            "CIS Google Cloud Platform Foundations v1.1.0 ref:3.8",
+            "https://cloud.google.com/vpc/docs/using-flow-logs#enabling_vpc_flow_logging"
+        ],
+        "sort_order": 50
+    },
+    {
+        "testcase": "Cloud DNS - DNSSEC Is Not Enabled for Cloud DNS",
+        "code": "dnssec_enabled",
+        "details": "<p>Domain Name System Security Extensions (DNSSEC) adds security to the DNS protocol by enabling DNS responses to be validated. Having a trustworthy DNS that translates a domain name like www.example.com into its associated IP address is an increasingly important building block of today’s web-based applications. Attackers can hijack this process of domain/IP lookup and redirect users to a malicious site through DNS hijacking and man-in-the-middle attacks. DNSSEC helps mitigate the risk of such attacks by cryptographically signing DNS records. As a result, it prevents attackers from issuing fake DNS responses that may misdirect browsers to nefarious websites.</p><p><b>Recommendation</b>: From Console:<ol><li>Go to Cloud DNS by visiting https://console.cloud.google.com/net-services/dns/zones.</li><li>For each zone of <samp>Type Public</samp>, set <samp>DNSSEC</samp> to <samp>ON</samp>.</li></ol></p><p><b>Path</b>: dns.projects.id.managed_zones.id</p><p><b>Conditions</b>: and,dns.projects.id.managed_zones.id.dnssec_enabled,false,</p>",
+        "tags":
+        [
+            "https://cloudplatform.googleblog.com/2017/11/DNSSEC-now-available-in-Cloud-DNS.html",
+            "https://cloud.google.com/dns/dnssec-config#enabling",
+            "https://cloud.google.com/dns/dnssec"
+        ],
+        "sort_order": 51
+    },
+    {
+        "testcase": "Cloud DNS - DNSSEC Key-signing Key Uses RSASHA1",
+        "details": "<p>The algorithm used for key signing should be a recommended one and it should be strong. When enabling DNSSEC for a managed zone, or creating a managed zone with DNSSEC, the user can select the DNSSEC signing algorithms and the denial-of-existence type. Changing the DNSSEC settings is only effective for a managed zone if DNSSEC is not already enabled. If there is a need to change the settings for a managed zone where it has been enabled, turn DNSSEC off and then re-enable it with different settings.</p><p><b>Recommendation</b>: From Console:<ol><li>If it is necessary to change the settings for a managed zone where it has been enabled, NSSEC must be turned off and re-enabled with different settings. To turn off DNSSEC, run the following command:<br><code>gcloud dns managed-zones update ZONE_NAME --dnssec-state off</code></br></li><li>To update key-signing for a reported managed DNS Zone, run the following command:<br><code> gcloud dns managed-zones update ZONE_NAME --dnssec-state on --ksk-algorithm KSK_ALGORITHM --ksk-key-length KSK_KEY_LENGTH --zsk-algorithm ZSK_ALGORITHM --zsk-key-length ZSK_KEY_LENGTH --denial-of-existence DENIAL_OF_EXISTENCE</code></br></li></ol></p><p><b>Path</b>: dns.projects.id.managed_zones.id</p><p><b>Conditions</b>: and,dns.projects.id.managed_zones.id.key_signing_algorithm,equal,rsasha1</p>",
+        "tags":
+        [
+            "https://cloud.google.com/dns/dnssec-advanced#advanced_signing_options"
+        ],
+        "sort_order": 52
+    },
+    {
+        "testcase": "Cloud DNS - DNSSEC Zone-signing Key Uses RSASHA1",
+        "details": "<p>The algorithm used for key signing should be a recommended one and it should be strong. When enabling DNSSEC for a managed zone, or creating a managed zone with DNSSEC, the user can select the DNSSEC signing algorithms and the denial-of-existence type. Changing the DNSSEC settings is only effective for a managed zone if DNSSEC is not already enabled. If there is a need to change the settings for a managed zone where it has been enabled, turn DNSSEC off and then re-enable it with different settings.</p><p><b>Recommendation</b>: From Console:<ol><li>If it is necessary to change the settings for a managed zone where it has been enabled, NSSEC must be turned off and re-enabled with different settings. To turn off DNSSEC, run the following command:<br><code>gcloud dns managed-zones update ZONE_NAME --dnssec-state off</code></br></li><li>To update key-signing for a reported managed DNS Zone, run the following command:<br><code> gcloud dns managed-zones update ZONE_NAME --dnssec-state on --ksk-algorithm KSK_ALGORITHM --ksk-key-length KSK_KEY_LENGTH --zsk-algorithm ZSK_ALGORITHM --zsk-key-length ZSK_KEY_LENGTH --denial-of-existence DENIAL_OF_EXISTENCE</code></br></li></ol></p><p><b>Path</b>: dns.projects.id.managed_zones.id</p><p><b>Conditions</b>: and,dns.projects.id.managed_zones.id.zone_signing_algorithm,equal,rsasha1</p>",
+        "tags":
+        [
+            "https://cloud.google.com/dns/dnssec-advanced#advanced_signing_options"
+        ],
+        "sort_order": 53
+    },
+    {
+        "testcase": "Functions - Functions Allowing HTTP Traffic (Gen 1)",
+        "code": "security_level",
+        "details": "<p>Use of a secure protocol (HTTPS) is best practice for encrypted communication. A function allowing HTTP traffic can be vulnerable to eavesdropping and man-in-the-middle attacks.</p><p><b>Path</b>: functions.projects.id.functions_v1.id</p><p><b>Conditions</b>: or,functions.projects.id.functions_v1.id.security_level,notEqual,SECURE_ALWAYS</p>",
+        "tags":
+        [
+            "https://cloud.google.com/logging/docs/reference/audit/appengine/rest/Shared.Types/SecurityLevel"
+        ],
+        "sort_order": 54
+    },
+    {
+        "testcase": "Functions - Potential Secrets in Function Environment Variables (Gen 1)",
+        "code": "environment_variables_secrets",
+        "details": "<p>Anyone who can access the function can view the configured secrets. Best practice is to store configuration secrets in Secret Manager (or similar).</p><p><b>Path</b>: functions.projects.id.functions_v1.id</p><p><b>Conditions</b>: or,functions.projects.id.functions_v1.id.environment_variables_secrets,notEmpty,</p>",
+        "tags":
+        [],
+        "sort_order": 55
+    },
+    {
+        "testcase": "Functions - Functions Accessible by \"_ARG_0_\"",
+        "code": "bindings",
+        "details": "<p>Allowing anonymous and/or public access grants permissions to anyone to access the function's configuration and content. This configuration should be restricted to follow the principle of least privilege</p><p><b>Path</b>: functions.projects.id.functions_v1.id</p><p><b>Key</b>: functions-v1-function-_ARG_0_</p><p><b>Argument Names</b>:<ul><li>Member</li></ul></p><p><b>Conditions</b>: or,functions.projects.id.functions_v1.id.bindings,containString,_ARG_0_</p>",
+        "tags":
+        [
+            "https://cloud.google.com/logging/docs/reference/audit/appengine/rest/Shared.Types/SecurityLevel"
+        ],
+        "sort_order": 56
+    },
+    {
+        "testcase": "Functions - Public Function Endpoint (Gen 1)",
+        "code": "ingress_settings",
+        "details": "<p>The Cloud Function's ingress configuration allowed all traffic, potentially exposing undesired functionality. It is recommended that traffic reaching functions be routed via a load balancer, to minimize the attack surface.</p><p><b>Display Path</b>: functions.projects.id.functions_v1.id</p><p><b>Path</b>: functions.projects.id.functions_v1.id.bindings.id</p><p><b>Conditions</b>: and,functions.projects.id.functions_v1.id.ingress_settings,equal,ALLOW_ALL,functions.projects.id.functions_v1.id.bindings.id.role,equal,roles/viewer,functions.projects.id.functions_v1.id.bindings.id.members,containString,allUsers</p>",
+        "tags":
+        [],
+        "sort_order": 57
+    },
+    {
+        "testcase": "Functions - Potential Secrets in Function Environment Variables (Gen 2)",
+        "code": "environment_variables_secrets",
+        "details": "<p>Anyone who can access the function can view the configured secrets. Best practice is to store configuration secrets in Secret Manager (or similar).</p><p><b>Path</b>: functions.projects.id.functions_v2.id</p><p><b>Conditions</b>: or,functions.projects.id.functions_v2.id.environment_variables_secrets,notEmpty,</p>",
+        "tags":
+        [],
+        "sort_order": 58
+    },
+    {
+        "testcase": "Functions - Public Function Endpoint (Gen 2)",
+        "code": "ingress_settings",
+        "details": "<p>The Cloud Function's ingress configuration allowed all traffic, potentially exposing undesired functionality. It is recommended that traffic reaching functions be routed via a load balancer, to minimize the attack surface.</p><p><b>Path</b>: functions.projects.id.functions_v2.id</p><p><b>Conditions</b>: or,functions.projects.id.functions_v2.id.ingress_settings,equal,ALLOW_ALL</p>",
+        "tags":
+        [],
+        "sort_order": 59
+    },
+    {
+        "testcase": "Users - Gmail Account in Use",
+        "code": "name",
+        "details": "<p>It is recommended fully-managed corporate Google accounts be used for increased visibility, auditing, and controlling access to Cloud Platform resources. Email accounts based outside of the user's organization, such as personal accounts, should not be used for business purposes.</p><p><b>Path</b>: iam.projects.id.users.id</p><p><b>Conditions</b>: and,iam.projects.id.users.id.name,match,.+@gmail[.]com</p>",
+        "tags":
+        [
+            "CIS Google Cloud Platform Foundations v1.0.0 ref:1.1",
+            "CIS Google Cloud Platform Foundations v1.1.0 ref:1.1",
+            "https://cloud.google.com/docs/enterprise/best-practices-for-enterprise-organizations#manage-identities",
+            "https://support.google.com/work/android/answer/6371476",
+            "https://cloud.google.com/sdk/gcloud/reference/organizations/get-iam-policy",
+            "https://cloud.google.com/sdk/gcloud/reference/beta/resource-manager/folders/get-iam-policy",
+            "https://cloud.google.com/sdk/gcloud/reference/projects/get-iam-policy",
+            "https://cloud.google.com/resource-manager/docs/organization-policy/org-policy-constraints",
+            "https://cloud.google.com/resource-manager/docs/organization-policy/restricting-domains"
+        ],
+        "sort_order": 60
+    },
+    {
+        "testcase": "Service Accounts - Lack of User-Managed Service Account Key Rotation",
+        "code": "valid_after",
+        "details": "<p>Rotating Service Account keys will reduce the window of opportunity for an access key that is associated with a compromised or terminated account to be used. User-managed Service Account keys should be rotated to ensure that data cannot be accessed with an old key which might have been lost, cracked, or stolen. It should be ensured that keys are rotated every 90 days.<br>This issue does not apply to system-managed keys, as they are automatically rotated by Google, and are used for signing for a maximum of two weeks. The rotation process is probabilistic, and usage of the new key will gradually ramp up and down over the key's lifetime.</p><p><b>Recommendation</b>: From console: <br>Delete any external (user-managed) Service Account Key older than 90 days: <ol><li>Go to <samp>APIs & Services\\Credentials</samp> using <samp>https://console.cloud.google.com/apis/credentials</samp></li><li>In the Section <samp>Service Account Keys</samp>, for every external (user-managed) service account key where <samp>creation date</samp> is greater than or equal to the past 90 days, click <samp>Delete Bin Icon</samp> to <samp>Delete Service Account key</samp></li></ol> <br>Create a new external (user-managed) Service Account Key for a Service Account:<ol><li>Go to <samp>APIs & Services\\Credentials</samp> using <samp>https://console.cloud.google.com/apis/credentials</samp></li><li>Click <samp>Create Credentials</samp> and <samp>Select Service Account Key.</samp></li><li>Choose the service account in the drop-down list for which an External (user-managed) Service Account key needs to be created.</li><li>Select the desired key type format among <samp>JSON</samp> or <samp>P12</samp>.</li><li>Click <samp>Create</samp>. It will download the <samp>private key</samp>. Keep it safe.</li><li>Click <samp>close</samp> if prompted</li><li>The site will redirect to the <samp>APIs & Services\\Credentials</samp> page. Make a note of the new <samp>ID</samp> displayed in the <samp>Service account keys</samp> section.</li></ol> </p><p><b>Display Path</b>: iam.projects.id.service_accounts.id</p><p><b>Path</b>: iam.projects.id.service_accounts.id.keys.id</p><p><b>Conditions</b>: and,iam.projects.id.service_accounts.id.keys.id.valid_after,olderThan,90,days,iam.projects.id.service_accounts.id.keys.id.key_type,equal,USER_MANAGED</p>",
+        "tags":
+        [
+            "CIS Google Cloud Platform Foundations v1.0.0 ref:1.6",
+            "CIS Google Cloud Platform Foundations v1.1.0 ref:1.7",
+            "https://cloud.google.com/iam/docs/understanding-service-accounts#managing_service_account_keys",
+            "https://cloud.google.com/sdk/gcloud/reference/iam/service-accounts/keys/list",
+            "https://cloud.google.com/iam/docs/service-accounts",
+            "https://cloud.google.com/iam/docs/reference/rest/v1/projects.serviceAccounts.keys"
+        ],
+        "sort_order": 61
+    },
+    {
+        "testcase": "Bindings - Basic Role in Use",
+        "code": "name",
+        "details": "<p>Basic roles grant significant privileges. In most cases, usage of these roles is not recommended and does not follow security best practice.<br><br><b>Note: </b>This rule may flag Google-Managed Service Accounts. Google services rely on these Service Accounts having access to the project, and recommends not removing or changing the Service Account's role (see https://cloud.google.com/iam/docs/service-accounts#google-managed).</p><p><b>Recommendation</b>: From Console: <ol><li>Go to <samp>IAM & admin/IAM</samp> using <samp>https://console.cloud.google.com/iam-admin/iam</samp></li><li>Got to the <samp>Members</samp></li><li>Identify <samp>User-Managed user created</samp> service account with roles containing <samp>*Admin</samp> or <samp>*admin</samp> or role matching <samp>Editor</samp> or role matching <samp>Owner</samp></li><li>Click the <samp>Delete bin</samp> icon to remove the role from the member (service account in this case)</li></ol></p><p><b>Path</b>: iam.projects.id.bindings.id</p><p><b>Conditions</b>: and,iam.projects.id.bindings.id.name,containAtLeastOneOf,owner,editor,viewer</p>",
+        "tags":
+        [
+            "CIS Google Cloud Platform Foundations v1.0.0 ref:1.4",
+            "CIS Google Cloud Platform Foundations v1.1.0 ref:1.5",
+            "https://cloud.google.com/sdk/gcloud/reference/iam/service-accounts/",
+            "https://cloud.google.com/iam/docs/understanding-roles",
+            "https://cloud.google.com/iam/docs/understanding-service-accounts"
+        ],
+        "sort_order": 62
+    },
+    {
+        "testcase": "Project - Separation of Duties Not Enforced for Service Account",
+        "code": "account_separation_duties",
+        "details": "<p>Separation of duties is the concept of ensuring that one individual does not have all necessary permissions to be able to complete a malicious action. In Cloud IAM-service accounts, this could be an action such as using a service account to access resources that user should not normally have access to. No user should have Service Account Admin and Service Account User roles assigned at the same time.</p><p><b>Recommendation</b>: From console:<ol><li>Go to <samp>IAM & Admin/IAM</samp> using <samp>https://console.cloud.google.com/iam-admin/iam</samp>.</li><li>For any member having both <samp>Service Account Admin</samp> and <samp>Service account User</samp> roles granted/assigned, click the <samp>Delete Bin</samp> icon to remove either role from the member.<br> Removal of a role should be done based on the business requirements.</li></ol></p><p><b>Path</b>: iam.projects.id.bindings_separation_duties.id</p><p><b>Conditions</b>: and,iam.projects.id.bindings_separation_duties.id.account_separation_duties,false,</p>",
+        "tags":
+        [
+            "CIS Google Cloud Platform Foundations v1.1.0 ref:1.8",
+            "https://cloud.google.com/iam/docs/service-accounts",
+            "https://cloud.google.com/iam/docs/understanding-roles",
+            "https://cloud.google.com/iam/docs/granting-changing-revoking-access"
+        ],
+        "sort_order": 63
+    },
+    {
+        "testcase": "Bindings - IAM Role Assigned to Domain",
+        "code": "domains",
+        "details": "<p>Roles granted to Workspace domains grant permissions to all users of the domain's Organization, which goes against the principle of least privilege.</p><p><b>Path</b>: iam.projects.id.bindings.id</p><p><b>Conditions</b>: and,iam.projects.id.bindings.id.members.domains,notEmpty,</p>",
+        "tags":
+        [
+            "https://cloud.google.com/iam/docs/understanding-roles",
+            "https://cloud.google.com/iam/docs/using-iam-securely"
+        ],
+        "sort_order": 64
+    },
+    {
+        "testcase": "Bindings - IAM Role Assigned to User",
+        "code": "users",
+        "details": "<p>Best practices recommends granting roles to a Google Suite group instead of to individual users when possible. It is easier to add members to and remove members from a group instead of updating a Cloud IAM policy to add or remove users.</p><p><b>Path</b>: iam.projects.id.bindings.id</p><p><b>Conditions</b>: and,iam.projects.id.bindings.id.members.users,notEmpty,</p>",
+        "tags":
+        [
+            "https://cloud.google.com/iam/docs/understanding-roles",
+            "https://cloud.google.com/iam/docs/using-iam-securely"
+        ],
+        "sort_order": 65
+    },
+    {
+        "testcase": "Project - Separation of Duties Not Enforced for KMS",
+        "code": "kms_separation_duties",
+        "details": "<p>Separation of duties is the concept of ensuring that one individual does not have all necessary permissions to be able to complete a malicious action. In Cloud KMS, this could be an action such as using a key to access and decrypt data a user should not normally have access to. Separation of duties is a business control typically used in larger organizations, meant to help avoid security or privacy incidents and errors. It is considered best practice. No user(s) should have Cloud KMS Admin and any of the Cloud KMS CryptoKey Encrypter/Decrypter, Cloud KMS CryptoKey Encrypter, Cloud KMS CryptoKey Decrypter roles assigned at the same time.</p><p><b>Recommendation</b>: From console:<ol><li>Go to <samp>IAM & Admin/IAM</samp> using <samp>https://console.cloud.google.com/iam-admin/iam</samp>.</li><li>For any member having <samp>Cloud KMS Admin</samp> and any of the <samp>Cloud KMS CryptoKey Encrypter/Decrypter, Cloud KMS CryptoKey Encrypter, Cloud KMS CryptoKey Decrypter</samp> roles granted/assigned, click the <samp>Delete Bin</samp> icon to remove either role from the member.<br> Removal of a role should be done based on the business requirements.</li></ol></p><p><b>Path</b>: iam.projects.id.bindings_separation_duties.id</p><p><b>Conditions</b>: and,iam.projects.id.bindings_separation_duties.id.kms_separation_duties,false,</p>",
+        "tags":
+        [
+            "CIS Google Cloud Platform Foundations v1.1.0 ref:1.11",
+            "https://cloud.google.com/kms/docs/separation-of-duties"
+        ],
+        "sort_order": 66
+    },
+    {
+        "testcase": "Bindings - Service Account with Admin Privileges",
+        "code": "service_accounts",
+        "details": "<p>Service accounts represent service-level security of the Resources (application or a VM) which can be determined by the roles assigned to it. Enrolling Service Accounts with administrative privileges grants full access to assigned application or a VM, Service Account Access holder can user.<br><br><b>Note: </b>This rule may flag Google-Managed Service Accounts. Google services rely on these Service Accounts having access to the project, and recommends not removing or changing the Service Account's role</p><p><b>Recommendation</b>: From Console: <ol><li>Go to <samp>IAM & admin/IAM</samp> using <samp>https://console.cloud.google.com/iam-admin/iam</samp></li><li>Got to the <samp>Members</samp></li><li>Identify <samp>User-Managed user created</samp> service account with roles containing <samp>*Admin</samp> or <samp>*admin</samp> or role matching <samp>Editor</samp> or role matching <samp>Owner</samp></li><li>Click the <samp>Delete bin</samp> icon to remove the role from the member (service account in this case)</li></ol></p><p><b>Path</b>: iam.projects.id.bindings.id</p><p><b>Conditions</b>: and,or,iam.projects.id.bindings.id.name,containAtLeastOneOf,editor,owner,iam.projects.id.bindings.id.name,match,.*admin,iam.projects.id.bindings.id.members.service_accounts,notEmpty,</p>",
+        "tags":
+        [
+            "CIS Google Cloud Platform Foundations v1.0.0 ref:1.4",
+            "CIS Google Cloud Platform Foundations v1.1.0 ref:1.5",
+            "https://cloud.google.com/sdk/gcloud/reference/iam/service-accounts/",
+            "https://cloud.google.com/iam/docs/understanding-roles",
+            "https://cloud.google.com/iam/docs/understanding-service-accounts"
+        ],
+        "sort_order": 67
+    },
+    {
+        "testcase": "Service Accounts - _ARG_1_",
+        "details": "<p>Access to the Service Account User role (roles/iam.serviceAccountUser) should be restricted, as members granted this role on a service account can use it to indirectly access all the resources to which the service account has access. </p><p><b>Display Path</b>: iam.projects.id.service_accounts.id</p><p><b>Path</b>: iam.projects.id.service_accounts.id.bindings.id</p><p><b>Key</b>: iam-service-account-user-_ARG_0_</p><p><b>Argument Names</b>:<ul><li>Member</li><li>Description</li></ul></p><p><b>Conditions</b>: and,iam.projects.id.service_accounts.id.bindings.id.members,containAtLeastOneOf,_ARG_0_</p>",
+        "tags":
+        [
+            "https://cloud.google.com/iam/docs/service-accounts#user-role"
+        ],
+        "sort_order": 68
+    },
+    {
+        "testcase": "Service Accounts - User-Managed Service Account Keys",
+        "code": "key_type",
+        "details": "<p>It is recommended to prevent use of user-managed service account keys, as anyone who has access to the keys will be able to access resources through the service account. Best practice recommends using GCP-managed keys, which are used by Cloud Platform services such as App Engine and Compute Engine. These keys cannot be downloaded. Google will keep the keys and automatically rotate them on an approximately weekly basis.</p><p><b>Recommendation</b>: From Console: <ol><li>Go to the IAM page in the GCP Console using <samp>https://console.cloud.google.com/iam-admin/iam</samp></li><li>In the left navigation pane, click <samp>Service accounts</samp>. All service accounts and their corresponding keys are listed.</li><li>Click the service account.</li><li>Click the <samp>edit</samp> and delete the keys.</li></ol></p><p><b>Display Path</b>: iam.projects.id.service_accounts.id</p><p><b>Path</b>: iam.projects.id.service_accounts.id.keys.id</p><p><b>Conditions</b>: and,iam.projects.id.service_accounts.id.keys.id.key_type,equal,USER_MANAGED</p>",
+        "tags":
+        [
+            "CIS Google Cloud Platform Foundations v1.0.0 ref:1.3",
+            "CIS Google Cloud Platform Foundations v1.1.0 ref:1.4",
+            "https://cloud.google.com/iam/docs/understanding-service-accounts#managing_service_account_keys",
+            "https://cloud.google.com/resource-manager/docs/organization-policy/restricting-service-accounts"
+        ],
+        "sort_order": 69
+    },
+    {
+        "testcase": "Bindings - User with Privileged Service Account Roles at the Project Level",
+        "code": "user_has_sa_user_role",
+        "details": "<p>Granting the iam.serviceAccountUser, iam.serviceAccountTokenCreator, or iam.serviceAccountActor role to a user for a project gives the user access to all service accounts in the project, including service accounts that may be created in the future. This can result into elevation of privileges by using service accounts and corresponding Compute Engine instances.</p><p><b>Recommendation</b>: From console: <ol><li>Go to the IAM page in the GCP Console by visiting: https://console.cloud.google.com/iam-admin/iam.</li><li>Click on the filter table text bar. Type <samp>Role: Service Account User</samp></li><li>Click the <samp>Delete Bin<samp> icon in front of the role <samp>Service Account User</samp> for every user listed as a result of a filter.</li><li>Click on the filter table text bar. Type <samp>Role: Service Account Token Creator<samp></li><li>Click the <samp>Delete Bin</samp> icon in front of the role <samp>Service Account Token Creator</samp> for every user listed as a result of a filter.</li></ol></p><p><b>Path</b>: iam.projects.id.bindings.id</p><p><b>Conditions</b>: and,iam.projects.id.bindings.id.name,containAtLeastOneOf,iam.serviceAccountUser,iam.serviceAccountTokenCreator,iam.serviceAccountActor</p>",
+        "tags":
+        [
+            "CIS Google Cloud Platform Foundations v1.0.0 ref:1.5",
+            "CIS Google Cloud Platform Foundations v1.1.0 ref:1.6",
+            "https://cloud.google.com/iam/docs/service-accounts",
+            "https://cloud.google.com/iam/docs/granting-changing-revoking-access",
+            "https://cloud.google.com/iam/docs/understanding-roles",
+            "https://cloud.google.com/iam/docs/granting-changing-revoking-access",
+            "https://console.cloud.google.com/iam-admin/iam"
+        ],
+        "sort_order": 70
+    },
+    {
+        "testcase": "KMS Bindings - Cloud KMS Cryptokeys Anonymously or Publicly Accessible",
+        "code": "anonymous_public_accessible",
+        "details": "<p>Granting permissions to allUsers or allAuthenticatedUsers allows anyone to access the data set. Such access might not be desirable if sensitive data is stored at the location. In this case, ensure that anonymous and/or public access to a Cloud KMS cryptokey is not allowed.</p><p><b>Recommendation</b>: From command line:<ol><li>List all Cloud KMS <samp>Cryptokeys</samp>: <br> gcloud kms keys list --keyring=[key_ring_name] --location=global --format=json | jq '.[].name'</li><li>Remove IAM policy binding for a KMS key to remove access to <samp>allUsers</samp> and <samp>allAuthenticatedUsers</samp> using the below command.<br> gcloud kms keys remove-iam-policy-binding [key_name] --keyring=[key_ring_name] --location=global --member='allAuthenticatedUsers' --role='[role]' <br> gcloud kms keys remove-iam-policy-binding [key_name] --keyring=[key_ring_name] --location=global --member='allUsers' --role='[role]'</li></ol></p><p><b>Display Path</b>: kms.projects.id.keyrings.id</p><p><b>Path</b>: kms.projects.id.keyrings.id.keys.id.kms_iam_policy.id</p><p><b>Conditions</b>: and,kms.projects.id.keyrings.id.keys.id.state,equal,ENABLED,kms.projects.id.keyrings.id.keys.id.kms_iam_policy.id.anonymous_public_accessible,false,</p>",
+        "tags":
+        [
+            "CIS Google Cloud Platform Foundations v1.1.0 ref:1.9",
+            "https://cloud.google.com/sdk/gcloud/reference/kms/keys/remove-iam-policy-binding",
+            "https://cloud.google.com/sdk/gcloud/reference/kms/keys/set-iam-policy",
+            "https://cloud.google.com/sdk/gcloud/reference/kms/keys/get-iam-policy",
+            "https://cloud.google.com/kms/docs/resource-hierarchy#key_resource_id"
+        ],
+        "sort_order": 71
+    },
+    {
+        "testcase": "Keys - KMS Encryption Not Rotated within 90 Days",
+        "code": "rotation_period",
+        "details": "<p>Set a key rotation period and starting time. A key can be created with a specified rotation period, which is the time between when new key versions are generated automatically. A key is used to protect some corpus of data. A collection of files could be encrypted with the same key and people with decrypt permissions on that key would be able to decrypt those files. Therefore, it's necessary to make sure the rotation period is set to a specific time.</p><p><b>Recommendation</b>: From console:<ol><li>Got to <samp>Cryptographic Keys</samp> by visiting: https://console.cloud.google.com/security/kms.</li><li>Click on the specific key ring</li><li>From the list of keys, choose the specific key and Click on <samp>Right side pop up the blade (3 dots).</samp></li><li>Click on <samp>Edit rotation period.</samp></li><li>On the pop-up window, <samp>Select a new rotation period</samp> in days which should be less than 90 and then choose <samp>Starting on</samp> date (date from which the rotation period begins).</li></ol></p><p><b>Display Path</b>: kms.projects.id.keyrings.id</p><p><b>Path</b>: kms.projects.id.keyrings.id.keys.id</p><p><b>Conditions</b>: and,kms.projects.id.keyrings.id.keys.id.state,equal,ENABLED,or,kms.projects.id.keyrings.id.keys.id.rotation_period,equal,None,kms.projects.id.keyrings.id.keys.id.rotation_period,moreThan,90,or,kms.projects.id.keyrings.id.keys.id.next_rotation_time_days,equal,None,kms.projects.id.keyrings.id.keys.id.next_rotation_time_days,moreThan,90</p>",
+        "tags":
+        [
+            "CIS Google Cloud Platform Foundations v1.1.0 ref:1.10",
+            "https://cloud.google.com/kms/docs/key-rotation#frequency_of_key_rotation",
+            "https://cloud.google.com/kms/docs/re-encrypt-data"
+        ],
+        "sort_order": 72
+    },
+    {
+        "testcase": "Clusters - Basic Authentication Enabled",
+        "code": "basic_authentication_enabled",
+        "details": "<p>Basic authentication allows a user to authenticate to the cluster with a username and password and it is stored in plain text without any encryption. Disabling Basic authentication will prevent attacks like brute force. Its recommended to use either client certificate or IAM for authentication.</p><p><b>Path</b>: kubernetesengine.projects.id.clusters.id</p><p><b>Conditions</b>: and,kubernetesengine.projects.id.clusters.id.basic_authentication_enabled,true,</p>",
+        "tags":
+        [
+            "CIS Google Cloud Platform Foundations v1.0.0 ref:7.10",
+            "CIS GKE Benchmark v1.0.0 ref:6.8.1",
+            "https://www.cisecurity.org/benchmark/kubernetes/",
+            "https://cloud.google.com/kubernetes-engine/docs/how-to/hardening-your-cluster#restrict_authn_methods",
+            "https://cloud.google.com/kubernetes-engine/docs/concepts/cis-benchmarks#evaluation_on"
+        ],
+        "sort_order": 73
+    },
+    {
+        "testcase": "Clusters - Certificate Authentication Enabled",
+        "code": "client_certificate_enabled",
+        "details": "<p>Unless applications use the client certificate authentication method, it should be disabled.</p><p><b>Path</b>: kubernetesengine.projects.id.clusters.id</p><p><b>Conditions</b>: and,kubernetesengine.projects.id.clusters.id.client_certificate_enabled,true,</p>",
+        "tags":
+        [
+            "CIS GKE Benchmark v1.0.0 ref:6.8.2",
+            "https://www.cisecurity.org/benchmark/kubernetes/",
+            "https://cloud.google.com/kubernetes-engine/docs/how-to/hardening-your-cluster#restrict_authn_methods",
+            "https://cloud.google.com/kubernetes-engine/docs/concepts/cis-benchmarks#evaluation_on"
+        ],
+        "sort_order": 74
+    },
+    {
+        "testcase": "Clusters - Alias IP Disabled",
+        "code": "alias_ip_disabled",
+        "details": "<p>With Alias IPs ranges enabled, Kubernetes Engine clusters can allocate IP addresses from a CIDR block known to Google Cloud Platform. This makes your cluster more scalable and allows your cluster to better interact with other GCP products and entities.</p><p><b>Path</b>: kubernetesengine.projects.id.clusters.id</p><p><b>Conditions</b>: and,kubernetesengine.projects.id.clusters.id.alias_ip_enabled,false,</p>",
+        "tags":
+        [
+            "CIS Google Cloud Platform Foundations v1.0.0 ref:7.13",
+            "CIS GKE Benchmark v1.0.0 ref:6.6.2",
+            "https://www.cisecurity.org/benchmark/kubernetes/",
+            "https://cloud.google.com/kubernetes-engine/docs/how-to/hardening-your-cluster#restrict_network_access_to_the_control_plane_and_nodes",
+            "https://cloud.google.com/kubernetes-engine/docs/concepts/cis-benchmarks#default_values_on"
+        ],
+        "sort_order": 75
+    },
+    {
+        "testcase": "Clusters - Application-Layer Secrets Encryption Disabled",
+        "code": "application_layer_encryption_enabled",
+        "details": "<p>By default, GKE encrypts customer content stored at rest, including Secrets. GKE handles and manages this default encryption without any additional action.<br>Application-layer Secrets Encryption provides an additional layer of security for sensitive data, such as user defined Secrets and Secrets required for the operation of the cluster, such as service account keys, which are all stored in etcd.<br>Using this functionality, you can use a key, that you manage in Cloud KMS, to encrypt data at the application layer. This protects against attackers in the event that they manage to gain access to etcd.</p><p><b>Path</b>: kubernetesengine.projects.id.clusters.id</p><p><b>Conditions</b>: and,application_layer_encryption_enabled,false,</p>",
+        "tags":
+        [
+            "CIS GKE Benchmark v1.0.0 ref:6.3.1",
+            "https://www.cisecurity.org/benchmark/kubernetes/",
+            "https://cloud.google.com/kubernetes-engine/docs/how-to/encrypting-secrets"
+        ],
+        "sort_order": 76
+    },
+    {
+        "testcase": "Clusters - Binary Authorization Disabled",
+        "code": "binary_authorization_enabled",
+        "details": "<p>Binary Authorization provides software supply-chain security for images that you deploy to GKE from Google Container Registry (GCR) or another container image registry.<br>Binary Authorization requires images to be signed by trusted authorities during the development process. These signatures are then validated at deployment time. By enforcing validation, you can gain tighter control over your container environment by ensuring only verified images are integrated into the build-and-release process.</p><p><b>Path</b>: kubernetesengine.projects.id.clusters.id</p><p><b>Conditions</b>: and,kubernetesengine.projects.id.clusters.id.binary_authorization_enabled,false,</p>",
+        "tags":
+        [
+            "CIS GKE Benchmark v1.0.0 ref:6.10.5",
+            "https://www.cisecurity.org/benchmark/kubernetes/",
+            "https://cloud.google.com/binary-authorization/"
+        ],
+        "sort_order": 77
+    },
+    {
+        "testcase": "Clusters - Clusters Lacking Labels",
+        "code": "has_no_labels",
+        "details": "<p>Labels enable users to map their own organizational structures onto system objects in a loosely coupled fashion, without requiring clients to store these mappings. Labels can also be used to apply specific security settings and auto configure objects at creation.</p><p><b>Path</b>: kubernetesengine.projects.id.clusters.id</p><p><b>Conditions</b>: and,kubernetesengine.projects.id.clusters.id.has_labels,false,</p>",
+        "tags":
+        [
+            "CIS Google Cloud Platform Foundations v1.0.0 ref:7.5",
+            "https://cloud.google.com/kubernetes-engine/docs/how-to/hardening-your-cluster#use_namespaces_and_rbac_to_restrict_access_to_cluster_resources"
+        ],
+        "sort_order": 78
+    },
+    {
+        "testcase": "Clusters - Cluster Logging Disabled",
+        "code": "logging_disabled",
+        "details": "<p>You should enable cluster logging and use a logging service so your cluster can export logs about its activities.</p><p><b>Path</b>: kubernetesengine.projects.id.clusters.id</p><p><b>Conditions</b>: and,kubernetesengine.projects.id.clusters.id.logging_enabled,false,</p>",
+        "tags":
+        [
+            "CIS Google Cloud Platform Foundations v1.0.0 ref:7.1",
+            "CIS GKE Benchmark v1.0.0 ref:6.7.1",
+            "https://www.cisecurity.org/benchmark/kubernetes/",
+            "https://kubernetes.io/docs/tasks/debug-application-cluster/audit/",
+            "https://cloud.google.com/kubernetes-engine/docs/how-to/hardening-your-cluster#stackdriver_logging",
+            "https://cloud.google.com/kubernetes-engine/docs/concepts/cis-benchmarks#default_values_on"
+        ],
+        "sort_order": 79
+    },
+    {
+        "testcase": "Clusters - Master Authorized Networks Disabled",
+        "code": "master_authorized_networks_disabled",
+        "details": "<p>Master authorized networks blocks untrusted IP addresses from outside Google Cloud Platform. Addresses from inside GCP can still reach your master through HTTPS provided that they have the necessary Kubernetes credentials.</p><p><b>Path</b>: kubernetesengine.projects.id.clusters.id</p><p><b>Conditions</b>: and,kubernetesengine.projects.id.clusters.id.master_authorized_networks_enabled,false,</p>",
+        "tags":
+        [
+            "CIS Google Cloud Platform Foundations v1.0.0 ref:7.4",
+            "CIS GKE Benchmark v1.0.0 ref:6.6.3",
+            "https://www.cisecurity.org/benchmark/kubernetes/",
+            "https://cloud.google.com/kubernetes-engine/docs/how-to/authorized-networks",
+            "https://cloud.google.com/kubernetes-engine/docs/how-to/hardening-your-cluster#restrict_network_access_to_the_control_plane_and_nodes",
+            "https://cloud.google.com/kubernetes-engine/docs/concepts/cis-benchmarks#default_values_on"
+        ],
+        "sort_order": 80
+    },
+    {
+        "testcase": "Clusters - GKE Metadata Server Disabled",
+        "code": "metadata_server_enabled",
+        "details": "<p>Every GKE node stores its metadata on a metadata server. Some of this metadata, such as kubelet credentials and the VM instance identity token, is sensitive and should not be exposed to a Kubernetes workload.<br>Enabling the GKE Metadata server prevents pods (that are not running on the host network) from accessing this metadata and facilitates Workload Identity.<br>When unspecified, the default setting allows running pods to have full access to the node's underlying metadata server.</p><p><b>Path</b>: kubernetesengine.projects.id.clusters.id</p><p><b>Conditions</b>: and,metadata_server_enabled,false,</p>",
+        "tags":
+        [
+            "CIS GKE Benchmark v1.0.0 ref:6.4.2",
+            "https://www.cisecurity.org/benchmark/kubernetes/",
+            "https://cloud.google.com/kubernetes-engine/docs/how-to/protecting-cluster-metadata#concealment"
+        ],
+        "sort_order": 81
+    },
+    {
+        "testcase": "Clusters - Cluster Monitoring Disabled",
+        "code": "monitoring_disabled",
+        "details": "<p>You should enable cluster monitoring and use a monitoring service so your cluster can export metrics about its activities.</p><p><b>Path</b>: kubernetesengine.projects.id.clusters.id</p><p><b>Conditions</b>: and,kubernetesengine.projects.id.clusters.id.monitoring_enabled,false,</p>",
+        "tags":
+        [
+            "CIS Google Cloud Platform Foundations v1.0.0 ref:7.2",
+            "CIS GKE Benchmark v1.0.0 ref:6.7.1",
+            "https://www.cisecurity.org/benchmark/kubernetes/",
+            "https://cloud.google.com/kubernetes-engine/docs/how-to/hardening-your-cluster#stackdriver_logging",
+            "https://cloud.google.com/monitoring/kubernetes-engine#about-skm",
+            "https://cloud.google.com/kubernetes-engine/docs/concepts/cis-benchmarks#default_values_on"
+        ],
+        "sort_order": 82
+    },
+    {
+        "testcase": "Clusters - Network Policy Disabled",
+        "code": "network_policy_disabled",
+        "details": "<p>By default, pods are non-isolated; they accept traffic from any source. Pods become isolated by having a NetworkPolicy that selects them. Once there is any NetworkPolicy in a namespace selecting a particular pod, that pod will reject any connections that are not allowed by any NetworkPolicy.</p><p><b>Path</b>: kubernetesengine.projects.id.clusters.id</p><p><b>Conditions</b>: and,kubernetesengine.projects.id.clusters.id.network_policy_enabled,false,</p>",
+        "tags":
+        [
+            "CIS Google Cloud Platform Foundations v1.0.0 ref:7.11",
+            "CIS GKE Benchmark v1.0.0 ref:6.6.7",
+            "https://www.cisecurity.org/benchmark/kubernetes/",
+            "https://cloud.google.com/kubernetes-engine/docs/how-to/hardening-your-cluster#restrict_with_network_policy",
+            "https://cloud.google.com/kubernetes-engine/docs/concepts/security-overview#network_security",
+            "https://cloud.google.com/kubernetes-engine/docs/concepts/cis-benchmarks#default_values_on"
+        ],
+        "sort_order": 83
+    },
+    {
+        "testcase": "Clusters - Pod Security Policy Disabled",
+        "code": "pod_security_policy_enabled",
+        "details": "<p>A Pod Security Policy is a cluster-level resource that controls security sensitive aspects of the pod specification. The PodSecurityPolicy objects define a set of conditions that a pod must run with in order to be accepted into the system, as well as defaults for the related fields.</p><p><b>Recommendation</b>: Enable the Pod Security Policy. By default, Pod Security Policy is disabled when you create a new cluster.</p><p><b>Path</b>: kubernetesengine.projects.id.clusters.id</p><p><b>Conditions</b>: and,kubernetesengine.projects.id.clusters.id.pod_security_policy_enabled,false,</p>",
+        "tags":
+        [
+            "CIS Google Cloud Platform Foundations v1.0.0 ref:7.14",
+            "CIS GKE Benchmark v1.0.0 ref:6.10.3",
+            "https://www.cisecurity.org/benchmark/kubernetes/",
+            "https://cloud.google.com/kubernetes-engine/docs/how-to/pod-security-policies",
+            "https://kubernetes.io/docs/concepts/policy/pod-security-policy",
+            "https://cloud.google.com/kubernetes-engine/docs/concepts/cis-benchmarks#default_values_on"
+        ],
+        "sort_order": 84
+    },
+    {
+        "testcase": "Clusters - Private Cluster Endpoint Disabled",
+        "code": "private_endpoint_enabled",
+        "details": "<p>In a private cluster, the master node has two endpoints, a private and public endpoint. The private endpoint is the internal IP address of the master, behind an internal load balancer in the master's VPC network. Nodes communicate with the master using the private endpoint. The public endpoint enables the Kubernetes API to be accessed from outside the master's VPC network.<br>Although Kubernetes API requires an authorized token to perform sensitive actions, a vulnerability could potentially expose the Kubernetes publicly with unrestricted access. Additionally, an attacker may be able to identify the current cluster and Kubernetes API version and determine whether it is vulnerable to an attack.<br>Unless required, disabling public endpoint will help prevent such threats, and require the attacker to be on the master's VPC network to perform any attack on the Kubernetes API.</p><p><b>Path</b>: kubernetesengine.projects.id.clusters.id</p><p><b>Conditions</b>: and,kubernetesengine.projects.id.clusters.id.private_endpoint_enabled,false,</p>",
+        "tags":
+        [
+            "CIS Google Cloud Platform Foundations v1.0.0 ref:7.15",
+            "CIS GKE Benchmark v1.0.0 ref:6.6.4",
+            "https://www.cisecurity.org/benchmark/kubernetes/",
+            "https://cloud.google.com/kubernetes-engine/docs/how-to/hardening-your-cluster#restrict_network_access_to_the_control_plane_and_nodes",
+            "https://cloud.google.com/kubernetes-engine/docs/concepts/cis-benchmarks#default_values_on",
+            "https://cloud.google.com/kubernetes-engine/docs/how-to/private-clusters"
+        ],
+        "sort_order": 85
+    },
+    {
+        "testcase": "Clusters - Private Google Access Disabled",
+        "code": "private_ip_google_access_disabled",
+        "details": "<p>Enabling Private Google Access allows hosts on a subnetwork to use a private IP address to reach Google APIs rather than an external IP address.</p><p><b>Path</b>: kubernetesengine.projects.id.clusters.id</p><p><b>Conditions</b>: and,kubernetesengine.projects.id.clusters.id.private_ip_google_access_enabled,false,</p>",
+        "tags":
+        [
+            "CIS Google Cloud Platform Foundations v1.0.0 ref:7.16",
+            "https://cloud.google.com/kubernetes-engine/docs/how-to/hardening-your-cluster#restrict_network_access_to_the_control_plane_and_nodes"
+        ],
+        "sort_order": 86
+    },
+    {
+        "testcase": "Clusters - Cluster Not Subscribed to Release Channel",
+        "code": "release_channel",
+        "details": "<p>Release Channels signal a graduating level of stability and production-readiness. These are based on observed performance of GKE clusters running that version and represent experience and confidence in the cluster version.<br>The Regular release channel upgrades every few weeks and is for production users who need features not yet offered in the Stable channel. These versions have passed internal validation, but don't have enough historical data to guarantee their stability. Known issues generally have known workarounds.<br>The Stable release channel upgrades every few months and is for production users who need stability above all else, and for whom frequent upgrades are too risky. These versions have passed internal validation and have been shown to be stable and reliable in production, based on the observed performance of those clusters.<br>Critical security patches are delivered to all release channels.</p><p><b>Path</b>: kubernetesengine.projects.id.clusters.id</p><p><b>Conditions</b>: and,kubernetesengine.projects.id.clusters.id.release_channel,containNoneOf,REGULAR,STABLE</p>",
+        "tags":
+        [
+            "CIS GKE Benchmark v1.0.0 ref:6.5.4",
+            "https://www.cisecurity.org/benchmark/kubernetes/",
+            "https://cloud.google.com/kubernetes-engine/docs/concepts/release-channels"
+        ],
+        "sort_order": 87
+    },
+    {
+        "testcase": "Clusters - Shielded GKE Nodes Disabled",
+        "code": "shielded_nodes_enabled",
+        "details": "<p>Shielded GKE nodes protects clusters against boot- or kernel-level malware or rootkits which persist beyond infected OS.<br>Shielded GKE nodes run firmware which is signed and verified using Google's Certificate Authority, ensuring that the nodes' firmware is unmodified and establishing the root of trust for Secure Boot. GKE node identity is strongly protected via virtual Trusted Platform Module (vTPM) and verified remotely by the master node before the node joins the cluster.</p><p><b>Path</b>: kubernetesengine.projects.id.clusters.id</p><p><b>Conditions</b>: and,kubernetesengine.projects.id.clusters.id.shielded_nodes_enabled,false,</p>",
+        "tags":
+        [
+            "CIS GKE Benchmark v1.0.0 ref:6.5.5",
+            "https://www.cisecurity.org/benchmark/kubernetes/",
+            "https://cloud.google.com/kubernetes-engine/docs/how-to/shielded-gke-nodes"
+        ],
+        "sort_order": 88
+    },
+    {
+        "testcase": "Clusters - Workload Identity Disabled",
+        "code": "workload_identity_enabled",
+        "details": "<p>Enabling Workload Identity manages the distribution and rotation of Service account keys for the workloads to use.<br>Kubernetes workloads should not use cluster node service accounts to authenticate to Google Cloud APIs. Each Kubernetes Workload that needs to authenticate to other Google services using Cloud IAM should be provisioned a dedicated Service account.</p><p><b>Path</b>: kubernetesengine.projects.id.clusters.id</p><p><b>Conditions</b>: and,workload_identity_enabled,false,</p>",
+        "tags":
+        [
+            "CIS GKE Benchmark v1.0.0 ref:6.2.2",
+            "https://www.cisecurity.org/benchmark/kubernetes/",
+            "https://cloud.google.com/kubernetes-engine/docs/how-to/workload-identity"
+        ],
+        "sort_order": 89
+    },
+    {
+        "testcase": "Clusters - Kubernetes Dashboard Enabled",
+        "code": "dashboard_status",
+        "details": "<p>You should disable the Kubernetes Web UI (Dashboard) when running on Kubernetes Engine. The Kubernetes Web UI (Dashboard) is backed by a highly privileged Kubernetes Service Account. The Cloud Console provides much of the same functionality, so you don't need this functionality.</p><p><b>Path</b>: kubernetesengine.projects.id.clusters.id</p><p><b>Conditions</b>: and,kubernetesengine.projects.id.clusters.id.dashboard_status,equal,Enabled</p>",
+        "tags":
+        [
+            "CIS Google Cloud Platform Foundations v1.0.0 ref:7.6",
+            "CIS GKE Benchmark v1.0.0 ref:6.10.1",
+            "https://www.cisecurity.org/benchmark/kubernetes/",
+            "https://cloud.google.com/kubernetes-engine/docs/how-to/hardening-your-cluster#disable_kubernetes_dashboard",
+            "https://cloud.google.com/kubernetes-engine/docs/concepts/cis-benchmarks#default_values_on"
+        ],
+        "sort_order": 90
+    },
+    {
+        "testcase": "Clusters - Default Service Account in Use",
+        "code": "default_service_account_used",
+        "details": "<p>Each GKE node has a Service Account associated with it. By default, nodes are given the Compute Engine default service account. This account has broad access by default, making it useful to wide variety of applications, but it has more permissions than are required to run your Kubernetes Engine cluster. You should create and use a minimally privileged service account to run your GKE cluster instead of using the Compute Engine default service account.</p><p><b>Path</b>: kubernetesengine.projects.id.clusters.id</p><p><b>Conditions</b>: and,kubernetesengine.projects.id.clusters.id.service_account,equal,default</p>",
+        "tags":
+        [
+            "CIS Google Cloud Platform Foundations v1.0.0 ref:7.17",
+            "CIS GKE Benchmark v1.0.0 ref:6.2.1",
+            "https://www.cisecurity.org/benchmark/kubernetes/",
+            "https://cloud.google.com/kubernetes-engine/docs/how-to/hardening-your-cluster#use_least_privilege_sa",
+            "https://cloud.google.com/kubernetes-engine/docs/concepts/cis-benchmarks#default_values_on"
+        ],
+        "sort_order": 91
+    },
+    {
+        "testcase": "Clusters - Legacy Authorization (ABAC) Enabled",
+        "code": "legacy_abac_enabled",
+        "details": "<p>The legacy authorizer in Kubernetes grants broad, statically defined permissions. To ensure that RBAC limits permissions correctly, you must disable the legacy authorizer. RBAC has significant security advantages, can help you ensure that users only have access to cluster resources within their own namespace and is now stable in Kubernetes.</p><p><b>Path</b>: kubernetesengine.projects.id.clusters.id</p><p><b>Conditions</b>: and,kubernetesengine.projects.id.clusters.id.legacy_abac_enabled,true,</p>",
+        "tags":
+        [
+            "CIS Google Cloud Platform Foundations v1.0.0 ref:7.3",
+            "CIS GKE Benchmark v1.0.0 ref:6.8.4",
+            "https://www.cisecurity.org/benchmark/kubernetes/",
+            "https://cloud.google.com/kubernetes-engine/docs/how-to/hardening-your-cluster#leave_abac_disabled_default_for_110",
+            "https://cloud.google.com/kubernetes-engine/docs/concepts/cis-benchmarks#default_values_on"
+        ],
+        "sort_order": 92
+    },
+    {
+        "testcase": "Clusters - Legacy Metadata Endpoints Enabled",
+        "code": "legacy_metadata_endpoints_enabled",
+        "details": "<p>The instance metadata server exposed legacy v0.1 and v1beta1 endpoints, which do not enforce metadata query headers. This is a feature in the v1 APIs that makes it more difficult for a potential attacker to retrieve instance metadata, such as Server-Side Request Forgery (SSRF). Unless specifically required, we recommend you disable these legacy APIs.</p><p><b>Display Path</b>: kubernetesengine.projects.id.clusters.id</p><p><b>Path</b>: kubernetesengine.projects.id.clusters.id.node_pools.id</p><p><b>Conditions</b>: and,kubernetesengine.projects.id.clusters.id.node_pools.id.legacy_metadata_endpoints_enabled,true,</p>",
+        "tags":
+        [
+            "CIS GKE Benchmark v1.0.0 ref:6.4.1",
+            "https://www.cisecurity.org/benchmark/kubernetes/",
+            "https://cloud.google.com/kubernetes-engine/docs/how-to/hardening-your-cluster#protect_node_metadata_default_for_112",
+            "https://cloud.google.com/kubernetes-engine/docs/concepts/cis-benchmarks#default_values_on"
+        ],
+        "sort_order": 93
+    },
+    {
+        "testcase": "Clusters - Nodes with Auto-Repair Disabled",
+        "code": "auto_repair_disabled",
+        "details": "<p>Auto-repair helps maintain the cluster nodes in a healthy, running state.</p><p><b>Display Path</b>: kubernetesengine.projects.id.clusters.id</p><p><b>Path</b>: kubernetesengine.projects.id.clusters.id.node_pools.id</p><p><b>Conditions</b>: and,kubernetesengine.projects.id.clusters.id.node_pools.id.auto_repair_enabled,false,</p>",
+        "tags":
+        [
+            "CIS Google Cloud Platform Foundations v1.0.0 ref:7.7",
+            "CIS GKE Benchmark v1.0.0 ref:6.5.2",
+            "https://www.cisecurity.org/benchmark/kubernetes/",
+            "https://cloud.google.com/kubernetes-engine/docs/how-to/node-auto-repair",
+            "https://cloud.google.com/kubernetes-engine/docs/concepts/cis-benchmarks#default_values_on"
+        ],
+        "sort_order": 94
+    },
+    {
+        "testcase": "Clusters - Nodes with Auto-Upgrade Disabled",
+        "code": "auto_upgrade_disabled",
+        "details": "<p>Auto-upgrades automatically ensures that security updates are applied and kept up to date.</p><p><b>Display Path</b>: kubernetesengine.projects.id.clusters.id</p><p><b>Path</b>: kubernetesengine.projects.id.clusters.id.node_pools.id</p><p><b>Conditions</b>: and,kubernetesengine.projects.id.clusters.id.node_pools.id.auto_upgrade_enabled,false,</p>",
+        "tags":
+        [
+            "CIS Google Cloud Platform Foundations v1.0.0 ref:7.8",
+            "CIS GKE Benchmark v1.0.0 ref:6.5.3",
+            "https://www.cisecurity.org/benchmark/kubernetes/",
+            "https://cloud.google.com/kubernetes-engine/docs/how-to/node-auto-upgrades",
+            "https://cloud.google.com/kubernetes-engine/docs/concepts/cis-benchmarks#default_values_on"
+        ],
+        "sort_order": 95
+    },
+    {
+        "testcase": "Clusters - Lack of Container-Optimized OS Node Images",
+        "code": "container_optimized_os_not_used",
+        "details": "<p>It is recommended to use container-optimized OS images, as they provide improved support, security and stability.</p><p><b>Path</b>: kubernetesengine.projects.id.clusters.id</p><p><b>Conditions</b>: and,kubernetesengine.projects.id.clusters.id.image_type,containNoneOf,COS,COS_CONTAINERD</p>",
+        "tags":
+        [
+            "CIS Google Cloud Platform Foundations v1.0.0 ref:7.9",
+            "CIS GKE Benchmark v1.0.0 ref:6.5.1",
+            "https://www.cisecurity.org/benchmark/kubernetes/",
+            "https://cloud.google.com/container-optimized-os/docs/concepts/features-and-benefits",
+            "https://cloud.google.com/kubernetes-engine/docs/concepts/cis-benchmarks#default_values_on",
+            "https://cloud.google.com/kubernetes-engine/docs/concepts/node-images"
+        ],
+        "sort_order": 96
+    },
+    {
+        "testcase": "Clusters - Nodes with Integrity Monitoring Disabled",
+        "code": "integrity_monitoring_enabled",
+        "details": "<p>The Integrity Monitoring feature should be enabled for GKE cluster nodes in order to monitor and automatically check the runtime boot integrity of shielded cluster nodes using Cloud Monitoring service.</p><p><b>Display Path</b>: kubernetesengine.projects.id.clusters.id</p><p><b>Path</b>: kubernetesengine.projects.id.clusters.id.node_pools.id</p><p><b>Conditions</b>: and,kubernetesengine.projects.id.clusters.id.node_pools.id.integrity_monitoring_enabled,false,</p>",
+        "tags":
+        [
+            "https://www.cisecurity.org/benchmark/kubernetes/",
+            "https://cloud.google.com/kubernetes-engine/docs/how-to/hardening-your-cluster",
+            "https://cloud.google.com/kubernetes-engine/docs/how-to/shielded-gke-nodes"
+        ],
+        "sort_order": 97
+    },
+    {
+        "testcase": "Clusters - Nodes with Secure Boot Disabled",
+        "code": "secure_boot_enabled",
+        "details": "<p>The Secure Boot feature should be enabled for GKE cluster nodes in order to protect them against malware and rootkits. Secure Boot helps ensure that the system runs only authentic software by verifying the digital signature of all boot components, and halting the boot process if the signature verification fails.</p><p><b>Display Path</b>: kubernetesengine.projects.id.clusters.id</p><p><b>Path</b>: kubernetesengine.projects.id.clusters.id.node_pools.id</p><p><b>Conditions</b>: and,kubernetesengine.projects.id.clusters.id.node_pools.id.secure_boot_enabled,false,</p>",
+        "tags":
+        [
+            "https://www.cisecurity.org/benchmark/kubernetes/",
+            "https://cloud.google.com/kubernetes-engine/docs/how-to/hardening-your-cluster",
+            "https://cloud.google.com/kubernetes-engine/docs/how-to/shielded-gke-nodes"
+        ],
+        "sort_order": 98
+    },
+    {
+        "testcase": "Clusters - Private Cluster Nodes Disabled",
+        "code": "private_nodes_enabled",
+        "details": "<p>Private Nodes are nodes with no public IP addresses. Disabling public IP addresses on cluster nodes restricts access to only internal networks, forcing attackers to obtain local network access before attempting to compromise the underlying Kubernetes hosts.</p><p><b>Path</b>: kubernetesengine.projects.id.clusters.id</p><p><b>Conditions</b>: and,kubernetesengine.projects.id.clusters.id.private_nodes_enabled,false,</p>",
+        "tags":
+        [
+            "CIS Google Cloud Platform Foundations v1.0.0 ref:7.15",
+            "CIS GKE Benchmark v1.0.0 ref:6.6.5",
+            "https://www.cisecurity.org/benchmark/kubernetes/",
+            "https://cloud.google.com/kubernetes-engine/docs/how-to/hardening-your-cluster#restrict_network_access_to_the_control_plane_and_nodes",
+            "https://cloud.google.com/kubernetes-engine/docs/concepts/cis-benchmarks#default_values_on",
+            "https://cloud.google.com/kubernetes-engine/docs/how-to/private-clusters"
+        ],
+        "sort_order": 99
+    },
+    {
+        "testcase": "Clusters - Lack of Access Scope Limitation",
+        "code": "scopes_not_limited",
+        "details": "<p>If you are not creating a separate service account for your nodes, you should limit the scopes of the node service account to reduce the oportunity for privilege escalation. This ensures that the default service account does not have permissions beyond those necessary to run your cluster. While the default scopes are limited, they may include scopes beyond the minimally required ones needed to run your cluster. If you are accessing private images in Google Container Registry, the minimally required scopes are only logging.write, monitoring, and devstorage.read_only.</p><p><b>Path</b>: kubernetesengine.projects.id.clusters.id</p><p><b>Conditions</b>: and,kubernetesengine.projects.id.clusters.id.has_limited_scopes,false,</p>",
+        "tags":
+        [
+            "CIS Google Cloud Platform Foundations v1.0.0 ref:7.18",
+            "https://cloud.google.com/kubernetes-engine/docs/how-to/access-scopes"
+        ],
+        "sort_order": 100
+    },
+    {
+        "testcase": "Redis Instances - Memory Instance Allows Unauthenticated Connections",
+        "code": "auth_enabled",
+        "details": "<p>All incoming connections to Cloud Memorystore databases should require the use of authentication and SSL.</p><p><b>Path</b>: cloudmemorystore.projects.id.redis_instances.id</p><p><b>Conditions</b>: and,cloudmemorystore.projects.id.redis_instances.id.auth_enabled,false,</p>",
+        "tags":
+        [
+            "https://cloud.google.com/memorystore/docs/redis/managing-auth"
+        ],
+        "sort_order": 101
+    },
+    {
+        "testcase": "Redis Instances - Memory Instance Not Requiring SSL for Incoming Connections",
+        "code": "ssl_required",
+        "details": "<p>All incoming connections to Cloud Memorystore databases should require the use of SSL.</p><p><b>Path</b>: cloudmemorystore.projects.id.redis_instances.id</p><p><b>Conditions</b>: and,cloudmemorystore.projects.id.redis_instances.id.ssl_required,false,</p>",
+        "tags":
+        [
+            "https://cloud.google.com/memorystore/docs/redis/securing-tls-connections"
+        ],
+        "sort_order": 102
+    },
+    {
+        "testcase": "Logging Configurations - Log Metric Filter Doesn't Exist for Audit Configuration Changes",
+        "code": "audit_config_change",
+        "details": "<p>Configuring the metric filter and alerts for audit configuration changes ensures the recommended state of audit configuration is maintained so that all activities in the project are audit-able at any point in time.</p><p><b>Recommendation</b>: From console: <ol><li>Go to <samp>Logging/Logs</samp> by visiting https://console.cloud.google.com/logs/metrics and click \"CREATE METRIC\".</li><li>Click the down arrow symbol on the <samp>Filter Bar</samp> at the rightmost corner and select <samp>Convert to Advanced Filter</samp>.</li><li>Clear any text and add: <br> <samp> protoPayload.methodName=\"SetIamPolicy\" AND protoPayload.serviceData.policyDelta.auditConfigDeltas:*</samp></li><li>Click <samp>Submit Filter</samp>. The logs display based on the filter text entered by the user.</li><li>In the <samp>Metric Editor</samp> menu on the right,fill out the name field. Set <samp>Units</samp> to <samp>1</samp>(default) and the <samp>Type</samp> to <samp>Counter</samp>. This ensures that the log metric counts the number of log entries matching the advanced logs query.</li><li>Click <samp>CreateMetric</samp>.</li></ol></p><p><b>Path</b>: stackdriverlogging.projects.id.logging_metrics.id</p><p><b>Conditions</b>: and,stackdriverlogging.projects.id.logging_metrics.id.audit_config_change,false,</p>",
+        "tags":
+        [
+            "CIS Google Cloud Platform Foundations v1.1.0 ref:2.5",
+            "https://cloud.google.com/logging/docs/logs-based-metrics/",
+            "https://cloud.google.com/monitoring/custom-metrics/",
+            "https://cloud.google.com/monitoring/alerts/",
+            "https://cloud.google.com/logging/docs/reference/tools/gcloud-logging",
+            "https://cloud.google.com/logging/docs/audit/configure-data-access#getiampolicy-setiampolicy"
+        ],
+        "sort_order": 103
+    },
+    {
+        "testcase": "Logging Configurations - Log Metric Filter Doesn't Exist for Cloud Storage IAM Permission Changes",
+        "code": "cloud_storage_iam_permission_change",
+        "details": "<p>Monitoring changes to cloud storage bucket permissions may reduce the time needed to detect and correct permissions on sensitive cloud storage buckets and objects inside the bucket.</p><p><b>Recommendation</b>: From console: <ol><li>Go to <samp>Logging/Logs</samp> by visiting https://console.cloud.google.com/logs/metrics and click \"CREATE METRIC\".</li><li>Click the down arrow symbol on the <samp>Filter Bar</samp> at the rightmost corner and select <samp>Convert to Advanced Filter</samp>.</li><li>Clear any text and add: <br> <samp> resource.type=gcs_bucket AND protoPayload.methodName=\"storage.setIamPermissions\"</samp></li><li>Click <samp>Submit Filter</samp>. The logs display based on the filter text entered by the user.</li><li>In the <samp>Metric Editor</samp> menu on the right,fill out the name field. Set <samp>Units</samp> to <samp>1</samp>(default) and the <samp>Type</samp> to <samp>Counter</samp>. This ensures that the log metric counts the number of log entries matching the advanced logs query.</li><li>Click <samp>CreateMetric</samp>.</li></ol></p><p><b>Path</b>: stackdriverlogging.projects.id.logging_metrics.id</p><p><b>Conditions</b>: and,stackdriverlogging.projects.id.logging_metrics.id.cloud_storage_iam_permission_change,false,</p>",
+        "tags":
+        [
+            "CIS Google Cloud Platform Foundations v1.1.0 ref:2.10",
+            "https://cloud.google.com/logging/docs/logs-based-metrics/",
+            "https://cloud.google.com/monitoring/custom-metrics/",
+            "https://cloud.google.com/monitoring/alerts/",
+            "https://cloud.google.com/logging/docs/reference/tools/gcloud-logging",
+            "https://cloud.google.com/storage/docs",
+            "https://cloud.google.com/storage/docs/access-control/iam-roles"
+        ],
+        "sort_order": 104
+    },
+    {
+        "testcase": "Logging Configurations - Log Metric Filter Doesn't Exist for Custom Role Changes",
+        "code": "custom_role_change",
+        "details": "<p>Google Cloud IAM provides predefined roles that give granular access to specific Google Cloud Platform resources and prevent unwanted access to other resources. However, to cater to organization-specific needs, Cloud IAM also provides the ability to create custom roles. Project owners and administrators with the Organization Role Administrator role or the IAM Role Administrator role can create custom roles. Monitoring role creation, deletion and updating activities will help in identifying any over-privileged role at early stages.</p><p><b>Recommendation</b>: From console: <ol><li>Go to <samp>Logging/Logs</samp> by visiting https://console.cloud.google.com/logs/metrics and click \"CREATE METRIC\".</li><li>Click the down arrow symbol on the <samp>Filter Bar</samp> at the rightmost corner and select <samp>Convert to Advanced Filter</samp>.</li><li>Clear any text and add: <br> <samp> resource.type=\"iam_role\" AND protoPayload.methodName =  \"google.iam.admin.v1.CreateRole\" OR protoPayload.methodName=\"google.iam.admin.v1.DeleteRole\" OR protoPayload.methodName=\"google.iam.admin.v1.UpdateRole\"</samp></li><li>Click <samp>Submit Filter</samp>. The logs display based on the filter text entered by the user.</li><li>In the <samp>Metric Editor</samp> menu on the right,fill out the name field. Set <samp>Units</samp> to <samp>1</samp>(default) and the <samp>Type</samp> to <samp>Counter</samp>. This ensures that the log metric counts the number of log entries matching the advanced logs query.</li><li>Click <samp>CreateMetric</samp>.</li></ol></p><p><b>Path</b>: stackdriverlogging.projects.id.logging_metrics.id</p><p><b>Conditions</b>: and,stackdriverlogging.projects.id.logging_metrics.id.custom_role_change,false,</p>",
+        "tags":
+        [
+            "CIS Google Cloud Platform Foundations v1.1.0 ref:2.6",
+            "https://cloud.google.com/logging/docs/logs-based-metrics/",
+            "https://cloud.google.com/monitoring/custom-metrics/",
+            "https://cloud.google.com/monitoring/alerts/",
+            "https://cloud.google.com/logging/docs/reference/tools/gcloud-logging",
+            "https://cloud.google.com/iam/docs/understanding-custom-roles"
+        ],
+        "sort_order": 105
+    },
+    {
+        "testcase": "Logging Configurations - Log Metric Filter Doesn't Exist for Project Ownership Assignments/Changes",
+        "code": "project_ownership_assignments",
+        "details": "<p>Project ownership has the highest level of privileges on a project. To avoid misuse of project resources, the project ownership assignment/change actions mentioned above should be monitored and alerted to concerned recipients.</p><p><b>Recommendation</b>: From console: <ol><li>Go to <samp>Logging/Logs</samp> by visiting https://console.cloud.google.com/logs/metrics and click \"CREATE METRIC\".</li><li>Click the down arrow symbol on the <samp>Filter Bar</samp> at the rightmost corner and select <samp>Convert to Advanced Filter</samp>.</li><li>Clear any text and add: <br> <samp> (protoPayload.serviceName=\"cloudresourcemanager.googleapis.com\") AND (ProjectOwnership OR projectOwnerInvitee) OR (protoPayload.serviceData.policyDelta.bindingDeltas.action=\"REMOVE\" AND protoPayload.serviceData.policyDelta.bindingDeltas.role=\"roles/owner\") OR (protoPayload.serviceData.policyDelta.bindingDeltas.action=\"ADD\" AND protoPayload.serviceData.policyDelta.bindingDeltas.role=\"roles/owner\")</samp></li><li>Click <samp>Submit Filter</samp>. The logs display based on the filter text entered by the user.</li><li>In the <samp>Metric Editor</samp> menu on the right,fill out the name field. Set <samp>Units</samp> to <samp>1</samp>(default) and the <samp>Type</samp> to <samp>Counter</samp>. This ensures that the log metric counts the number of log entries matching the advanced logs query.</li><li>Click <samp>CreateMetric</samp>.</li></ol></p><p><b>Path</b>: stackdriverlogging.projects.id.logging_metrics.id</p><p><b>Conditions</b>: and,stackdriverlogging.projects.id.logging_metrics.id.project_ownership_assignments,false,</p>",
+        "tags":
+        [
+            "CIS Google Cloud Platform Foundations v1.1.0 ref:2.4",
+            "https://cloud.google.com/logging/docs/logs-based-metrics/",
+            "https://cloud.google.com/monitoring/custom-metrics/",
+            "https://cloud.google.com/monitoring/alerts/",
+            "https://cloud.google.com/logging/docs/reference/tools/gcloud-logging"
+        ],
+        "sort_order": 106
+    },
+    {
+        "testcase": "Logging Configurations - Log Metric Filter Doesn't Exist for SQL Instance Configuration Changes",
+        "code": "sql_instance_conf_change",
+        "details": "<p>Monitoring changes to SQL instance configuration changes may reduce the time needed to detect and correct misconfigurations done on the SQL server.</p><p><b>Recommendation</b>: From console: <ol><li>Go to <samp>Logging/Logs</samp> by visiting https://console.cloud.google.com/logs/metrics and click \"CREATE METRIC\".</li><li>Click the down arrow symbol on the <samp>Filter Bar</samp> at the rightmost corner and select <samp>Convert to Advanced Filter</samp>.</li><li>Clear any text and add: <br> <samp> protoPayload.methodName=\"cloudsql.instances.update\"</samp></li><li>Click <samp>Submit Filter</samp>. The logs display based on the filter text entered by the user.</li><li>In the <samp>Metric Editor</samp> menu on the right,fill out the name field. Set <samp>Units</samp> to <samp>1</samp>(default) and the <samp>Type</samp> to <samp>Counter</samp>. This ensures that the log metric counts the number of log entries matching the advanced logs query.</li><li>Click <samp>CreateMetric</samp>.</li></ol></p><p><b>Path</b>: stackdriverlogging.projects.id.logging_metrics.id</p><p><b>Conditions</b>: and,stackdriverlogging.projects.id.logging_metrics.id.sql_instance_conf_change,false,</p>",
+        "tags":
+        [
+            "CIS Google Cloud Platform Foundations v1.1.0 ref:2.11",
+            "https://cloud.google.com/logging/docs/logs-based-metrics/",
+            "https://cloud.google.com/monitoring/custom-metrics/",
+            "https://cloud.google.com/monitoring/alerts/",
+            "https://cloud.google.com/logging/docs/reference/tools/gcloud-logging",
+            "https://cloud.google.com/storage/docs",
+            "https://cloud.google.com/sql/docs/",
+            "https://cloud.google.com/sql/docs/mysql/",
+            "https://cloud.google.com/sql/docs/postgres/"
+        ],
+        "sort_order": 107
+    },
+    {
+        "testcase": "Logging Configurations - Log Metric Filter Doesn't Exist for VPC Network Changes",
+        "code": "vpc_network_change",
+        "details": "<p>It is possible to have more than one VPC within a project. In addition, it is also possible to create a peer connection between two VPCs enablingnetwork traffic to route between VPCs.Monitoring changes to a VPC will help ensure VPC traffic flow is not getting impacted.</p><p><b>Recommendation</b>: From console: <ol><li>Go to <samp>Logging/Logs</samp> by visiting https://console.cloud.google.com/logs/metrics and click \"CREATE METRIC\".</li><li>Click the down arrow symbol on the <samp>Filter Bar</samp> at the rightmost corner and select <samp>Convert to Advanced Filter</samp>.</li><li>Clear any text and add: <br> <samp>resource.type=gce_network AND jsonPayload.event_subtype=\"compute.networks.insert\" \n85| P a g eOR jsonPayload.event_subtype=\"compute.networks.patch\" OR jsonPayload.event_subtype=\"compute.networks.delete\"  OR jsonPayload.event_subtype=\"compute.networks.removePeering\" OR jsonPayload.event_subtype=\"compute.networks.addPeering\" </samp></li><li>Click <samp>Submit Filter</samp>. The logs display based on the filter text entered by the user.</li><li>In the <samp>Metric Editor</samp> menu on the right,fill out the name field. Set <samp>Units</samp> to <samp>1</samp>(default) and the <samp>Type</samp> to <samp>Counter</samp>. This ensures that the log metric counts the number of log entries matching the advanced logs query.</li><li>Click <samp>CreateMetric</samp>.</li></ol></p><p><b>Path</b>: stackdriverlogging.projects.id.logging_metrics.id</p><p><b>Conditions</b>: and,stackdriverlogging.projects.id.logging_metrics.id.vpc_network_change,false,</p>",
+        "tags":
+        [
+            "CIS Google Cloud Platform Foundations v1.1.0 ref:2.9",
+            "https://cloud.google.com/logging/docs/logs-based-metrics/",
+            "https://cloud.google.com/monitoring/custom-metrics/",
+            "https://cloud.google.com/monitoring/alerts/",
+            "https://cloud.google.com/logging/docs/reference/tools/gcloud-logging",
+            "https://cloud.google.com/vpc/docs/overview"
+        ],
+        "sort_order": 108
+    },
+    {
+        "testcase": "Logging Configurations - Log Metric Filter Doesn't Exist for VPC Network Firewall Rule Changes",
+        "code": "vpc_network_firewall_rule_change",
+        "details": "<p>Monitoring for Create or Update Firewall rule events gives insight to network access changes and may reduce the time it takes to detect suspicious activity.</p><p><b>Recommendation</b>: From console: <ol><li>Go to <samp>Logging/Logs</samp> by visiting https://console.cloud.google.com/logs/metrics and click \"CREATE METRIC\".</li><li>Click the down arrow symbol on the <samp>Filter Bar</samp> at the rightmost corner and select <samp>Convert to Advanced Filter</samp>.</li><li>Clear any text and add: <br> <samp> resource.type=\"gce_firewall_rule\" AND jsonPayload.event_subtype=\"compute.firewalls.patch\" OR jsonPayload.event_subtype=\"compute.firewalls.insert\"</samp></li><li>Click <samp>Submit Filter</samp>. The logs display based on the filter text entered by the user.</li><li>In the <samp>Metric Editor</samp> menu on the right,fill out the name field. Set <samp>Units</samp> to <samp>1</samp>(default) and the <samp>Type</samp> to <samp>Counter</samp>. This ensures that the log metric counts the number of log entries matching the advanced logs query.</li><li>Click <samp>CreateMetric</samp>.</li></ol></p><p><b>Path</b>: stackdriverlogging.projects.id.logging_metrics.id</p><p><b>Conditions</b>: and,stackdriverlogging.projects.id.logging_metrics.id.vpc_network_firewall_rule_change,false,</p>",
+        "tags":
+        [
+            "CIS Google Cloud Platform Foundations v1.1.0 ref:2.7",
+            "https://cloud.google.com/logging/docs/logs-based-metrics/",
+            "https://cloud.google.com/monitoring/custom-metrics/",
+            "https://cloud.google.com/monitoring/alerts/",
+            "https://cloud.google.com/logging/docs/reference/tools/gcloud-logging",
+            "https://cloud.google.com/vpc/docs/firewalls"
+        ],
+        "sort_order": 109
+    },
+    {
+        "testcase": "Logging Configurations - Log Metric Filter Doesn't Exist for VPC Network Route Changes",
+        "code": "vpc_network_route_change",
+        "details": "<p>Google Cloud Platform (GCP) routes define the paths network traffic takes from a VM instance to another destination. The other destination can be inside the organization VPC network (such as another VM) or outside of it. Every route consists of a destination and a next hop. Traffic whose destination IP is within the destination range is sent to the next hop for delivery. Monitoring changes to route tables will help ensure that all VPC traffic flows through an expected path.</p><p><b>Recommendation</b>: From console: <ol><li>Go to <samp>Logging/Logs</samp> by visiting https://console.cloud.google.com/logs/metrics and click \"CREATE METRIC\".</li><li>Click the down arrow symbol on the <samp>Filter Bar</samp> at the rightmost corner and select <samp>Convert to Advanced Filter</samp>.</li><li>Clear any text and add: <br> <samp> resource.type=\"gce_route\" AND jsonPayload.event_subtype=\"compute.routes.delete\" OR jsonPayload.event_subtype=\"compute.routes.insert\"</samp></li><li>Click <samp>Submit Filter</samp>. The logs display based on the filter text entered by the user.</li><li>In the <samp>Metric Editor</samp> menu on the right,fill out the name field. Set <samp>Units</samp> to <samp>1</samp>(default) and the <samp>Type</samp> to <samp>Counter</samp>. This ensures that the log metric counts the number of log entries matching the advanced logs query.</li><li>Click <samp>CreateMetric</samp>.</li></ol></p><p><b>Path</b>: stackdriverlogging.projects.id.logging_metrics.id</p><p><b>Conditions</b>: and,stackdriverlogging.projects.id.logging_metrics.id.vpc_network_route_change,false,</p>",
+        "tags":
+        [
+            "CIS Google Cloud Platform Foundations v1.1.0 ref:2.8",
+            "https://cloud.google.com/logging/docs/logs-based-metrics/",
+            "https://cloud.google.com/monitoring/custom-metrics/",
+            "https://cloud.google.com/monitoring/alerts/",
+            "https://cloud.google.com/logging/docs/reference/tools/gcloud-logging",
+            "https://cloud.google.com/storage/docs/access-control/iam"
+        ],
+        "sort_order": 110
+    },
+    {
+        "testcase": "Logging Configurations - Lack of Export Sinks",
+        "details": "<p>Export sinks for Stackdriver logging were not found. As a result, logs would be deleted after the configured retention period, and would not be backed up.</p><p><b>Display Path</b>: stackdriverlogging.projects.id.sinks</p><p><b>Path</b>: stackdriverlogging.projects.id</p><p><b>Conditions</b>: and,stackdriverlogging.projects.id.sinks,empty,</p>",
+        "tags":
+        [
+            "https://cloud.google.com/logging",
+            "https://cloud.google.com/logging/docs/export"
+        ],
+        "sort_order": 111
+    },
+    {
+        "testcase": "Monitoring Alerts - Alerts Doesn't Exist for Audit Configuration Changes",
+        "code": "audit_config_change",
+        "details": "<p>Configuring the metric filter and alerts for audit configuration changes ensures the recommended state of audit configuration is maintained so that all activities in the project are audit-able at any point in time.</p><p><b>Recommendation</b>: From console: <ol><li>Identify the audit configuration changes metric under the section <samp>User-defined Metrics</samp> at https://console.cloud.google.com/logs/metrics.</li><li>Click the 3-dot icon in the rightmost column for the desired metric and select <samp>Create alert from Metric</samp>. A new page opens.</li><li>Fill out the alert policy configuration and click <samp>Save</samp>. Choose the alerting threshold and configuration that makes sense for the user's organization. For example, a threshold of zero(0) for the most recent value will ensure that a notification is triggered for every owner change in the project:: <br> <samp>Set `Aggregator` to `Count`<br> Set `Configuration`: <br> -Condition: above <br> -Threshold: 0 <br> -For: most recent value </samp></li><li>Configure the desired notifications channels in the section <samp>Notifications.</samp></li><li>Name the policy and click <samp>Save</samp>.</li></ol></p><p><b>Path</b>: stackdrivermonitoring.projects.id.monitoring_alert_policies.id</p><p><b>Conditions</b>: and,stackdrivermonitoring.projects.id.monitoring_alert_policies.id.audit_config_change,false,</p>",
+        "tags":
+        [
+            "CIS Google Cloud Platform Foundations v1.1.0 ref:2.5",
+            "https://cloud.google.com/logging/docs/logs-based-metrics/",
+            "https://cloud.google.com/monitoring/custom-metrics/",
+            "https://cloud.google.com/monitoring/alerts/",
+            "https://cloud.google.com/logging/docs/reference/tools/gcloud-logging",
+            "https://cloud.google.com/logging/docs/audit/configure-data-access#getiampolicy-setiampolicy"
+        ],
+        "sort_order": 112
+    },
+    {
+        "testcase": "Monitoring Alerts - Alerts Doesn't Exist for Cloud Storage IAM Permission Changes",
+        "code": "cloud_storage_iam_permission_change",
+        "details": "<p>Monitoring changes to cloud storage bucket permissions may reduce the time needed to detect and correct permissions on sensitive cloud storage buckets and objects inside the bucket.</p><p><b>Recommendation</b>: From console: <ol><li>Identify the cloud storage IAM permission changes metric under the section <samp>User-defined Metrics</samp> at https://console.cloud.google.com/logs/metrics.</li><li>Click the 3-dot icon in the rightmost column for the desired metric and select <samp>Create alert from Metric</samp>. A new page opens.</li><li>Fill out the alert policy configuration and click <samp>Save</samp>. Choose the alerting threshold and configuration that makes sense for the user's organization. For example, a threshold of zero(0) for the most recent value will ensure that a notification is triggered for every owner change in the project:: <br> <samp>Set `Aggregator` to `Count`<br> Set `Configuration`: <br> -Condition: above <br> -Threshold: 0 <br> -For: most recent value </samp></li><li>Configure the desired notifications channels in the section <samp>Notifications.</samp></li><li>Name the policy and click <samp>Save</samp>.</li></ol></p><p><b>Path</b>: stackdrivermonitoring.projects.id.monitoring_alert_policies.id</p><p><b>Conditions</b>: and,stackdrivermonitoring.projects.id.monitoring_alert_policies.id.cloud_storage_iam_permission_change,false,</p>",
+        "tags":
+        [
+            "CIS Google Cloud Platform Foundations v1.1.0 ref:2.10",
+            "https://cloud.google.com/logging/docs/logs-based-metrics/",
+            "https://cloud.google.com/monitoring/custom-metrics/",
+            "https://cloud.google.com/monitoring/alerts/",
+            "https://cloud.google.com/logging/docs/reference/tools/gcloud-logging",
+            "https://cloud.google.com/storage/docs",
+            "https://cloud.google.com/storage/docs/access-control/iam-roles"
+        ],
+        "sort_order": 113
+    },
+    {
+        "testcase": "Monitoring Alerts - Alerts Doesn't Exist for Custom Role Changes",
+        "code": "custom_role_change",
+        "details": "<p>Google Cloud IAM provides predefined roles that give granular access to specific Google Cloud Platform resources and prevent unwanted access to other resources. However, to cater to organization-specific needs, Cloud IAM also provides the ability to create custom roles. Project owners and administrators with the Organization Role Administrator role or the IAM Role Administrator role can create custom roles. Monitoring role creation, deletion and updating activities will help in identifying any over-privileged role at early stages.</p><p><b>Recommendation</b>: From console: <ol><li>Identify the custom role changes metric under the section <samp>User-defined Metrics</samp> at https://console.cloud.google.com/logs/metrics.</li><li>Click the 3-dot icon in the rightmost column for the desired metric and select <samp>Create alert from Metric</samp>. A new page opens.</li><li>Fill out the alert policy configuration and click <samp>Save</samp>. Choose the alerting threshold and configuration that makes sense for the user's organization. For example, a threshold of zero(0) for the most recent value will ensure that a notification is triggered for every owner change in the project:: <br> <samp>Set `Aggregator` to `Count`<br> Set `Configuration`: <br> -Condition: above <br> -Threshold: 0 <br> -For: most recent value </samp></li><li>Configure the desired notifications channels in the section <samp>Notifications.</samp></li><li>Name the policy and click <samp>Save</samp>.</li></ol></p><p><b>Path</b>: stackdrivermonitoring.projects.id.monitoring_alert_policies.id</p><p><b>Conditions</b>: and,stackdrivermonitoring.projects.id.monitoring_alert_policies.id.custom_role_change,false,</p>",
+        "tags":
+        [
+            "CIS Google Cloud Platform Foundations v1.1.0 ref:2.6",
+            "https://cloud.google.com/logging/docs/logs-based-metrics/",
+            "https://cloud.google.com/monitoring/custom-metrics/",
+            "https://cloud.google.com/monitoring/alerts/",
+            "https://cloud.google.com/logging/docs/reference/tools/gcloud-logging",
+            "https://cloud.google.com/iam/docs/understanding-custom-roles"
+        ],
+        "sort_order": 114
+    },
+    {
+        "testcase": "Monitoring Alerts - Alerts Doesn't Exist for Project Ownership Assignments/Changes",
+        "code": "project_ownership_assignments",
+        "details": "<p>Project ownership has the highest level of privileges on a project. To avoid misuse of project resources, the project ownership assignment/change actions mentioned above should be monitored and alerted to concerned recipients.</p><p><b>Recommendation</b>: From console: <ol><li>Identify the project ownership assignment/changes metric under the section <samp>User-defined Metrics</samp> at https://console.cloud.google.com/logs/metrics.</li><li>Click the 3-dot icon in the rightmost column for the desired metric and select <samp>Create alert from Metric</samp>. A new page opens.</li><li>Fill out the alert policy configuration and click <samp>Save</samp>. Choose the alerting threshold and configuration that makes sense for the user's organization. For example, a threshold of zero(0) for the most recent value will ensure that a notification is triggered for every owner change in the project:: <br> <samp>Set `Aggregator` to `Count`<br> Set `Configuration`: <br> -Condition: above <br> -Threshold: 0 <br> -For: most recent value </samp></li><li>Configure the desired notifications channels in the section <samp>Notifications.</samp></li><li>Name the policy and click <samp>Save</samp>.</li></ol></p><p><b>Path</b>: stackdrivermonitoring.projects.id.monitoring_alert_policies.id</p><p><b>Conditions</b>: and,stackdrivermonitoring.projects.id.monitoring_alert_policies.id.project_ownership_assignments,false,</p>",
+        "tags":
+        [
+            "CIS Google Cloud Platform Foundations v1.1.0 ref:2.4",
+            "https://cloud.google.com/logging/docs/logs-based-metrics/",
+            "https://cloud.google.com/monitoring/custom-metrics/",
+            "https://cloud.google.com/monitoring/alerts/",
+            "https://cloud.google.com/logging/docs/reference/tools/gcloud-logging"
+        ],
+        "sort_order": 115
+    },
+    {
+        "testcase": "Monitoring Alerts - Alerts Doesn't Exist for SQL Instance Configuration Changes",
+        "code": "sql_instance_conf_change",
+        "details": "<p>Monitoring changes to SQL instance configuration changes may reduce the time needed to detect and correct misconfigurations done on the SQL server.</p><p><b>Recommendation</b>: From console: <ol><li>Identify the sql instance configuration changes metric under the section <samp>User-defined Metrics</samp> at https://console.cloud.google.com/logs/metrics.</li><li>Click the 3-dot icon in the rightmost column for the desired metric and select <samp>Create alert from Metric</samp>. A new page opens.</li><li>Fill out the alert policy configuration and click <samp>Save</samp>. Choose the alerting threshold and configuration that makes sense for the user's organization. For example, a threshold of zero(0) for the most recent value will ensure that a notification is triggered for every owner change in the project:: <br> <samp>Set `Aggregator` to `Count`<br> Set `Configuration`: <br> -Condition: above <br> -Threshold: 0 <br> -For: most recent value </samp></li><li>Configure the desired notifications channels in the section <samp>Notifications.</samp></li><li>Name the policy and click <samp>Save</samp>.</li></ol></p><p><b>Path</b>: stackdrivermonitoring.projects.id.monitoring_alert_policies.id</p><p><b>Conditions</b>: and,stackdrivermonitoring.projects.id.monitoring_alert_policies.id.sql_instance_conf_change,false,</p>",
+        "tags":
+        [
+            "CIS Google Cloud Platform Foundations v1.1.0 ref:2.11",
+            "https://cloud.google.com/logging/docs/logs-based-metrics/",
+            "https://cloud.google.com/monitoring/custom-metrics/",
+            "https://cloud.google.com/monitoring/alerts/",
+            "https://cloud.google.com/logging/docs/reference/tools/gcloud-logging",
+            "https://cloud.google.com/storage/docs",
+            "https://cloud.google.com/sql/docs/",
+            "https://cloud.google.com/sql/docs/mysql/",
+            "https://cloud.google.com/sql/docs/postgres/"
+        ],
+        "sort_order": 116
+    },
+    {
+        "testcase": "Monitoring Alerts - Alerts Doesn't Exist for VPC Network Changes",
+        "code": "vpc_network_change",
+        "details": "<p>It is possible to have more than one VPC within a project. In addition, it is also possible to create a peer connection between two VPCs enablingnetwork traffic to route between VPCs. Monitoring changes to a VPC will help ensure VPC traffic flow is not getting impacted.</p><p><b>Recommendation</b>: From console: <ol><li>Identify the vpc network changes metric under the section <samp>User-defined Metrics</samp> at https://console.cloud.google.com/logs/metrics.</li><li>Click the 3-dot icon in the rightmost column for the desired metric and select <samp>Create alert from Metric</samp>. A new page opens.</li><li>Fill out the alert policy configuration and click <samp>Save</samp>. Choose the alerting threshold and configuration that makes sense for the user's organization. For example, a threshold of zero(0) for the most recent value will ensure that a notification is triggered for every owner change in the project:: <br> <samp>Set `Aggregator` to `Count`<br> Set `Configuration`: <br> -Condition: above <br> -Threshold: 0 <br> -For: most recent value </samp></li><li>Configure the desired notifications channels in the section <samp>Notifications.</samp></li><li>Name the policy and click <samp>Save</samp>.</li></ol></p><p><b>Path</b>: stackdrivermonitoring.projects.id.monitoring_alert_policies.id</p><p><b>Conditions</b>: and,stackdrivermonitoring.projects.id.monitoring_alert_policies.id.vpc_network_change,false,</p>",
+        "tags":
+        [
+            "CIS Google Cloud Platform Foundations v1.1.0 ref:2.9",
+            "https://cloud.google.com/logging/docs/logs-based-metrics/",
+            "https://cloud.google.com/monitoring/custom-metrics/",
+            "https://cloud.google.com/monitoring/alerts/",
+            "https://cloud.google.com/logging/docs/reference/tools/gcloud-logging",
+            "https://cloud.google.com/vpc/docs/overview"
+        ],
+        "sort_order": 117
+    },
+    {
+        "testcase": "Monitoring Alerts - Alerts Doesn't Exist for VPC Network Firewall Rule Changes",
+        "code": "vpc_network_firewall_rule_change",
+        "details": "<p>Monitoring for Create or Update Firewall rule events gives insight to network access changes and may reduce the time it takes to detect suspicious activity.</p><p><b>Recommendation</b>: From console: <ol><li>Identify the vpc network firewall rule changes metric under the section <samp>User-defined Metrics</samp> at https://console.cloud.google.com/logs/metrics.</li><li>Click the 3-dot icon in the rightmost column for the desired metric and select <samp>Create alert from Metric</samp>. A new page opens.</li><li>Fill out the alert policy configuration and click <samp>Save</samp>. Choose the alerting threshold and configuration that makes sense for the user's organization. For example, a threshold of zero(0) for the most recent value will ensure that a notification is triggered for every owner change in the project:: <br> <samp>Set `Aggregator` to `Count`<br> Set `Configuration`: <br> -Condition: above <br> -Threshold: 0 <br> -For: most recent value </samp></li><li>Configure the desired notifications channels in the section <samp>Notifications.</samp></li><li>Name the policy and click <samp>Save</samp>.</li></ol></p><p><b>Path</b>: stackdrivermonitoring.projects.id.monitoring_alert_policies.id</p><p><b>Conditions</b>: and,stackdrivermonitoring.projects.id.monitoring_alert_policies.id.vpc_network_firewall_rule_change,false,</p>",
+        "tags":
+        [
+            "CIS Google Cloud Platform Foundations v1.1.0 ref:2.7",
+            "https://cloud.google.com/logging/docs/logs-based-metrics/",
+            "https://cloud.google.com/monitoring/custom-metrics/",
+            "https://cloud.google.com/monitoring/alerts/",
+            "https://cloud.google.com/logging/docs/reference/tools/gcloud-logging",
+            "https://cloud.google.com/vpc/docs/firewalls"
+        ],
+        "sort_order": 118
+    },
+    {
+        "testcase": "Monitoring Alerts - Alerts Doesn't Exist for VPC Network Route Changes",
+        "code": "vpc_network_route_change",
+        "details": "<p>Google Cloud Platform (GCP) routes define the paths network traffic takes from a VM instance to another destination. The other destination can be inside the organization VPC network (such as another VM) or outside of it. Every route consists of a destination and a next hop. Traffic whose destination IP is within the destination range is sent to the next hop for delivery. Monitoring changes to route tables will help ensure that all VPC traffic flows through an expected path.</p><p><b>Recommendation</b>: From console: <ol><li>Identify the vpc network route changes metric under the section <samp>User-defined Metrics</samp> at https://console.cloud.google.com/logs/metrics.</li><li>Click the 3-dot icon in the rightmost column for the desired metric and select <samp>Create alert from Metric</samp>. A new page opens.</li><li>Fill out the alert policy configuration and click <samp>Save</samp>. Choose the alerting threshold and configuration that makes sense for the user's organization. For example, a threshold of zero(0) for the most recent value will ensure that a notification is triggered for every owner change in the project:: <br> <samp>Set `Aggregator` to `Count`<br> Set `Configuration`: <br> -Condition: above <br> -Threshold: 0 <br> -For: most recent value </samp></li><li>Configure the desired notifications channels in the section <samp>Notifications.</samp></li><li>Name the policy and click <samp>Save</samp>.</li></ol></p><p><b>Path</b>: stackdrivermonitoring.projects.id.monitoring_alert_policies.id</p><p><b>Conditions</b>: and,stackdrivermonitoring.projects.id.monitoring_alert_policies.id.vpc_network_route_change,false,</p>",
+        "tags":
+        [
+            "CIS Google Cloud Platform Foundations v1.1.0 ref:2.8",
+            "https://cloud.google.com/logging/docs/logs-based-metrics/",
+            "https://cloud.google.com/monitoring/custom-metrics/",
+            "https://cloud.google.com/monitoring/alerts/",
+            "https://cloud.google.com/logging/docs/reference/tools/gcloud-logging",
+            "https://cloud.google.com/storage/docs/access-control/iam"
+        ],
+        "sort_order": 119
+    }
+]
