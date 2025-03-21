@@ -21,7 +21,7 @@ The following methodologies are supported:
 - [OSSTMM Version 3 - Physical Security Testing](https://github.com/AttackForge/TestSuites/blob/main/OSSTMM/v3/Chapter%208/osstmm_physical_security_testing.json)
 
 ## Artifical Intelligence (AI)
-- [MITRE ATT&CK Enterprise Version 16.1](https://github.com/AttackForge/TestSuites/blob/main/MITRE/ATLAS/mitre_atlas_4.8.0_testcases.json)
+- [MITRE ATLAS Version 4.8.0](https://github.com/AttackForge/TestSuites/blob/main/MITRE/ATLAS/mitre_atlas_4.8.0_testcases.json)
 
 ## Web Application & API
 - [OWASP Web Security Testing Guide Version 4.2](https://github.com/AttackForge/TestSuites/blob/main/OWASP/WSTG/v4.2/owasp_wstg.json)
