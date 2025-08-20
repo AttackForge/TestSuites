@@ -27,7 +27,7 @@ The following methodologies are supported:
 - [OWASP Desktop App Security Top 10 2021](https://github.com/AttackForge/TestSuites/blob/main/OWASP/Top%2010/OWASP-Desktop-App-Security-Top-10-2021.json)
 
 ## Operational Technology (OT)
-- [OWASP Operational Technology (OT) Top 10 2025](https://github.com/AttackForge/TestSuites/blob/main/OWASP/Top%2010/OWASP-Operational-Technology-(OT)-Top-10-2025)
+- [OWASP Operational Technology (OT) Top 10 2025](https://github.com/AttackForge/TestSuites/blob/main/OWASP/Top%2010/OWASP-Operational-Technology-(OT)-Top-10-2025.json)
 
 ## Web Application & API
 - [OWASP Web Security Testing Guide Version 4.2](https://github.com/AttackForge/TestSuites/blob/main/OWASP/WSTG/v4.2/owasp_wstg.json)
