@@ -23,15 +23,23 @@ The following methodologies are supported:
 ## Artifical Intelligence (AI)
 - [MITRE ATLAS Version 4.8.0](https://github.com/AttackForge/TestSuites/blob/main/MITRE/ATLAS/mitre_atlas_4.8.0_testcases.json)
 
+## Desktop Applications
+- [OWASP Desktop App Security Top 10 2021](https://github.com/AttackForge/TestSuites/blob/main/OWASP/Top%2010/OWASP-Desktop-App-Security-Top-10-2021.json)
+
+## Operational Technology (OT)
+- [OWASP Operational Technology (OT) Top 10 2025](https://github.com/AttackForge/TestSuites/blob/main/OWASP/Top%2010/OWASP-Operational-Technology-(OT)-Top-10-2025)
+
 ## Web Application & API
 - [OWASP Web Security Testing Guide Version 4.2](https://github.com/AttackForge/TestSuites/blob/main/OWASP/WSTG/v4.2/owasp_wstg.json)
 - [OWASP Application Security Verification Standard (ASVS) Version 4 - Level 1](https://github.com/AttackForge/TestSuites/blob/main/OWASP/ASVS/v4/Level%201/owasp_asvs_level_1.json)
 - [OWASP Application Security Verification Standard (ASVS) Version 4 - Level 2](https://github.com/AttackForge/TestSuites/blob/main/OWASP/ASVS/v4/Level%202/owasp_asvs_level_2.json)
 - [OWASP Application Security Verification Standard (ASVS) Version 4 - Level 3](https://github.com/AttackForge/TestSuites/blob/main/OWASP/ASVS/v4/Level%203/owasp_asvs_level_3.json)
+- [OWASP Web Application Security Top 10 2021](https://github.com/AttackForge/TestSuites/blob/main/OWASP/Top%2010/OWASP-Web-Application-Top-10-2021.json)
+- [OWASP API Security Top 10 2023](https://github.com/AttackForge/TestSuites/blob/main/OWASP/Top%2010/OWASP-API-Security-Top-10-2023.json)
 
 ## Mobile Application
-- [OWASP Mobile Application Security Testing Guide (MASTG) Version 2 - Level 1](https://github.com/AttackForge/TestSuites/blob/main/OWASP/MASTG/v2/Level%201/owasp_mastg_level_1.json)
-- [OWASP Mobile Application Security Testing Guide (MASTG) Version 2 - Level 2](https://github.com/AttackForge/TestSuites/blob/main/OWASP/MASTG/v2/Level%202/owasp_mastg_level_2.json)
+- [OWASP Mobile Application Security Testing Guide (MASTG) Version 2 2025](https://github.com/AttackForge/TestSuites/blob/main/OWASP/MASTG/v2/OWASP-Mobile-Application-Security-Testing-Guide-(MASTG)-Version-2-2025)
+- [OWASP Mobile Top 10 2024](https://github.com/AttackForge/TestSuites/blob/main/OWASP/Top%2010/OWASP-Mobile-Top-10-2024.json)
 - [MITRE ATT&CK Mobile Version 16.1](https://github.com/AttackForge/TestSuites/blob/main/MITRE/ATT%26CK/MOBILE/mitre_attack_mobile_16_1.json) - see [recommended mapping](https://support.attackforge.com/attackforge-enterprise/modules/test-suite-builder#import-mappings)
 
 ## Network Infrastructure, Hardware and IOT
@@ -46,6 +54,12 @@ The following methodologies are supported:
 - [CIS Google Cloud Platform Foundation v1.1.0](https://github.com/AttackForge/TestSuites/blob/main/GCP/CIS-Google-Cloud-Platform-Foundation-v1.1.0.json)
 - [Oracle Cloud Infrastructure](https://github.com/AttackForge/TestSuites/blob/main/OCI/Oracle-Cloud-Infrastructure.json)
 - [Kubernetes Infrastructure](https://github.com/AttackForge/TestSuites/blob/main/KUBERNETES/Kubernetes-Infrastructure.json)
+
+## CI/CD
+- [OWASP Top 10 CI/CD Security Risks 2023](https://github.com/AttackForge/TestSuites/blob/main/OWASP/Top%2010/OWASP-Top-10-CI-CD-Security-Risks-2023.json)
+
+## Low Code/No Code
+- [OWASP Low Code/No Code Top 10 2024](https://github.com/AttackForge/TestSuites/blob/main/OWASP/Top%2010/OWASP-Low-Code-No-Code-Top-10-2024.json)
 
 You can load additional testing methodologies in the form of Test Cases which can be imported on your Test Suites using the import options on Test Cases:
 
