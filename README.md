@@ -38,7 +38,7 @@ The following methodologies are supported:
 - [OWASP API Security Top 10 2023](https://github.com/AttackForge/TestSuites/blob/main/OWASP/Top%2010/OWASP-API-Security-Top-10-2023.json)
 
 ## Mobile Application
-- [OWASP Mobile Application Security Testing Guide (MASTG) Version 2 2025](https://github.com/AttackForge/TestSuites/blob/main/OWASP/MASTG/v2/OWASP-Mobile-Application-Security-Testing-Guide-(MASTG)-Version-2-2025)
+- [OWASP Mobile Application Security Testing Guide (MASTG) Version 2 2025](https://github.com/AttackForge/TestSuites/blob/main/OWASP/MASTG/v2/OWASP-Mobile-Application-Security-Testing-Guide-(MASTG)-Version-2-2025.json)
 - [OWASP Mobile Top 10 2024](https://github.com/AttackForge/TestSuites/blob/main/OWASP/Top%2010/OWASP-Mobile-Top-10-2024.json)
 - [MITRE ATT&CK Mobile Version 16.1](https://github.com/AttackForge/TestSuites/blob/main/MITRE/ATT%26CK/MOBILE/mitre_attack_mobile_16_1.json) - see [recommended mapping](https://support.attackforge.com/attackforge-enterprise/modules/test-suite-builder#import-mappings)
 
