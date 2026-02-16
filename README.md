@@ -22,7 +22,7 @@ The following methodologies are supported:
 
 ## Artifical Intelligence (AI)
 - [MITRE ATLAS Version 4.8.0](https://github.com/AttackForge/TestSuites/blob/main/MITRE/ATLAS/mitre_atlas_4.8.0_testcases.json)
-- [OWASP Top 10 for Large Language Model Applications](https://github.com/AttackForge/TestSuites/blob/main/OWASP/Top%2010/OWASP-LLM-Applications-Top-10-2025.json)
+- [OWASP Top 10 for Large Language Model Applications 2025](https://github.com/AttackForge/TestSuites/blob/main/OWASP/Top%2010/OWASP-LLM-Applications-Top-10-2025.json)
 
 ## Desktop Applications
 - [OWASP Desktop App Security Top 10 2021](https://github.com/AttackForge/TestSuites/blob/main/OWASP/Top%2010/OWASP-Desktop-App-Security-Top-10-2021.json)
