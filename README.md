@@ -14,14 +14,14 @@ This repository provides additional industry methodologies you can import into y
 The following methodologies are supported:
 
 ## Red Teaming
-- [MITRE ATT&CK Enterprise Version 16.1](https://github.com/AttackForge/TestSuites/blob/main/MITRE/ATT%26CK/ENTERPRISE/mitre_attack_enterprise_16_1.json) - see [recommended mapping](https://support.attackforge.com/attackforge-enterprise/modules/test-suite-builder#import-mappings)
-- [MITRE ATT&CK Mobile Version 16.1](https://github.com/AttackForge/TestSuites/blob/main/MITRE/ATT%26CK/MOBILE/mitre_attack_mobile_16_1.json) - see [recommended mapping](https://support.attackforge.com/attackforge-enterprise/modules/test-suite-builder#import-mappings)
-- [MITRE ATT&CK ICS Version 16.1](https://github.com/AttackForge/TestSuites/blob/main/MITRE/ATT%26CK/ICS/mitre_attack_ics_16_1.json) - see [recommended mapping](https://support.attackforge.com/attackforge-enterprise/modules/test-suite-builder#import-mappings)
+- [MITRE ATT&CK Enterprise Version 19.1](https://github.com/AttackForge/TestSuites/blob/main/MITRE/ATT%26CK/ENTERPRISE/mitre_attack_enterprise_19_1.json)
+- [MITRE ATT&CK Mobile Version 19.1](https://github.com/AttackForge/TestSuites/blob/main/MITRE/ATT%26CK/MOBILE/mitre_attack_mobile_19_1.json)
+- [MITRE ATT&CK ICS Version 19.1](https://github.com/AttackForge/TestSuites/blob/main/MITRE/ATT%26CK/ICS/mitre_attack_ics_19_1.json)
 - [OSSTMM Version 3 - Human Security Testing](https://github.com/AttackForge/TestSuites/blob/main/OSSTMM/v3/Chapter%207/osstmm_human_security_testing.json)
 - [OSSTMM Version 3 - Physical Security Testing](https://github.com/AttackForge/TestSuites/blob/main/OSSTMM/v3/Chapter%208/osstmm_physical_security_testing.json)
 
 ## Artifical Intelligence (AI)
-- [MITRE ATLAS Version 4.8.0](https://github.com/AttackForge/TestSuites/blob/main/MITRE/ATLAS/mitre_atlas_4.8.0_testcases.json)
+- [MITRE ATLAS v2026.06](https://github.com/AttackForge/TestSuites/blob/main/MITRE/ATLAS/mitre_atlas_v2026.06.json)
 - [OWASP AI Testing Guide 2026](https://github.com/AttackForge/TestSuites/blob/main/OWASP/AITG/owasp_ai_testing_guide_2026.json)
 - [OWASP Top 10 for Large Language Model Applications 2025](https://github.com/AttackForge/TestSuites/blob/main/OWASP/Top%2010/OWASP-LLM-Applications-Top-10-2025.json)
 
@@ -33,14 +33,15 @@ The following methodologies are supported:
 
 ## Web Application & API
 - [OWASP Web Security Testing Guide Version 4.2](https://github.com/AttackForge/TestSuites/blob/main/OWASP/WSTG/v4.2/owasp_wstg.json)
-- [OWASP Application Security Verification Standard (ASVS) Version 4 - Level 1](https://github.com/AttackForge/TestSuites/blob/main/OWASP/ASVS/v4/Level%201/owasp_asvs_level_1.json)
-- [OWASP Application Security Verification Standard (ASVS) Version 4 - Level 2](https://github.com/AttackForge/TestSuites/blob/main/OWASP/ASVS/v4/Level%202/owasp_asvs_level_2.json)
-- [OWASP Application Security Verification Standard (ASVS) Version 4 - Level 3](https://github.com/AttackForge/TestSuites/blob/main/OWASP/ASVS/v4/Level%203/owasp_asvs_level_3.json)
+- [OWASP Application Security Verification Standard (ASVS) Version 5.0.0 - Level 1](https://github.com/AttackForge/TestSuites/blob/main/OWASP/ASVS/v5/owasp_asvs_5.0.0_level_1.json)
+- [OWASP Application Security Verification Standard (ASVS) Version 5.0.0 - Level 2](https://github.com/AttackForge/TestSuites/blob/main/OWASP/ASVS/v5/owasp_asvs_5.0.0_level_2.json)
+- [OWASP Application Security Verification Standard (ASVS) Version 5.0.0 - Level 3](https://github.com/AttackForge/TestSuites/blob/main/OWASP/ASVS/v5/owasp_asvs_5.0.0_level_3.json)
 - [OWASP Web Application Security Top 10 2021](https://github.com/AttackForge/TestSuites/blob/main/OWASP/Top%2010/OWASP-Web-Application-Top-10-2021.json)
 - [OWASP API Security Top 10 2023](https://github.com/AttackForge/TestSuites/blob/main/OWASP/Top%2010/OWASP-API-Security-Top-10-2023.json)
 
 ## Mobile Application
-- [OWASP Mobile Application Security Testing Guide (MASTG) Version 2 2025](https://github.com/AttackForge/TestSuites/blob/main/OWASP/MASTG/v2/OWASP-Mobile-Application-Security-Testing-Guide-(MASTG)-Version-2-2025.json)
+- [OWASP Mobile Application Security Testing Guide (MASTG) Version 2 2026.01 - Android](https://github.com/AttackForge/TestSuites/blob/main/OWASP/MASTG/v2/owasp-mastg-2.0.0-2026.01_android.json)
+- [OWASP Mobile Application Security Testing Guide (MASTG) Version 2 2026.01 - iOS](https://github.com/AttackForge/TestSuites/blob/main/OWASP/MASTG/v2/owasp-mastg-2.0.0-2026.01_ios.json)
 - [OWASP Mobile Top 10 2024](https://github.com/AttackForge/TestSuites/blob/main/OWASP/Top%2010/OWASP-Mobile-Top-10-2024.json)
 - [MITRE ATT&CK Mobile Version 16.1](https://github.com/AttackForge/TestSuites/blob/main/MITRE/ATT%26CK/MOBILE/mitre_attack_mobile_16_1.json) - see [recommended mapping](https://support.attackforge.com/attackforge-enterprise/modules/test-suite-builder#import-mappings)
 
