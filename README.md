@@ -29,6 +29,7 @@ The following methodologies are supported:
 - [OWASP Desktop App Security Top 10 2021](https://github.com/AttackForge/TestSuites/blob/main/OWASP/Top%2010/OWASP-Desktop-App-Security-Top-10-2021.json)
 
 ## Operational Technology (OT)
+- [MITRE ATT&CK ICS Version 19.1](https://github.com/AttackForge/TestSuites/blob/main/MITRE/ATT%26CK/ICS/mitre_attack_ics_19_1.json)
 - [OWASP Operational Technology (OT) Top 10 2025](https://github.com/AttackForge/TestSuites/blob/main/OWASP/Top%2010/OWASP-Operational-Technology-(OT)-Top-10-2025.json)
 
 ## Web Application & API
@@ -43,13 +44,12 @@ The following methodologies are supported:
 - [OWASP Mobile Application Security Testing Guide (MASTG) Version 2 2026.01 - Android](https://github.com/AttackForge/TestSuites/blob/main/OWASP/MASTG/v2/owasp-mastg-2.0.0-2026.01_android.json)
 - [OWASP Mobile Application Security Testing Guide (MASTG) Version 2 2026.01 - iOS](https://github.com/AttackForge/TestSuites/blob/main/OWASP/MASTG/v2/owasp-mastg-2.0.0-2026.01_ios.json)
 - [OWASP Mobile Top 10 2024](https://github.com/AttackForge/TestSuites/blob/main/OWASP/Top%2010/OWASP-Mobile-Top-10-2024.json)
-- [MITRE ATT&CK Mobile Version 16.1](https://github.com/AttackForge/TestSuites/blob/main/MITRE/ATT%26CK/MOBILE/mitre_attack_mobile_16_1.json) - see [recommended mapping](https://support.attackforge.com/attackforge-enterprise/modules/test-suite-builder#import-mappings)
+- [MITRE ATT&CK Mobile Version 19.1](https://github.com/AttackForge/TestSuites/blob/main/MITRE/ATT%26CK/MOBILE/mitre_attack_mobile_19_1.json)
 
 ## Network Infrastructure, Hardware and IOT
 - [OSSTMM Version 3 - Telecommunications Security Testing](https://github.com/AttackForge/TestSuites/blob/main/OSSTMM/v3/Chapter%2010/osstmm_telecommunications_security_testing.json)
 - [OSSTMM Version 3 - Data Networks Security Testing](https://github.com/AttackForge/TestSuites/blob/main/OSSTMM/v3/Chapter%2011/osstmm_data_networks_security_testing.json)
 - [OSSTMM Version 3 - Wireless Security Testing](https://github.com/AttackForge/TestSuites/blob/main/OSSTMM/v3/Chapter%209/osstmm_wireless_security_testing.json)
-- [MITRE ATT&CK ICS Version 16.1](https://github.com/AttackForge/TestSuites/blob/main/MITRE/ATT%26CK/ICS/mitre_attack_ics_16_1.json) - see [recommended mapping](https://support.attackforge.com/attackforge-enterprise/modules/test-suite-builder#import-mappings)
 
 ## Cloud Configuration
 - [CIS Amazon Web Services Foundation v1.2.0](https://github.com/AttackForge/TestSuites/blob/main/AWS/CIS-Amazon-Web-Services-Foundation-v1.2.0.json)
