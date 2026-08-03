@@ -33,7 +33,7 @@ The following methodologies are supported:
 - [OWASP Operational Technology (OT) Top 10 2025](https://github.com/AttackForge/TestSuites/blob/main/OWASP/Top%2010/OWASP-Operational-Technology-(OT)-Top-10-2025.json)
 
 ## Web Application & API
-- [OWASP Web Security Testing Guide Version 4.2](https://github.com/AttackForge/TestSuites/blob/main/OWASP/WSTG/v4.2/owasp_wstg.json)
+- [OWASP Web Security Testing Guide Version 4.2](https://github.com/AttackForge/TestSuites/blob/main/OWASP/WSTG/owasp-wstg-4.2.json)
 - [OWASP Application Security Verification Standard (ASVS) Version 5.0.0 - Level 1](https://github.com/AttackForge/TestSuites/blob/main/OWASP/ASVS/v5/owasp_asvs_5.0.0_level_1.json)
 - [OWASP Application Security Verification Standard (ASVS) Version 5.0.0 - Level 2](https://github.com/AttackForge/TestSuites/blob/main/OWASP/ASVS/v5/owasp_asvs_5.0.0_level_2.json)
 - [OWASP Application Security Verification Standard (ASVS) Version 5.0.0 - Level 3](https://github.com/AttackForge/TestSuites/blob/main/OWASP/ASVS/v5/owasp_asvs_5.0.0_level_3.json)
